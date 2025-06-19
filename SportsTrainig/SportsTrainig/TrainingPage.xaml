@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"  
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"  
+            x:Class="SportsTraining.Pages.TrainingPage"  
+            Title="Training">  
+
+   <Grid Padding="20">  
+       <Grid.RowDefinitions>  
+           <RowDefinition Height="Auto" />  
+           <RowDefinition Height="Auto" />  
+           <RowDefinition Height="Auto" />  
+           <RowDefinition Height="Auto" />  
+       </Grid.RowDefinitions>  
+       <Grid.ColumnDefinitions>  
+           <ColumnDefinition Width="*" />  
+       </Grid.ColumnDefinitions>  
+
+       <Label Text="Training Session"  
+              FontSize="24"  
+              HorizontalOptions="Center"  
+              Grid.Row="0" />  
+
+       <Label Text="{Binding Counter}"  
+              FontSize="48"  
+              HorizontalOptions="Center"  
+              Grid.Row="1" />  
+
+       <Button Text="Add Rep"  
+               Command="{Binding IncrementCommand}"  
+               Grid.Row="2"  
+               HorizontalOptions="Center" />  
+
+       <Button Text="Reset"  
+               Command="{Binding ResetCommand}"  
+               Grid.Row="3"  
+               HorizontalOptions="Center" />  
+   </Grid>  
+
+</ContentPage>

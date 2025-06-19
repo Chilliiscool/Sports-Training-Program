@@ -1,4 +1,4 @@
-﻿namespace SportsTrainig
+﻿namespace SportsTraining
 {
     public partial class AppShell : Shell
     {

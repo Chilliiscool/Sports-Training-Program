@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 
-namespace SportsTrainig
+namespace SportsTraining
 {
     public static class MauiProgram
     {

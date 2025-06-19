@@ -11,12 +11,12 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyCompanyAttribute("SportsTrainig")]
+[assembly: System.Reflection.AssemblyCompanyAttribute("SportsTraining")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+2801419c8414f8e8545ea7c199ec13fc896f868b")]
-[assembly: System.Reflection.AssemblyProductAttribute("SportsTrainig")]
-[assembly: System.Reflection.AssemblyTitleAttribute("SportsTrainig")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+2cc39cdf0cee1f76a479296feb0bb56bcd2df20d")]
+[assembly: System.Reflection.AssemblyProductAttribute("SportsTraining")]
+[assembly: System.Reflection.AssemblyTitleAttribute("SportsTraining")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
 [assembly: System.Runtime.Versioning.TargetPlatformAttribute("Android34.0")]
 [assembly: System.Runtime.Versioning.SupportedOSPlatformAttribute("Android21.0")]

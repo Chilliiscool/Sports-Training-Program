@@ -1,7 +1,7 @@
 ﻿using Android.App;
 using Android.Runtime;
 
-namespace SportsTrainig
+namespace SportsTraining
 {
     [Application]
     public class MainApplication : MauiApplication

@@ -11,10 +11,14 @@
 using System;
 using System.Reflection;
 
+[assembly: System.Reflection.AssemblyMetadataAttribute("Microsoft.Maui.ApplicationModel.AppInfo.PackageName", "com.companyname.sportstrainig")]
+[assembly: System.Reflection.AssemblyMetadataAttribute("Microsoft.Maui.ApplicationModel.AppInfo.PublisherName", "User Name")]
+[assembly: System.Reflection.AssemblyMetadataAttribute("Microsoft.Maui.ApplicationModel.AppInfo.Name", "SportsTrainig")]
+[assembly: System.Reflection.AssemblyMetadataAttribute("Microsoft.Maui.ApplicationModel.AppInfo.Version", "1.0.0.1")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("SportsTrainig")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2801419c8414f8e8545ea7c199ec13fc896f868b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+2cc39cdf0cee1f76a479296feb0bb56bcd2df20d")]
 [assembly: System.Reflection.AssemblyProductAttribute("SportsTrainig")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SportsTrainig")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
