@@ -11,4 +11,5 @@ namespace SportsTraining
             MainPage = new AppShell();
         }
     }
+
 }

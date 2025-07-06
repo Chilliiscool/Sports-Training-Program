@@ -1,27 +1,31 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"  
-            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"  
-            x:Class="SportsTraining.Pages.SettingsPage"  
-            Title="Settings">  
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SportsTraining.Pages.SettingsPage"
+             Title="Settings">
 
-   <Grid Padding="20">  
-       <Grid.RowDefinitions>  
-           <RowDefinition Height="Auto" />  
-           <RowDefinition Height="Auto" />  
-       </Grid.RowDefinitions>  
-       <Grid.ColumnDefinitions>  
-           <ColumnDefinition Width="*" />  
-       </Grid.ColumnDefinitions>  
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="12">
 
-       <Label Text="Settings Page"  
-              FontSize="24"  
-              HorizontalOptions="Center"  
-              Grid.Row="0" />  
+            <Label Text="Settings" FontSize="28" FontAttributes="Bold" />
 
-       <Label Text="User preferences and options here."  
-              FontSize="18"  
-              HorizontalOptions="Center"  
-              Grid.Row="1" />  
-   </Grid>  
+            <!-- Settings buttons -->
+            <Button Text="Account Settings" Clicked="OnAccountSettingsClicked" />
+            <Button Text="Edit Profile" Clicked="OnEditProfileClicked" />
+            <Button Text="Change Password" Clicked="OnChangePasswordClicked" />
+            <Button Text="Training Preferences" Clicked="OnTrainingPreferencesClicked" />
+            <Button Text="Goals" Clicked="OnGoalsClicked" />
+            <Button Text="Units" Clicked="OnUnitsClicked" />
+            <Button Text="Notifications" Clicked="OnNotificationsClicked" />
+            <Button Text="Enable/Disable" Clicked="OnToggleFeatureClicked" />
+            <Button Text="App Settings" Clicked="OnAppSettingsClicked" />
+            <Button Text="Offline Mode" Clicked="OnOfflineModeClicked" />
+            <Button Text="Light/Dark Mode" Clicked="OnThemeToggleClicked" />
+            <Button Text="Language" Clicked="OnLanguageClicked" />
+            <Button Text="Privacy Permissions" Clicked="OnPrivacyClicked" />
+            <Button Text="Support" Clicked="OnSupportClicked" />
+            <Button Text="FAQ" Clicked="OnFaqClicked" />
+            <Button Text="Report Issue" Clicked="OnReportIssueClicked" />
 
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
