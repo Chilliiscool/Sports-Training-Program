@@ -1,5 +1,6 @@
 ﻿using Microsoft.Maui;
 using Microsoft.Maui.Controls;
+using SportsTraining.Pages; 
 
 namespace SportsTraining
 {
@@ -8,8 +9,8 @@ namespace SportsTraining
         public App()
         {
             InitializeComponent();
-            MainPage = new AppShell();
+            MainPage = new NavigationPage(new WebLoginPage());
+
         }
     }
-
 }

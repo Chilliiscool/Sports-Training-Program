@@ -3,58 +3,87 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="SportsTraining.Pages.MainPage"
-    BackgroundColor="White">
+    BackgroundColor="{AppThemeBinding Light=White, Dark=Black}">
+
+    <ContentPage.Resources>
+        <Style TargetType="Switch">
+            <Setter Property="OnColor" Value="{AppThemeBinding Light=#000000, Dark=#EEEEEE}" />
+            <Setter Property="ThumbColor" Value="{AppThemeBinding Light=#FFFFFF, Dark=#FFFFFF}" />
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="On">
+                            <VisualState.Setters>
+                                <Setter Property="OnColor" Value="{AppThemeBinding Light=#000000, Dark=#EEEEEE}" />
+                                <Setter Property="ThumbColor" Value="{AppThemeBinding Light=#FFFFFF, Dark=#FFFFFF}" />
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="Off">
+                            <VisualState.Setters>
+                                <Setter Property="OnColor" Value="{AppThemeBinding Light=#D1D1D1, Dark=#757575}" />
+                                <Setter Property="ThumbColor" Value="{AppThemeBinding Light=#212121, Dark=#9E9E9E}" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+    </ContentPage.Resources>
 
     <Grid RowDefinitions="*,Auto">
-
-        <!-- Main Scrollable Content -->
         <ScrollView Grid.Row="0">
             <VerticalStackLayout Padding="20" Spacing="20">
 
-                <!-- Title -->
                 <Label 
                     Text="My Day" 
                     FontSize="26" 
                     FontAttributes="Bold"
-                    TextColor="Black" />
+                    TextColor="{AppThemeBinding Light=Black, Dark=White}" />
 
-                <!-- My Day Box -->
                 <Frame 
-                    BackgroundColor="#E0E0E0"
-                    BorderColor= "Black"
+                    BackgroundColor="{AppThemeBinding Light=#E0E0E0, Dark=#303030}"
+                    BorderColor="{AppThemeBinding Light=Black, Dark=White}"
                     CornerRadius="0"
                     Padding="20">
                     <Label 
                         Text="What you have on that day" 
                         FontSize="18" 
                         FontAttributes="Bold"
-                        TextColor="Black" />
+                        TextColor="{AppThemeBinding Light=Black, Dark=White}" />
                 </Frame>
 
-                <!-- Program Title -->
                 <Label 
                     Text="Program" 
                     FontSize="22" 
                     FontAttributes="Bold"
-                    TextColor="Black" />
+                    TextColor="{AppThemeBinding Light=Black, Dark=White}" />
+                <ListView x:Name="ProgramsListView" BackgroundColor="Transparent">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextCell 
+                Text="{Binding Name}" 
+                Detail="{Binding Description}" 
+                TextColor="{AppThemeBinding Light=Black, Dark=White}"
+                DetailColor="{AppThemeBinding Light=Gray, Dark=LightGray}" />
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
 
-                <!-- Program Box -->
                 <Frame 
-                    BackgroundColor="#E0E0E0"
-                    BorderColor="Black"
+                    BackgroundColor="{AppThemeBinding Light=#E0E0E0, Dark=#303030}"
+                    BorderColor="{AppThemeBinding Light=Black, Dark=White}"
                     CornerRadius="0"
                     Padding="20">
                     <Label 
                         Text="Your program" 
                         FontSize="18" 
                         FontAttributes="Bold"
-                        TextColor="Black" />
+                        TextColor="{AppThemeBinding Light=Black, Dark=White}" />
                 </Frame>
+
+                
 
             </VerticalStackLayout>
         </ScrollView>
-
-
-
     </Grid>
 </ContentPage>

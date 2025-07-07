@@ -5,7 +5,7 @@
 //------------------------------------------------------------------------------
 using System;
 
-namespace SportsTrainig {
+namespace SportsTraining {
 	#pragma warning disable IDE0002
 	public partial class Resource : _Microsoft.Android.Resource.Designer.ResourceConstant {
 	}

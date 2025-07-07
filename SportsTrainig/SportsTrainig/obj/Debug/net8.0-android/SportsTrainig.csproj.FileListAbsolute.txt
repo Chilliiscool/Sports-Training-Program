@@ -18,11 +18,6 @@ C:\SportsProgram\Sports-Training-Program\SportsTrainig\SportsTrainig\obj\Debug\n
 C:\SportsProgram\Sports-Training-Program\SportsTrainig\SportsTrainig\obj\Debug\net8.0-android\mauifont.stamp
 C:\SportsProgram\Sports-Training-Program\SportsTrainig\SportsTrainig\obj\Debug\net8.0-android\resizetizer\f\OpenSans-Regular.ttf
 C:\SportsProgram\Sports-Training-Program\SportsTrainig\SportsTrainig\obj\Debug\net8.0-android\resizetizer\f\OpenSans-Semibold.ttf
-C:\SportsProgram\Sports-Training-Program\SportsTrainig\SportsTrainig\obj\Debug\net8.0-android\resizetizer\r\drawable-xxxhdpi\dotnet_bot.png
-C:\SportsProgram\Sports-Training-Program\SportsTrainig\SportsTrainig\obj\Debug\net8.0-android\resizetizer\r\drawable-xxhdpi\dotnet_bot.png
-C:\SportsProgram\Sports-Training-Program\SportsTrainig\SportsTrainig\obj\Debug\net8.0-android\resizetizer\r\drawable-xhdpi\dotnet_bot.png
-C:\SportsProgram\Sports-Training-Program\SportsTrainig\SportsTrainig\obj\Debug\net8.0-android\resizetizer\r\drawable-hdpi\dotnet_bot.png
-C:\SportsProgram\Sports-Training-Program\SportsTrainig\SportsTrainig\obj\Debug\net8.0-android\resizetizer\r\drawable-mdpi\dotnet_bot.png
 C:\SportsProgram\Sports-Training-Program\SportsTrainig\SportsTrainig\obj\Debug\net8.0-android\resizetizer\r\mipmap-xxxhdpi\appicon_round.png
 C:\SportsProgram\Sports-Training-Program\SportsTrainig\SportsTrainig\obj\Debug\net8.0-android\resizetizer\r\mipmap-xxhdpi\appicon_round.png
 C:\SportsProgram\Sports-Training-Program\SportsTrainig\SportsTrainig\obj\Debug\net8.0-android\resizetizer\r\mipmap-xhdpi\appicon_round.png
@@ -863,8 +858,6 @@ C:\SportsProgram\Sports-Training-Program\SportsTrainig\SportsTrainig\obj\Debug\n
 C:\SportsProgram\Sports-Training-Program\SportsTrainig\SportsTrainig\obj\Debug\net8.0-android\android\src\crc6477f0d89a9cfd64b1\VisualElementTracker_AttachTracker.java
 C:\SportsProgram\Sports-Training-Program\SportsTrainig\SportsTrainig\obj\Debug\net8.0-android\android\src\crc6477f0d89a9cfd64b1\WebViewRenderer.java
 C:\SportsProgram\Sports-Training-Program\SportsTrainig\SportsTrainig\obj\Debug\net8.0-android\android\src\crc6477f0d89a9cfd64b1\WebViewRenderer_JavascriptResult.java
-C:\SportsProgram\Sports-Training-Program\SportsTrainig\SportsTrainig\obj\Debug\net8.0-android\android\src\crc648088b4c7dac10f5c\MainActivity.java
-C:\SportsProgram\Sports-Training-Program\SportsTrainig\SportsTrainig\obj\Debug\net8.0-android\android\src\crc648088b4c7dac10f5c\MainApplication.java
 C:\SportsProgram\Sports-Training-Program\SportsTrainig\SportsTrainig\obj\Debug\net8.0-android\android\src\crc6488302ad6e9e4df1a\ImageLoaderCallback.java
 C:\SportsProgram\Sports-Training-Program\SportsTrainig\SportsTrainig\obj\Debug\net8.0-android\android\src\crc6488302ad6e9e4df1a\ImageLoaderCallbackBase_1.java
 C:\SportsProgram\Sports-Training-Program\SportsTrainig\SportsTrainig\obj\Debug\net8.0-android\android\src\crc6488302ad6e9e4df1a\ImageLoaderResultCallback.java

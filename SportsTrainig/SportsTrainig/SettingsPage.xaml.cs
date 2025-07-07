@@ -5,9 +5,22 @@ namespace SportsTraining.Pages
 {
     public partial class SettingsPage : ContentPage
     {
+        const string NotificationsKey = "NotificationsEnabled";
+        const string UnitsKey = "SelectedUnits";
         public SettingsPage()
         {
             InitializeComponent();  // Loads your XAML content
+            ThemeToggleSwitch.IsToggled = Application.Current.RequestedTheme == AppTheme.Dark;
+            bool savedNotifications = Preferences.Get(NotificationsKey, true);
+            NotificationsSwitch.IsToggled = savedNotifications;
+            UnitsPicker.ItemsSource = new string[]
+            {
+                "Metric (kg, km)",
+                "Imperial (lbs, miles)",
+                "US Customary",
+            };
+            int savedIndex = Preferences.Get(UnitsKey, 0);
+            UnitsPicker.SelectedIndex = savedIndex;
         }
 
         // 💡 This is the method your button is trying to call
@@ -36,46 +49,51 @@ namespace SportsTraining.Pages
         {
             DisplayAlert("Goals", "Go to goals screen.", "OK");
         }
-        private void OnUnitsClicked(object sender, EventArgs e)
+        
+        private void OnNotificationsToggled(object sender, ToggledEventArgs e)
         {
-            DisplayAlert("Units", "Open unit selection screen.", "OK");
+            bool notificationsEnabled = e.Value;
+
+            // Save preference persistently
+            Preferences.Set(NotificationsKey, notificationsEnabled);
         }
-        private void OnNotificationsClicked(object sender, EventArgs e)
+        private void OnUnitsPickerSelectedIndexChanged(object sender, EventArgs e)
         {
-            DisplayAlert("Notifications", "Manage notification preferences.", "OK");
-        }
-        private void OnToggleFeatureClicked(object sender, EventArgs e)
-        {
-            DisplayAlert("Enable/Disable", "Toggled a feature.", "OK");
+            if (UnitsPicker.SelectedIndex == -1)
+                return;
+
+            int selectedIndex = UnitsPicker.SelectedIndex;
+
+            // Save selected index persistently
+            Preferences.Set(UnitsKey, selectedIndex);
+
+            string selectedUnit = UnitsPicker.Items[selectedIndex];
+         
+
+            // TODO: Add logic to apply unit changes throughout your app
         }
 
         private void OnAppSettingsClicked(object sender, EventArgs e)
         {
             DisplayAlert("App Settings", "Go to app settings page.", "OK");
         }
-        private void OnOfflineModeClicked(object sender, EventArgs e)
+        private void OnOfflineModeToggled(object sender, ToggledEventArgs e)
         {
-            DisplayAlert("Offline Mode", "Offline mode toggled or selected.", "OK");
+            bool isOffline = e.Value;
+            string status = isOffline ? "enabled" : "disabled";
         }
-        private void OnThemeToggleClicked(object sender, EventArgs e)
+
+        private void OnThemeToggleToggled(object sender, ToggledEventArgs e)
         {
-            var currentTheme = App.Current.UserAppTheme;
+            bool isDark = e.Value;
 
-            // Toggle between Light and Dark
-            if (currentTheme == AppTheme.Dark)
-            {
-                App.Current.UserAppTheme = AppTheme.Light;
-            }
-            else
-            {
-                App.Current.UserAppTheme = AppTheme.Dark;
-            }
+            // Change app theme
+            Application.Current.UserAppTheme = isDark ? AppTheme.Dark : AppTheme.Light;
 
-            
-
-            //Save it for next launch
-            Preferences.Set("AppTheme", App.Current.UserAppTheme.ToString());
+            // Save the setting using Preferences
+            Preferences.Set("UserPreferredTheme", isDark ? "Dark" : "Light");
         }
+
 
         private void OnLanguageClicked(object sender, EventArgs e)
         {
@@ -97,6 +115,8 @@ namespace SportsTraining.Pages
         {
             DisplayAlert("Report Issue", "Open issue reporting page.", "OK");
         }
+        public static bool AreNotificationsEnabled() =>
+            Preferences.Get(NotificationsKey, true);
 
 
 
