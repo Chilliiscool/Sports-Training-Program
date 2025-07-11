@@ -46,6 +46,23 @@ namespace SportsTraining.Pages
                 await DisplayAlert("Error", $"Could not load programs: {ex.Message}", "OK");
             }
         }
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            string savedCompanie = Preferences.Get("SelectedCompany", "Normal");
+
+            if (savedCompanie == "ETPA")
+            {
+                LogoImage.IsVisible = true;
+            }
+            else
+            {
+                LogoImage.IsVisible = false;
+            }
+        }
+
     }
 }
+
 

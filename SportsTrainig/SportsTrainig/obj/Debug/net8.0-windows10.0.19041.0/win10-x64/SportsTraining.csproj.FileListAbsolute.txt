@@ -1,0 +1,12 @@
+C:\SportsProgram\Sports-Training-Program\SportsTrainig\SportsTrainig\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\SportsTraining.csproj.AssemblyReference.cache
+C:\SportsProgram\Sports-Training-Program\SportsTrainig\SportsTrainig\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\mauiimage.inputs
+C:\SportsProgram\Sports-Training-Program\SportsTrainig\SportsTrainig\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\mauifont.inputs
+C:\SportsProgram\Sports-Training-Program\SportsTrainig\SportsTrainig\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\mauisplash.inputs
+C:\SportsProgram\Sports-Training-Program\SportsTrainig\SportsTrainig\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\mauimanifest.stamp
+C:\SportsProgram\Sports-Training-Program\SportsTrainig\SportsTrainig\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\Platforms\Windows\App.g.i.cs
+C:\SportsProgram\Sports-Training-Program\SportsTrainig\SportsTrainig\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\Platforms\Windows\App.g.cs
+C:\SportsProgram\Sports-Training-Program\SportsTrainig\SportsTrainig\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\XamlTypeInfo.g.cs
+C:\SportsProgram\Sports-Training-Program\SportsTrainig\SportsTrainig\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\Platforms\Windows\App.xaml
+C:\SportsProgram\Sports-Training-Program\SportsTrainig\SportsTrainig\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\Platforms\Windows\App.xbf
+C:\SportsProgram\Sports-Training-Program\SportsTrainig\SportsTrainig\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\XamlSaveStateFile.xml
+C:\SportsProgram\Sports-Training-Program\SportsTrainig\SportsTrainig\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\SportsTraining.GeneratedMSBuildEditorConfig.editorconfig

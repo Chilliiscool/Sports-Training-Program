@@ -44,5 +44,20 @@ namespace SportsTraining.Pages
 
         protected void OnPropertyChanged(string propertyName) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            string savedCompanie = Preferences.Get("SelectedCompany", "Normal");
+
+            if (savedCompanie == "ETPA")
+            {
+                LogoImage.IsVisible = true;
+            }
+            else
+            {
+                LogoImage.IsVisible = false;
+            }
+        }
     }
 }

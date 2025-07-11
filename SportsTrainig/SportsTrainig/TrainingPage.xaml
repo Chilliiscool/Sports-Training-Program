@@ -2,9 +2,16 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"  
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"  
             x:Class="SportsTraining.Pages.TrainingPage"  
-            Title="Training">  
+            Title="Training">
+    <Shell.TitleView>
+        <HorizontalStackLayout Spacing="10" Padding="10" VerticalOptions="Center">
+            <Label Text="Training" FontSize="22" VerticalOptions="Center" />
+            <Image Source="default_logo.png" HeightRequest="50" />
+            <Image x:Name="LogoImage" Source="etpa_logo.png" HeightRequest="50" IsVisible="False" />
+        </HorizontalStackLayout>
+    </Shell.TitleView>
 
-   <Grid Padding="20">  
+    <Grid Padding="20">  
        <Grid.RowDefinitions>  
            <RowDefinition Height="Auto" />  
            <RowDefinition Height="Auto" />  

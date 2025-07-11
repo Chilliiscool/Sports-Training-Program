@@ -6,6 +6,13 @@
    xmlns:pages="clr-namespace:SportsTraining.Pages"
    Shell.FlyoutBehavior="Disabled"
    Title="SportsTraining">
+    <Shell.TitleView>
+        <HorizontalStackLayout Spacing="10" Padding="10" VerticalOptions="Center">
+            <Label Text="Settings" FontSize="22" VerticalOptions="Center" />
+            <Image Source="default_logo.png" HeightRequest="50" />
+            <Image x:Name="LogoImage" Source="etpa_logo.png" HeightRequest="50" IsVisible="False" />
+        </HorizontalStackLayout>
+    </Shell.TitleView>
 
     <TabBar>
         <ShellContent

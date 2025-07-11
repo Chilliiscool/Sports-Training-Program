@@ -75,9 +75,3 @@ build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = SportsTraining.TrainingPage.xaml
 build_metadata.AdditionalFiles.TargetPath = TrainingPage.xaml
 build_metadata.AdditionalFiles.RelativePath = TrainingPage.xaml
-
-[C:/SportsProgram/Sports-Training-Program/SportsTrainig/SportsTrainig/WebLoginPage.xaml]
-build_metadata.AdditionalFiles.GenKind = Xaml
-build_metadata.AdditionalFiles.ManifestResourceName = SportsTraining.WebLoginPage.xaml
-build_metadata.AdditionalFiles.TargetPath = WebLoginPage.xaml
-build_metadata.AdditionalFiles.RelativePath = WebLoginPage.xaml

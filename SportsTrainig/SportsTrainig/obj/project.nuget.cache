@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "rSXeCOA3eLo=",
+  "dgSpecHash": "J0ouY9ThG7o=",
   "success": true,
   "projectFilePath": "C:\\SportsProgram\\Sports-Training-Program\\SportsTrainig\\SportsTrainig\\SportsTraining.csproj",
   "expectedPackageFiles": [
@@ -117,8 +117,8 @@
     "C:\\Users\\frank\\.nuget\\packages\\microsoft.android.ref.34\\34.0.147\\microsoft.android.ref.34.34.0.147.nupkg.sha512",
     "C:\\Users\\frank\\.nuget\\packages\\microsoft.android.runtime.34.android-arm\\34.0.147\\microsoft.android.runtime.34.android-arm.34.0.147.nupkg.sha512",
     "C:\\Users\\frank\\.nuget\\packages\\microsoft.android.runtime.34.android-x86\\34.0.147\\microsoft.android.runtime.34.android-x86.34.0.147.nupkg.sha512",
+    "C:\\Users\\frank\\.nuget\\packages\\microsoft.ios.runtime.ios-arm64.net8.0_18.0\\18.0.8319\\microsoft.ios.runtime.ios-arm64.net8.0_18.0.18.0.8319.nupkg.sha512",
     "C:\\Users\\frank\\.nuget\\packages\\microsoft.ios.ref.net8.0_18.0\\18.0.8319\\microsoft.ios.ref.net8.0_18.0.18.0.8319.nupkg.sha512",
-    "C:\\Users\\frank\\.nuget\\packages\\microsoft.ios.runtime.iossimulator-x64.net8.0_18.0\\18.0.8319\\microsoft.ios.runtime.iossimulator-x64.net8.0_18.0.18.0.8319.nupkg.sha512",
     "C:\\Users\\frank\\.nuget\\packages\\microsoft.maccatalyst.runtime.maccatalyst-x64.net8.0_18.0\\18.0.8319\\microsoft.maccatalyst.runtime.maccatalyst-x64.net8.0_18.0.18.0.8319.nupkg.sha512",
     "C:\\Users\\frank\\.nuget\\packages\\microsoft.maccatalyst.ref.net8.0_18.0\\18.0.8319\\microsoft.maccatalyst.ref.net8.0_18.0.18.0.8319.nupkg.sha512",
     "C:\\Users\\frank\\.nuget\\packages\\microsoft.windows.sdk.net.ref\\10.0.19041.57\\microsoft.windows.sdk.net.ref.10.0.19041.57.nupkg.sha512"

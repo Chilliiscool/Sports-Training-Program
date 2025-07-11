@@ -1,48 +1,68 @@
-﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SportsTraining.Pages.SettingsPage"
-             Title="Settings">
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"  
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"  
+            xmlns:controls="clr-namespace:Microsoft.Maui.Controls;assembly=Microsoft.Maui.Controls"  
+            x:Class="SportsTraining.Pages.SettingsPage"  
+            Title="Setting">  
 
-    <ScrollView>
-        <VerticalStackLayout Padding="20" Spacing="12">
+   <Shell.TitleView>  
+       <HorizontalStackLayout Spacing="10" Padding="10" VerticalOptions="Center">
+            <Label Text="Settings" FontSize="22" VerticalOptions="Center" />
+            <Image Source="default_logo.png" HeightRequest="50" />
+            <Image x:Name="LogoImage" Source="etpa_logo.png" HeightRequest="50" IsVisible="False" />
+        </HorizontalStackLayout>  
+   </Shell.TitleView>  
 
-            <Label Text="Settings" FontSize="28" FontAttributes="Bold" />
+   <ScrollView>  
+       <VerticalStackLayout Padding="20" Spacing="12">  
 
-            <!-- Settings buttons -->
-            <Button Text="Account Settings" Clicked="OnAccountSettingsClicked" />
-            <Button Text="Edit Profile" Clicked="OnEditProfileClicked" />
-            <Button Text="Change Password" Clicked="OnChangePasswordClicked" />
-            <Button Text="Training Preferences" Clicked="OnTrainingPreferencesClicked" />
-            <Button Text="Goals" Clicked="OnGoalsClicked" />
-            <VerticalStackLayout Padding="10" Spacing="10">
-                <Label Text="Select Units:" />
-                <Picker x:Name="UnitsPicker" SelectedIndexChanged="OnUnitsPickerSelectedIndexChanged" />
-            </VerticalStackLayout>
-            <HorizontalStackLayout Padding="10" Spacing="10" VerticalOptions="Center">
-                <Label Text="Notifications:" VerticalOptions="Center" />
-                <Label Text="Off" VerticalOptions="Center" />
-                <Switch x:Name="NotificationsSwitch" Toggled="OnNotificationsToggled" />
-                <Label Text="On" VerticalOptions="Center" />
-            </HorizontalStackLayout>
-            <Button Text="App Settings" Clicked="OnAppSettingsClicked" />
-            <HorizontalStackLayout Padding="10" Spacing="10" VerticalOptions="Center">
-                <Label Text="Offline Mode:" VerticalOptions="Center" />
-                <Label Text="Off" VerticalOptions="Center" />
-                <Switch Toggled="OnOfflineModeToggled" />
-                <Label Text="On" VerticalOptions="Center" />
-            </HorizontalStackLayout>
-            <HorizontalStackLayout Padding="10" Spacing="10" VerticalOptions="Center">
-                <Label Text="App Theam:" VerticalOptions="Center" />
-                <Label Text="☀️ Light" VerticalOptions="Center" />
-                <Switch x:Name="ThemeToggleSwitch" Toggled="OnThemeToggleToggled" />
-                <Label Text="🌙 Dark" VerticalOptions="Center" />
-            </HorizontalStackLayout>
-            <Button Text="Language" Clicked="OnLanguageClicked" />
-            <Button Text="Privacy Permissions" Clicked="OnPrivacyClicked" />
-            <Button Text="Support" Clicked="OnSupportClicked" />
-            <Button Text="FAQ" Clicked="OnFaqClicked" />
-            <Button Text="Report Issue" Clicked="OnReportIssueClicked" />
+           
+             
 
-        </VerticalStackLayout>
-    </ScrollView>
+           <VerticalStackLayout Padding="10" Spacing="10">  
+               <Label Text="Select Companie:" />  
+               <Picker x:Name="CompaniePicker" SelectedIndexChanged="OnCompaniePickerSelectedIndexChanged" />  
+           </VerticalStackLayout>  
+
+           <Button Text="Account Settings" Clicked="OnAccountSettingsClicked" />  
+           <Button Text="Edit Profile" Clicked="OnEditProfileClicked" />  
+           <Button Text="Change Password" Clicked="OnChangePasswordClicked" />  
+           <Button Text="Training Preferences" Clicked="OnTrainingPreferencesClicked" />  
+           <Button Text="Goals" Clicked="OnGoalsClicked" />  
+
+           <VerticalStackLayout Padding="10" Spacing="10">  
+               <Label Text="Select Units:" />  
+               <Picker x:Name="UnitsPicker" SelectedIndexChanged="OnUnitsPickerSelectedIndexChanged" />  
+           </VerticalStackLayout>  
+
+           <HorizontalStackLayout Padding="10" Spacing="10" VerticalOptions="Center">  
+               <Label Text="Notifications:" VerticalOptions="Center" />  
+               <Label Text="Off" VerticalOptions="Center" />  
+               <Switch x:Name="NotificationsSwitch" Toggled="OnNotificationsToggled" />  
+               <Label Text="On" VerticalOptions="Center" />  
+           </HorizontalStackLayout>  
+
+           <Button Text="App Settings" Clicked="OnAppSettingsClicked" />  
+
+           <HorizontalStackLayout Padding="10" Spacing="10" VerticalOptions="Center">  
+               <Label Text="Offline Mode:" VerticalOptions="Center" />  
+               <Label Text="Off" VerticalOptions="Center" />  
+               <Switch Toggled="OnOfflineModeToggled" />  
+               <Label Text="On" VerticalOptions="Center" />  
+           </HorizontalStackLayout>  
+
+           <HorizontalStackLayout Padding="10" Spacing="10" VerticalOptions="Center">  
+               <Label Text="App Theme:" VerticalOptions="Center" />  
+               <Label Text="☀️ Light" VerticalOptions="Center" />  
+               <Switch x:Name="ThemeToggleSwitch" Toggled="OnThemeToggleToggled" />  
+               <Label Text="🌙 Dark" VerticalOptions="Center" />  
+           </HorizontalStackLayout>  
+
+           <Button Text="Language" Clicked="OnLanguageClicked" />  
+           <Button Text="Privacy Permissions" Clicked="OnPrivacyClicked" />  
+           <Button Text="Support" Clicked="OnSupportClicked" />  
+           <Button Text="FAQ" Clicked="OnFaqClicked" />  
+           <Button Text="Report Issue" Clicked="OnReportIssueClicked" />  
+
+       </VerticalStackLayout>  
+   </ScrollView>  
 </ContentPage>

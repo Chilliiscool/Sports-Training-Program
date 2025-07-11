@@ -7,12 +7,42 @@ namespace SportsTraining.Pages
     {
         const string NotificationsKey = "NotificationsEnabled";
         const string UnitsKey = "SelectedUnits";
+        const string ThemeKey = "UserPreferredTheme";
+        const string CompanieKey = "SelectedCompanie";
+
+
         public SettingsPage()
         {
-            InitializeComponent();  // Loads your XAML content
-            ThemeToggleSwitch.IsToggled = Application.Current.RequestedTheme == AppTheme.Dark;
+            InitializeComponent();
+
+            // Load saved theme preference
+            string savedTheme = Preferences.Get(ThemeKey, "Light");
+            bool isDark = savedTheme == "Dark";
+
+            // Set toggle state
+            ThemeToggleSwitch.IsToggled = isDark;
+
+            // Apply theme on page load
+            Application.Current.UserAppTheme = isDark ? AppTheme.Dark : AppTheme.Light;
+
+            // Load other preferences as you have
             bool savedNotifications = Preferences.Get(NotificationsKey, true);
             NotificationsSwitch.IsToggled = savedNotifications;
+
+            CompaniePicker.ItemsSource = new string[]
+            {
+                "Normal",
+                "ETPA",
+            };
+            CompaniePicker.ItemsSource = new string[] { "Normal", "ETPA" };
+
+            // Load saved company
+            string savedCompany = Preferences.Get("SelectedCompany", "Normal");
+            int index = CompaniePicker.ItemsSource.IndexOf(savedCompany);
+            CompaniePicker.SelectedIndex = index >= 0 ? index : 0;
+
+            ApplyCompanieTheme(savedCompany);
+
             UnitsPicker.ItemsSource = new string[]
             {
                 "Metric (kg, km)",
@@ -57,6 +87,29 @@ namespace SportsTraining.Pages
             // Save preference persistently
             Preferences.Set(NotificationsKey, notificationsEnabled);
         }
+        private void OnCompaniePickerSelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (CompaniePicker.SelectedIndex == -1)
+                return;
+
+            string selectedCompanie = CompaniePicker.Items[CompaniePicker.SelectedIndex];
+
+            Preferences.Set("SelectedCompany", selectedCompanie);
+            LogoImage.IsVisible = selectedCompanie == "ETPA";
+
+            
+            LogoImage.IsVisible = selectedCompanie == "ETPA";
+        }
+
+
+        private void ApplyCompanieTheme(string companie)
+        {
+            if (companie == "ETPA")
+            {
+                LogoImage.Source = "etpa_logo.png";
+            }
+            
+        }
         private void OnUnitsPickerSelectedIndexChanged(object sender, EventArgs e)
         {
             if (UnitsPicker.SelectedIndex == -1)
@@ -67,8 +120,8 @@ namespace SportsTraining.Pages
             // Save selected index persistently
             Preferences.Set(UnitsKey, selectedIndex);
 
-            string selectedUnit = UnitsPicker.Items[selectedIndex];
-         
+            string selectedUnit = CompaniePicker.Items[selectedIndex];
+
 
             // TODO: Add logic to apply unit changes throughout your app
         }
@@ -91,7 +144,7 @@ namespace SportsTraining.Pages
             Application.Current.UserAppTheme = isDark ? AppTheme.Dark : AppTheme.Light;
 
             // Save the setting using Preferences
-            Preferences.Set("UserPreferredTheme", isDark ? "Dark" : "Light");
+            Preferences.Set(ThemeKey, isDark ? "Dark" : "Light");
         }
 
 

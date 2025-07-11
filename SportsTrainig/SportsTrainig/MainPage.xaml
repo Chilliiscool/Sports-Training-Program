@@ -4,6 +4,13 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="SportsTraining.Pages.MainPage"
     BackgroundColor="{AppThemeBinding Light=White, Dark=Black}">
+    <Shell.TitleView>
+        <HorizontalStackLayout Spacing="10" Padding="10" VerticalOptions="Center">
+            <Label Text="Home" FontSize="22" VerticalOptions="Center"  />
+            <Image Source="default_logo.png" HeightRequest="50" />
+            <Image x:Name="LogoImage" Source="etpa_logo.png" HeightRequest="50" IsVisible="False" />
+        </HorizontalStackLayout>
+    </Shell.TitleView>
 
     <ContentPage.Resources>
         <Style TargetType="Switch">
