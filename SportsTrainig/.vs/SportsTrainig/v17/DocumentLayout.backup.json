@@ -3,68 +3,60 @@
   "WorkspaceRootPath": "C:\\SportsProgram\\Sports-Training-Program\\SportsTrainig\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{5AC84949-6445-4951-B659-679699FD67E3}|SportsTrainig\\SportsTraining.csproj|c:\\sportsprogram\\sports-training-program\\sportstrainig\\sportstrainig\\settingspage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5AC84949-6445-4951-B659-679699FD67E3}|SportsTrainig\\SportsTraining.csproj|solutionrelative:sportstrainig\\settingspage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5AC84949-6445-4951-B659-679699FD67E3}|SportsTrainig\\SportsTraining.csproj|c:\\sportsprogram\\sports-training-program\\sportstrainig\\sportstrainig\\appshell.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{5AC84949-6445-4951-B659-679699FD67E3}|SportsTrainig\\SportsTraining.csproj|solutionrelative:sportstrainig\\appshell.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5AC84949-6445-4951-B659-679699FD67E3}|SportsTrainig\\SportsTraining.csproj|c:\\sportsprogram\\sports-training-program\\sportstrainig\\sportstrainig\\appshell.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5AC84949-6445-4951-B659-679699FD67E3}|SportsTrainig\\SportsTraining.csproj|solutionrelative:sportstrainig\\appshell.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5AC84949-6445-4951-B659-679699FD67E3}|SportsTrainig\\SportsTraining.csproj|c:\\sportsprogram\\sports-training-program\\sportstrainig\\sportstrainig\\trainingpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5AC84949-6445-4951-B659-679699FD67E3}|SportsTrainig\\SportsTraining.csproj|solutionrelative:sportstrainig\\trainingpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5AC84949-6445-4951-B659-679699FD67E3}|SportsTrainig\\SportsTraining.csproj|c:\\sportsprogram\\sports-training-program\\sportstrainig\\sportstrainig\\trainingpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{5AC84949-6445-4951-B659-679699FD67E3}|SportsTrainig\\SportsTraining.csproj|solutionrelative:sportstrainig\\trainingpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5AC84949-6445-4951-B659-679699FD67E3}|SportsTrainig\\SportsTraining.csproj|c:\\sportsprogram\\sports-training-program\\sportstrainig\\sportstrainig\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5AC84949-6445-4951-B659-679699FD67E3}|SportsTrainig\\SportsTraining.csproj|solutionrelative:sportstrainig\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5AC84949-6445-4951-B659-679699FD67E3}|SportsTrainig\\SportsTraining.csproj|c:\\sportsprogram\\sports-training-program\\sportstrainig\\sportstrainig\\progresspage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5AC84949-6445-4951-B659-679699FD67E3}|SportsTrainig\\SportsTraining.csproj|solutionrelative:sportstrainig\\progresspage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{5AC84949-6445-4951-B659-679699FD67E3}|SportsTrainig\\SportsTraining.csproj|c:\\sportsprogram\\sports-training-program\\sportstrainig\\sportstrainig\\mainpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5AC84949-6445-4951-B659-679699FD67E3}|SportsTrainig\\SportsTraining.csproj|solutionrelative:sportstrainig\\mainpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5AC84949-6445-4951-B659-679699FD67E3}|SportsTrainig\\SportsTraining.csproj|c:\\sportsprogram\\sports-training-program\\sportstrainig\\sportstrainig\\mainpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{5AC84949-6445-4951-B659-679699FD67E3}|SportsTrainig\\SportsTraining.csproj|solutionrelative:sportstrainig\\mainpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5AC84949-6445-4951-B659-679699FD67E3}|SportsTrainig\\SportsTraining.csproj|c:\\sportsprogram\\sports-training-program\\sportstrainig\\sportstrainig\\loginpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{5AC84949-6445-4951-B659-679699FD67E3}|SportsTrainig\\SportsTraining.csproj|solutionrelative:sportstrainig\\loginpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\SportsProgram\\Sports-Training-Program\\SportsTrainig\\SportsTrainig\\obj\\Debug\\net8.0-windows10.0.19041.0\\win10-x64\\Platforms\\Windows\\App.g.i.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:SportsTrainig\\obj\\Debug\\net8.0-windows10.0.19041.0\\win10-x64\\Platforms\\Windows\\App.g.i.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5AC84949-6445-4951-B659-679699FD67E3}|SportsTrainig\\SportsTraining.csproj|c:\\sportsprogram\\sports-training-program\\sportstrainig\\sportstrainig\\settingspage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{5AC84949-6445-4951-B659-679699FD67E3}|SportsTrainig\\SportsTraining.csproj|solutionrelative:sportstrainig\\settingspage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5AC84949-6445-4951-B659-679699FD67E3}|SportsTrainig\\SportsTraining.csproj|c:\\sportsprogram\\sports-training-program\\sportstrainig\\sportstrainig\\progresspage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{5AC84949-6445-4951-B659-679699FD67E3}|SportsTrainig\\SportsTraining.csproj|solutionrelative:sportstrainig\\progresspage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5AC84949-6445-4951-B659-679699FD67E3}|SportsTrainig\\SportsTraining.csproj|c:\\sportsprogram\\sports-training-program\\sportstrainig\\sportstrainig\\resources\\styles\\colors.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{5AC84949-6445-4951-B659-679699FD67E3}|SportsTrainig\\SportsTraining.csproj|solutionrelative:sportstrainig\\resources\\styles\\colors.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{5AC84949-6445-4951-B659-679699FD67E3}|SportsTrainig\\SportsTraining.csproj|c:\\sportsprogram\\sports-training-program\\sportstrainig\\sportstrainig\\visualcoachingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AC84949-6445-4951-B659-679699FD67E3}|SportsTrainig\\SportsTraining.csproj|solutionrelative:sportstrainig\\visualcoachingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{5AC84949-6445-4951-B659-679699FD67E3}|SportsTrainig\\SportsTraining.csproj|c:\\sportsprogram\\sports-training-program\\sportstrainig\\sportstrainig\\loginpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5AC84949-6445-4951-B659-679699FD67E3}|SportsTrainig\\SportsTraining.csproj|solutionrelative:sportstrainig\\loginpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{5AC84949-6445-4951-B659-679699FD67E3}|SportsTrainig\\SportsTraining.csproj|c:\\sportsprogram\\sports-training-program\\sportstrainig\\sportstrainig\\settingspage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AC84949-6445-4951-B659-679699FD67E3}|SportsTrainig\\SportsTraining.csproj|solutionrelative:sportstrainig\\settingspage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AC84949-6445-4951-B659-679699FD67E3}|SportsTrainig\\SportsTraining.csproj|c:\\sportsprogram\\sports-training-program\\sportstrainig\\sportstrainig\\appshell.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AC84949-6445-4951-B659-679699FD67E3}|SportsTrainig\\SportsTraining.csproj|solutionrelative:sportstrainig\\appshell.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AC84949-6445-4951-B659-679699FD67E3}|SportsTrainig\\SportsTraining.csproj|c:\\sportsprogram\\sports-training-program\\sportstrainig\\sportstrainig\\settingspage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{5AC84949-6445-4951-B659-679699FD67E3}|SportsTrainig\\SportsTraining.csproj|solutionrelative:sportstrainig\\settingspage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AC84949-6445-4951-B659-679699FD67E3}|SportsTrainig\\SportsTraining.csproj|c:\\sportsprogram\\sports-training-program\\sportstrainig\\sportstrainig\\mainpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{5AC84949-6445-4951-B659-679699FD67E3}|SportsTrainig\\SportsTraining.csproj|solutionrelative:sportstrainig\\mainpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AC84949-6445-4951-B659-679699FD67E3}|SportsTrainig\\SportsTraining.csproj|c:\\sportsprogram\\sports-training-program\\sportstrainig\\sportstrainig\\appshell.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{5AC84949-6445-4951-B659-679699FD67E3}|SportsTrainig\\SportsTraining.csproj|solutionrelative:sportstrainig\\appshell.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AC84949-6445-4951-B659-679699FD67E3}|SportsTrainig\\SportsTraining.csproj|c:\\sportsprogram\\sports-training-program\\sportstrainig\\sportstrainig\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AC84949-6445-4951-B659-679699FD67E3}|SportsTrainig\\SportsTraining.csproj|solutionrelative:sportstrainig\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AC84949-6445-4951-B659-679699FD67E3}|SportsTrainig\\SportsTraining.csproj|c:\\sportsprogram\\sports-training-program\\sportstrainig\\sportstrainig\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{5AC84949-6445-4951-B659-679699FD67E3}|SportsTrainig\\SportsTraining.csproj|solutionrelative:sportstrainig\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{5AC84949-6445-4951-B659-679699FD67E3}|SportsTrainig\\SportsTraining.csproj|c:\\sportsprogram\\sports-training-program\\sportstrainig\\sportstrainig\\resources\\styles\\styles.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{5AC84949-6445-4951-B659-679699FD67E3}|SportsTrainig\\SportsTraining.csproj|solutionrelative:sportstrainig\\resources\\styles\\styles.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AC84949-6445-4951-B659-679699FD67E3}|SportsTrainig\\SportsTraining.csproj|c:\\sportsprogram\\sports-training-program\\sportstrainig\\sportstrainig\\programsession.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AC84949-6445-4951-B659-679699FD67E3}|SportsTrainig\\SportsTraining.csproj|solutionrelative:sportstrainig\\programsession.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AC84949-6445-4951-B659-679699FD67E3}|SportsTrainig\\SportsTraining.csproj|c:\\sportsprogram\\sports-training-program\\sportstrainig\\sportstrainig\\mauiprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AC84949-6445-4951-B659-679699FD67E3}|SportsTrainig\\SportsTraining.csproj|solutionrelative:sportstrainig\\mauiprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AC84949-6445-4951-B659-679699FD67E3}|SportsTrainig\\SportsTraining.csproj|c:\\sportsprogram\\sports-training-program\\sportstrainig\\sportstrainig\\workoutprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AC84949-6445-4951-B659-679699FD67E3}|SportsTrainig\\SportsTraining.csproj|solutionrelative:sportstrainig\\workoutprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -74,208 +66,193 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{e5c86464-96be-4d7c-9a8b-abcb3bbf5f92}"
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
-            },
-            {
               "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "App.g.i.cs",
-              "DocumentMoniker": "C:\\SportsProgram\\Sports-Training-Program\\SportsTrainig\\SportsTrainig\\obj\\Debug\\net8.0-windows10.0.19041.0\\win10-x64\\Platforms\\Windows\\App.g.i.cs",
-              "RelativeDocumentMoniker": "SportsTrainig\\obj\\Debug\\net8.0-windows10.0.19041.0\\win10-x64\\Platforms\\Windows\\App.g.i.cs",
-              "ToolTip": "C:\\SportsProgram\\Sports-Training-Program\\SportsTrainig\\SportsTrainig\\obj\\Debug\\net8.0-windows10.0.19041.0\\win10-x64\\Platforms\\Windows\\App.g.i.cs",
-              "RelativeToolTip": "SportsTrainig\\obj\\Debug\\net8.0-windows10.0.19041.0\\win10-x64\\Platforms\\Windows\\App.g.i.cs",
-              "ViewState": "AgIAABEAAAAAAAAAAAA9wCgAAAASAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-08T06:35:05.142Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 2,
               "Title": "LoginPage.xaml.cs",
               "DocumentMoniker": "C:\\SportsProgram\\Sports-Training-Program\\SportsTrainig\\SportsTrainig\\LoginPage.xaml.cs",
               "RelativeDocumentMoniker": "SportsTrainig\\LoginPage.xaml.cs",
               "ToolTip": "C:\\SportsProgram\\Sports-Training-Program\\SportsTrainig\\SportsTrainig\\LoginPage.xaml.cs",
               "RelativeToolTip": "SportsTrainig\\LoginPage.xaml.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAowAgAAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-07T03:03:12.176Z"
+              "WhenOpened": "2025-07-21T04:59:24.289Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "LoginPage.xaml",
-              "DocumentMoniker": "C:\\SportsProgram\\Sports-Training-Program\\SportsTrainig\\SportsTrainig\\LoginPage.xaml",
-              "RelativeDocumentMoniker": "SportsTrainig\\LoginPage.xaml",
-              "ToolTip": "C:\\SportsProgram\\Sports-Training-Program\\SportsTrainig\\SportsTrainig\\LoginPage.xaml",
-              "RelativeToolTip": "SportsTrainig\\LoginPage.xaml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAOAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-07-07T03:02:46.417Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "Colors.xaml",
-              "DocumentMoniker": "C:\\SportsProgram\\Sports-Training-Program\\SportsTrainig\\SportsTrainig\\Resources\\Styles\\Colors.xaml",
-              "RelativeDocumentMoniker": "SportsTrainig\\Resources\\Styles\\Colors.xaml",
-              "ToolTip": "C:\\SportsProgram\\Sports-Training-Program\\SportsTrainig\\SportsTrainig\\Resources\\Styles\\Colors.xaml",
-              "RelativeToolTip": "SportsTrainig\\Resources\\Styles\\Colors.xaml",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAABUAAAAqAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-06-25T04:59:08.674Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "SettingsPage.xaml.cs",
               "DocumentMoniker": "C:\\SportsProgram\\Sports-Training-Program\\SportsTrainig\\SportsTrainig\\SettingsPage.xaml.cs",
               "RelativeDocumentMoniker": "SportsTrainig\\SettingsPage.xaml.cs",
               "ToolTip": "C:\\SportsProgram\\Sports-Training-Program\\SportsTrainig\\SportsTrainig\\SettingsPage.xaml.cs",
               "RelativeToolTip": "SportsTrainig\\SettingsPage.xaml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAoAAAAAAAAAA==",
+              "ViewState": "AgIAAIsAAAAAAAAAAAAUwK8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-19T04:05:38.507Z",
+              "WhenOpened": "2025-07-21T04:51:59.287Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 5,
               "Title": "SettingsPage.xaml",
               "DocumentMoniker": "C:\\SportsProgram\\Sports-Training-Program\\SportsTrainig\\SportsTrainig\\SettingsPage.xaml",
               "RelativeDocumentMoniker": "SportsTrainig\\SettingsPage.xaml",
               "ToolTip": "C:\\SportsProgram\\Sports-Training-Program\\SportsTrainig\\SportsTrainig\\SettingsPage.xaml",
               "RelativeToolTip": "SportsTrainig\\SettingsPage.xaml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAKAAAAAAAAAA==",
+              "ViewState": "AgIAACIAAAAAAAAAAAAnwEUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-06-19T04:05:29.344Z"
+              "WhenOpened": "2025-07-21T04:51:58.467Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "ProgressPage.xaml.cs",
-              "DocumentMoniker": "C:\\SportsProgram\\Sports-Training-Program\\SportsTrainig\\SportsTrainig\\ProgressPage.xaml.cs",
-              "RelativeDocumentMoniker": "SportsTrainig\\ProgressPage.xaml.cs",
-              "ToolTip": "C:\\SportsProgram\\Sports-Training-Program\\SportsTrainig\\SportsTrainig\\ProgressPage.xaml.cs",
-              "RelativeToolTip": "SportsTrainig\\ProgressPage.xaml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-19T04:05:06.057Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "ProgressPage.xaml",
-              "DocumentMoniker": "C:\\SportsProgram\\Sports-Training-Program\\SportsTrainig\\SportsTrainig\\ProgressPage.xaml",
-              "RelativeDocumentMoniker": "SportsTrainig\\ProgressPage.xaml",
-              "ToolTip": "C:\\SportsProgram\\Sports-Training-Program\\SportsTrainig\\SportsTrainig\\ProgressPage.xaml",
-              "RelativeToolTip": "SportsTrainig\\ProgressPage.xaml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAhAAAAAAAAAA==",
+              "DocumentIndex": 9,
+              "Title": "App.xaml",
+              "DocumentMoniker": "C:\\SportsProgram\\Sports-Training-Program\\SportsTrainig\\SportsTrainig\\App.xaml",
+              "RelativeDocumentMoniker": "SportsTrainig\\App.xaml",
+              "ToolTip": "C:\\SportsProgram\\Sports-Training-Program\\SportsTrainig\\SportsTrainig\\App.xaml",
+              "RelativeToolTip": "SportsTrainig\\App.xaml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-06-19T04:04:56.251Z"
+              "WhenOpened": "2025-07-21T01:51:15.78Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "TrainingPage.xaml.cs",
-              "DocumentMoniker": "C:\\SportsProgram\\Sports-Training-Program\\SportsTrainig\\SportsTrainig\\TrainingPage.xaml.cs",
-              "RelativeDocumentMoniker": "SportsTrainig\\TrainingPage.xaml.cs",
-              "ToolTip": "C:\\SportsProgram\\Sports-Training-Program\\SportsTrainig\\SportsTrainig\\TrainingPage.xaml.cs",
-              "RelativeToolTip": "SportsTrainig\\TrainingPage.xaml.cs",
-              "ViewState": "AgIAABgAAAAAAAAAAAAYwDwAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-19T04:03:17.024Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "TrainingPage.xaml",
-              "DocumentMoniker": "C:\\SportsProgram\\Sports-Training-Program\\SportsTrainig\\SportsTrainig\\TrainingPage.xaml",
-              "RelativeDocumentMoniker": "SportsTrainig\\TrainingPage.xaml",
-              "ToolTip": "C:\\SportsProgram\\Sports-Training-Program\\SportsTrainig\\SportsTrainig\\TrainingPage.xaml",
-              "RelativeToolTip": "SportsTrainig\\TrainingPage.xaml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAhAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-06-19T04:02:44.185Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "Styles.xaml",
-              "DocumentMoniker": "C:\\SportsProgram\\Sports-Training-Program\\SportsTrainig\\SportsTrainig\\Resources\\Styles\\Styles.xaml",
-              "RelativeDocumentMoniker": "SportsTrainig\\Resources\\Styles\\Styles.xaml",
-              "ToolTip": "C:\\SportsProgram\\Sports-Training-Program\\SportsTrainig\\SportsTrainig\\Resources\\Styles\\Styles.xaml",
-              "RelativeToolTip": "SportsTrainig\\Resources\\Styles\\Styles.xaml",
-              "ViewState": "AgIAAEwBAAAAAAAAAAAAwHYBAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-06-19T03:27:00.651Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 8,
               "Title": "App.xaml.cs",
               "DocumentMoniker": "C:\\SportsProgram\\Sports-Training-Program\\SportsTrainig\\SportsTrainig\\App.xaml.cs",
               "RelativeDocumentMoniker": "SportsTrainig\\App.xaml.cs",
               "ToolTip": "C:\\SportsProgram\\Sports-Training-Program\\SportsTrainig\\SportsTrainig\\App.xaml.cs",
               "RelativeToolTip": "SportsTrainig\\App.xaml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-19T03:24:52.506Z"
+              "WhenOpened": "2025-06-19T03:24:52.506Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "AppShell.xaml.cs",
-              "DocumentMoniker": "C:\\SportsProgram\\Sports-Training-Program\\SportsTrainig\\SportsTrainig\\AppShell.xaml.cs",
-              "RelativeDocumentMoniker": "SportsTrainig\\AppShell.xaml.cs",
-              "ToolTip": "C:\\SportsProgram\\Sports-Training-Program\\SportsTrainig\\SportsTrainig\\AppShell.xaml.cs",
-              "RelativeToolTip": "SportsTrainig\\AppShell.xaml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-19T03:19:06.262Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 7,
               "Title": "AppShell.xaml",
               "DocumentMoniker": "C:\\SportsProgram\\Sports-Training-Program\\SportsTrainig\\SportsTrainig\\AppShell.xaml",
               "RelativeDocumentMoniker": "SportsTrainig\\AppShell.xaml",
               "ToolTip": "C:\\SportsProgram\\Sports-Training-Program\\SportsTrainig\\SportsTrainig\\AppShell.xaml",
               "RelativeToolTip": "SportsTrainig\\AppShell.xaml",
-              "ViewState": "AgIAAAEAAAAAAAAAAAAAABAAAAAEAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-06-19T03:13:52.963Z"
+              "WhenOpened": "2025-06-19T03:13:52.963Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 4,
+              "Title": "AppShell.xaml.cs",
+              "DocumentMoniker": "C:\\SportsProgram\\Sports-Training-Program\\SportsTrainig\\SportsTrainig\\AppShell.xaml.cs",
+              "RelativeDocumentMoniker": "SportsTrainig\\AppShell.xaml.cs",
+              "ToolTip": "C:\\SportsProgram\\Sports-Training-Program\\SportsTrainig\\SportsTrainig\\AppShell.xaml.cs",
+              "RelativeToolTip": "SportsTrainig\\AppShell.xaml.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAAAIwDkAAAA/AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-19T03:19:06.262Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "MainPage.xaml",
               "DocumentMoniker": "C:\\SportsProgram\\Sports-Training-Program\\SportsTrainig\\SportsTrainig\\MainPage.xaml",
               "RelativeDocumentMoniker": "SportsTrainig\\MainPage.xaml",
               "ToolTip": "C:\\SportsProgram\\Sports-Training-Program\\SportsTrainig\\SportsTrainig\\MainPage.xaml",
               "RelativeToolTip": "SportsTrainig\\MainPage.xaml",
-              "ViewState": "AgIAAE4AAAAAAAAAAAAAAAgAAABGAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-06-19T03:14:24.76Z"
+              "WhenOpened": "2025-06-19T03:14:24.76Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 0,
               "Title": "MainPage.xaml.cs",
               "DocumentMoniker": "C:\\SportsProgram\\Sports-Training-Program\\SportsTrainig\\SportsTrainig\\MainPage.xaml.cs",
               "RelativeDocumentMoniker": "SportsTrainig\\MainPage.xaml.cs",
-              "ToolTip": "C:\\SportsProgram\\Sports-Training-Program\\SportsTrainig\\SportsTrainig\\MainPage.xaml.cs",
-              "RelativeToolTip": "SportsTrainig\\MainPage.xaml.cs",
-              "ViewState": "AgIAACAAAAAAAAAAAAAcwDAAAAAIAAAAAAAAAA==",
+              "ToolTip": "C:\\SportsProgram\\Sports-Training-Program\\SportsTrainig\\SportsTrainig\\MainPage.xaml.cs*",
+              "RelativeToolTip": "SportsTrainig\\MainPage.xaml.cs*",
+              "ViewState": "AgIAABsAAAAAAAAAAAAYwDgAAAA/AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-19T03:14:08.719Z"
+              "WhenOpened": "2025-06-19T03:14:08.719Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "WorkoutProgram.cs",
+              "DocumentMoniker": "C:\\SportsProgram\\Sports-Training-Program\\SportsTrainig\\SportsTrainig\\WorkoutProgram.cs",
+              "RelativeDocumentMoniker": "SportsTrainig\\WorkoutProgram.cs",
+              "ToolTip": "C:\\SportsProgram\\Sports-Training-Program\\SportsTrainig\\SportsTrainig\\WorkoutProgram.cs",
+              "RelativeToolTip": "SportsTrainig\\WorkoutProgram.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAsAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-21T01:12:26.75Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "MauiProgram.cs",
+              "DocumentMoniker": "C:\\SportsProgram\\Sports-Training-Program\\SportsTrainig\\SportsTrainig\\MauiProgram.cs",
+              "RelativeDocumentMoniker": "SportsTrainig\\MauiProgram.cs",
+              "ToolTip": "C:\\SportsProgram\\Sports-Training-Program\\SportsTrainig\\SportsTrainig\\MauiProgram.cs",
+              "RelativeToolTip": "SportsTrainig\\MauiProgram.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-21T01:12:22.076Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "ProgramSession.cs",
+              "DocumentMoniker": "C:\\SportsProgram\\Sports-Training-Program\\SportsTrainig\\SportsTrainig\\ProgramSession.cs",
+              "RelativeDocumentMoniker": "SportsTrainig\\ProgramSession.cs",
+              "ToolTip": "C:\\SportsProgram\\Sports-Training-Program\\SportsTrainig\\SportsTrainig\\ProgramSession.cs",
+              "RelativeToolTip": "SportsTrainig\\ProgramSession.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwA0AAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-20T04:16:28.516Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "VisualCoachingService.cs",
+              "DocumentMoniker": "C:\\SportsProgram\\Sports-Training-Program\\SportsTrainig\\SportsTrainig\\VisualCoachingService.cs",
+              "RelativeDocumentMoniker": "SportsTrainig\\VisualCoachingService.cs",
+              "ToolTip": "C:\\SportsProgram\\Sports-Training-Program\\SportsTrainig\\SportsTrainig\\VisualCoachingService.cs*",
+              "RelativeToolTip": "SportsTrainig\\VisualCoachingService.cs*",
+              "ViewState": "AgIAACAAAAAAAAAAAAAAACAAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-20T00:49:33.957Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Styles.xaml",
+              "DocumentMoniker": "C:\\SportsProgram\\Sports-Training-Program\\SportsTrainig\\SportsTrainig\\Resources\\Styles\\Styles.xaml",
+              "RelativeDocumentMoniker": "SportsTrainig\\Resources\\Styles\\Styles.xaml",
+              "ToolTip": "C:\\SportsProgram\\Sports-Training-Program\\SportsTrainig\\SportsTrainig\\Resources\\Styles\\Styles.xaml",
+              "RelativeToolTip": "SportsTrainig\\Resources\\Styles\\Styles.xaml",
+              "ViewState": "AgIAAGwAAAAAAAAAAAAawIYAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-06-19T03:27:00.651Z",
+              "EditorCaption": ""
             }
           ]
         }

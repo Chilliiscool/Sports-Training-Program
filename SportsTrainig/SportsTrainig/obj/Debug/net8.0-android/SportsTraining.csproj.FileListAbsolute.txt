@@ -1052,3 +1052,4 @@ C:\SportsProgram\Sports-Training-Program\SportsTrainig\SportsTrainig\obj\Debug\n
 C:\SportsProgram\Sports-Training-Program\SportsTrainig\SportsTrainig\obj\Debug\net8.0-android\stamp\_GenerateJavaStubs.stamp
 C:\SportsProgram\Sports-Training-Program\SportsTrainig\SportsTrainig\obj\Debug\net8.0-android\stamp\_GeneratePackageManagerJava.stamp
 C:\SportsProgram\Sports-Training-Program\SportsTrainig\SportsTrainig\obj\Debug\net8.0-android\stamp\_ResolveLibraryProjectImports.stamp
+C:\SportsProgram\Sports-Training-Program\SportsTrainig\SportsTrainig\obj\Debug\net8.0-android\android\assets\Newtonsoft.Json.dll

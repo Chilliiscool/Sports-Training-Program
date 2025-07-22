@@ -1,68 +1,141 @@
 ﻿using Microsoft.Maui.Controls;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Net.Http.Json;
 using Microsoft.Maui.Storage;
+using Microsoft.Maui.Dispatching;
+using System.Collections.ObjectModel;
+using SportsTraining.Services;
 using SportsTraining.Models;
+using System.Diagnostics;
+using Newtonsoft.Json.Linq;
+using System.Linq;
 
 namespace SportsTraining.Pages
 {
     public partial class MainPage : ContentPage
     {
+        public ObservableCollection<ProgramSession> TodayPrograms { get; set; } = new ObservableCollection<ProgramSession>();
+        private bool isLoading = false;
+
         public MainPage()
         {
             InitializeComponent();
-            LoadUserPrograms();
+            ProgramsListView.ItemsSource = TodayPrograms;
         }
 
-        private async void LoadUserPrograms()
-        {
-            try
-            {
-                // Get the stored token
-                string token = await SecureStorage.Default.GetAsync("auth_token");
-
-                if (string.IsNullOrEmpty(token))
-                {
-                    await DisplayAlert("Error", "You must log in first.", "OK");
-                    await Navigation.PopAsync(); // Go back to login
-                    return;
-                }
-
-                using var client = new HttpClient();
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-
-                // ✅ Replace with actual user ID or let API return current user’s data
-                string userId = "currentUserId";  // Placeholder
-                var programs = await client.GetFromJsonAsync<List<WorkoutProgram>>(
-                    $"https://cloud.visualcoaching2.com/api/users/{userId}/programs"
-                );
-
-                // Set to ListView
-                ProgramsListView.ItemsSource = programs ?? new List<WorkoutProgram>();
-            }
-            catch (Exception ex)
-            {
-                await DisplayAlert("Error", $"Could not load programs: {ex.Message}", "OK");
-            }
-        }
         protected override void OnAppearing()
         {
             base.OnAppearing();
+            LogoImage.IsVisible = Preferences.Get("SelectedCompany", "Normal") == "ETPA";
+            _ = LoadUserProgramsAsync();
+        }
 
-            string savedCompanie = Preferences.Get("SelectedCompany", "Normal");
+        private async Task LoadUserProgramsAsync()
+        {
+            if (isLoading) return;
+            isLoading = true;
 
-            if (savedCompanie == "ETPA")
+            MainThread.BeginInvokeOnMainThread(() =>
             {
-                LogoImage.IsVisible = true;
+                TodayPrograms.Clear();
+                LoadingIndicator.IsVisible = true;
+                LoadingIndicator.IsRunning = true;
+                ProgramsListView.IsVisible = false;
+            });
+
+            string cookie = Preferences.Get("VCP_Cookie", string.Empty);
+
+            if (string.IsNullOrEmpty(cookie))
+            {
+                await DisplayAlert("Login Required", "Please login to view your program.", "OK");
+                ShowProgramList();
+                isLoading = false;
+                return;
             }
-            else
+
+            try
             {
-                LogoImage.IsVisible = false;
+                string today = DateTime.Today.ToString("yyyy-MM-dd");
+                var jsonResponse = await VisualCoachingService.GetRawSessionsJson(cookie, today);
+
+                var sessions = new List<VisualCoachingService.ProgramSessionBrief>();
+
+                try
+                {
+                    sessions = Newtonsoft.Json.JsonConvert.DeserializeObject<List<VisualCoachingService.ProgramSessionBrief>>(jsonResponse)
+                               ?? new List<VisualCoachingService.ProgramSessionBrief>();
+                }
+                catch
+                {
+                    try
+                    {
+                        var jobject = JObject.Parse(jsonResponse);
+                        if (jobject["sessions"] != null)
+{
+    sessions = jobject["sessions"]?.ToObject<List<VisualCoachingService.ProgramSessionBrief>>() ?? new List<VisualCoachingService.ProgramSessionBrief>();
+}
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine($"JSON parsing failed: {ex.Message}");
+                    }
+                }
+
+                var seenKeys = new HashSet<string>();
+
+                MainThread.BeginInvokeOnMainThread(() =>
+                {
+                    TodayPrograms.Clear();
+
+                    foreach (var brief in sessions)
+                    {
+                        string key = $"{brief.SessionTitle}_{brief.Url}";
+
+                        if (!seenKeys.Contains(key))
+                        {
+                            seenKeys.Add(key);
+
+                            TodayPrograms.Add(new ProgramSession
+                            {
+                                SessionTitle = brief.SessionTitle,
+                                Url = brief.Url
+                            });
+                        }
+                    }
+
+                    ShowProgramList();
+                });
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Error", $"Failed to load program: {ex.Message}", "OK");
+                ShowProgramList();
+            }
+            finally
+            {
+                isLoading = false;
+
+                MainThread.BeginInvokeOnMainThread(() =>
+                {
+                    LoadingIndicator.IsVisible = false;
+                    LoadingIndicator.IsRunning = false;
+                    ProgramsListView.IsVisible = true;
+                });
             }
         }
 
+        private void ProgramsListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            if (e.SelectedItem is ProgramSession selected)
+            {
+                ProgramsListView.SelectedItem = null;
+                Debug.WriteLine($"Selected session: {selected.SessionTitle}, URL: {selected.Url}");
+            }
+        }
+
+        private void ShowProgramList()
+        {
+            LoadingIndicator.IsVisible = false;
+            LoadingIndicator.IsRunning = false;
+            ProgramsListView.IsVisible = true;
+        }
     }
 }
-
-

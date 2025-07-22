@@ -1,67 +1,53 @@
-using System;
-using System.Net.Http;
-using System.Net.Http.Json;
+using Microsoft.Maui.Controls;
 using Microsoft.Maui.Storage;
+using SportsTraining.Services;
 
 namespace SportsTraining.Pages
 {
     public partial class LoginPage : ContentPage
     {
+        bool isPasswordVisible = false;
+
         public LoginPage()
         {
             InitializeComponent();
         }
 
+        private void OnPasswordToggleClicked(object sender, EventArgs e)
+        {
+            isPasswordVisible = !isPasswordVisible;
+            passwordEntry.IsPassword = !isPasswordVisible;
+            passwordToggleBtn.Source = isPasswordVisible ? "eye_open.png" : "eye_closed.png";
+        }
+
+
         private async void OnLoginClicked(object sender, EventArgs e)
         {
-            ErrorLabel.IsVisible = false;
+            string email = emailEntry.Text?.Trim() ?? "";
+            string password = passwordEntry.Text ?? "";
 
-            var loginRequest = new
+            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
             {
-                Email = EmailEntry.Text,
-                Password = PasswordEntry.Text
-            };
-
-            using var client = new HttpClient();
-
-            try
-            {
-                var response = await client.PostAsJsonAsync("https://cloud.visualcoaching2.com/Account/LogOn", loginRequest);
-
-                if (response.IsSuccessStatusCode)
-                {
-                    var loginResponse = await response.Content.ReadFromJsonAsync<LoginResponse>();
-
-                    if (loginResponse != null && !string.IsNullOrEmpty(loginResponse.Token))
-                    {
-                        // Save token securely on device
-                        await SecureStorage.Default.SetAsync("auth_token", loginResponse.Token);
-
-                        // Navigate to MainPage after successful login
-                        await Navigation.PushAsync(new MainPage());
-                    }
-                    else
-                    {
-                        ErrorLabel.Text = "Login failed: Invalid server response.";
-                        ErrorLabel.IsVisible = true;
-                    }
-                }
-                else
-                {
-                    ErrorLabel.Text = "Login failed: Incorrect email or password.";
-                    ErrorLabel.IsVisible = true;
-                }
+                statusLabel.Text = "Please enter both email and password.";
+                return;
             }
-            catch (Exception ex)
+
+            statusLabel.Text = "";
+
+            string cookie = await VisualCoachingService.LoginAndGetCookie(email, password);
+
+            if (!string.IsNullOrEmpty(cookie))
             {
-                ErrorLabel.Text = $"Error: {ex.Message}";
-                ErrorLabel.IsVisible = true;
+                Preferences.Set("VCP_Cookie", cookie);
+                
+
+               
+                await Shell.Current.GoToAsync("//MainPage");
+            }
+            else
+            {
+                statusLabel.Text = "Login failed. Please check your email and password.";
             }
         }
-    }
-
-    public class LoginResponse
-    {
-        public string Token { get; set; }
     }
 }

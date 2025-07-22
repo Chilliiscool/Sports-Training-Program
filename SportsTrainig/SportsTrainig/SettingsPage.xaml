@@ -61,8 +61,9 @@
            <Button Text="Privacy Permissions" Clicked="OnPrivacyClicked" />  
            <Button Text="Support" Clicked="OnSupportClicked" />  
            <Button Text="FAQ" Clicked="OnFaqClicked" />  
-           <Button Text="Report Issue" Clicked="OnReportIssueClicked" />  
+           <Button Text="Report Issue" Clicked="OnReportIssueClicked" />
+           <Button Text="Logout" Clicked="OnLogoutClicked" />
 
-       </VerticalStackLayout>  
+        </VerticalStackLayout>  
    </ScrollView>  
 </ContentPage>

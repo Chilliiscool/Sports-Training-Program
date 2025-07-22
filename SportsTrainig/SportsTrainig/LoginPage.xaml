@@ -1,12 +1,33 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SportsTraining.Pages.LoginPage"
-             Title="Login">
-    <VerticalStackLayout Padding="30" Spacing="20">
-        <Entry x:Name="EmailEntry" Placeholder="Email" Keyboard="Email" />
-        <Entry x:Name="PasswordEntry" Placeholder="Password" IsPassword="True" />
+<ContentPage
+    x:Class="SportsTraining.Pages.LoginPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Login">
+    
+
+    <StackLayout Padding="30" Spacing="20">
+        <Label Text="Email" />
+        <Entry x:Name="emailEntry" Placeholder="Enter your email" Keyboard="Email" />
+
+        <Label Text="Password" />
+        <Grid>
+            <Entry x:Name="passwordEntry"
+                   Placeholder="Enter your password"
+                   IsPassword="True"
+                   HorizontalOptions="FillAndExpand" />
+            <ImageButton x:Name="passwordToggleBtn"
+                         Source="eye_closed.png"
+                         HorizontalOptions="End"
+                         VerticalOptions="Center"
+                         BackgroundColor="Transparent"
+                         WidthRequest="30"
+                         HeightRequest="30"
+                         Margin="0,0,5,0"
+                         Clicked="OnPasswordToggleClicked" />
+        </Grid>
+
         <Button Text="Login" Clicked="OnLoginClicked" />
-        <Label x:Name="ErrorLabel" TextColor="Red" IsVisible="False" />
-    </VerticalStackLayout>
+
+        <Label x:Name="statusLabel" TextColor="Red" FontSize="Small" />
+    </StackLayout>
 </ContentPage>

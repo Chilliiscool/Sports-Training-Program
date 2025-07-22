@@ -16,7 +16,7 @@ namespace SportsTraining
             string savedTheme = Preferences.Get(ThemeKey, "Light");
             Application.Current.UserAppTheme = savedTheme == "Dark" ? AppTheme.Dark : AppTheme.Light;
 
-            MainPage = new AppShell(); // or your starting page
+            MainPage = new AppShell(); // Set the Shell as main page
         }
     }
 }

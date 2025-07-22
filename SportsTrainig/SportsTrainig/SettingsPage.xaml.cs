@@ -168,6 +168,13 @@ namespace SportsTraining.Pages
         {
             DisplayAlert("Report Issue", "Open issue reporting page.", "OK");
         }
+        private async void OnLogoutClicked(object sender, EventArgs e)
+        {
+            Preferences.Remove("VCP_Cookie");
+            await Shell.Current.GoToAsync("//LoginPage");
+        }
+
+
         public static bool AreNotificationsEnabled() =>
             Preferences.Get(NotificationsKey, true);
 

@@ -9,6 +9,7 @@
 //------------------------------------------------------------------------------
 
 
+
 namespace SportsTrainig.WinUI
 {
 #if !DISABLE_XAML_GENERATED_MAIN
@@ -75,6 +76,11 @@ namespace SportsTrainig.WinUI
                 if (global::System.Diagnostics.Debugger.IsAttached) global::System.Diagnostics.Debugger.Break();
             };
 #endif
+        }
+
+        protected override MauiApp CreateMauiApp()
+        {
+            throw new NotImplementedException();
         }
     }
 }
