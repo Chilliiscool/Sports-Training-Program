@@ -17,6 +17,13 @@ namespace SportsTraining.Services
             public string Name { get; set; }
             public string Cookie { get; set; }
         }
+        public class ProgramSessionDetail
+        {
+            public string SessionTitle { get; set; }
+            public string HtmlSummary { get; set; }
+            public string SessionName { get; set; }
+            public string Description { get; set; }
+        }
 
         public class ProgramSessionBrief
         {
@@ -25,14 +32,6 @@ namespace SportsTraining.Services
 
             [JsonProperty("SessionTitle")]
             public string SessionTitle { get; set; }
-        }
-
-        public class ProgramSessionDetail
-        {
-            // Add properties as needed from Summary2 API
-            public string? SessionName { get; set; }
-            public string? Description { get; set; }
-            // etc.
         }
 
         public static async Task<string?> LoginAndGetCookie(string email, string password)
@@ -204,5 +203,47 @@ namespace SportsTraining.Services
                 return string.Empty;
             }
         }
+        public static async Task<string> GetRawSessionHtml(string cookie, string sessionUrl)
+        {
+            try
+            {
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Add("Cookie", $".VCPCOOKIES={cookie}");
+                client.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (compatible; MyApp/1.0)");
+
+                // Compose full URL from relative URL returned from API
+                string baseUrl = "https://cloud.visualcoaching2.com";
+                string fullUrl = baseUrl + sessionUrl;
+
+                var response = await client.GetAsync(fullUrl);
+                if (!response.IsSuccessStatusCode)
+                {
+                    Debug.WriteLine($"Failed to get session HTML: {response.StatusCode}");
+                    return string.Empty;
+                }
+
+                var html = await response.Content.ReadAsStringAsync();
+                return html;
+            }
+            catch (System.Exception ex)
+            {
+                Debug.WriteLine($"GetRawSessionHtml error: {ex.Message}");
+                return string.Empty;
+            }
+        }
+        public static async Task<ProgramSessionDetail> GetSessionSummaryFromUrl(string cookie, string url)
+        {
+            using var client = new HttpClient();
+            client.DefaultRequestHeaders.Add("Cookie", $".VCPCOOKIES={cookie}");
+
+            string fullUrl = $"https://cloud.visualcoaching2.com{url}";
+            var response = await client.GetAsync(fullUrl);
+            string json = await response.Content.ReadAsStringAsync();
+
+            return JsonConvert.DeserializeObject<ProgramSessionDetail>(json)
+                   ?? new ProgramSessionDetail();
+        }
+
+
     }
 }

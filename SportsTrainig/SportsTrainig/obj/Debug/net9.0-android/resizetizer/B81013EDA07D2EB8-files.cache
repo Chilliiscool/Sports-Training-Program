@@ -1,7 +1,9 @@
 ﻿obj\Debug\net9.0-android\resizetizer\r\drawable\default_logo.png
 obj\Debug\net9.0-android\resizetizer\r\drawable\etpa_logo.png
-obj\Debug\net9.0-android\resizetizer\r\drawable\eye_closed.png
-obj\Debug\net9.0-android\resizetizer\r\drawable\eye_open.png
+obj\Debug\net9.0-android\resizetizer\r\drawable\eye_closed_dark.png
+obj\Debug\net9.0-android\resizetizer\r\drawable\eye_closed_light.png
+obj\Debug\net9.0-android\resizetizer\r\drawable\eye_open_dark.png
+obj\Debug\net9.0-android\resizetizer\r\drawable\eye_open_light.png
 obj\Debug\net9.0-android\resizetizer\r\drawable\home.png
 obj\Debug\net9.0-android\resizetizer\r\drawable\progress.png
 obj\Debug\net9.0-android\resizetizer\r\drawable\settings.png

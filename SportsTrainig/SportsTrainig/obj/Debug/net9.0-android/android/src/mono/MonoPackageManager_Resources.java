@@ -4,6 +4,7 @@ public class MonoPackageManager_Resources {
 		/* We need to ensure that "SportsTraining.dll" comes first in this list. */
 		"SportsTraining.dll",
 		"GoogleGson.dll",
+		"HtmlAgilityPack.dll",
 		"Microsoft.Extensions.Configuration.dll",
 		"Microsoft.Extensions.Configuration.Abstractions.dll",
 		"Microsoft.Extensions.DependencyInjection.dll",

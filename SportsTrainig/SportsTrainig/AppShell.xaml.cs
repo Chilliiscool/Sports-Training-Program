@@ -15,9 +15,10 @@ namespace SportsTraining
         {
             InitializeComponent();
 
-            // Register routes (optional since already in ShellContent)
+            // Register routes for navigation
             Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
             Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
+            Routing.RegisterRoute(nameof(TrainingPage), typeof(TrainingPage)); // <-- Added route registration
 
             // Find named controls from XAML
             shellTitleView = this.FindByName<HorizontalStackLayout>("ShellTitleView");

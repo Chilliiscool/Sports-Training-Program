@@ -1,63 +1,66 @@
+using Microsoft.Maui.Controls;
+using Microsoft.Maui.Storage;
+using SportsTraining.Services;
 using System;
 using System.ComponentModel;
-using System.Windows.Input;
-using Microsoft.Maui.Controls;
+using System.Net;
 
 namespace SportsTraining.Pages
 {
+    [QueryProperty(nameof(Url), "url")]
     public partial class TrainingPage : ContentPage, INotifyPropertyChanged
     {
-        private int counter;
+        private string _url;
 
-        public int Counter
+        public string Url
         {
-            get => counter;
+            get => WebUtility.UrlDecode(_url);
             set
             {
-                if (counter != value)
-                {
-                    counter = value;
-                    OnPropertyChanged(nameof(Counter));
-                }
+                _url = value;
+                LoadSessionDetails();
             }
         }
-
-        public ICommand IncrementCommand { get; }
-        public ICommand ResetCommand { get; }
 
         public TrainingPage()
         {
             InitializeComponent();
-
-            // Initialize commands
-            IncrementCommand = new Command(() => Counter++);
-            ResetCommand = new Command(() => Counter = 0);
-
-            // Set BindingContext to self to enable bindings in XAML
-            BindingContext = this;
-
-            // Initialize counter
-            Counter = 0;
         }
 
-        public new event PropertyChangedEventHandler PropertyChanged;
+        private async void LoadSessionDetails()
+        {
+            try
+            {
+                string cookie = Preferences.Get("VCP_Cookie", "");
+                if (string.IsNullOrEmpty(cookie))
+                {
+                    await DisplayAlert("Error", "No cookie found. Please login.", "OK");
+                    return;
+                }
 
-        protected void OnPropertyChanged(string propertyName) =>
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+                if (string.IsNullOrEmpty(_url))
+                {
+                    await DisplayAlert("Error", "Session URL is missing.", "OK");
+                    return;
+                }
+
+                var detail = await VisualCoachingService.GetSessionSummaryFromUrl(cookie, _url);
+
+                TitleLabel.Text = detail?.SessionTitle ?? "Training Session";
+                DetailLabel.Text = detail?.HtmlSummary ?? "No session content found.";
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Error", $"Failed to load session: {ex.Message}", "OK");
+            }
+        }
+
         protected override void OnAppearing()
         {
             base.OnAppearing();
 
-            string savedCompanie = Preferences.Get("SelectedCompany", "Normal");
-
-            if (savedCompanie == "ETPA")
-            {
-                LogoImage.IsVisible = true;
-            }
-            else
-            {
-                LogoImage.IsVisible = false;
-            }
+            string savedCompany = Preferences.Get("SelectedCompany", "Normal");
+            LogoImage.IsVisible = savedCompany == "ETPA";
         }
     }
 }

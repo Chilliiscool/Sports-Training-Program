@@ -17,6 +17,8 @@
 
     <!-- Add LoginPage as ShellContent so absolute navigation works -->
     <ShellContent Route="LoginPage" ContentTemplate="{DataTemplate local:LoginPage}" />
+    <ShellContent Route="sessionDetail" ContentTemplate="{DataTemplate local:SessionDetailPage}" />
+                                                                                                                                                      
 
     <TabBar>
         <ShellContent Title="Home" Icon="home.png" ContentTemplate="{DataTemplate local:MainPage}" Route="MainPage" />

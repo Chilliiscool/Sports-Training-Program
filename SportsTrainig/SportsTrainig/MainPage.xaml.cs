@@ -7,6 +7,7 @@ using SportsTraining.Models;
 using System.Diagnostics;
 using Newtonsoft.Json.Linq;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace SportsTraining.Pages
 {
@@ -53,15 +54,15 @@ namespace SportsTraining.Pages
 
             try
             {
-                string today = DateTime.Today.ToString("yyyy-MM-dd");
+                string today = System.DateTime.Today.ToString("yyyy-MM-dd");
                 var jsonResponse = await VisualCoachingService.GetRawSessionsJson(cookie, today);
 
-                var sessions = new List<VisualCoachingService.ProgramSessionBrief>();
+                var sessions = new System.Collections.Generic.List<VisualCoachingService.ProgramSessionBrief>();
 
                 try
                 {
-                    sessions = Newtonsoft.Json.JsonConvert.DeserializeObject<List<VisualCoachingService.ProgramSessionBrief>>(jsonResponse)
-                               ?? new List<VisualCoachingService.ProgramSessionBrief>();
+                    sessions = Newtonsoft.Json.JsonConvert.DeserializeObject<System.Collections.Generic.List<VisualCoachingService.ProgramSessionBrief>>(jsonResponse)
+                               ?? new System.Collections.Generic.List<VisualCoachingService.ProgramSessionBrief>();
                 }
                 catch
                 {
@@ -69,17 +70,17 @@ namespace SportsTraining.Pages
                     {
                         var jobject = JObject.Parse(jsonResponse);
                         if (jobject["sessions"] != null)
-{
-    sessions = jobject["sessions"]?.ToObject<List<VisualCoachingService.ProgramSessionBrief>>() ?? new List<VisualCoachingService.ProgramSessionBrief>();
-}
+                        {
+                            sessions = jobject["sessions"]?.ToObject<System.Collections.Generic.List<VisualCoachingService.ProgramSessionBrief>>() ?? new System.Collections.Generic.List<VisualCoachingService.ProgramSessionBrief>();
+                        }
                     }
-                    catch (Exception ex)
+                    catch (System.Exception ex)
                     {
                         Debug.WriteLine($"JSON parsing failed: {ex.Message}");
                     }
                 }
 
-                var seenKeys = new HashSet<string>();
+                var seenKeys = new System.Collections.Generic.HashSet<string>();
 
                 MainThread.BeginInvokeOnMainThread(() =>
                 {
@@ -104,7 +105,7 @@ namespace SportsTraining.Pages
                     ShowProgramList();
                 });
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
                 await DisplayAlert("Error", $"Failed to load program: {ex.Message}", "OK");
                 ShowProgramList();
@@ -122,14 +123,19 @@ namespace SportsTraining.Pages
             }
         }
 
-        private void ProgramsListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        private async void ProgramsListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             if (e.SelectedItem is ProgramSession selected)
             {
                 ProgramsListView.SelectedItem = null;
-                Debug.WriteLine($"Selected session: {selected.SessionTitle}, URL: {selected.Url}");
+
+                var encodedUrl = Uri.EscapeDataString(selected.Url);
+                await Shell.Current.GoToAsync($"{nameof(TrainingPage)}?url={encodedUrl}");
+ 
             }
         }
+
+
 
         private void ShowProgramList()
         {

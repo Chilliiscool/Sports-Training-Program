@@ -11,7 +11,7 @@
                Source="etpa_logo.png"
                HeightRequest="80"
                HorizontalOptions="Center"
-               IsVisible="False"/>
+               IsVisible="False" />
 
         <ActivityIndicator x:Name="LoadingIndicator"
                            IsVisible="False"
@@ -24,9 +24,9 @@
                TextColor="{AppThemeBinding Light=Black, Dark=White}" />
 
         <ListView x:Name="ProgramsListView"
-                  ItemSelected="ProgramsListView_ItemSelected"
                   IsVisible="False"
-                  SeparatorVisibility="Default">
+                  SeparatorVisibility="Default"
+                  ItemSelected="ProgramsListView_ItemSelected">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="models:ProgramSession">
                     <TextCell Text="{Binding SessionTitle}" 

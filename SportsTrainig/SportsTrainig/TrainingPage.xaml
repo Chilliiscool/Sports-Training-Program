@@ -10,37 +10,10 @@
             <Image x:Name="LogoImage" Source="etpa_logo.png" HeightRequest="50" IsVisible="False" />
         </HorizontalStackLayout>
     </Shell.TitleView>
-
-    <Grid Padding="20">  
-       <Grid.RowDefinitions>  
-           <RowDefinition Height="Auto" />  
-           <RowDefinition Height="Auto" />  
-           <RowDefinition Height="Auto" />  
-           <RowDefinition Height="Auto" />  
-       </Grid.RowDefinitions>  
-       <Grid.ColumnDefinitions>  
-           <ColumnDefinition Width="*" />  
-       </Grid.ColumnDefinitions>  
-
-       <Label Text="Training Session"  
-              FontSize="24"  
-              HorizontalOptions="Center"  
-              Grid.Row="0" />  
-
-       <Label Text="{Binding Counter}"  
-              FontSize="48"  
-              HorizontalOptions="Center"  
-              Grid.Row="1" />  
-
-       <Button Text="Add Rep"  
-               Command="{Binding IncrementCommand}"  
-               Grid.Row="2"  
-               HorizontalOptions="Center" />  
-
-       <Button Text="Reset"  
-               Command="{Binding ResetCommand}"  
-               Grid.Row="3"  
-               HorizontalOptions="Center" />  
-   </Grid>  
-
+    <ScrollView>
+        <StackLayout Padding="20">
+            <Label x:Name="TitleLabel" FontSize="24" FontAttributes="Bold" />
+            <Label x:Name="DetailLabel" FontSize="16" />
+        </StackLayout>
+    </ScrollView>
 </ContentPage>
