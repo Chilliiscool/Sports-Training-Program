@@ -3,7 +3,6 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     Title="Login">
-    
 
     <StackLayout Padding="30" Spacing="20">
         <Label Text="Email" />
@@ -16,7 +15,7 @@
                    IsPassword="True"
                    HorizontalOptions="FillAndExpand" />
             <ImageButton x:Name="passwordToggleBtn"
-                         Source="eye_closed.png"
+                         Source="eye_closed_dark.png"
                          HorizontalOptions="End"
                          VerticalOptions="Center"
                          BackgroundColor="Transparent"
@@ -26,7 +25,7 @@
                          Clicked="OnPasswordToggleClicked" />
         </Grid>
 
-        <Button Text="Login" Clicked="OnLoginClicked" />
+        <Button x:Name="loginButton" Text="Login" Clicked="OnLoginClicked" />
 
         <Label x:Name="statusLabel" TextColor="Red" FontSize="Small" />
     </StackLayout>

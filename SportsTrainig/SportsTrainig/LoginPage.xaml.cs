@@ -2,6 +2,7 @@
 using SportsTraining.Services;
 using System;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 
 namespace SportsTraining.Pages
 {
@@ -65,8 +66,20 @@ namespace SportsTraining.Pages
             passwordToggleBtn.Source = ImageSource.FromFile(iconName);
         }
 
+        private bool IsValidEmail(string email)
+        {
+            if (string.IsNullOrWhiteSpace(email))
+                return false;
+
+            // Simple regex for email validation
+            var emailPattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+            return Regex.IsMatch(email, emailPattern, RegexOptions.IgnoreCase);
+        }
+
         private async void OnLoginClicked(object sender, EventArgs e)
         {
+            statusLabel.Text = "";  // Clear previous status messages
+
             string email = emailEntry.Text?.Trim() ?? "";
             string password = passwordEntry.Text ?? "";
 
@@ -75,6 +88,14 @@ namespace SportsTraining.Pages
                 statusLabel.Text = "Please enter both email and password.";
                 return;
             }
+
+            if (!IsValidEmail(email))
+            {
+                statusLabel.Text = "Please enter a valid email address.";
+                return;
+            }
+
+            loginButton.IsEnabled = false;  // Disable button during login process
 
             try
             {
@@ -96,7 +117,11 @@ namespace SportsTraining.Pages
             catch (Exception ex)
             {
                 statusLabel.Text = "An error occurred. Please try again.";
-                Debug.WriteLine($"[Login] Error: {ex.Message}");  // <-- Add this line
+                Debug.WriteLine($"[Login] Error: {ex.Message}");
+            }
+            finally
+            {
+                loginButton.IsEnabled = true;  // Re-enable button after login attempt
             }
         }
     }

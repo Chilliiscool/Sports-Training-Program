@@ -114,6 +114,7 @@ namespace SportsTraining.Pages
                     LoadingIndicator.IsVisible = false;
                     LoadingIndicator.IsRunning = false;
                     ProgramsListView.IsVisible = true;
+                    ProgramsListView.IsRefreshing = false;  // Stop Pull-to-Refresh animation
                 });
             }
         }
@@ -134,6 +135,12 @@ namespace SportsTraining.Pages
             LoadingIndicator.IsVisible = false;
             LoadingIndicator.IsRunning = false;
             ProgramsListView.IsVisible = true;
+        }
+
+        // ** Pull-to-Refresh handler **
+        private async void ProgramsListView_Refreshing(object sender, EventArgs e)
+        {
+            await LoadUserProgramsAsync();
         }
     }
 }

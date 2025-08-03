@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Net;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -11,14 +12,14 @@ namespace SportsTraining.Services
 {
     public static class VisualCoachingService
     {
-        private static readonly HttpClient client = new();
-
-        private static void SetupHttpClientHeaders(string cookie)
+        private static readonly CookieContainer cookieContainer = new();
+        private static readonly HttpClientHandler handler = new HttpClientHandler
         {
-            client.DefaultRequestHeaders.Clear();
-            client.DefaultRequestHeaders.Add("Cookie", $".VCPCOOKIES={cookie}");
-            client.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (compatible; MyApp/1.0)");
-        }
+            UseCookies = true,
+            CookieContainer = cookieContainer,
+        };
+
+        private static readonly HttpClient client = new HttpClient(handler);
 
         public class LoginResponse
         {
@@ -70,6 +71,9 @@ namespace SportsTraining.Services
                 var loginResult = JsonConvert.DeserializeObject<LoginResponse>(responseContent);
                 if (!string.IsNullOrEmpty(loginResult?.Cookie))
                 {
+                    Uri baseUri = new Uri("https://cloud.visualcoaching2.com");
+                    cookieContainer.SetCookies(baseUri, $".VCPCOOKIES={loginResult.Cookie}");
+                    Preferences.Set("VCP_Cookie", loginResult.Cookie);
                     Debug.WriteLine($"Login cookie from JSON: {loginResult.Cookie}");
                     return loginResult.Cookie;
                 }
@@ -81,6 +85,9 @@ namespace SportsTraining.Services
                         if (cookie.StartsWith(".VCPCOOKIES"))
                         {
                             var cookieValue = cookie.Split(';')[0].Split('=')[1];
+                            Uri baseUri = new Uri("https://cloud.visualcoaching2.com");
+                            cookieContainer.SetCookies(baseUri, $".VCPCOOKIES={cookieValue}");
+                            Preferences.Set("VCP_Cookie", cookieValue);
                             Debug.WriteLine($"Login cookie from header: {cookieValue}");
                             return cookieValue;
                         }
@@ -101,7 +108,7 @@ namespace SportsTraining.Services
         {
             try
             {
-                SetupHttpClientHeaders(cookie);
+                // No manual cookie header needed, CookieContainer handles it
 
                 string url = $"https://cloud.visualcoaching2.com/Application/Program/?date={date}&current=true&version=2&today=true&format=Tablet&json=true&requireSortFilters=true&client=";
 
@@ -153,7 +160,7 @@ namespace SportsTraining.Services
         {
             try
             {
-                SetupHttpClientHeaders(cookie);
+                // Cookie container will handle the cookie
 
                 var match = Regex.Match(sessionUrl, @"/Session/(\d+)\?week=(\d+)&day=(\d+)&session=(\d+)&i=(\d+)");
                 if (!match.Success)
@@ -203,12 +210,11 @@ namespace SportsTraining.Services
         {
             try
             {
-                client.DefaultRequestHeaders.Clear();
-                client.DefaultRequestHeaders.Add("Cookie", $".VCPCOOKIES={cookie}");
-                client.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (compatible; MyApp/1.0)");
-
                 string baseUrl = "https://cloud.visualcoaching2.com";
                 string fullUrl = baseUrl + sessionUrl;
+
+                Debug.WriteLine($"Fetching session HTML from: {fullUrl}");
+                Debug.WriteLine($"Using cookie: {cookie}");
 
                 var response = await client.GetAsync(fullUrl);
 
@@ -225,7 +231,12 @@ namespace SportsTraining.Services
                     return string.Empty;
                 }
 
-                return await response.Content.ReadAsStringAsync();
+                var content = await response.Content.ReadAsStringAsync();
+
+                // Optional: Log part of the content to check for unexpected login page HTML
+                Debug.WriteLine($"Response content starts with: {content.Substring(0, Math.Min(200, content.Length))}");
+
+                return content;
             }
             catch (Exception ex)
             {
@@ -233,5 +244,6 @@ namespace SportsTraining.Services
                 return string.Empty;
             }
         }
+
     }
 }
