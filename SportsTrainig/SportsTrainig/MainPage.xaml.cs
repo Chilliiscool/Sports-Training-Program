@@ -1,11 +1,10 @@
 ﻿using Microsoft.Maui.Controls;
-using Microsoft.Maui.Storage;
 using Microsoft.Maui.Dispatching;
-using System.Collections.ObjectModel;
 using SportsTraining.Services;
 using SportsTraining.Models;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
-using Newtonsoft.Json.Linq;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -13,7 +12,7 @@ namespace SportsTraining.Pages
 {
     public partial class MainPage : ContentPage
     {
-        public ObservableCollection<ProgramSession> TodayPrograms { get; set; } = new ObservableCollection<ProgramSession>();
+        public ObservableCollection<ProgramSession> TodayPrograms { get; set; } = new();
         private bool isLoading = false;
 
         public MainPage()
@@ -24,8 +23,18 @@ namespace SportsTraining.Pages
 
         protected override void OnAppearing()
         {
+            Debug.WriteLine("[Debug Test] MainPage OnAppearing called.");
+
             base.OnAppearing();
+
             LogoImage.IsVisible = Preferences.Get("SelectedCompany", "Normal") == "ETPA";
+
+            if (!SessionManager.IsLoggedIn)
+            {
+                Shell.Current.GoToAsync("//LoginPage");
+                return;
+            }
+
             _ = LoadUserProgramsAsync();
         }
 
@@ -42,10 +51,12 @@ namespace SportsTraining.Pages
                 ProgramsListView.IsVisible = false;
             });
 
-            string cookie = Preferences.Get("VCP_Cookie", string.Empty);
+            string cookie = SessionManager.GetCookie();
+            Debug.WriteLine($"[MainPage] Cookie on OnAppearing: {cookie}");
 
             if (string.IsNullOrEmpty(cookie))
             {
+                Debug.WriteLine("[MainPage] No cookie found. Prompt login.");
                 await DisplayAlert("Login Required", "Please login to view your program.", "OK");
                 ShowProgramList();
                 isLoading = false;
@@ -54,33 +65,10 @@ namespace SportsTraining.Pages
 
             try
             {
-                string today = System.DateTime.Today.ToString("yyyy-MM-dd");
-                var jsonResponse = await VisualCoachingService.GetRawSessionsJson(cookie, today);
+                string today = DateTime.Today.ToString("yyyy-MM-dd");
+                var sessions = await VisualCoachingService.GetSessionsForDate(cookie, today);
 
-                var sessions = new System.Collections.Generic.List<VisualCoachingService.ProgramSessionBrief>();
-
-                try
-                {
-                    sessions = Newtonsoft.Json.JsonConvert.DeserializeObject<System.Collections.Generic.List<VisualCoachingService.ProgramSessionBrief>>(jsonResponse)
-                               ?? new System.Collections.Generic.List<VisualCoachingService.ProgramSessionBrief>();
-                }
-                catch
-                {
-                    try
-                    {
-                        var jobject = JObject.Parse(jsonResponse);
-                        if (jobject["sessions"] != null)
-                        {
-                            sessions = jobject["sessions"]?.ToObject<System.Collections.Generic.List<VisualCoachingService.ProgramSessionBrief>>() ?? new System.Collections.Generic.List<VisualCoachingService.ProgramSessionBrief>();
-                        }
-                    }
-                    catch (System.Exception ex)
-                    {
-                        Debug.WriteLine($"JSON parsing failed: {ex.Message}");
-                    }
-                }
-
-                var seenKeys = new System.Collections.Generic.HashSet<string>();
+                var seenKeys = new HashSet<string>();
 
                 MainThread.BeginInvokeOnMainThread(() =>
                 {
@@ -90,10 +78,8 @@ namespace SportsTraining.Pages
                     {
                         string key = $"{brief.SessionTitle}_{brief.Url}";
 
-                        if (!seenKeys.Contains(key))
+                        if (seenKeys.Add(key)) // returns true if not already in set
                         {
-                            seenKeys.Add(key);
-
                             TodayPrograms.Add(new ProgramSession
                             {
                                 SessionTitle = brief.SessionTitle,
@@ -105,8 +91,16 @@ namespace SportsTraining.Pages
                     ShowProgramList();
                 });
             }
-            catch (System.Exception ex)
+            catch (UnauthorizedAccessException)
             {
+                Debug.WriteLine("[MainPage] Session expired, clearing cookie.");  
+                await DisplayAlert("Session Expired", "Please log in again.", "OK");
+                SessionManager.ClearCookie();
+                await Shell.Current.GoToAsync("//LoginPage");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"[MainPage] Error loading sessions: {ex.Message}");  // <-- Add this line
                 await DisplayAlert("Error", $"Failed to load program: {ex.Message}", "OK");
                 ShowProgramList();
             }
@@ -131,11 +125,8 @@ namespace SportsTraining.Pages
 
                 var encodedUrl = Uri.EscapeDataString(selected.Url);
                 await Shell.Current.GoToAsync($"{nameof(TrainingPage)}?url={encodedUrl}");
- 
             }
         }
-
-
 
         private void ShowProgramList()
         {

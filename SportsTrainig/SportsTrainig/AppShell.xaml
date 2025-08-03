@@ -8,17 +8,15 @@
     Title="SportsTraining">
 
     <Shell.TitleView>
-        <HorizontalStackLayout x:Name="ShellTitleView" Spacing="10" Padding="10" VerticalOptions="Center">
-            <Label x:Name="TitleLabel" Text="Settings" FontSize="22" VerticalOptions="Center" />
+        <HorizontalStackLayout x:Name="ShellTitleView" x:FieldModifier="public" Spacing="10" Padding="10" VerticalOptions="Center">
+            <Label x:Name="TitleLabel" x:FieldModifier="public" Text="Settings" FontSize="22" VerticalOptions="Center" />
             <Image Source="default_logo.png" HeightRequest="50" />
-            <Image x:Name="LogoImage" Source="etpa_logo.png" HeightRequest="50" IsVisible="False" />
+            <Image x:Name="LogoImage" x:FieldModifier="public" Source="etpa_logo.png" HeightRequest="50" IsVisible="False" />
         </HorizontalStackLayout>
     </Shell.TitleView>
 
-    <!-- Add LoginPage as ShellContent so absolute navigation works -->
     <ShellContent Route="LoginPage" ContentTemplate="{DataTemplate local:LoginPage}" />
     <ShellContent Route="sessionDetail" ContentTemplate="{DataTemplate local:SessionDetailPage}" />
-                                                                                                                                                      
 
     <TabBar>
         <ShellContent Title="Home" Icon="home.png" ContentTemplate="{DataTemplate local:MainPage}" Route="MainPage" />

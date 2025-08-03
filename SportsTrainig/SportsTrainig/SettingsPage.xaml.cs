@@ -172,6 +172,7 @@ namespace SportsTraining.Pages
         {
             Preferences.Remove("VCP_Cookie");
             await Shell.Current.GoToAsync("//LoginPage");
+
         }
 
 

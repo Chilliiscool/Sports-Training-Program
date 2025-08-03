@@ -10,10 +10,9 @@
             <Image x:Name="LogoImage" Source="etpa_logo.png" HeightRequest="50" IsVisible="False" />
         </HorizontalStackLayout>
     </Shell.TitleView>
-    <ScrollView>
-        <StackLayout Padding="20">
-            <Label x:Name="TitleLabel" FontSize="24" FontAttributes="Bold" />
-            <Label x:Name="DetailLabel" FontSize="16" />
-        </StackLayout>
-    </ScrollView>
+
+    <StackLayout Padding="20" Spacing="10">
+        <Label x:Name="TitleLabel" FontSize="24" FontAttributes="Bold" />
+        <WebView x:Name="SessionWebView" HeightRequest="600" />
+    </StackLayout>
 </ContentPage>

@@ -7,6 +7,7 @@ using System.Net;
 
 namespace SportsTraining.Pages
 {
+
     [QueryProperty(nameof(Url), "url")]
     public partial class TrainingPage : ContentPage, INotifyPropertyChanged
     {
@@ -35,6 +36,7 @@ namespace SportsTraining.Pages
                 if (string.IsNullOrEmpty(cookie))
                 {
                     await DisplayAlert("Error", "No cookie found. Please login.", "OK");
+                    await Shell.Current.GoToAsync("//LoginPage");
                     return;
                 }
 
@@ -44,10 +46,23 @@ namespace SportsTraining.Pages
                     return;
                 }
 
-                var detail = await VisualCoachingService.GetSessionSummaryFromUrl(cookie, _url);
+                // Fetch raw HTML content of the session page
+                string htmlContent = await VisualCoachingService.GetRawSessionHtml(cookie, _url);
 
-                TitleLabel.Text = detail?.SessionTitle ?? "Training Session";
-                DetailLabel.Text = detail?.HtmlSummary ?? "No session content found.";
+                if (string.IsNullOrWhiteSpace(htmlContent))
+                {
+                    // Possibly unauthorized or session expired
+                    await DisplayAlert("Session Expired", "Your session has expired. Please log in again.", "OK");
+                    Preferences.Remove("VCP_Cookie");
+                    await Shell.Current.GoToAsync("//LoginPage");
+                    return;
+                }
+
+                // Set title (you can parse HTML for a better title if desired)
+                TitleLabel.Text = "Training Session";
+
+                // Load the HTML into the WebView
+                SessionWebView.Source = new HtmlWebViewSource { Html = htmlContent };
             }
             catch (Exception ex)
             {

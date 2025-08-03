@@ -1,6 +1,7 @@
 ﻿using Microsoft.Maui.Controls;
-using Microsoft.Maui.Storage;
 using SportsTraining.Services;
+using System;
+using System.Diagnostics;
 
 namespace SportsTraining.Pages
 {
@@ -14,40 +15,52 @@ namespace SportsTraining.Pages
             Application.Current.RequestedThemeChanged += OnThemeChanged;
         }
 
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
-            SetPasswordIcon(); // ✅ Now runs after the visual tree is built
+
+            if (SessionManager.IsLoggedIn)
+            {
+                await Shell.Current.GoToAsync("//MainPage");
+                return;
+            }
+
+            SetPasswordIcon();
         }
 
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
             Application.Current.RequestedThemeChanged -= OnThemeChanged;
+
+            emailEntry.Text = "";
+            passwordEntry.Text = "";
+            statusLabel.Text = "";
         }
 
         private void OnThemeChanged(object sender, AppThemeChangedEventArgs e)
         {
-            SetPasswordIcon(); // Refresh icon if theme changes while app is running
+            SetPasswordIcon();
         }
 
         private void OnPasswordToggleClicked(object sender, EventArgs e)
         {
             isPasswordVisible = !isPasswordVisible;
             passwordEntry.IsPassword = !isPasswordVisible;
-            SetPasswordIcon(); // Refresh icon on toggle
+            SetPasswordIcon();
         }
 
         private void SetPasswordIcon()
         {
             bool isDarkMode = Application.Current?.RequestedTheme == AppTheme.Dark;
 
-            string iconName;
-
-            if (isPasswordVisible)
-                iconName = isDarkMode ? "eye_open_light.png" : "eye_open_dark.png";
-            else
-                iconName = isDarkMode ? "eye_closed_light.png" : "eye_closed_dark.png";
+            string iconName = (isPasswordVisible, isDarkMode) switch
+            {
+                (true, true) => "eye_open_light.png",
+                (true, false) => "eye_open_dark.png",
+                (false, true) => "eye_closed_light.png",
+                _ => "eye_closed_dark.png"
+            };
 
             passwordToggleBtn.Source = ImageSource.FromFile(iconName);
         }
@@ -69,18 +82,21 @@ namespace SportsTraining.Pages
 
                 if (!string.IsNullOrEmpty(cookie))
                 {
-                    Preferences.Set("VCP_Cookie", cookie);
+                    SessionManager.SaveCookie(cookie);
+                    Debug.WriteLine($"[Login] Cookie saved: {cookie}");
+                    Debug.WriteLine($"[Login] Cookie from SessionManager: {SessionManager.GetCookie()}");
+
                     await Shell.Current.GoToAsync("//MainPage");
                 }
                 else
                 {
-                    statusLabel.Text = "Login failed. Please check your email and password.";
+                    await DisplayAlert("Login Failed", "Invalid credentials or no cookie returned.", "OK");
                 }
             }
             catch (Exception ex)
             {
                 statusLabel.Text = "An error occurred. Please try again.";
-                System.Diagnostics.Debug.WriteLine($"Login error: {ex.Message}");
+                Debug.WriteLine($"[Login] Error: {ex.Message}");  // <-- Add this line
             }
         }
     }

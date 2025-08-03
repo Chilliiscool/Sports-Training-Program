@@ -1,9 +1,11 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Diagnostics;
+using Microsoft.Maui.Storage;
 
 namespace SportsTraining.Services
 {
@@ -11,12 +13,20 @@ namespace SportsTraining.Services
     {
         private static readonly HttpClient client = new();
 
+        private static void SetupHttpClientHeaders(string cookie)
+        {
+            client.DefaultRequestHeaders.Clear();
+            client.DefaultRequestHeaders.Add("Cookie", $".VCPCOOKIES={cookie}");
+            client.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (compatible; MyApp/1.0)");
+        }
+
         public class LoginResponse
         {
             public string UserId { get; set; }
             public string Name { get; set; }
             public string Cookie { get; set; }
         }
+
         public class ProgramSessionDetail
         {
             public string SessionTitle { get; set; }
@@ -44,6 +54,7 @@ namespace SportsTraining.Services
 
             try
             {
+                client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (compatible; MyApp/1.0)");
 
                 var response = await client.PostAsync("https://cloud.visualcoaching2.com/api/2/Account/Logon", content);
@@ -53,6 +64,7 @@ namespace SportsTraining.Services
                 if (!response.IsSuccessStatusCode)
                     return null;
 
+                // Try to get cookie from JSON first
                 var loginResult = JsonConvert.DeserializeObject<LoginResponse>(responseContent);
                 if (!string.IsNullOrEmpty(loginResult?.Cookie))
                 {
@@ -60,22 +72,27 @@ namespace SportsTraining.Services
                     return loginResult.Cookie;
                 }
 
+                // Then try to get cookie from Set-Cookie header
                 if (response.Headers.TryGetValues("Set-Cookie", out var cookies))
                 {
                     foreach (var cookie in cookies)
                     {
                         if (cookie.StartsWith(".VCPCOOKIES"))
                         {
-                            var cookieValue = cookie.Split(';')[0].Split('=')[1];
-                            Debug.WriteLine($"Login cookie from header: {cookieValue}");
-                            return cookieValue;
+                            var cookieMatch = Regex.Match(cookie, @"\.VCPCOOKIES=([^;]+)");
+                            if (cookieMatch.Success)
+                            {
+                                var cookieValue = cookieMatch.Groups[1].Value;
+                                Debug.WriteLine($"Login cookie from header (regex): {cookieValue}");
+                                return cookieValue;
+                            }
                         }
                     }
                 }
 
                 return null;
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 Debug.WriteLine($"Login error: {ex.Message}");
                 return null;
@@ -86,23 +103,26 @@ namespace SportsTraining.Services
         {
             try
             {
-                client.DefaultRequestHeaders.Clear();
-                client.DefaultRequestHeaders.Add("Cookie", $".VCPCOOKIES={cookie}");
-                client.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (compatible; MyApp/1.0)");
+                SetupHttpClientHeaders(cookie);
 
                 string url = $"https://cloud.visualcoaching2.com/Application/Program/?date={date}&current=true&version=2&today=true&format=Tablet&json=true&requireSortFilters=true&client=";
 
                 var response = await client.GetAsync(url);
-                if (!response.IsSuccessStatusCode)
+
+                Debug.WriteLine($"Request Cookie Header: {client.DefaultRequestHeaders}");
+                Debug.WriteLine($"Response Status Code: {response.StatusCode}");
+
+                if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
                 {
-                    Debug.WriteLine($"Failed to get sessions: {response.StatusCode}");
-                    return new List<ProgramSessionBrief>();
+                    Preferences.Remove("VCP_Cookie");
+                    throw new UnauthorizedAccessException("Session expired, please login again.");
                 }
+
+                response.EnsureSuccessStatusCode();
 
                 var json = await response.Content.ReadAsStringAsync();
                 Debug.WriteLine($"Sessions JSON: {json}");
 
-                // API sometimes returns an object with a 'sessions' property that holds the list
                 try
                 {
                     var sessions = JsonConvert.DeserializeObject<List<ProgramSessionBrief>>(json);
@@ -111,7 +131,6 @@ namespace SportsTraining.Services
                 }
                 catch
                 {
-
                     var jobject = Newtonsoft.Json.Linq.JObject.Parse(json);
                     var sessionsToken = jobject["sessions"];
 
@@ -119,12 +138,15 @@ namespace SportsTraining.Services
                     {
                         return sessionsToken.ToObject<List<ProgramSessionBrief>>() ?? new List<ProgramSessionBrief>();
                     }
-
                 }
 
                 return new List<ProgramSessionBrief>();
             }
-            catch (System.Exception ex)
+            catch (UnauthorizedAccessException)
+            {
+                throw;
+            }
+            catch (Exception ex)
             {
                 Debug.WriteLine($"GetSessionsForDate error: {ex.Message}");
                 return new List<ProgramSessionBrief>();
@@ -135,9 +157,7 @@ namespace SportsTraining.Services
         {
             try
             {
-                client.DefaultRequestHeaders.Clear();
-                client.DefaultRequestHeaders.Add("Cookie", $".VCPCOOKIES={cookie}");
-                client.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (compatible; MyApp/1.0)");
+                SetupHttpClientHeaders(cookie);
 
                 var match = Regex.Match(sessionUrl, @"/Session/(\d+)\?week=(\d+)&day=(\d+)&session=(\d+)&i=(\d+)");
                 if (!match.Success)
@@ -156,11 +176,14 @@ namespace SportsTraining.Services
                 string apiUrl = $"https://cloud.visualcoaching2.com/api/2/Program/Summary2/{sessionId}?key={key}";
 
                 var response = await client.GetAsync(apiUrl);
-                if (!response.IsSuccessStatusCode)
+
+                if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
                 {
-                    Debug.WriteLine($"Failed to get session summary: {response.StatusCode}");
-                    return null;
+                    Preferences.Remove("VCP_Cookie");
+                    throw new UnauthorizedAccessException("Session expired, please login again.");
                 }
+
+                response.EnsureSuccessStatusCode();
 
                 var json = await response.Content.ReadAsStringAsync();
                 Debug.WriteLine($"Session summary JSON: {json}");
@@ -168,41 +191,17 @@ namespace SportsTraining.Services
                 var sessionDetail = JsonConvert.DeserializeObject<ProgramSessionDetail>(json);
                 return sessionDetail;
             }
-            catch (System.Exception ex)
+            catch (UnauthorizedAccessException)
+            {
+                throw;
+            }
+            catch (Exception ex)
             {
                 Debug.WriteLine($"GetSessionSummary error: {ex.Message}");
                 return null;
             }
         }
 
-        public static async Task<string> GetRawSessionsJson(string cookie, string date)
-        {
-            try
-            {
-                client.DefaultRequestHeaders.Clear();
-                client.DefaultRequestHeaders.Add("Cookie", $".VCPCOOKIES={cookie}");
-                client.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (compatible; MyApp/1.0)");
-
-                string url = $"https://cloud.visualcoaching2.com/Application/Program/?date={date}&current=true&version=2&today=true&format=Tablet&json=true&requireSortFilters=true&client=";
-
-                var response = await client.GetAsync(url);
-                if (!response.IsSuccessStatusCode)
-                {
-                    Debug.WriteLine($"Failed to get sessions: {response.StatusCode}");
-                    return string.Empty;
-                }
-
-                var json = await response.Content.ReadAsStringAsync();
-                Debug.WriteLine($"Sessions JSON: {json}");
-
-                return json;
-            }
-            catch (System.Exception ex)
-            {
-                Debug.WriteLine($"GetSessionsForDate error: {ex.Message}");
-                return string.Empty;
-            }
-        }
         public static async Task<string> GetRawSessionHtml(string cookie, string sessionUrl)
         {
             try
@@ -211,39 +210,29 @@ namespace SportsTraining.Services
                 client.DefaultRequestHeaders.Add("Cookie", $".VCPCOOKIES={cookie}");
                 client.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (compatible; MyApp/1.0)");
 
-                // Compose full URL from relative URL returned from API
                 string baseUrl = "https://cloud.visualcoaching2.com";
                 string fullUrl = baseUrl + sessionUrl;
 
                 var response = await client.GetAsync(fullUrl);
-                if (!response.IsSuccessStatusCode)
+
+                if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
                 {
-                    Debug.WriteLine($"Failed to get session HTML: {response.StatusCode}");
+                    Preferences.Remove("VCP_Cookie");
                     return string.Empty;
                 }
 
-                var html = await response.Content.ReadAsStringAsync();
-                return html;
+                if (!response.IsSuccessStatusCode)
+                {
+                    return string.Empty;
+                }
+
+                return await response.Content.ReadAsStringAsync();
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 Debug.WriteLine($"GetRawSessionHtml error: {ex.Message}");
                 return string.Empty;
             }
         }
-        public static async Task<ProgramSessionDetail> GetSessionSummaryFromUrl(string cookie, string url)
-        {
-            using var client = new HttpClient();
-            client.DefaultRequestHeaders.Add("Cookie", $".VCPCOOKIES={cookie}");
-
-            string fullUrl = $"https://cloud.visualcoaching2.com{url}";
-            var response = await client.GetAsync(fullUrl);
-            string json = await response.Content.ReadAsStringAsync();
-
-            return JsonConvert.DeserializeObject<ProgramSessionDetail>(json)
-                   ?? new ProgramSessionDetail();
-        }
-
-
     }
 }

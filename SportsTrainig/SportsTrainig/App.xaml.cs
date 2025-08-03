@@ -18,5 +18,19 @@ namespace SportsTraining
 
             MainPage = new AppShell(); // Set the Shell as main page
         }
+        private async void CheckLoginStatus()
+        {
+            string cookie = Preferences.Get("VCP_Cookie", null);
+
+            if (!string.IsNullOrEmpty(cookie))
+            {
+                await Shell.Current.GoToAsync("//MainPage");
+            }
+            else
+            {
+                await Shell.Current.GoToAsync("//LoginPage");
+            }
+        }
     }
 }
+    

@@ -1,8 +1,8 @@
 using Microsoft.Maui.Controls;
-using Microsoft.Maui.Storage;
 using SportsTraining.Services;
 using System.Text.RegularExpressions;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace SportsTraining.Pages
 {
@@ -20,10 +20,11 @@ namespace SportsTraining.Pages
         {
             base.OnAppearing();
 
-            string cookie = Preferences.Get("VCP_Cookie", string.Empty);
+            string cookie = SessionManager.GetCookie();
             if (string.IsNullOrEmpty(cookie))
             {
                 await DisplayAlert("Error", "Please log in again.", "OK");
+                await Shell.Current.GoToAsync("//LoginPage");
                 return;
             }
 
@@ -50,6 +51,14 @@ namespace SportsTraining.Pages
 
                 if (string.IsNullOrWhiteSpace(html))
                 {
+                    // Check cookie using SessionManager, not Preferences directly
+                    if (string.IsNullOrEmpty(SessionManager.GetCookie()))
+                    {
+                        await DisplayAlert("Session Expired", "Your session has expired. Please log in again.", "OK");
+                        await Shell.Current.GoToAsync("//LoginPage");
+                        return;
+                    }
+
                     await DisplayAlert("Error", "No session content found.", "OK");
                     return;
                 }
