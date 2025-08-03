@@ -1,8 +1,9 @@
 ﻿using Microsoft.Maui.Controls;
 using Microsoft.Maui.Storage;
-using SportsTraining.Pages;
 using SportsTraining.Services;
 using System;
+using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace SportsTraining
 {
@@ -12,9 +13,9 @@ namespace SportsTraining
         {
             InitializeComponent();
 
-            Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
-            Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
-            Routing.RegisterRoute(nameof(TrainingPage), typeof(TrainingPage));
+            Routing.RegisterRoute(nameof(Pages.LoginPage), typeof(Pages.LoginPage));
+            Routing.RegisterRoute(nameof(Pages.MainPage), typeof(Pages.MainPage));
+            Routing.RegisterRoute(nameof(Pages.TrainingPage), typeof(Pages.TrainingPage));
 
             this.Navigated += AppShell_Navigated;
         }
@@ -23,47 +24,34 @@ namespace SportsTraining
         {
             base.OnAppearing();
 
-            string cookie = SessionManager.GetCookie();
-
-            if (string.IsNullOrEmpty(cookie))
+            if (!SessionManager.IsLoggedIn)
             {
                 await Shell.Current.GoToAsync("//LoginPage");
                 return;
             }
 
-            // Optional: preload today's sessions
-            _ = VisualCoachingService.GetSessionsForDate(cookie, DateTime.Today.ToString("yyyy-MM-dd"));
+            string cookie = SessionManager.GetCookie();
+
+            try
+            {
+                var sessions = await VisualCoachingService.GetSessionsForDate(cookie, DateTime.Today.ToString("yyyy-MM-dd"));
+                Debug.WriteLine($"Loaded {sessions.Count} sessions on startup.");
+            }
+            catch (UnauthorizedAccessException)
+            {
+                // Session expired
+                SessionManager.ClearCookie();
+                await Shell.Current.GoToAsync("//LoginPage");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error loading sessions in AppShell OnAppearing: {ex.Message}");
+            }
         }
 
         private void AppShell_Navigated(object sender, ShellNavigatedEventArgs e)
         {
-            var currentRoute = Shell.Current.CurrentState.Location.ToString().ToLower();
-            bool isLoginPage = currentRoute.Contains("loginpage");
-
-            ShellTitleView.IsVisible = !isLoginPage;
-
-            if (!isLoginPage)
-            {
-                if (currentRoute.Contains("mainpage"))
-                    TitleLabel.Text = "Home";
-                else if (currentRoute.Contains("trainingpage"))
-                    TitleLabel.Text = "Training";
-                else if (currentRoute.Contains("progresspage"))
-                    TitleLabel.Text = "Progress";
-                else if (currentRoute.Contains("settingspage"))
-                    TitleLabel.Text = "Settings";
-                else
-                    TitleLabel.Text = "SportsTraining";
-
-                string selectedCompany = Preferences.Get("SelectedCompany", "Normal");
-                LogoImage.IsVisible = selectedCompany == "ETPA";
-            }
-            else
-            {
-                ShellTitleView.IsVisible = true;
-                TitleLabel.Text = "Login";
-                LogoImage.IsVisible = false;
-            }
+            // Optional UI updates on navigation (title bar, etc.)
         }
     }
 }

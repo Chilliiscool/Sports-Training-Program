@@ -1,11 +1,12 @@
 ﻿using Microsoft.Maui.Controls;
 using Microsoft.Maui.Dispatching;
+using Microsoft.Maui.Storage;
 using SportsTraining.Services;
 using SportsTraining.Models;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System;
-using System.Linq;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace SportsTraining.Pages
@@ -21,7 +22,7 @@ namespace SportsTraining.Pages
             ProgramsListView.ItemsSource = TodayPrograms;
         }
 
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             Debug.WriteLine("[Debug Test] MainPage OnAppearing called.");
 
@@ -31,11 +32,11 @@ namespace SportsTraining.Pages
 
             if (!SessionManager.IsLoggedIn)
             {
-                Shell.Current.GoToAsync("//LoginPage");
+                await Shell.Current.GoToAsync("//LoginPage");
                 return;
             }
 
-            _ = LoadUserProgramsAsync();
+            await LoadUserProgramsAsync();
         }
 
         private async Task LoadUserProgramsAsync()
@@ -93,14 +94,14 @@ namespace SportsTraining.Pages
             }
             catch (UnauthorizedAccessException)
             {
-                Debug.WriteLine("[MainPage] Session expired, clearing cookie.");  
+                Debug.WriteLine("[MainPage] Session expired, clearing cookie.");
                 await DisplayAlert("Session Expired", "Please log in again.", "OK");
                 SessionManager.ClearCookie();
                 await Shell.Current.GoToAsync("//LoginPage");
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"[MainPage] Error loading sessions: {ex.Message}");  // <-- Add this line
+                Debug.WriteLine($"[MainPage] Error loading sessions: {ex.Message}");
                 await DisplayAlert("Error", $"Failed to load program: {ex.Message}", "OK");
                 ShowProgramList();
             }

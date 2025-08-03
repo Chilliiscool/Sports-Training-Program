@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Net.Http;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
 using System.Diagnostics;
+using System.Net.Http;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using Microsoft.Maui.Storage;
+using Newtonsoft.Json;
 
 namespace SportsTraining.Services
 {
@@ -62,9 +62,11 @@ namespace SportsTraining.Services
                 Debug.WriteLine($"Login Response: {responseContent}");
 
                 if (!response.IsSuccessStatusCode)
+                {
+                    Debug.WriteLine("Login failed with status code: " + response.StatusCode);
                     return null;
+                }
 
-                // Try to get cookie from JSON first
                 var loginResult = JsonConvert.DeserializeObject<LoginResponse>(responseContent);
                 if (!string.IsNullOrEmpty(loginResult?.Cookie))
                 {
@@ -72,24 +74,20 @@ namespace SportsTraining.Services
                     return loginResult.Cookie;
                 }
 
-                // Then try to get cookie from Set-Cookie header
                 if (response.Headers.TryGetValues("Set-Cookie", out var cookies))
                 {
                     foreach (var cookie in cookies)
                     {
                         if (cookie.StartsWith(".VCPCOOKIES"))
                         {
-                            var cookieMatch = Regex.Match(cookie, @"\.VCPCOOKIES=([^;]+)");
-                            if (cookieMatch.Success)
-                            {
-                                var cookieValue = cookieMatch.Groups[1].Value;
-                                Debug.WriteLine($"Login cookie from header (regex): {cookieValue}");
-                                return cookieValue;
-                            }
+                            var cookieValue = cookie.Split(';')[0].Split('=')[1];
+                            Debug.WriteLine($"Login cookie from header: {cookieValue}");
+                            return cookieValue;
                         }
                     }
                 }
 
+                Debug.WriteLine("No cookie found in login response.");
                 return null;
             }
             catch (Exception ex)
@@ -109,12 +107,10 @@ namespace SportsTraining.Services
 
                 var response = await client.GetAsync(url);
 
-                Debug.WriteLine($"Request Cookie Header: {client.DefaultRequestHeaders}");
-                Debug.WriteLine($"Response Status Code: {response.StatusCode}");
-
                 if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
                 {
-                    Preferences.Remove("VCP_Cookie");
+                    Debug.WriteLine("Session expired detected in GetSessionsForDate.");
+                    SessionManager.ClearCookie();
                     throw new UnauthorizedAccessException("Session expired, please login again.");
                 }
 
@@ -179,7 +175,8 @@ namespace SportsTraining.Services
 
                 if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
                 {
-                    Preferences.Remove("VCP_Cookie");
+                    Debug.WriteLine("Session expired detected in GetSessionSummary.");
+                    SessionManager.ClearCookie();
                     throw new UnauthorizedAccessException("Session expired, please login again.");
                 }
 
@@ -217,12 +214,14 @@ namespace SportsTraining.Services
 
                 if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
                 {
-                    Preferences.Remove("VCP_Cookie");
+                    Debug.WriteLine("Session expired detected in GetRawSessionHtml.");
+                    SessionManager.ClearCookie();
                     return string.Empty;
                 }
 
                 if (!response.IsSuccessStatusCode)
                 {
+                    Debug.WriteLine($"GetRawSessionHtml failed with status code: {response.StatusCode}");
                     return string.Empty;
                 }
 
