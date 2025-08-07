@@ -1,4 +1,12 @@
-﻿using System;
+﻿// Module Name: VisualCoachingService
+// Author: Kye Franken 
+// Date Created: 23 / 07 / 2025
+// Date Modified: 06 / 08 / 2025
+// Description: Provides methods to interact with the Visual Coaching API including login, 
+// fetching sessions for a date, session summaries, and raw session HTML content. 
+// Manages cookies and handles session expiration.
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net;
@@ -12,15 +20,16 @@ namespace SportsTraining.Services
 {
     public static class VisualCoachingService
     {
+        // Shared CookieContainer and HttpClient with cookie handling enabled
         private static readonly CookieContainer cookieContainer = new();
         private static readonly HttpClientHandler handler = new HttpClientHandler
         {
             UseCookies = true,
             CookieContainer = cookieContainer,
         };
-
         private static readonly HttpClient client = new HttpClient(handler);
 
+        // Model for login response JSON
         public class LoginResponse
         {
             public string UserId { get; set; }
@@ -28,6 +37,7 @@ namespace SportsTraining.Services
             public string Cookie { get; set; }
         }
 
+        // Model for detailed session info returned by API
         public class ProgramSessionDetail
         {
             public string SessionTitle { get; set; }
@@ -36,6 +46,7 @@ namespace SportsTraining.Services
             public string Description { get; set; }
         }
 
+        // Model for brief session info returned by API
         public class ProgramSessionBrief
         {
             [JsonProperty("Url")]
@@ -45,6 +56,7 @@ namespace SportsTraining.Services
             public string SessionTitle { get; set; }
         }
 
+        // Login method: sends credentials and extracts cookie from response JSON or headers
         public static async Task<string?> LoginAndGetCookie(string email, string password)
         {
             var content = new FormUrlEncodedContent(new[]
@@ -68,6 +80,7 @@ namespace SportsTraining.Services
                     return null;
                 }
 
+                // Try parse cookie from JSON response
                 var loginResult = JsonConvert.DeserializeObject<LoginResponse>(responseContent);
                 if (!string.IsNullOrEmpty(loginResult?.Cookie))
                 {
@@ -78,6 +91,7 @@ namespace SportsTraining.Services
                     return loginResult.Cookie;
                 }
 
+                // Try parse cookie from response headers if JSON did not contain it
                 if (response.Headers.TryGetValues("Set-Cookie", out var cookies))
                 {
                     foreach (var cookie in cookies)
@@ -104,12 +118,12 @@ namespace SportsTraining.Services
             }
         }
 
+        // Retrieves a list of sessions for a given date, handling unauthorized responses
         public static async Task<List<ProgramSessionBrief>> GetSessionsForDate(string cookie, string date)
         {
             try
             {
-                // No manual cookie header needed, CookieContainer handles it
-
+                // URL for sessions list with date and parameters
                 string url = $"https://cloud.visualcoaching2.com/Application/Program/?date={date}&current=true&version=2&today=true&format=Tablet&json=true&requireSortFilters=true&client=";
 
                 var response = await client.GetAsync(url);
@@ -128,12 +142,14 @@ namespace SportsTraining.Services
 
                 try
                 {
+                    // Try deserialize directly as list
                     var sessions = JsonConvert.DeserializeObject<List<ProgramSessionBrief>>(json);
                     if (sessions != null)
                         return sessions;
                 }
                 catch
                 {
+                    // Fallback: parse JSON object and extract 'sessions' token
                     var jobject = Newtonsoft.Json.Linq.JObject.Parse(json);
                     var sessionsToken = jobject["sessions"];
 
@@ -156,12 +172,11 @@ namespace SportsTraining.Services
             }
         }
 
+        // Retrieves detailed session summary JSON by parsing the session URL to get keys
         public static async Task<ProgramSessionDetail?> GetSessionSummary(string cookie, string sessionUrl)
         {
             try
             {
-                // Cookie container will handle the cookie
-
                 var match = Regex.Match(sessionUrl, @"/Session/(\d+)\?week=(\d+)&day=(\d+)&session=(\d+)&i=(\d+)");
                 if (!match.Success)
                 {
@@ -206,6 +221,7 @@ namespace SportsTraining.Services
             }
         }
 
+        // Retrieves raw HTML content for a given session URL, handling session expiration
         public static async Task<string> GetRawSessionHtml(string cookie, string sessionUrl)
         {
             try
@@ -233,7 +249,7 @@ namespace SportsTraining.Services
 
                 var content = await response.Content.ReadAsStringAsync();
 
-                // Optional: Log part of the content to check for unexpected login page HTML
+                // Optional debug: output start of content for verification
                 Debug.WriteLine($"Response content starts with: {content.Substring(0, Math.Min(200, content.Length))}");
 
                 return content;

@@ -19,6 +19,11 @@ namespace SportsTraining.WinUI
             this.InitializeComponent();
         }
 
+        private void InitializeComponent()
+        {
+            throw new NotImplementedException();
+        }
+
         protected override MauiApp CreateMauiApp() => MauiProgram.CreateMauiApp();
     }
 

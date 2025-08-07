@@ -1,4 +1,11 @@
+// Module Name: ProgressPage
+// Author: Kye Franken 
+// Date Created: 20 / 06 / 2025
+// Date Modified: 06 / 08 / 2025
+// Description: Displays the user's progress page and shows a logo if the selected company is "ETPA".
+
 using Microsoft.Maui.Controls;
+using Microsoft.Maui.Storage; // Required for Preferences
 using System;
 
 namespace SportsTraining.Pages
@@ -7,23 +14,18 @@ namespace SportsTraining.Pages
     {
         public ProgressPage()
         {
-            InitializeComponent();  // This loads the XAML content
+            InitializeComponent();  // Loads the associated XAML layout
         }
+
         protected override void OnAppearing()
         {
             base.OnAppearing();
 
-            string savedCompanie = Preferences.Get("SelectedCompany", "Normal");
+            // Retrieve the saved company name from device preferences
+            string savedCompany = Preferences.Get("SelectedCompany", "Normal");
 
-            if (savedCompanie == "ETPA")
-            {
-                LogoImage.IsVisible = true;
-            }
-            else
-            {
-                LogoImage.IsVisible = false;
-            }
+            // Show the ETPA logo only if the selected company is "ETPA"
+            LogoImage.IsVisible = savedCompany == "ETPA";
         }
-
     }
 }

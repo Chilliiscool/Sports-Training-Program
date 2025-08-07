@@ -1,4 +1,11 @@
-﻿using Microsoft.Maui.Controls;
+﻿// Module Name: LoginPage
+// Author: Kye Franken 
+// Date Created: 11 / 07 / 2025
+// Date Modified: 06 / 08 / 2025
+// Description: Handles user login using email and password. Displays theme-aware password toggle icons,
+// validates input, and saves login session cookie for use across the app.
+
+using Microsoft.Maui.Controls;
 using SportsTraining.Services;
 using System;
 using System.Diagnostics;
@@ -8,18 +15,22 @@ namespace SportsTraining.Pages
 {
     public partial class LoginPage : ContentPage
     {
+        // Tracks whether the password is currently visible
         bool isPasswordVisible = false;
 
         public LoginPage()
         {
             InitializeComponent();
+            // Subscribe to theme changes to update icon dynamically
             Application.Current.RequestedThemeChanged += OnThemeChanged;
         }
 
+        // Runs each time the page appears
         protected override async void OnAppearing()
         {
             base.OnAppearing();
 
+            // If already logged in, skip login and go to MainPage
             if (SessionManager.IsLoggedIn)
             {
                 await Shell.Current.GoToAsync("//MainPage");
@@ -29,21 +40,27 @@ namespace SportsTraining.Pages
             SetPasswordIcon();
         }
 
+        // Runs when the page disappears
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
+
+            // Unsubscribe from theme changes
             Application.Current.RequestedThemeChanged -= OnThemeChanged;
 
+            // Clear input fields and status
             emailEntry.Text = "";
             passwordEntry.Text = "";
             statusLabel.Text = "";
         }
 
+        // Updates the password visibility icon when the app theme changes
         private void OnThemeChanged(object sender, AppThemeChangedEventArgs e)
         {
             SetPasswordIcon();
         }
 
+        // Toggles password visibility and updates icon
         private void OnPasswordToggleClicked(object sender, EventArgs e)
         {
             isPasswordVisible = !isPasswordVisible;
@@ -51,6 +68,7 @@ namespace SportsTraining.Pages
             SetPasswordIcon();
         }
 
+        // Sets the password toggle icon based on theme and visibility
         private void SetPasswordIcon()
         {
             bool isDarkMode = Application.Current?.RequestedTheme == AppTheme.Dark;
@@ -66,16 +84,17 @@ namespace SportsTraining.Pages
             passwordToggleBtn.Source = ImageSource.FromFile(iconName);
         }
 
+        // Validates that the entered email is in a correct format
         private bool IsValidEmail(string email)
         {
             if (string.IsNullOrWhiteSpace(email))
                 return false;
 
-            // Simple regex for email validation
             var emailPattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
             return Regex.IsMatch(email, emailPattern, RegexOptions.IgnoreCase);
         }
 
+        // Handles login button click event
         private async void OnLoginClicked(object sender, EventArgs e)
         {
             statusLabel.Text = "";  // Clear previous status messages
@@ -83,30 +102,36 @@ namespace SportsTraining.Pages
             string email = emailEntry.Text?.Trim() ?? "";
             string password = passwordEntry.Text ?? "";
 
+            // Check for empty inputs
             if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
             {
                 statusLabel.Text = "Please enter both email and password.";
                 return;
             }
 
+            // Validate email format
             if (!IsValidEmail(email))
             {
                 statusLabel.Text = "Please enter a valid email address.";
                 return;
             }
 
-            loginButton.IsEnabled = false;  // Disable button during login process
+            loginButton.IsEnabled = false;  // Prevent double submissions
 
             try
             {
+                // Attempt login via Visual Coaching API
                 string cookie = await VisualCoachingService.LoginAndGetCookie(email, password);
 
                 if (!string.IsNullOrEmpty(cookie))
                 {
+                    // Save cookie for use across the app
                     SessionManager.SaveCookie(cookie);
+
                     Debug.WriteLine($"[Login] Cookie saved: {cookie}");
                     Debug.WriteLine($"[Login] Cookie from SessionManager: {SessionManager.GetCookie()}");
 
+                    // Navigate to main page
                     await Shell.Current.GoToAsync("//MainPage");
                 }
                 else
@@ -121,7 +146,7 @@ namespace SportsTraining.Pages
             }
             finally
             {
-                loginButton.IsEnabled = true;  // Re-enable button after login attempt
+                loginButton.IsEnabled = true;  // Re-enable login button
             }
         }
     }

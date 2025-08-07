@@ -1,4 +1,11 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
+    <!--//
+Module Name: SessionDetailPage 
+Author: Kye Franken 
+Date Created: 28/07/2025
+Date Modified: 06/08/2025
+Description: UI page for the SessionDetailPage.-->
+    
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SportsTraining.Pages.SessionDetailPage"

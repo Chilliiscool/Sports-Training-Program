@@ -1,4 +1,11 @@
-﻿using Microsoft.Maui.Controls;
+﻿// Module Name: MainPage
+// Author: Kye Franken 
+// Date Created: 19 / 06 / 2025
+// Date Modified: 06 / 08 / 2025
+// Description: Displays today's workout programs fetched from the Visual Coaching API,
+// handles user session validation, and supports navigation to detailed training pages.
+
+using Microsoft.Maui.Controls;
 using Microsoft.Maui.Dispatching;
 using Microsoft.Maui.Storage;
 using SportsTraining.Services;
@@ -13,37 +20,48 @@ namespace SportsTraining.Pages
 {
     public partial class MainPage : ContentPage
     {
+        // Observable collection bound to the ListView to display workout sessions
         public ObservableCollection<ProgramSession> TodayPrograms { get; set; } = new();
+
+        // Flag to prevent overlapping load operations
         private bool isLoading = false;
 
         public MainPage()
         {
             InitializeComponent();
+
+            // Bind the ObservableCollection to the ListView
             ProgramsListView.ItemsSource = TodayPrograms;
         }
 
+        // Triggered when page appears, ensures user is logged in and loads programs
         protected override async void OnAppearing()
         {
             Debug.WriteLine("[Debug Test] MainPage OnAppearing called.");
 
             base.OnAppearing();
 
+            // Show company logo if selected company is ETPA
             LogoImage.IsVisible = Preferences.Get("SelectedCompany", "Normal") == "ETPA";
 
+            // Redirect to login if user is not authenticated
             if (!SessionManager.IsLoggedIn)
             {
                 await Shell.Current.GoToAsync("//LoginPage");
                 return;
             }
 
+            // Load today's workout sessions asynchronously
             await LoadUserProgramsAsync();
         }
 
+        // Loads the workout sessions from the API and updates the UI
         private async Task LoadUserProgramsAsync()
         {
             if (isLoading) return;
             isLoading = true;
 
+            // Show loading indicator and hide program list while loading
             MainThread.BeginInvokeOnMainThread(() =>
             {
                 TodayPrograms.Clear();
@@ -71,6 +89,7 @@ namespace SportsTraining.Pages
 
                 var seenKeys = new HashSet<string>();
 
+                // Update UI with retrieved sessions, ensuring no duplicates
                 MainThread.BeginInvokeOnMainThread(() =>
                 {
                     TodayPrograms.Clear();
@@ -79,7 +98,7 @@ namespace SportsTraining.Pages
                     {
                         string key = $"{brief.SessionTitle}_{brief.Url}";
 
-                        if (seenKeys.Add(key)) // returns true if not already in set
+                        if (seenKeys.Add(key)) // Only add if not already present
                         {
                             TodayPrograms.Add(new ProgramSession
                             {
@@ -109,6 +128,7 @@ namespace SportsTraining.Pages
             {
                 isLoading = false;
 
+                // Hide loading indicator and show program list
                 MainThread.BeginInvokeOnMainThread(() =>
                 {
                     LoadingIndicator.IsVisible = false;
@@ -119,17 +139,19 @@ namespace SportsTraining.Pages
             }
         }
 
+        // Handles selection of a program and navigates to the training page with URL parameter
         private async void ProgramsListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             if (e.SelectedItem is ProgramSession selected)
             {
-                ProgramsListView.SelectedItem = null;
+                ProgramsListView.SelectedItem = null;  // Deselect item
 
                 var encodedUrl = Uri.EscapeDataString(selected.Url);
                 await Shell.Current.GoToAsync($"{nameof(TrainingPage)}?url={encodedUrl}");
             }
         }
 
+        // Helper method to toggle visibility after loading is complete
         private void ShowProgramList()
         {
             LoadingIndicator.IsVisible = false;
@@ -137,7 +159,7 @@ namespace SportsTraining.Pages
             ProgramsListView.IsVisible = true;
         }
 
-        // ** Pull-to-Refresh handler **
+        // Pull-to-refresh handler to reload the programs list
         private async void ProgramsListView_Refreshing(object sender, EventArgs e)
         {
             await LoadUserProgramsAsync();
