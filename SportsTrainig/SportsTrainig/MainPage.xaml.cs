@@ -1,9 +1,10 @@
 ﻿// Module Name: MainPage
 // Author: Kye Franken 
 // Date Created: 19 / 06 / 2025
-// Date Modified: 06 / 08 / 2025
+// Date Modified: 11 / 08 / 2025
 // Description: Displays today's workout programs fetched from the Visual Coaching API,
 // handles user session validation, and supports navigation to detailed training pages.
+// Slightly softer handling around unauthorized to pair with PM-session fixes.
 
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Dispatching;
@@ -61,7 +62,6 @@ namespace SportsTraining.Pages
             if (isLoading) return;
             isLoading = true;
 
-            // Show loading indicator and hide program list while loading
             MainThread.BeginInvokeOnMainThread(() =>
             {
                 TodayPrograms.Clear();
@@ -78,7 +78,7 @@ namespace SportsTraining.Pages
                 Debug.WriteLine("[MainPage] No cookie found. Prompt login.");
                 await DisplayAlert("Login Required", "Please login to view your program.", "OK");
                 ShowProgramList();
-                isLoading = false;
+                isLoading = false;  // Reset flag here before return
                 return;
             }
 
@@ -89,7 +89,6 @@ namespace SportsTraining.Pages
 
                 var seenKeys = new HashSet<string>();
 
-                // Update UI with retrieved sessions, ensuring no duplicates
                 MainThread.BeginInvokeOnMainThread(() =>
                 {
                     TodayPrograms.Clear();
@@ -113,9 +112,10 @@ namespace SportsTraining.Pages
             }
             catch (UnauthorizedAccessException)
             {
-                Debug.WriteLine("[MainPage] Session expired, clearing cookie.");
-                await DisplayAlert("Session Expired", "Please log in again.", "OK");
+                Debug.WriteLine("[MainPage] Session expired.");
+                // Clear cookie and push to Login
                 SessionManager.ClearCookie();
+                await DisplayAlert("Session Expired", "Please log in again.", "OK");
                 await Shell.Current.GoToAsync("//LoginPage");
             }
             catch (Exception ex)
@@ -128,7 +128,6 @@ namespace SportsTraining.Pages
             {
                 isLoading = false;
 
-                // Hide loading indicator and show program list
                 MainThread.BeginInvokeOnMainThread(() =>
                 {
                     LoadingIndicator.IsVisible = false;
@@ -144,7 +143,9 @@ namespace SportsTraining.Pages
         {
             if (e.SelectedItem is ProgramSession selected)
             {
-                ProgramsListView.SelectedItem = null;  // Deselect item
+                ProgramsListView.SelectedItem = null;
+
+                Debug.WriteLine($"Selected session URL: {selected.Url}");
 
                 var encodedUrl = Uri.EscapeDataString(selected.Url);
                 await Shell.Current.GoToAsync($"{nameof(TrainingPage)}?url={encodedUrl}");

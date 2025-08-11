@@ -1,10 +1,10 @@
 ﻿// Module Name: VisualCoachingService
 // Author: Kye Franken 
 // Date Created: 23 / 07 / 2025
-// Date Modified: 06 / 08 / 2025
+// Date Modified: 11 / 08 / 2025
 // Description: Provides methods to interact with the Visual Coaching API including login, 
 // fetching sessions for a date, session summaries, and raw session HTML content. 
-// Manages cookies and handles session expiration.
+// Manages cookies and handles session expiration, with explicit cookie headers and redirect detection to avoid false sign-outs.
 
 using System;
 using System.Collections.Generic;
@@ -22,12 +22,69 @@ namespace SportsTraining.Services
     {
         // Shared CookieContainer and HttpClient with cookie handling enabled
         private static readonly CookieContainer cookieContainer = new();
+
+        // IMPORTANT: Do NOT follow redirects — we want to detect 302 to /Account/Logon ourselves.
         private static readonly HttpClientHandler handler = new HttpClientHandler
         {
             UseCookies = true,
             CookieContainer = cookieContainer,
+            AllowAutoRedirect = false
         };
+
         private static readonly HttpClient client = new HttpClient(handler);
+
+        private static readonly Uri BaseUri = new Uri("https://cloud.visualcoaching2.com");
+
+        // Helper to set the cookie container with current cookie from SessionManager
+        private static void SetCookieFromSession()
+        {
+            string? cookie = SessionManager.GetCookie();
+            if (!string.IsNullOrEmpty(cookie))
+            {
+                // Clear existing cookies for that domain to prevent duplicates
+                cookieContainer.GetCookies(BaseUri).Clear();
+                cookieContainer.SetCookies(BaseUri, $".VCPCOOKIES={cookie}");
+                Debug.WriteLine($"[VCS] Cookie set in CookieContainer: {cookie}");
+            }
+        }
+
+        // Helper to also force-add Cookie header (some endpoints are picky)
+        private static void ApplyCookieHeader(string cookie)
+        {
+            client.DefaultRequestHeaders.Remove("Cookie");
+            if (!string.IsNullOrEmpty(cookie))
+            {
+                client.DefaultRequestHeaders.Add("Cookie", $".VCPCOOKIES={cookie}");
+            }
+
+            // Always set a UA
+            client.DefaultRequestHeaders.UserAgent.Clear();
+            client.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (compatible; SportsTrainingApp/1.0)");
+        }
+
+        // Helper to detect redirect to login
+        private static bool IsRedirectToLogin(HttpResponseMessage response)
+        {
+            if ((int)response.StatusCode == 302 || response.StatusCode == HttpStatusCode.Redirect || response.StatusCode == HttpStatusCode.RedirectKeepVerb || response.StatusCode == HttpStatusCode.RedirectMethod)
+            {
+                var loc = response.Headers.Location?.ToString() ?? "";
+                if (loc.Contains("/Account/Logon", StringComparison.OrdinalIgnoreCase))
+                {
+                    Debug.WriteLine("[VCS] Detected 302 redirect to login.");
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        // Helper to detect if a 200 HTML body is actually the login page
+        private static bool HtmlLooksLikeLogin(string html)
+        {
+            if (string.IsNullOrWhiteSpace(html)) return false;
+            return html.IndexOf("Account/Logon", StringComparison.OrdinalIgnoreCase) >= 0
+                || html.IndexOf("name=\"user\"", StringComparison.OrdinalIgnoreCase) >= 0
+                || html.IndexOf("name=\"password\"", StringComparison.OrdinalIgnoreCase) >= 0;
+        }
 
         // Model for login response JSON
         public class LoginResponse
@@ -68,15 +125,15 @@ namespace SportsTraining.Services
             try
             {
                 client.DefaultRequestHeaders.Clear();
-                client.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (compatible; MyApp/1.0)");
+                client.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (compatible; SportsTrainingApp/1.0)");
 
                 var response = await client.PostAsync("https://cloud.visualcoaching2.com/api/2/Account/Logon", content);
                 var responseContent = await response.Content.ReadAsStringAsync();
-                Debug.WriteLine($"Login Response: {responseContent}");
+                Debug.WriteLine($"[VCS] Login Response: {responseContent}");
 
                 if (!response.IsSuccessStatusCode)
                 {
-                    Debug.WriteLine("Login failed with status code: " + response.StatusCode);
+                    Debug.WriteLine("[VCS] Login failed with status code: " + response.StatusCode);
                     return null;
                 }
 
@@ -84,10 +141,9 @@ namespace SportsTraining.Services
                 var loginResult = JsonConvert.DeserializeObject<LoginResponse>(responseContent);
                 if (!string.IsNullOrEmpty(loginResult?.Cookie))
                 {
-                    Uri baseUri = new Uri("https://cloud.visualcoaching2.com");
-                    cookieContainer.SetCookies(baseUri, $".VCPCOOKIES={loginResult.Cookie}");
-                    Preferences.Set("VCP_Cookie", loginResult.Cookie);
-                    Debug.WriteLine($"Login cookie from JSON: {loginResult.Cookie}");
+                    cookieContainer.SetCookies(BaseUri, $".VCPCOOKIES={loginResult.Cookie}");
+                    SessionManager.SaveCookie(loginResult.Cookie);
+                    Debug.WriteLine($"[VCS] Login cookie from JSON: {loginResult.Cookie}");
                     return loginResult.Cookie;
                 }
 
@@ -99,21 +155,20 @@ namespace SportsTraining.Services
                         if (cookie.StartsWith(".VCPCOOKIES"))
                         {
                             var cookieValue = cookie.Split(';')[0].Split('=')[1];
-                            Uri baseUri = new Uri("https://cloud.visualcoaching2.com");
-                            cookieContainer.SetCookies(baseUri, $".VCPCOOKIES={cookieValue}");
-                            Preferences.Set("VCP_Cookie", cookieValue);
-                            Debug.WriteLine($"Login cookie from header: {cookieValue}");
+                            cookieContainer.SetCookies(BaseUri, $".VCPCOOKIES={cookieValue}");
+                            SessionManager.SaveCookie(cookieValue);
+                            Debug.WriteLine($"[VCS] Login cookie from header: {cookieValue}");
                             return cookieValue;
                         }
                     }
                 }
 
-                Debug.WriteLine("No cookie found in login response.");
+                Debug.WriteLine("[VCS] No cookie found in login response.");
                 return null;
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"Login error: {ex.Message}");
+                Debug.WriteLine($"[VCS] Login error: {ex.Message}");
                 return null;
             }
         }
@@ -123,14 +178,16 @@ namespace SportsTraining.Services
         {
             try
             {
-                // URL for sessions list with date and parameters
+                SetCookieFromSession();
+                ApplyCookieHeader(cookie);
+
                 string url = $"https://cloud.visualcoaching2.com/Application/Program/?date={date}&current=true&version=2&today=true&format=Tablet&json=true&requireSortFilters=true&client=";
 
                 var response = await client.GetAsync(url);
 
-                if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+                if (IsRedirectToLogin(response) || response.StatusCode == HttpStatusCode.Unauthorized)
                 {
-                    Debug.WriteLine("Session expired detected in GetSessionsForDate.");
+                    Debug.WriteLine("[VCS] Session expired detected in GetSessionsForDate.");
                     SessionManager.ClearCookie();
                     throw new UnauthorizedAccessException("Session expired, please login again.");
                 }
@@ -138,21 +195,17 @@ namespace SportsTraining.Services
                 response.EnsureSuccessStatusCode();
 
                 var json = await response.Content.ReadAsStringAsync();
-                Debug.WriteLine($"Sessions JSON: {json}");
+                Debug.WriteLine($"[VCS] Sessions JSON: {json}");
 
                 try
                 {
-                    // Try deserialize directly as list
                     var sessions = JsonConvert.DeserializeObject<List<ProgramSessionBrief>>(json);
-                    if (sessions != null)
-                        return sessions;
+                    if (sessions != null) return sessions;
                 }
                 catch
                 {
-                    // Fallback: parse JSON object and extract 'sessions' token
                     var jobject = Newtonsoft.Json.Linq.JObject.Parse(json);
                     var sessionsToken = jobject["sessions"];
-
                     if (sessionsToken != null)
                     {
                         return sessionsToken.ToObject<List<ProgramSessionBrief>>() ?? new List<ProgramSessionBrief>();
@@ -167,7 +220,7 @@ namespace SportsTraining.Services
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"GetSessionsForDate error: {ex.Message}");
+                Debug.WriteLine($"[VCS] GetSessionsForDate error: {ex.Message}");
                 return new List<ProgramSessionBrief>();
             }
         }
@@ -177,10 +230,13 @@ namespace SportsTraining.Services
         {
             try
             {
+                SetCookieFromSession();
+                ApplyCookieHeader(cookie);
+
                 var match = Regex.Match(sessionUrl, @"/Session/(\d+)\?week=(\d+)&day=(\d+)&session=(\d+)&i=(\d+)");
                 if (!match.Success)
                 {
-                    Debug.WriteLine("Could not parse session URL");
+                    Debug.WriteLine("[VCS] Could not parse session URL");
                     return null;
                 }
 
@@ -195,9 +251,9 @@ namespace SportsTraining.Services
 
                 var response = await client.GetAsync(apiUrl);
 
-                if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+                if (IsRedirectToLogin(response) || response.StatusCode == HttpStatusCode.Unauthorized)
                 {
-                    Debug.WriteLine("Session expired detected in GetSessionSummary.");
+                    Debug.WriteLine("[VCS] Session expired detected in GetSessionSummary.");
                     SessionManager.ClearCookie();
                     throw new UnauthorizedAccessException("Session expired, please login again.");
                 }
@@ -205,7 +261,7 @@ namespace SportsTraining.Services
                 response.EnsureSuccessStatusCode();
 
                 var json = await response.Content.ReadAsStringAsync();
-                Debug.WriteLine($"Session summary JSON: {json}");
+                Debug.WriteLine($"[VCS] Session summary JSON: {json}");
 
                 var sessionDetail = JsonConvert.DeserializeObject<ProgramSessionDetail>(json);
                 return sessionDetail;
@@ -216,50 +272,57 @@ namespace SportsTraining.Services
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"GetSessionSummary error: {ex.Message}");
+                Debug.WriteLine($"[VCS] GetSessionSummary error: {ex.Message}");
                 return null;
             }
         }
 
-        // Retrieves raw HTML content for a given session URL, handling session expiration
+        // Retrieves raw HTML content for a given session URL, handling session expiration and silent redirects
         public static async Task<string> GetRawSessionHtml(string cookie, string sessionUrl)
         {
             try
             {
-                string baseUrl = "https://cloud.visualcoaching2.com";
-                string fullUrl = baseUrl + sessionUrl;
+                SetCookieFromSession();
+                ApplyCookieHeader(cookie);
 
-                Debug.WriteLine($"Fetching session HTML from: {fullUrl}");
-                Debug.WriteLine($"Using cookie: {cookie}");
+                string fullUrl = new Uri(BaseUri, sessionUrl).ToString();
+
+                Debug.WriteLine($"[VCS] Fetching session HTML from: {fullUrl}");
+                Debug.WriteLine($"[VCS] Using cookie: {cookie}");
 
                 var response = await client.GetAsync(fullUrl);
 
-                if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+                // Detect redirect to login (302) or 401 Unauthorized
+                if (IsRedirectToLogin(response) || response.StatusCode == HttpStatusCode.Unauthorized)
                 {
-                    Debug.WriteLine("Session expired detected in GetRawSessionHtml.");
-                    SessionManager.ClearCookie();
+                    Debug.WriteLine("[VCS] Unauthorized when fetching session HTML.");
+                    // DO NOT clear cookie here; caller may choose to retry once.
                     return string.Empty;
                 }
 
                 if (!response.IsSuccessStatusCode)
                 {
-                    Debug.WriteLine($"GetRawSessionHtml failed with status code: {response.StatusCode}");
+                    Debug.WriteLine($"[VCS] GetRawSessionHtml failed with status code: {response.StatusCode}");
                     return string.Empty;
                 }
 
                 var content = await response.Content.ReadAsStringAsync();
 
-                // Optional debug: output start of content for verification
-                Debug.WriteLine($"Response content starts with: {content.Substring(0, Math.Min(200, content.Length))}");
+                // Defensive: if server served the login page with 200
+                if (HtmlLooksLikeLogin(content))
+                {
+                    Debug.WriteLine("[VCS] Login form detected in 200 HTML.");
+                    return string.Empty;
+                }
 
+                Debug.WriteLine($"[VCS] Response content starts with: {content.Substring(0, Math.Min(200, content.Length))}");
                 return content;
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"GetRawSessionHtml error: {ex.Message}");
+                Debug.WriteLine($"[VCS] GetRawSessionHtml error: {ex.Message}");
                 return string.Empty;
             }
         }
-
     }
 }
