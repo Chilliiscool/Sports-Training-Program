@@ -15,5 +15,9 @@ namespace SportsTraining.Models
 
         // URL to access the session details
         public string Url { get; set; }
+        //Client name for the session
+        public string ClientName { get; set; }
+        // Client group associated with the session
+        public string ClientGroup { get; set; }
     }
 }

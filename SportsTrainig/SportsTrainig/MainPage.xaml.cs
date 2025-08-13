@@ -1,9 +1,9 @@
 ﻿// Module Name: MainPage
 // Author: Kye Franken 
 // Date Created: 19 / 06 / 2025
-// Date Modified: 06 / 08 / 2025
+// Date Modified: 13 / 08 / 2025
 // Description: Displays today's workout programs fetched from the Visual Coaching API,
-// handles user session validation, and supports navigation to detailed training pages.
+// groups by ClientGroup then sorts by ClientName, and navigates to the Training tab with a URL.
 
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Dispatching;
@@ -14,27 +14,39 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System;
 using System.Collections.Generic;
+using System.Linq; // <-- Needed for GroupBy/OrderBy/FirstOrDefault
 using System.Threading.Tasks;
 
 namespace SportsTraining.Pages
 {
+    // Helper grouping class for ListView grouping
+    public class Grouping<TKey, TItem> : ObservableCollection<TItem>
+    {
+        public TKey Key { get; }
+        public Grouping(TKey key, IEnumerable<TItem> items) : base(items)
+        {
+            Key = key;
+        }
+    }
+
     public partial class MainPage : ContentPage
     {
-        // Observable collection bound to the ListView to display workout sessions
+        // Flat collection (optional to keep around if needed elsewhere)
         public ObservableCollection<ProgramSession> TodayPrograms { get; set; } = new();
 
-        // Flag to prevent overlapping load operations
+        // Grouped collection bound to the ListView
+        public ObservableCollection<Grouping<string, ProgramSession>> GroupedPrograms { get; set; } = new();
+
         private bool isLoading = false;
 
         public MainPage()
         {
             InitializeComponent();
 
-            // Bind the ObservableCollection to the ListView
-            ProgramsListView.ItemsSource = TodayPrograms;
+            // Bind the grouped collection
+            ProgramsListView.ItemsSource = GroupedPrograms;
         }
 
-        // Triggered when page appears, ensures user is logged in and loads programs
         protected override async void OnAppearing()
         {
             Debug.WriteLine("[Debug Test] MainPage OnAppearing called.");
@@ -51,20 +63,18 @@ namespace SportsTraining.Pages
                 return;
             }
 
-            // Load today's workout sessions asynchronously
             await LoadUserProgramsAsync();
         }
 
-        // Loads the workout sessions from the API and updates the UI
         private async Task LoadUserProgramsAsync()
         {
             if (isLoading) return;
             isLoading = true;
 
-            // Show loading indicator and hide program list while loading
             MainThread.BeginInvokeOnMainThread(() =>
             {
                 TodayPrograms.Clear();
+                GroupedPrograms.Clear();
                 LoadingIndicator.IsVisible = true;
                 LoadingIndicator.IsRunning = true;
                 ProgramsListView.IsVisible = false;
@@ -87,26 +97,41 @@ namespace SportsTraining.Pages
                 string today = DateTime.Today.ToString("yyyy-MM-dd");
                 var sessions = await VisualCoachingService.GetSessionsForDate(cookie, today);
 
-                var seenKeys = new HashSet<string>();
+                var seenKeys = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+                var temp = new List<ProgramSession>();
 
-                // Update UI with retrieved sessions, ensuring no duplicates
+                foreach (var brief in sessions)
+                {
+                    // Build a unique key including client to avoid dupes
+                    string key = $"{brief.SessionTitle}_{brief.Url}_{brief.ClientName}_{brief.ClientGroup}";
+                    if (!seenKeys.Add(key)) continue;
+
+                    temp.Add(new ProgramSession
+                    {
+                        SessionTitle = brief.SessionTitle,
+                        Url = brief.Url,
+                        ClientName = brief.ClientName,
+                        ClientGroup = string.IsNullOrWhiteSpace(brief.ClientGroup) ? "Ungrouped" : brief.ClientGroup
+                    });
+                }
+
+                // Sort items by ClientName within each group, and group by ClientGroup
+                var grouped = temp
+                    .GroupBy(p => p.ClientGroup)
+                    .OrderBy(g => g.Key, StringComparer.OrdinalIgnoreCase)
+                    .Select(g =>
+                        new Grouping<string, ProgramSession>(
+                            g.Key,
+                            g.OrderBy(p => p.ClientName, StringComparer.OrdinalIgnoreCase)
+                        ));
+
                 MainThread.BeginInvokeOnMainThread(() =>
                 {
                     TodayPrograms.Clear();
+                    foreach (var item in temp) TodayPrograms.Add(item);
 
-                    foreach (var brief in sessions)
-                    {
-                        string key = $"{brief.SessionTitle}_{brief.Url}";
-
-                        if (seenKeys.Add(key)) // Only add if not already present
-                        {
-                            TodayPrograms.Add(new ProgramSession
-                            {
-                                SessionTitle = brief.SessionTitle,
-                                Url = brief.Url
-                            });
-                        }
-                    }
+                    GroupedPrograms.Clear();
+                    foreach (var grp in grouped) GroupedPrograms.Add(grp);
 
                     ShowProgramList();
                 });
@@ -128,30 +153,47 @@ namespace SportsTraining.Pages
             {
                 isLoading = false;
 
-                // Hide loading indicator and show program list
                 MainThread.BeginInvokeOnMainThread(() =>
                 {
                     LoadingIndicator.IsVisible = false;
                     LoadingIndicator.IsRunning = false;
                     ProgramsListView.IsVisible = true;
-                    ProgramsListView.IsRefreshing = false;  // Stop Pull-to-Refresh animation
+                    ProgramsListView.IsRefreshing = false;
                 });
             }
         }
 
-        // Handles selection of a program and navigates to the training page with URL parameter
+        // Selection handler (kept your PM->AM link logic)
         private async void ProgramsListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             if (e.SelectedItem is ProgramSession selected)
             {
-                ProgramsListView.SelectedItem = null;  // Deselect item
+                // Clear selection highlight
+                ((ListView)sender).SelectedItem = null;
 
-                var encodedUrl = Uri.EscapeDataString(selected.Url);
-                await Shell.Current.GoToAsync($"{nameof(TrainingPage)}?url={encodedUrl}");
+                Debug.WriteLine($"Selected session URL before check: {selected.Url}");
+
+                // If PM clicked, use AM link instead (when available)
+                string finalUrl = selected.Url;
+                if (selected.SessionTitle?.Contains("PM", StringComparison.OrdinalIgnoreCase) == true)
+                {
+                    var amSession = TodayPrograms
+                        .FirstOrDefault(p => p.SessionTitle?.Contains("AM", StringComparison.OrdinalIgnoreCase) == true
+                                             && p.ClientName?.Equals(selected.ClientName, StringComparison.OrdinalIgnoreCase) == true);
+                    if (amSession != null)
+                    {
+                        finalUrl = amSession.Url;
+                        Debug.WriteLine($"PM session clicked — using AM URL: {finalUrl}");
+                    }
+                }
+
+                var encodedUrl = Uri.EscapeDataString(finalUrl);
+
+                // Jump to Training tab with the URL (no back button)
+                await Shell.Current.GoToAsync($"//{nameof(TrainingPage)}?url={encodedUrl}");
             }
         }
 
-        // Helper method to toggle visibility after loading is complete
         private void ShowProgramList()
         {
             LoadingIndicator.IsVisible = false;
@@ -159,7 +201,6 @@ namespace SportsTraining.Pages
             ProgramsListView.IsVisible = true;
         }
 
-        // Pull-to-refresh handler to reload the programs list
         private async void ProgramsListView_Refreshing(object sender, EventArgs e)
         {
             await LoadUserProgramsAsync();

@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
-    <!--//
+<!--//
 Module Name: MainPage 
 Author: Kye Franken 
 Date Created: 19/06/2025
-Date Modified: 06/08/2025
+Date Modified: 13/08/2025
 Description: UI page for the MainPage.-->
-    
+
 <ContentPage 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
@@ -30,14 +30,44 @@ Description: UI page for the MainPage.-->
                FontAttributes="Bold"
                TextColor="{AppThemeBinding Light=Black, Dark=White}" />
 
+        
         <ListView x:Name="ProgramsListView"
                   IsVisible="False"
                   SeparatorVisibility="Default"
+                  IsGroupingEnabled="True"
+                  GroupDisplayBinding="{Binding Key}"
                   ItemSelected="ProgramsListView_ItemSelected">
+
+           
+            <ListView.GroupHeaderTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Padding="10,6" BackgroundColor="{AppThemeBinding Light=#F0F0F0, Dark=#222}">
+                            <Label Text="{Binding Key}"
+                                   FontAttributes="Bold"
+                                   FontSize="16"
+                                   TextColor="{AppThemeBinding Light=Black, Dark=White}" />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.GroupHeaderTemplate>
+
+            
             <ListView.ItemTemplate>
-                <DataTemplate x:DataType="models:ProgramSession">
-                    <TextCell Text="{Binding SessionTitle}" 
-                              TextColor="{AppThemeBinding Light=Black, Dark=White}" />
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid ColumnDefinitions="*,Auto" Padding="10,6">
+                            <Label Grid.Column="0"
+                                   Text="{Binding SessionTitle}"
+                                   FontSize="16"
+                                   TextColor="{AppThemeBinding Light=Black, Dark=White}" />
+                            <Label Grid.Column="1"
+                                   Text="{Binding ClientName}"
+                                   FontSize="16"
+                                   Margin="8,0,0,0"
+                                   TextColor="{AppThemeBinding Light=Gray, Dark=LightGray}" />
+                        </Grid>
+                    </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

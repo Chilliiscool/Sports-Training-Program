@@ -114,6 +114,10 @@ namespace SportsTraining.Services
 
             [JsonProperty("SessionTitle")]
             public string SessionTitle { get; set; }
+            [JsonProperty("ClientName")]
+            public string ClientName { get; set; }
+            [JsonProperty("ClientGroup")]
+            public string ClientGroup { get; set; }
         }
 
         // Login method: sends credentials and extracts cookie from response JSON or headers

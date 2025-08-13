@@ -25,9 +25,9 @@ Description: UI page for the SettingsPage.-->
            
              
 
-           <VerticalStackLayout Padding="10" Spacing="10">  
-               <Label Text="Select Companie:" />  
-               <Picker x:Name="CompaniePicker" SelectedIndexChanged="OnCompaniePickerSelectedIndexChanged" />  
+           <VerticalStackLayout Padding="10" Spacing="10">
+                <Label Text="Select Company:" />
+                <Picker x:Name="CompanyPicker" SelectedIndexChanged="OnCompanyPickerSelectedIndexChanged" />  
            </VerticalStackLayout>  
 
            <Button Text="Account Settings" Clicked="OnAccountSettingsClicked" />  

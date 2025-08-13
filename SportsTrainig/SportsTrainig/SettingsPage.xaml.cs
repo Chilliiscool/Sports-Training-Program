@@ -43,11 +43,11 @@ namespace SportsTraining.Pages
             NotificationsSwitch.IsToggled = savedNotifications;
 
             // Company picker
-            CompaniePicker.ItemsSource = companyItems;
+            CompanyPicker.ItemsSource = companyItems;
             string savedCompany = Preferences.Get(CompanyKey, "Normal");
             int index = Array.IndexOf(companyItems, savedCompany);
-            CompaniePicker.SelectedIndex = index >= 0 ? index : 0;
-            ApplyCompanieTheme(savedCompany);
+            CompanyPicker.SelectedIndex = index >= 0 ? index : 0;
+            ApplyCompanyTheme(savedCompany);
             LogoImage.IsVisible = savedCompany == "ETPA";
 
             // Units picker
@@ -86,20 +86,20 @@ namespace SportsTraining.Pages
             Preferences.Set(NotificationsKey, e.Value);
         }
 
-        private void OnCompaniePickerSelectedIndexChanged(object sender, EventArgs e)
+        private void OnCompanyPickerSelectedIndexChanged(object sender, EventArgs e)
         {
-            if (CompaniePicker.SelectedIndex == -1)
+            if (CompanyPicker.SelectedIndex == -1)
                 return;
 
-            string selectedCompany = companyItems[CompaniePicker.SelectedIndex];
+            string selectedCompany = companyItems[CompanyPicker.SelectedIndex];
             Preferences.Set(CompanyKey, selectedCompany);
 
             // Show or hide company-specific logo
             LogoImage.IsVisible = selectedCompany == "ETPA";
-            ApplyCompanieTheme(selectedCompany);
+            ApplyCompanyTheme(selectedCompany);
         }
 
-        private void ApplyCompanieTheme(string company)
+        private void ApplyCompanyTheme(string company)
         {
             if (company == "ETPA")
                 LogoImage.Source = "etpa_logo.png";
