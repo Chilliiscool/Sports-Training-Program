@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-    <!--//
-Module Name: TrainingPage 
-Author: Kye Franken 
+<!--
+Module Name: TrainingPage
+Author: Kye Franken
 Date Created: 20/06/2025
-Date Modified: 06/08/2025
-Description: UI page for the TrainingPage.-->
-    
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"  
-            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"  
-            x:Class="SportsTraining.Pages.TrainingPage"  
-            Title="Training">
+Date Modified: 14/08/2025
+Description: Renders a training session as native controls (no WebView).
+             Parses tables from HTML and shows a "Diary" button under each table.
+-->
+
+<ContentPage
+    x:Class="SportsTraining.Pages.TrainingPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Training">
+
     <Shell.TitleView>
         <HorizontalStackLayout Spacing="10" Padding="10" VerticalOptions="Center">
             <Label Text="Training" FontSize="22" VerticalOptions="Center" />
@@ -18,8 +22,18 @@ Description: UI page for the TrainingPage.-->
         </HorizontalStackLayout>
     </Shell.TitleView>
 
-    <StackLayout Padding="20" Spacing="10">
-        <Label x:Name="TitleLabel" FontSize="24" FontAttributes="Bold" />
-        <WebView x:Name="SessionWebView" HeightRequest="600" />
-    </StackLayout>
+    <Grid RowDefinitions="Auto,Auto,*" Padding="16" RowSpacing="12">
+        <!-- Title -->
+        <Label x:Name="TitleLabel"
+               Grid.Row="0"
+               FontSize="24"
+               FontAttributes="Bold"
+               Text="Training Session" />
+
+
+        <!-- Session content -->
+        <ScrollView Grid.Row="2">
+            <VerticalStackLayout x:Name="SessionStack" Spacing="18" />
+        </ScrollView>
+    </Grid>
 </ContentPage>
