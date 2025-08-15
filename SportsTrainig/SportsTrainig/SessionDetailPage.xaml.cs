@@ -1,9 +1,9 @@
 // Module Name: SessionDetailPage
 // Author: Kye Franken 
 // Date Created: 28 / 07 / 2025
-// Date Modified: 11 / 08 / 2025
+// Date Modified: 15 / 08 / 2025
 // Description: Loads and displays a training session's title and content. Robust against redirects:
-// forces i=0, retries once, and falls back to JSON summary if HTML fails.
+// forces session=0 and i=0, retries once, and falls back to JSON summary if HTML fails.
 
 using Microsoft.Maui.Controls;
 using SportsTraining.Services;
@@ -53,6 +53,7 @@ namespace SportsTraining.Pages
             LoadingIndicator.IsVisible = false;
         }
 
+        // Force session=0 & i=0 and add format/version if missing
         private static string ForceFirstIndexAndNormalize(string raw)
         {
             if (string.IsNullOrWhiteSpace(raw)) return raw;
@@ -68,6 +69,8 @@ namespace SportsTraining.Pages
                 var kv = p.Split('=', 2);
                 if (kv.Length == 2) dict[kv[0]] = kv[1];
             }
+
+            dict["session"] = "0";
             dict["i"] = "0";
             if (!dict.ContainsKey("format")) dict["format"] = "Tablet";
             if (!dict.ContainsKey("version")) dict["version"] = "2";

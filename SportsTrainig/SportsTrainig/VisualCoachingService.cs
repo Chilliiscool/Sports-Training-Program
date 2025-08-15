@@ -1,10 +1,11 @@
 ﻿// Module Name: VisualCoachingService
 // Author: Kye Franken 
 // Date Created: 23 / 07 / 2025
-// Date Modified: 11 / 08 / 2025
+// Date Modified: 15 / 08 / 2025
 // Description: Provides methods to interact with the Visual Coaching API including login, 
 // fetching sessions for a date, session summaries, and raw session HTML content. 
 // Manages cookies and handles session expiration, with explicit cookie headers and redirect detection to avoid false sign-outs.
+// Update (15/08): GetSessionSummary now parses query params by name (order-independent).
 
 using System;
 using System.Collections.Generic;
@@ -234,7 +235,7 @@ namespace SportsTraining.Services
             }
         }
 
-        // Retrieves detailed session summary JSON by parsing the session URL to get keys
+        // Retrieves detailed session summary JSON — now robust to ANY query param order.
         public static async Task<ProgramSessionDetail?> GetSessionSummary(string cookie, string sessionUrl)
         {
             try
@@ -242,21 +243,48 @@ namespace SportsTraining.Services
                 SetCookieFromSession();
                 ApplyCookieHeader(cookie);
 
-                var match = Regex.Match(sessionUrl, @"/Session/(\d+)\?week=(\d+)&day=(\d+)&session=(\d+)&i=(\d+)");
-                if (!match.Success)
+                // Build absolute URL first (handles relative "/Application/Program/Session/...")
+                var full = new Uri(BaseUri, sessionUrl);
+
+                // 1) Get the numeric SessionId from the path: /Application/Program/Session/{id}
+                //    Be lenient: just grab the last number in the path.
+                string path = full.AbsolutePath; // e.g. /Application/Program/Session/1474814
+                var idMatch = Regex.Match(path, @"(\d+)$");
+                if (!idMatch.Success)
                 {
-                    Debug.WriteLine("[VCS] Could not parse session URL");
+                    Debug.WriteLine("[VCS] Could not parse SessionId from path: " + path);
+                    return null;
+                }
+                string sessionId = idMatch.Value;
+
+                // 2) Parse the query into a case-insensitive map (order independent)
+                var kv = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+                var query = full.Query; // includes leading '?'
+                if (!string.IsNullOrEmpty(query))
+                {
+                    foreach (var part in query.TrimStart('?').Split('&', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries))
+                    {
+                        int eq = part.IndexOf('=');
+                        if (eq <= 0) continue;
+                        var key = part[..eq];
+                        var val = part[(eq + 1)..];
+                        kv[key] = val;
+                    }
+                }
+
+                // 3) Pull required values; bail if any are missing
+                if (!kv.TryGetValue("week", out var week) ||
+                    !kv.TryGetValue("day", out var day) ||
+                    !kv.TryGetValue("session", out var sess) ||
+                    !kv.TryGetValue("i", out var i))
+                {
+                    Debug.WriteLine("[VCS] Missing one of week/day/session/i in query: " + full.Query);
                     return null;
                 }
 
-                string sessionId = match.Groups[1].Value;
-                string week = match.Groups[2].Value;
-                string day = match.Groups[3].Value;
-                string session = match.Groups[4].Value;
-                string i = match.Groups[5].Value;
-
-                string key = $"{week}:{day}:{session}:{i}";
-                string apiUrl = $"https://cloud.visualcoaching2.com/api/2/Program/Summary2/{sessionId}?key={key}";
+                // 4) Build Summary2 URL
+                string keyStr = $"{week}:{day}:{sess}:{i}";
+                string apiUrl = $"https://cloud.visualcoaching2.com/api/2/Program/Summary2/{sessionId}?key={keyStr}";
 
                 var response = await client.GetAsync(apiUrl);
 

@@ -30,7 +30,7 @@ Description: Renders a training session as native controls (no WebView).
                FontAttributes="Bold"
                Text="Training Session" />
 
-
+        
         <!-- Session content -->
         <ScrollView Grid.Row="2">
             <VerticalStackLayout x:Name="SessionStack" Spacing="18" />

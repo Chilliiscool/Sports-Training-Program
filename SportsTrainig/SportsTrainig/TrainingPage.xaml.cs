@@ -1,16 +1,16 @@
 // Module Name: TrainingPage
 // Author: Kye Franken
 // Date Created: 20 / 06 / 2025
-// Date Modified: 14 / 08 / 2025
-// Description: Loads Visual Coaching HTML for a session, parses key bits,
-//              converts <table> elements to native Grid, and appends a Diary button
-//              under every table. No WebView is used.
+// Date Modified: 15 / 08 / 2025
+// Description: Loads Visual Coaching HTML for a session and renders ONLY a top summary matrix
+//              with AM and PM across for Planned. The “Got” row is hidden (since all content
+//              we need is shown in Planned). All other HTML below (paragraphs/tables/etc.)
+//              is NOT rendered. Includes robust fallbacks and sanitising so “PM OFF” etc. show.
 
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Storage;
 using SportsTraining.Services;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
@@ -24,8 +24,7 @@ namespace SportsTraining.Pages
     public partial class TrainingPage : ContentPage, INotifyPropertyChanged
     {
         private string _url;
-        private string _absoluteSessionUrl;      // full https URL for the session
-        private List<string> _diaryLinks = new(); // any "Diary" links found in the page (if any)
+        private string _absoluteSessionUrl; // full https URL for the session
 
         public string Url
         {
@@ -33,8 +32,9 @@ namespace SportsTraining.Pages
             set
             {
                 var decoded = WebUtility.UrlDecode(value ?? "");
-                _url = ForceFirstIndexAndNormalize(decoded);
+                _url = ForceFirstIndexAndNormalize(decoded); // keep i=0/Tablet/2; do not force AM/PM
                 _absoluteSessionUrl = BuildAbsoluteUrl(_url);
+                Debug.WriteLine($"[TrainingPage] Set Url -> {_url}");
                 _ = LoadAndRenderAsync();
             }
         }
@@ -51,30 +51,12 @@ namespace SportsTraining.Pages
             LogoImage.IsVisible = savedCompany == "ETPA";
         }
 
-        // --- Navigation & UI events ---
+        // --- UI events ---
         private async void OnRefreshClicked(object sender, EventArgs e) => await LoadAndRenderAsync();
 
         private async void OnOpenInBrowserClicked(object sender, EventArgs e)
         {
             try { await Launcher.OpenAsync(new Uri(_absoluteSessionUrl)); }
-            catch { /* ignore */ }
-        }
-
-        private async void OnDiaryClicked(object sender, EventArgs e)
-        {
-            try
-            {
-                var btn = (Button)sender;
-                var link = btn.CommandParameter as string;
-
-                // Prefer the table-specific link if available,
-                // otherwise try any page-level diary link, then fallback to session URL.
-                string target =
-                    (!string.IsNullOrWhiteSpace(link) ? link :
-                     _diaryLinks.FirstOrDefault(l => !string.IsNullOrWhiteSpace(l))) ?? _absoluteSessionUrl;
-
-                await Launcher.OpenAsync(new Uri(BuildAbsoluteUrl(target)));
-            }
             catch { /* ignore */ }
         }
 
@@ -97,24 +79,23 @@ namespace SportsTraining.Pages
                     return;
                 }
 
-                SetLoading(true);
-
-                // attempt #1
+                // attempt #1: raw HTML
                 string html = await VisualCoachingService.GetRawSessionHtml(cookie, _url);
 
-                // retry once
+                // retry once if empty
                 if (string.IsNullOrWhiteSpace(html))
                 {
                     Debug.WriteLine("[TrainingPage] Empty HTML, retry 1…");
                     html = await VisualCoachingService.GetRawSessionHtml(cookie, _url);
                 }
 
-                // fallback: Summary2
+                // fallback: Summary2 ? synthesize minimal HTML
                 if (string.IsNullOrWhiteSpace(html))
                 {
                     var summary = await VisualCoachingService.GetSessionSummary(cookie, _url);
                     if (summary == null)
                     {
+                        // Could be expired cookie; prompt relogin
                         await DisplayAlert("Session Expired", "Your session has expired. Please log in again.", "OK");
                         SessionManager.ClearCookie();
                         await Shell.Current.GoToAsync("//LoginPage");
@@ -128,99 +109,183 @@ namespace SportsTraining.Pages
                     html = $"<h1>{WebUtility.HtmlEncode(summary.SessionTitle ?? "Training Session")}</h1>{body}";
                 }
 
+                // Final visible fallback (no more blank screens)
+                if (string.IsNullOrWhiteSpace(html))
+                {
+                    RenderNoContentFallback();
+                    return;
+                }
+
                 RenderHtmlAsNative(html);
             }
             catch (Exception ex)
             {
                 Debug.WriteLine($"[TrainingPage] Error: {ex.Message}");
                 await DisplayAlert("Error", $"Failed to load session: {ex.Message}", "OK");
+                RenderNoContentFallback(); // show something instead of blank
             }
-            finally
+        }
+
+        private void RenderNoContentFallback()
+        {
+            SessionStack.Children.Clear();
+            TitleLabel.Text = "Training Session";
+
+            SessionStack.Children.Add(new Label
             {
-                SetLoading(false);
-            }
+                Text = "No content was returned for this session.\nTry pulling to refresh, or open it in the browser.",
+                FontSize = 16
+            });
+
+            var openBtn = new Button { Text = "Open in Browser", Margin = new Thickness(0, 12, 0, 0) };
+            openBtn.Clicked += OnOpenInBrowserClicked;
+            SessionStack.Children.Add(openBtn);
         }
 
         private void RenderHtmlAsNative(string html)
         {
             // Clear previous content
             SessionStack.Children.Clear();
-            _diaryLinks.Clear();
 
-            // Title
+            // Title (from first <h1>)
             var title = ExtractFirst(html, @"<h1[^>]*>(.*?)</h1>");
             TitleLabel.Text = !string.IsNullOrWhiteSpace(title)
                 ? WebUtility.HtmlDecode(StripTags(title).Trim())
                 : "Training Session";
 
-            // Capture any "Diary" anchors on the page for fallback usage
-            foreach (Match m in Regex.Matches(html, @"<a[^>]*href=""(?<href>[^""]+)""[^>]*>(?<txt>.*?)</a>",
-                                               RegexOptions.Singleline | RegexOptions.IgnoreCase))
+            // ---- AM/PM matrix (Planned only) ----
+            var (amPlan, pmPlan) = ExtractAmPmPlans(html);
+
+            // Always show the matrix; use em-dashes if nothing found
+            SessionStack.Children.Add(BuildAmPmMatrixPlannedOnly(
+                string.IsNullOrWhiteSpace(amPlan) ? "—" : amPlan,
+                string.IsNullOrWhiteSpace(pmPlan) ? "—" : pmPlan
+            ));
+
+            // STOP HERE — do NOT render the rest of the HTML (tables/paragraphs)
+            // per user request to remove the content under the table.
+        }
+
+        // --- AM/PM extraction for PLANNED (multi-line preserved) ---
+
+        // Returns (amPlanned, pmPlanned) with multi-line content preserved and “AM/PM” removed from the text.
+        private static (string amPlan, string pmPlan) ExtractAmPmPlans(string html)
+        {
+            string am = "";
+            string pm = "";
+
+            foreach (Match block in Regex.Matches(
+                         html ?? "",
+                         @"<div[^>]*class=['""]weekly-no-background['""][^>]*>.*?<div[^>]*class=['""]text_element['""][^>]*>(?<content>.*?)</div>.*?</div>",
+                         RegexOptions.Singleline | RegexOptions.IgnoreCase))
             {
-                var txt = StripTags(m.Groups["txt"].Value).Trim();
-                var href = m.Groups["href"].Value.Trim();
-                if (txt.Contains("Diary", StringComparison.OrdinalIgnoreCase) ||
-                    href.Contains("Diary", StringComparison.OrdinalIgnoreCase))
+                var inner = block.Groups["content"].Value;
+
+                // collect ALL <p> lines inside this text_element
+                var lines = Regex.Matches(inner, @"<p[^>]*>(.*?)</p>", RegexOptions.Singleline | RegexOptions.IgnoreCase)
+                                 .Cast<Match>()
+                                 .Select(m => WebUtility.HtmlDecode(StripTags(m.Groups[1].Value)).Trim())
+                                 .Where(s => !string.IsNullOrWhiteSpace(s))
+                                 .Select(Sanitize) // handle NBSP / zero?width chars
+                                 .ToList();
+
+                if (lines.Count == 0) continue;
+
+                string header = lines[0]; // e.g. "AM Swim" or "PM OFF"
+                bool isAm = header.StartsWith("AM", StringComparison.OrdinalIgnoreCase);
+                bool isPm = header.StartsWith("PM", StringComparison.OrdinalIgnoreCase);
+
+                // remove the AM/PM prefix from the header text ("AM Swim" -> "Swim", "PM OFF" -> "OFF")
+                string headerWithoutTag = CleanupPlannedText(header, isAm ? "AM" : "PM");
+
+                // join remaining lines, if any
+                string rest = lines.Count > 1 ? string.Join("\n", lines.Skip(1)) : "";
+
+                string combined = string.IsNullOrWhiteSpace(rest) ? headerWithoutTag
+                                                                  : $"{headerWithoutTag} — {rest}";
+
+                if (isAm) am = combined;
+                if (isPm) pm = combined;
+            }
+
+            return (am, pm);
+        }
+
+        // Remove leading "AM"/"PM" + any punctuation/spaces that follow.
+        private static string CleanupPlannedText(string text, string prefix)
+        {
+            if (string.IsNullOrWhiteSpace(text)) return "";
+            text = Sanitize(text).Trim();
+            var m = Regex.Match(text, @"^(?i)" + prefix + @"\s*[:\-–]?\s*(.*)$");
+            return m.Success ? m.Groups[1].Value.Trim() : text;
+        }
+
+        private View BuildAmPmMatrixPlannedOnly(string amPlan, string pmPlan)
+        {
+            // Grid: 3 columns, 2 rows:
+            // Row 0:   "" |   AM   |   PM
+            // Row 1: Planned | amPlan | pmPlan
+            var grid = new Grid
+            {
+                ColumnSpacing = 10,
+                RowSpacing = 6,
+                Padding = new Thickness(10),
+                Margin = new Thickness(0, 4, 0, 10),
+                BackgroundColor = Application.Current?.RequestedTheme == AppTheme.Dark
+                                  ? new Microsoft.Maui.Graphics.Color(0.12f, 0.12f, 0.12f)
+                                  : new Microsoft.Maui.Graphics.Color(0.96f, 0.96f, 0.96f)
+            };
+
+            grid.ColumnDefinitions.Add(new ColumnDefinition(GridLength.Auto)); // labels column
+            grid.ColumnDefinitions.Add(new ColumnDefinition(GridLength.Star)); // AM
+            grid.ColumnDefinitions.Add(new ColumnDefinition(GridLength.Star)); // PM
+
+            for (int i = 0; i < 2; i++) grid.RowDefinitions.Add(new RowDefinition(GridLength.Auto));
+
+            // Header row
+            AddHeader(grid, 0, 1, "AM");
+            AddHeader(grid, 0, 2, "PM");
+
+            // Planned row (only row we show)
+            AddHeader(grid, 1, 0, "Planned");
+            AddCell(grid, 1, 1, amPlan);
+            AddCell(grid, 1, 2, pmPlan);
+
+            return new VerticalStackLayout
+            {
+                Spacing = 4,
+                Children =
                 {
-                    _diaryLinks.Add(href);
+                    new Label { Text = "Today’s Sessions", FontSize = 18, FontAttributes = FontAttributes.Bold, Margin = new Thickness(0,4,0,0) },
+                    grid
                 }
-            }
+            };
+        }
 
-            // Paragraph intro (optional — grab first few <p>)
-            var introParas = Regex.Matches(html, @"<p[^>]*>(.*?)</p>", RegexOptions.Singleline | RegexOptions.IgnoreCase)
-                                  .Cast<Match>().Select(m => StripTags(m.Groups[1].Value).Trim())
-                                  .Where(t => !string.IsNullOrWhiteSpace(t))
-                                  .Take(3)
-                                  .ToList();
-            if (introParas.Count > 0)
+        private static void AddHeader(Grid g, int r, int c, string text)
+        {
+            var lbl = new Label
             {
-                var intro = new VerticalStackLayout { Spacing = 6 };
-                foreach (var p in introParas)
-                    intro.Children.Add(new Label { Text = WebUtility.HtmlDecode(p), FontSize = 15 });
-                SessionStack.Children.Add(intro);
-            }
+                Text = text,
+                FontSize = 14,
+                FontAttributes = FontAttributes.Bold
+            };
+            Grid.SetRow(lbl, r);
+            Grid.SetColumn(lbl, c);
+            g.Children.Add(lbl);
+        }
 
-            // Convert each <table>…</table> to a Grid + Diary button
-            var tables = Regex.Matches(html, @"<table[^>]*>(.*?)</table>", RegexOptions.Singleline | RegexOptions.IgnoreCase)
-                              .Cast<Match>()
-                              .Select(m => m.Value)
-                              .ToList();
-
-            if (tables.Count == 0)
+        private static void AddCell(Grid g, int r, int c, string text)
+        {
+            var lbl = new Label
             {
-                // If no tables, show the remaining paragraphs as a simple list
-                var allParas = Regex.Matches(html, @"<p[^>]*>(.*?)</p>", RegexOptions.Singleline | RegexOptions.IgnoreCase)
-                                    .Cast<Match>().Select(m => StripTags(m.Groups[1].Value).Trim())
-                                    .Where(t => !string.IsNullOrWhiteSpace(t))
-                                    .ToList();
-
-                foreach (var p in allParas)
-                    SessionStack.Children.Add(new Label { Text = WebUtility.HtmlDecode(p), FontSize = 16 });
-
-                return;
-            }
-
-            int tableIndex = 0;
-            foreach (var tableHtml in tables)
-            {
-                // Try to find a table-local "Diary" link (anchor nearby within same block)
-                string? localDiaryLink = FindNearestDiaryLink(tableHtml);
-
-                var grid = BuildGridFromHtmlTable(tableHtml);
-                SessionStack.Children.Add(grid);
-
-                var diaryBtn = new Button
-                {
-                    Text = "Diary",
-                    Margin = new Thickness(0, 8, 0, 24),
-                    CommandParameter = localDiaryLink
-                };
-                diaryBtn.Clicked += OnDiaryClicked;
-
-                SessionStack.Children.Add(diaryBtn);
-
-                tableIndex++;
-            }
+                Text = WebUtility.HtmlDecode(text),
+                FontSize = 14,
+                LineBreakMode = LineBreakMode.WordWrap
+            };
+            Grid.SetRow(lbl, r);
+            Grid.SetColumn(lbl, c);
+            g.Children.Add(lbl);
         }
 
         // --- Helpers: parsing & UI build ---
@@ -239,6 +304,7 @@ namespace SportsTraining.Pages
             return $"https://cloud.visualcoaching2.com{(maybeRelative.StartsWith("/") ? "" : "/")}{maybeRelative}";
         }
 
+        // Keep i=0 and add format/version if missing (don’t force AM/PM here)
         private static string ForceFirstIndexAndNormalize(string raw)
         {
             if (string.IsNullOrWhiteSpace(raw)) return raw;
@@ -270,93 +336,14 @@ namespace SportsTraining.Pages
             return $"{path}?{string.Join("&", parts)}";
         }
 
-        private Grid BuildGridFromHtmlTable(string tableHtml)
+        // Remove zero-width chars (200B–200D, FEFF), NBSP, and collapse whitespace.
+        private static string Sanitize(string s)
         {
-            // Parse rows/cells very simply (HTML is assumed clean from VC)
-            var rowMatches = Regex.Matches(tableHtml, @"<tr[^>]*>(.*?)</tr>", RegexOptions.Singleline | RegexOptions.IgnoreCase);
-
-            var grid = new Grid
-            {
-                ColumnSpacing = 8,
-                RowSpacing = 6,
-                Padding = new Thickness(10),
-                BackgroundColor = Application.Current?.RequestedTheme == AppTheme.Dark
-                                  ? new Microsoft.Maui.Graphics.Color(0.12f, 0.12f, 0.12f)
-                                  : new Microsoft.Maui.Graphics.Color(0.96f, 0.96f, 0.96f)
-            };
-
-            int rowIndex = 0;
-            int maxCols = 0;
-            List<List<string>> rows = new();
-
-            foreach (Match row in rowMatches)
-            {
-                var cells = Regex.Matches(row.Groups[1].Value, @"<(td|th)[^>]*>(.*?)</\1>", RegexOptions.Singleline | RegexOptions.IgnoreCase)
-                                 .Cast<Match>()
-                                 .Select(m => WebUtility.HtmlDecode(StripTags(m.Groups[2].Value).Trim()))
-                                 .ToList();
-                if (cells.Count > 0)
-                {
-                    rows.Add(cells);
-                    maxCols = Math.Max(maxCols, cells.Count);
-                }
-            }
-
-            // Define columns
-            for (int c = 0; c < maxCols; c++)
-                grid.ColumnDefinitions.Add(new ColumnDefinition(GridLength.Star));
-
-            // Add rows + labels
-            foreach (var cells in rows)
-            {
-                grid.RowDefinitions.Add(new RowDefinition(GridLength.Auto));
-                for (int c = 0; c < maxCols; c++)
-                {
-                    string text = c < cells.Count ? cells[c] : "";
-                    var lbl = new Label
-                    {
-                        Text = text,
-                        FontSize = 14,
-                        LineBreakMode = LineBreakMode.WordWrap
-                    };
-
-                    // treat first row as header if came from <th>
-                    if (rowIndex == 0)
-                    {
-                        lbl.FontAttributes = FontAttributes.Bold;
-                    }
-
-                    Grid.SetRow(lbl, rowIndex);
-                    Grid.SetColumn(lbl, c);
-                    grid.Children.Add(lbl);
-                }
-                rowIndex++;
-            }
-
-            return grid;
-        }
-
-        private static string? FindNearestDiaryLink(string htmlBlock)
-        {
-            // Look for an <a> with "Diary" in the text or href inside the same block
-            foreach (Match m in Regex.Matches(htmlBlock, @"<a[^>]*href=""(?<href>[^""]+)""[^>]*>(?<txt>.*?)</a>",
-                                              RegexOptions.Singleline | RegexOptions.IgnoreCase))
-            {
-                var txt = StripTags(m.Groups["txt"].Value).Trim();
-                var href = m.Groups["href"].Value.Trim();
-                if (txt.Contains("Diary", StringComparison.OrdinalIgnoreCase) ||
-                    href.Contains("Diary", StringComparison.OrdinalIgnoreCase))
-                {
-                    return href;
-                }
-            }
-            return null;
-        }
-
-        private void SetLoading(bool on)
-        {
-            LoadingIndicator.IsVisible = on;
-            LoadingIndicator.IsRunning = on;
+            if (string.IsNullOrEmpty(s)) return s ?? "";
+            string t = s.Replace('\u00A0', ' ');
+            t = Regex.Replace(t, "[\u200B\u200C\u200D\uFEFF]", ""); // zero?width chars
+            t = Regex.Replace(t, @"\s+", " ");
+            return t.Trim();
         }
     }
 }
