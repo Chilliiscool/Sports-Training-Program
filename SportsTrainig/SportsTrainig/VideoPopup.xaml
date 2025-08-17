@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup
+    x:Class="SportsTraining.Popups.VideoPopup"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    BackgroundColor="#000">
+
+    <Grid Padding="0"
+          RowDefinitions="Auto,*"
+          ColumnDefinitions="*,Auto">
+
+        <Label x:Name="TitleText"
+               Grid.Row="0" Grid.Column="0"
+               Text="Video" TextColor="White"
+               FontSize="18" FontAttributes="Bold"
+               Margin="10,8,6,8" />
+
+        <Button Grid.Row="0" Grid.Column="1"
+                Text="✕"
+                BackgroundColor="Transparent"
+                TextColor="White"
+                Clicked="OnCloseClicked" />
+
+        <!-- MediaElement from CommunityToolkit.Maui.Media -->
+        <toolkit:MediaElement x:Name="Player"
+                              Grid.Row="1" Grid.ColumnSpan="2"
+                              ShouldAutoPlay="True"
+                              ShouldShowPlaybackControls="True"
+                              Aspect="AspectFit" />
+    </Grid>
+</toolkit:Popup>

@@ -16,6 +16,7 @@ layout\fragment_backstack;layout\fragment_backstack
 layout\navigationlayout;layout\navigationlayout
 layout\shellcontent;compatibility\Android\Resources\layout\shellcontent
 layout\tabbar;android\Resources\layout\Tabbar
+layout\textureview;layout\textureview
 layout\toolbar;android\Resources\layout\Toolbar
 values\attr;values\attr
 values\attrs;android\Resources\values\attrs

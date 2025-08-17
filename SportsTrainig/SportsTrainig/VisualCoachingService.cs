@@ -119,6 +119,15 @@ namespace SportsTraining.Services
             public string ClientName { get; set; }
             [JsonProperty("ClientGroup")]
             public string ClientGroup { get; set; }
+            [JsonProperty("Week")]
+            public int Week { get; set; }
+            [JsonProperty("Day")]
+            public int Day { get; set; }
+            [JsonProperty("DateStart")]
+            public string DateStart { get; set; }
+
+            [JsonProperty("DateEnd")]
+            public string DateEnd { get; set; }
         }
 
         // Login method: sends credentials and extracts cookie from response JSON or headers

@@ -1,39 +1,112 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!--
-Module Name: TrainingPage
-Author: Kye Franken
-Date Created: 20/06/2025
-Date Modified: 14/08/2025
-Description: Renders a training session as native controls (no WebView).
-             Parses tables from HTML and shows a "Diary" button under each table.
--->
-
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
     x:Class="SportsTraining.Pages.TrainingPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Title="Training">
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:shapes="clr-namespace:Microsoft.Maui.Controls.Shapes;assembly=Microsoft.Maui.Controls"
+    BackgroundColor="{DynamicResource PageBackgroundColor}">
 
-    <Shell.TitleView>
-        <HorizontalStackLayout Spacing="10" Padding="10" VerticalOptions="Center">
-            <Label Text="Training" FontSize="22" VerticalOptions="Center" />
-            <Image Source="default_logo.png" HeightRequest="50" />
-            <Image x:Name="LogoImage" Source="etpa_logo.png" HeightRequest="50" IsVisible="False" />
-        </HorizontalStackLayout>
-    </Shell.TitleView>
+    <Grid>
+        <!-- MAIN LAYOUT -->
+        <!-- rows: 0 logo (and hidden TitleLabel), 1 header (Week · Date), 2 tabs, 3 content, 4 footer -->
+        <Grid RowDefinitions="Auto,Auto,Auto,*,Auto">
 
-    <Grid RowDefinitions="Auto,Auto,*" Padding="16" RowSpacing="12">
-        <!-- Title -->
-        <Label x:Name="TitleLabel"
-               Grid.Row="0"
-               FontSize="24"
-               FontAttributes="Bold"
-               Text="Training Session" />
+            <!-- Brand / Logo (optional) -->
+            <Image x:Name="LogoImage"
+                   Grid.Row="0"
+                   HeightRequest="28"
+                   Margin="10,8"
+                   Aspect="AspectFit"
+                   IsVisible="False"
+                   HorizontalOptions="Start" />
 
-        
-        <!-- Session content -->
-        <ScrollView Grid.Row="2">
-            <VerticalStackLayout x:Name="SessionStack" Spacing="18" />
-        </ScrollView>
+            <!-- Hidden title label so code-behind can set it -->
+            <Label x:Name="TitleLabel"
+                   Grid.Row="0"
+                   Text="Training Session"
+                   IsVisible="False" />
+
+            <!-- Header line: Week N · ddd dd/MM/yyyy -->
+            <Label x:Name="HeaderWeekDateLabel"
+                   Grid.Row="1"
+                   Text="Week 1 · Mon 18/08/2025"
+                   FontSize="22"
+                   FontAttributes="Bold"
+                   Margin="10,0,10,6" />
+
+            <!-- Week tabs -->
+            <ScrollView Grid.Row="2" Orientation="Horizontal" Margin="10,0,10,6">
+                <HorizontalStackLayout x:Name="WeekTabsLayout" Spacing="8"/>
+            </ScrollView>
+
+            <!-- Content: Days ABOVE session (single vertical scroll) -->
+            <ScrollView Grid.Row="3" Margin="10,0,10,10">
+                <VerticalStackLayout Spacing="10">
+
+                    <!-- Day list panel -->
+                    <Frame x:Name="DatesSection"
+                           Padding="0"
+                           HasShadow="False"
+                           CornerRadius="12"
+                           BackgroundColor="{AppThemeBinding Light=#F2F2F2, Dark=#1F1F1F}">
+                        <VerticalStackLayout x:Name="DaysListLayout" Padding="8" Spacing="2"/>
+                    </Frame>
+
+                    <!-- Main session content -->
+                    <VerticalStackLayout x:Name="SessionStack" Spacing="8"/>
+                </VerticalStackLayout>
+            </ScrollView>
+
+            <!-- Footer spacer (optional) -->
+            <BoxView Grid.Row="4" HeightRequest="0"/>
+        </Grid>
+
+        <!-- LIGHTBOX OVERLAY (images/videos) -->
+        <Grid x:Name="LightboxOverlay"
+              BackgroundColor="#80000000"
+              IsVisible="False"
+              InputTransparent="False">
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer Tapped="OnLightboxBackgroundTapped"/>
+            </Grid.GestureRecognizers>
+
+            <Grid Padding="0"
+                  VerticalOptions="Center"
+                  HorizontalOptions="Center"
+                  WidthRequest="{OnIdiom Phone=360, Tablet=900, Desktop=900}"
+                  Margin="12">
+                <Border BackgroundColor="{AppThemeBinding Light=#000000, Dark=#000000}"
+                        StrokeThickness="0"
+                        Padding="0">
+                    <Border.StrokeShape>
+                        <shapes:RoundRectangle CornerRadius="12"/>
+                    </Border.StrokeShape>
+
+                    <Grid RowDefinitions="Auto,*" ColumnDefinitions="*,Auto" Padding="10">
+                        <!-- Lightbox title -->
+                        <Label x:Name="LightboxTitle"
+                               Grid.Row="0" Grid.Column="0"
+                               Text="Media"
+                               TextColor="White"
+                               FontSize="18"
+                               FontAttributes="Bold"
+                               Margin="0,0,6,8" />
+
+                        <!-- Close button -->
+                        <Button Grid.Row="0" Grid.Column="1"
+                                Text="✕"
+                                BackgroundColor="Transparent"
+                                TextColor="White"
+                                Clicked="OnLightboxCloseClicked" />
+
+                        <!-- Content host (Image or MediaElement injected from code-behind) -->
+                        <ContentView x:Name="LightboxContent"
+                                     Grid.Row="1" Grid.ColumnSpan="2"
+                                     Padding="0" />
+                    </Grid>
+                </Border>
+            </Grid>
+        </Grid>
     </Grid>
 </ContentPage>

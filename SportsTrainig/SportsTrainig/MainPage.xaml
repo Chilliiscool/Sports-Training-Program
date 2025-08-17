@@ -1,15 +1,14 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
-<!--//
+<!--
 Module Name: MainPage 
 Author: Kye Franken 
 Date Created: 19/06/2025
-Date Modified: 13/08/2025
-Description: UI page for the MainPage.-->
-
+Date Modified: 15/08/2025
+Description: UI page for the MainPage.
+-->
 <ContentPage 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:models="clr-namespace:SportsTraining.Models"
     x:Class="SportsTraining.Pages.MainPage"
     Title="Today's Program">
 
@@ -30,15 +29,15 @@ Description: UI page for the MainPage.-->
                FontAttributes="Bold"
                TextColor="{AppThemeBinding Light=Black, Dark=White}" />
 
-        
         <ListView x:Name="ProgramsListView"
                   IsVisible="False"
                   SeparatorVisibility="Default"
                   IsGroupingEnabled="True"
                   GroupDisplayBinding="{Binding Key}"
-                  ItemSelected="ProgramsListView_ItemSelected">
+                  ItemSelected="ProgramsListView_ItemSelected"
+                  IsPullToRefreshEnabled="True"
+                  Refreshing="ProgramsListView_Refreshing">
 
-           
             <ListView.GroupHeaderTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -52,7 +51,6 @@ Description: UI page for the MainPage.-->
                 </DataTemplate>
             </ListView.GroupHeaderTemplate>
 
-            
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>

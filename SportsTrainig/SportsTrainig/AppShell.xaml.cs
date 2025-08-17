@@ -1,69 +1,72 @@
 ﻿// Module Name: AppShell
-// Author: Kye Franken 
+// Author: Kye Franken
 // Date Created: 19 / 06 / 2025
-// Date Modified: 06 / 08 / 2025
-// Description: Defines the main application shell for navigation, registers routes, manages session validation on startup.
+// Date Modified: 15 / 08 / 2025
+// Description: Shell + a flyout toggle ("Show/Hide Day/Date Panel") that pages listen to.
+//              Uses Preferences key ShowDatesPanel (default: false = hidden).
 
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Storage;
 using SportsTraining.Services;
 using System;
-using System.Diagnostics;
-using System.Threading.Tasks;
 
 namespace SportsTraining
 {
     public partial class AppShell : Shell
     {
+        private const string ShowDatesPrefKey = "ShowDatesPanel";
+        private readonly MenuItem _toggleDatesItem;
+
         public AppShell()
         {
             InitializeComponent();
 
-            // Register app navigation routes
+            // Routes
             Routing.RegisterRoute(nameof(Pages.LoginPage), typeof(Pages.LoginPage));
             Routing.RegisterRoute(nameof(Pages.MainPage), typeof(Pages.MainPage));
             Routing.RegisterRoute(nameof(Pages.TrainingPage), typeof(Pages.TrainingPage));
 
-            // Subscribe to navigated event for potential UI updates after navigation
-            this.Navigated += AppShell_Navigated;
+            // Ensure default (hidden) unless user changed it
+            bool show = Preferences.Get(ShowDatesPrefKey, false);
+
+            // Add a Flyout menu toggle
+            _toggleDatesItem = new MenuItem { Text = show ? "Hide Day/Date Panel" : "Show Day/Date Panel" };
+            _toggleDatesItem.Clicked += (_, __) =>
+            {
+                bool current = Preferences.Get(ShowDatesPrefKey, true);
+                bool next = !current;
+                Preferences.Set(ShowDatesPrefKey, next);
+                _toggleDatesItem.Text = next ? "Hide Day/Date Panel" : "Show Day/Date Panel";
+
+                // Broadcast to interested pages (e.g., TrainingPage)
+                MessagingCenter.Send(this, "ShowDatesPanelChanged", next);
+            };
+
+            // Put the toggle at the bottom of the flyout
+            Items.Add(new MenuItem { Text = "-" }); // simple divider
+            Items.Add(_toggleDatesItem);
         }
 
-        // Runs when the shell appears - checks login status and loads sessions
         protected override async void OnAppearing()
         {
             base.OnAppearing();
 
-            // If user not logged in, redirect to LoginPage
             if (!SessionManager.IsLoggedIn)
             {
                 await Shell.Current.GoToAsync("//LoginPage");
                 return;
             }
 
-            string cookie = SessionManager.GetCookie();
-
             try
             {
-                // Attempt to load sessions for today using saved cookie
-                var sessions = await VisualCoachingService.GetSessionsForDate(cookie, DateTime.Today.ToString("yyyy-MM-dd"));
-                Debug.WriteLine($"Loaded {sessions.Count} sessions on startup.");
+                string cookie = SessionManager.GetCookie();
+                _ = await VisualCoachingService.GetSessionsForDate(cookie, DateTime.Today.ToString("yyyy-MM-dd"));
             }
             catch (UnauthorizedAccessException)
             {
-                // Cookie expired or unauthorized - clear and redirect to login
                 SessionManager.ClearCookie();
                 await Shell.Current.GoToAsync("//LoginPage");
             }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"Error loading sessions in AppShell OnAppearing: {ex.Message}");
-            }
-        }
-
-        // Optional event handler after navigation occurs
-        private void AppShell_Navigated(object sender, ShellNavigatedEventArgs e)
-        {
-            // Implement UI updates on navigation if needed (e.g., update title bar)
         }
     }
 }

@@ -1,12 +1,9 @@
 ﻿// Module Name: MainPage
 // Author: Kye Franken 
 // Date Created: 19 / 06 / 2025
-// Date Modified: 15 / 08 / 2025
-// Description: Displays today's workout programs fetched from the Visual Coaching API,
-// groups by ClientGroup then sorts by ClientName, and navigates to the Training tab with a URL.
-// This version keeps ONLY the first URL (lowest `session=`) per (ClientName, Name) and ignores others.
-// Update (15/08): Re-normalizes to the FIRST/AM link immediately before navigation and
-//                 hard-forces session=0 (AM) and i=0 so broken PM links are never used.
+// Date Modified: 16 / 08 / 2025
+// Description: Displays today's programs, grouped. Carries correct week/day and ad=DateStart
+//              into TrainingPage so content + dates line up. Normalises week/ad; keeps API day.
 
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Dispatching;
@@ -19,26 +16,20 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Reflection; // for reflection-based getters
+using System.Reflection;
+using System.Globalization;
 
 namespace SportsTraining.Pages
 {
-    // Helper grouping class for ListView grouping
     public class Grouping<TKey, TItem> : ObservableCollection<TItem>
     {
         public TKey Key { get; }
-        public Grouping(TKey key, IEnumerable<TItem> items) : base(items)
-        {
-            Key = key;
-        }
+        public Grouping(TKey key, IEnumerable<TItem> items) : base(items) => Key = key;
     }
 
     public partial class MainPage : ContentPage
     {
-        // Flat collection (optional to keep around if needed elsewhere)
         public ObservableCollection<ProgramSession> TodayPrograms { get; set; } = new();
-
-        // Grouped collection bound to the ListView
         public ObservableCollection<Grouping<string, ProgramSession>> GroupedPrograms { get; set; } = new();
 
         private bool isLoading = false;
@@ -46,21 +37,15 @@ namespace SportsTraining.Pages
         public MainPage()
         {
             InitializeComponent();
-
-            // Bind the grouped collection
             ProgramsListView.ItemsSource = GroupedPrograms;
         }
 
         protected override async void OnAppearing()
         {
-            Debug.WriteLine("[Debug Test] MainPage OnAppearing called.");
-
             base.OnAppearing();
 
-            // Show company logo if selected company is ETPA
             LogoImage.IsVisible = Preferences.Get("SelectedCompany", "Normal") == "ETPA";
 
-            // Redirect to login if user is not authenticated
             if (!SessionManager.IsLoggedIn)
             {
                 await Shell.Current.GoToAsync("//LoginPage");
@@ -85,11 +70,8 @@ namespace SportsTraining.Pages
             });
 
             string cookie = SessionManager.GetCookie();
-            Debug.WriteLine($"[MainPage] Cookie on OnAppearing: {cookie}");
-
             if (string.IsNullOrEmpty(cookie))
             {
-                Debug.WriteLine("[MainPage] No cookie found. Prompt login.");
                 await DisplayAlert("Login Required", "Please login to view your program.", "OK");
                 ShowProgramList();
                 isLoading = false;
@@ -101,48 +83,61 @@ namespace SportsTraining.Pages
                 string today = DateTime.Today.ToString("yyyy-MM-dd");
                 var sessions = await VisualCoachingService.GetSessionsForDate(cookie, today);
 
-                // Keep only the FIRST url (lowest `session=`) for each (ClientName, Name) pair.
                 var bestByPersonAndName = new Dictionary<string, ProgramSession>(StringComparer.OrdinalIgnoreCase);
 
                 foreach (var brief in sessions)
                 {
-                    // Read properties safely via reflection (no dynamic).
                     string clientName = GetPropString(brief, "ClientName");
                     string name = FirstNonEmpty(
-                                            GetPropString(brief, "Name"),
-                                            GetPropString(brief, "PName"),
-                                            GetPropString(brief, "SessionTitle")   // last-resort to avoid empty keys
-                                        );
+                        GetPropString(brief, "Name"),
+                        GetPropString(brief, "PName"),
+                        GetPropString(brief, "SessionTitle")
+                    );
                     string clientGroup = FirstNonEmpty(GetPropString(brief, "ClientGroup"), "Ungrouped");
                     string sessionTitle = GetPropString(brief, "SessionTitle");
                     string urlRaw = GetPropString(brief, "Url");
 
-                    // If Name is still empty, build a stable fallback key using program identifiers.
+                    // From API (strings so we can normalise)
+                    string dateStartRaw = GetPropString(brief, "DateStart"); // should be yyyy-MM-dd
+                    string weekRaw = GetPropString(brief, "Week");      // could be 0-based
+                    string dayRaw = GetPropString(brief, "Day");       // use as-is
+
+                    if (string.IsNullOrWhiteSpace(clientName) || string.IsNullOrWhiteSpace(urlRaw)) continue;
+
                     if (string.IsNullOrWhiteSpace(name))
                     {
                         var pid = GetPropString(brief, "PId");
-                        var week = GetPropString(brief, "Week");
-                        var day = GetPropString(brief, "Day");
                         var uid = GetPropString(brief, "ClientUserId");
-                        name = FirstNonEmpty(pid, $"{week}-{day}-{uid}", "(unknown)");
+                        name = FirstNonEmpty(pid, $"{weekRaw}-{dayRaw}-{uid}", "(unknown)");
                     }
 
-                    if (string.IsNullOrWhiteSpace(clientName) || string.IsNullOrWhiteSpace(urlRaw))
-                        continue;
+                    // ---- Normalise week/ad BEFORE passing forward; keep API 'day' as-is ----
+                    string weekNorm = weekRaw;
+                    if (int.TryParse(weekRaw, out var w))
+                    {
+                        if (w < 1) w = w + 1; // 0-based -> 1-based
+                        weekNorm = w.ToString(CultureInfo.InvariantCulture);
+                    }
 
-                    // Normalise URL so first index is stable (session=0, i=0, format=Tablet, version=2)
-                    string normalisedUrl = NormalizeUrlToFirstIndex(urlRaw);
+                    string adNorm = NormalizeDateToYMD(dateStartRaw);
+                    string dayNorm = dayRaw; // no rotation — trust API
+
+                    // ---- Build URL and inject normalised week/day/ad ----
+                    string normalized = NormalizeUrlToFirstIndex(urlRaw);
+                    normalized = AppendOrReplaceQuery(normalized, "week", weekNorm);
+                    normalized = AppendOrReplaceQuery(normalized, "day", dayNorm);
+                    string normalizedWithAd = AppendOrReplaceQuery(normalized, "ad", adNorm);
 
                     var candidate = new ProgramSession
                     {
                         SessionTitle = sessionTitle,
-                        Url = normalisedUrl,
+                        Url = normalizedWithAd,
                         ClientName = clientName,
                         ClientGroup = string.IsNullOrWhiteSpace(clientGroup) ? "Ungrouped" : clientGroup
                     };
 
                     string key = $"{clientName}||{name}";
-                    int candidateSession = GetSessionIndexFromUrl(normalisedUrl);
+                    int candidateSession = GetSessionIndexFromUrl(normalized);
 
                     if (!bestByPersonAndName.TryGetValue(key, out var existing))
                     {
@@ -150,29 +145,25 @@ namespace SportsTraining.Pages
                     }
                     else
                     {
-                        // Keep the one with the smaller `session=` (i.e., the FIRST URL, usually AM)
                         int existingSession = GetSessionIndexFromUrl(existing.Url ?? "");
                         if (candidateSession < existingSession)
                             bestByPersonAndName[key] = candidate;
                     }
                 }
 
-                var temp = bestByPersonAndName.Values.ToList();
+                var items = bestByPersonAndName.Values.ToList();
 
-                // Sort items by ClientName within each group, and group by ClientGroup
-                var grouped = temp
+                var grouped = items
                     .GroupBy(p => p.ClientGroup ?? "Ungrouped")
                     .OrderBy(g => g.Key, StringComparer.OrdinalIgnoreCase)
-                    .Select(g =>
-                        new Grouping<string, ProgramSession>(
-                            g.Key,
-                            g.OrderBy(p => p.ClientName ?? "", StringComparer.OrdinalIgnoreCase)
-                        ));
+                    .Select(g => new Grouping<string, ProgramSession>(
+                        g.Key,
+                        g.OrderBy(p => p.ClientName ?? "", StringComparer.OrdinalIgnoreCase)));
 
                 MainThread.BeginInvokeOnMainThread(() =>
                 {
                     TodayPrograms.Clear();
-                    foreach (var item in temp) TodayPrograms.Add(item);
+                    foreach (var it in items) TodayPrograms.Add(it);
 
                     GroupedPrograms.Clear();
                     foreach (var grp in grouped) GroupedPrograms.Add(grp);
@@ -182,21 +173,19 @@ namespace SportsTraining.Pages
             }
             catch (UnauthorizedAccessException)
             {
-                Debug.WriteLine("[MainPage] Session expired, clearing cookie.");
                 await DisplayAlert("Session Expired", "Please log in again.", "OK");
                 SessionManager.ClearCookie();
                 await Shell.Current.GoToAsync("//LoginPage");
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"[MainPage] Error loading sessions: {ex.Message}");
+                Debug.WriteLine($"[MainPage] Error: {ex.Message}");
                 await DisplayAlert("Error", $"Failed to load program: {ex.Message}", "OK");
                 ShowProgramList();
             }
             finally
             {
                 isLoading = false;
-
                 MainThread.BeginInvokeOnMainThread(() =>
                 {
                     LoadingIndicator.IsVisible = false;
@@ -207,21 +196,19 @@ namespace SportsTraining.Pages
             }
         }
 
-        // With the list already deduped to FIRST-URL entries, tapping just opens that URL.
-        // We still normalize again here to be 100% safe.
+        // Tap -> go to TrainingPage with url + anchorDate (from ad=)
         private async void ProgramsListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            if (e.SelectedItem is not ProgramSession selected)
-                return;
-
+            if (e.SelectedItem is not ProgramSession selected) return;
             ProgramsListView.SelectedItem = null;
 
-            // Always normalize immediately before navigating (belt and braces).
-            string finalUrl = NormalizeUrlToFirstIndex(selected.Url ?? "");
-            Debug.WriteLine($"[MainPage] Navigating to TrainingPage with FIRST-URL: {finalUrl}");
+            string withFirst = NormalizeUrlToFirstIndex(selected.Url ?? "");
+            string ad = GetQueryValue(withFirst, "ad");
+            string finalUrl = RemoveQueryKey(withFirst, "ad");
 
             var encodedUrl = Uri.EscapeDataString(finalUrl);
-            await Shell.Current.GoToAsync($"//{nameof(TrainingPage)}?url={encodedUrl}");
+            var encodedAnchor = Uri.EscapeDataString(ad ?? "");
+            await Shell.Current.GoToAsync($"//{nameof(TrainingPage)}?url={encodedUrl}&anchorDate={encodedAnchor}");
         }
 
         private void ShowProgramList()
@@ -238,7 +225,18 @@ namespace SportsTraining.Pages
 
         // ---------- Helpers ----------
 
-        // Parse `session=` from query string; if missing, return int.MaxValue so any explicit session beats it.
+        private static string NormalizeDateToYMD(string input)
+        {
+            if (string.IsNullOrWhiteSpace(input)) return "";
+            if (DateTime.TryParseExact(input, "yyyy-MM-dd", CultureInfo.InvariantCulture,
+                                       DateTimeStyles.None, out var dt))
+                return dt.ToString("yyyy-MM-dd");
+            if (DateTime.TryParse(input, CultureInfo.InvariantCulture,
+                                  DateTimeStyles.AssumeLocal, out dt))
+                return dt.ToString("yyyy-MM-dd");
+            return input; // last resort: pass through
+        }
+
         private static int GetSessionIndexFromUrl(string url)
         {
             if (string.IsNullOrWhiteSpace(url)) return int.MaxValue;
@@ -246,7 +244,7 @@ namespace SportsTraining.Pages
             string query = q >= 0 ? url[(q + 1)..] : "";
             foreach (var part in query.Split('&', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries))
             {
-                int eq = part.IndexOf('=', StringComparison.Ordinal);
+                int eq = part.IndexOf('=');
                 if (eq <= 0) continue;
                 var key = part[..eq];
                 var val = part[(eq + 1)..];
@@ -256,7 +254,6 @@ namespace SportsTraining.Pages
             return int.MaxValue;
         }
 
-        // Reflection-based safe property getters (string/int) so we don't need dynamic
         private static string GetPropString(object obj, string propName)
         {
             if (obj == null || string.IsNullOrWhiteSpace(propName)) return "";
@@ -276,42 +273,73 @@ namespace SportsTraining.Pages
             return "";
         }
 
-        // Force session=0, i=0 and add format/version; rebuild query in a stable, predictable order
         private static string NormalizeUrlToFirstIndex(string raw)
         {
             if (string.IsNullOrWhiteSpace(raw)) return raw;
-
             int qIndex = raw.IndexOf('?');
             string path = qIndex < 0 ? raw : raw[..qIndex];
             string query = qIndex < 0 ? "" : raw[(qIndex + 1)..];
 
-            // parse into a small dictionary
-            var pairs = query.Split('&', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
             var kv = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-            foreach (var p in pairs)
+            foreach (var p in query.Split('&', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries))
             {
                 int eq = p.IndexOf('=');
                 if (eq <= 0) continue;
-                var k = p[..eq];
-                var v = p[(eq + 1)..];
-                kv[k] = v;
+                kv[p[..eq]] = p[(eq + 1)..];
             }
 
-            // **force the AM link**
             kv["session"] = "0";
             kv["i"] = "0";
             if (!kv.ContainsKey("format")) kv["format"] = "Tablet";
             if (!kv.ContainsKey("version")) kv["version"] = "2";
 
-            // rebuild in a stable order
-            string[] order = { "week", "day", "session", "i", "format", "version" };
+            string[] order = { "week", "day", "session", "i", "format", "version", "ad" };
             var keys = kv.Keys
-                         .OrderBy(k => Array.IndexOf(order, k) is int idx && idx >= 0 ? idx : int.MaxValue)
-                         .ThenBy(k => k, StringComparer.OrdinalIgnoreCase)
-                         .ToList();
+                .OrderBy(k => Array.IndexOf(order, k) is int idx && idx >= 0 ? idx : int.MaxValue)
+                .ThenBy(k => k, StringComparer.OrdinalIgnoreCase);
 
-            var rebuilt = string.Join("&", keys.Select(k => $"{k}={kv[k]}"));
+            return $"{path}?{string.Join("&", keys.Select(k => $"{k}={kv[k]}"))}";
+        }
+
+        private static string AppendOrReplaceQuery(string url, string key, string value)
+        {
+            if (string.IsNullOrWhiteSpace(url)) return url;
+            int q = url.IndexOf('?');
+            string path = q < 0 ? url : url[..q];
+            var kv = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+            if (q >= 0)
+            {
+                foreach (var p in url[(q + 1)..].Split('&', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries))
+                {
+                    int eq = p.IndexOf('=');
+                    if (eq <= 0) continue;
+                    kv[p[..eq]] = p[(eq + 1)..];
+                }
+            }
+            if (!string.IsNullOrWhiteSpace(value)) kv[key] = value;
+            var rebuilt = string.Join("&", kv.Select(k => $"{k.Key}={k.Value}"));
             return $"{path}?{rebuilt}";
+        }
+
+        private static string GetQueryValue(string url, string key)
+        {
+            int q = url.IndexOf('?'); if (q < 0) return "";
+            foreach (var p in url[(q + 1)..].Split('&', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries))
+            {
+                int eq = p.IndexOf('=');
+                if (eq <= 0) continue;
+                if (p[..eq].Equals(key, StringComparison.OrdinalIgnoreCase)) return p[(eq + 1)..];
+            }
+            return "";
+        }
+
+        private static string RemoveQueryKey(string url, string key)
+        {
+            int q = url.IndexOf('?'); if (q < 0) return url;
+            string path = url[..q];
+            var parts = url[(q + 1)..].Split('&', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).ToList();
+            parts = parts.Where(p => !(p.StartsWith(key + "=", StringComparison.OrdinalIgnoreCase))).ToList();
+            return parts.Count == 0 ? path : $"{path}?{string.Join("&", parts)}";
         }
     }
 }
