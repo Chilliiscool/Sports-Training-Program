@@ -17,6 +17,7 @@ namespace SportsTraining
         private const string ShowDatesPrefKey = "ShowDatesPanel";
         private readonly MenuItem _toggleDatesItem;
 
+        [Obsolete]
         public AppShell()
         {
             InitializeComponent();

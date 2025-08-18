@@ -3,30 +3,33 @@
     x:Class="SportsTraining.Popups.VideoPopup"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-    BackgroundColor="#000">
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit">
 
-    <Grid Padding="0"
-          RowDefinitions="Auto,*"
-          ColumnDefinitions="*,Auto">
+    <Grid Padding="0" RowDefinitions="Auto,*" BackgroundColor="#000000">
+        <!-- Header -->
+        <Grid Grid.Row="0" Padding="12" ColumnDefinitions="*,Auto" BackgroundColor="#111111">
+            <!-- This must exist because your code uses TitleText -->
+            <Label x:Name="TitleText"
+                   Text="Video"
+                   TextColor="White"
+                   FontSize="18"
+                   FontAttributes="Bold"
+                   VerticalTextAlignment="Center" />
+            <Button Grid.Column="1"
+                    Text="✕"
+                    BackgroundColor="Transparent"
+                    TextColor="White"
+                    FontSize="16"
+                    Clicked="OnCloseClicked" />
+        </Grid>
 
-        <Label x:Name="TitleText"
-               Grid.Row="0" Grid.Column="0"
-               Text="Video" TextColor="White"
-               FontSize="18" FontAttributes="Bold"
-               Margin="10,8,6,8" />
-
-        <Button Grid.Row="0" Grid.Column="1"
-                Text="✕"
-                BackgroundColor="Transparent"
-                TextColor="White"
-                Clicked="OnCloseClicked" />
-
-        <!-- MediaElement from CommunityToolkit.Maui.Media -->
-        <toolkit:MediaElement x:Name="Player"
-                              Grid.Row="1" Grid.ColumnSpan="2"
-                              ShouldAutoPlay="True"
-                              ShouldShowPlaybackControls="True"
-                              Aspect="AspectFit" />
+        <!-- Body -->
+        <Grid Grid.Row="1" Padding="0">
+            <!-- This must be named Player so your code-behind can access it -->
+            <toolkit:MediaElement x:Name="Player"
+                                  ShouldAutoPlay="True"
+                                  ShouldShowPlaybackControls="True"
+                                  Aspect="AspectFit" />
+        </Grid>
     </Grid>
 </toolkit:Popup>

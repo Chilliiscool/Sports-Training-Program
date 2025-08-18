@@ -65,7 +65,15 @@
 
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui" Version="12.2.0" />
-		<PackageReference Include="CommunityToolkit.Maui.MediaElement" Version="6.1.2" />
+		<!-- Media3 bindings (all must match exactly) -->
+		<PackageReference Include="Xamarin.AndroidX.Media3.Common" Version="1.5.1.1" />
+		<PackageReference Include="Xamarin.AndroidX.Media3.ExoPlayer" Version="1.5.1.1" />
+		<PackageReference Include="Xamarin.AndroidX.Media3.UI" Version="1.5.1.1" />
+		<!-- Optional streaming types (safe to include) -->
+		<PackageReference Include="Xamarin.AndroidX.Media3.ExoPlayer.Hls" Version="1.5.1.1" />
+		<PackageReference Include="Xamarin.AndroidX.Media3.ExoPlayer.Dash" Version="1.5.1.1" />
+		<PackageReference Include="Xamarin.AndroidX.Media3.ExoPlayer.Rtsp" Version="1.5.1.1" />
+		<PackageReference Include="Xamarin.AndroidX.Media3.Session" Version="1.5.1.1" />
 		<PackageReference Include="HtmlAgilityPack" Version="1.12.2" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.100" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="9.0.100" />

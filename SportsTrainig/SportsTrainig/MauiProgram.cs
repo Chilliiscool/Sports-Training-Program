@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
-using CommunityToolkit.Maui;                 // base Toolkit
-using static CommunityToolkit.Maui.Views.MediaElement;    // MediaElement
+using CommunityToolkit.Maui;
+using SportsTraining.Controls;
 
 namespace SportsTraining
 {
@@ -12,12 +12,17 @@ namespace SportsTraining
 
             builder
                 .UseMauiApp<App>()
-                .UseMauiCommunityToolkit()                 // base Toolkit
-                .UseMauiCommunityToolkitMediaElement()     // MediaElement renderer
+                .UseMauiCommunityToolkit()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+                })
+                .ConfigureMauiHandlers(handlers =>
+                {
+#if ANDROID
+                    handlers.AddHandler(typeof(VideoPlayerView), typeof(SportsTraining.Platforms.Android.VideoPlayerViewHandler));
+#endif
                 });
 
 #if DEBUG

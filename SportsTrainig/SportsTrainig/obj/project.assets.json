@@ -36,29 +36,6 @@
           }
         }
       },
-      "CommunityToolkit.Maui.MediaElement/6.1.2": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Maui.Controls": "[9.0.90, 10.0.0)",
-          "Xamarin.AndroidX.Media3.Common": "1.5.0",
-          "Xamarin.AndroidX.Media3.ExoPlayer": "1.5.0",
-          "Xamarin.AndroidX.Media3.ExoPlayer.Dash": "1.5.0",
-          "Xamarin.AndroidX.Media3.ExoPlayer.Hls": "1.5.0",
-          "Xamarin.AndroidX.Media3.ExoPlayer.Rtsp": "1.5.0",
-          "Xamarin.AndroidX.Media3.Session": "1.5.0",
-          "Xamarin.AndroidX.Media3.UI": "1.5.0"
-        },
-        "compile": {
-          "lib/net9.0-android35.0/CommunityToolkit.Maui.MediaElement.dll": {
-            "related": ".aar;.xml"
-          }
-        },
-        "runtime": {
-          "lib/net9.0-android35.0/CommunityToolkit.Maui.MediaElement.dll": {
-            "related": ".aar;.xml"
-          }
-        }
-      },
       "GoogleGson/2.13.0.1": {
         "type": "package",
         "dependencies": {
@@ -1639,12 +1616,12 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Loader.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media/1.7.0.8": {
+      "Xamarin.AndroidX.Media/1.7.0.9": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Annotation": "1.9.1.1",
-          "Xamarin.AndroidX.Collection": "1.4.5.1",
-          "Xamarin.AndroidX.Core": "1.15.0.1"
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Collection": "1.4.5.2",
+          "Xamarin.AndroidX.Core": "1.15.0.2"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media.dll": {
@@ -1660,12 +1637,12 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media3.Common/1.5.0": {
+      "Xamarin.AndroidX.Media3.Common/1.5.1.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Annotation": "1.9.1.1",
-          "Xamarin.AndroidX.Annotation.Experimental": "1.4.1.7",
-          "Xamarin.Google.Guava": "33.3.1.1"
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Annotation.Experimental": "1.4.1.8",
+          "Xamarin.Google.Guava": "33.4.0.1"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.Common.dll": {
@@ -1681,11 +1658,11 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media3.Common.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media3.Container/1.5.0": {
+      "Xamarin.AndroidX.Media3.Container/1.5.1.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Annotation": "1.9.1.1",
-          "Xamarin.AndroidX.Media3.Common": "1.5.0"
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Media3.Common": "1.5.1.1"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.Container.dll": {
@@ -1701,11 +1678,11 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media3.Container.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media3.Database/1.5.0": {
+      "Xamarin.AndroidX.Media3.Database/1.5.1.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Annotation": "1.9.1.1",
-          "Xamarin.AndroidX.Media3.Common": "1.5.0"
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Media3.Common": "1.5.1.1"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.Database.dll": {
@@ -1721,13 +1698,13 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media3.Database.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media3.DataSource/1.5.0": {
+      "Xamarin.AndroidX.Media3.DataSource/1.5.1.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Annotation": "1.9.1.1",
-          "Xamarin.AndroidX.ExifInterface": "1.3.7.8",
-          "Xamarin.AndroidX.Media3.Common": "1.5.0",
-          "Xamarin.AndroidX.Media3.Database": "1.5.0"
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.ExifInterface": "1.3.7.9",
+          "Xamarin.AndroidX.Media3.Common": "1.5.1.1",
+          "Xamarin.AndroidX.Media3.Database": "1.5.1.1"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.DataSource.dll": {
@@ -1743,11 +1720,11 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media3.DataSource.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media3.Decoder/1.5.0": {
+      "Xamarin.AndroidX.Media3.Decoder/1.5.1.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Annotation": "1.9.1.1",
-          "Xamarin.AndroidX.Media3.Common": "1.5.0"
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Media3.Common": "1.5.1.1"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.Decoder.dll": {
@@ -1763,19 +1740,19 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media3.Decoder.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media3.ExoPlayer/1.5.0": {
+      "Xamarin.AndroidX.Media3.ExoPlayer/1.5.1.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Annotation": "1.9.1.1",
-          "Xamarin.AndroidX.Collection": "1.4.5.1",
-          "Xamarin.AndroidX.Core": "1.15.0.1",
-          "Xamarin.AndroidX.ExifInterface": "1.3.7.8",
-          "Xamarin.AndroidX.Media3.Common": "1.5.0",
-          "Xamarin.AndroidX.Media3.Container": "1.5.0",
-          "Xamarin.AndroidX.Media3.DataSource": "1.5.0",
-          "Xamarin.AndroidX.Media3.Database": "1.5.0",
-          "Xamarin.AndroidX.Media3.Decoder": "1.5.0",
-          "Xamarin.AndroidX.Media3.Extractor": "1.5.0"
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Collection": "1.4.5.2",
+          "Xamarin.AndroidX.Core": "1.15.0.2",
+          "Xamarin.AndroidX.ExifInterface": "1.3.7.9",
+          "Xamarin.AndroidX.Media3.Common": "1.5.1.1",
+          "Xamarin.AndroidX.Media3.Container": "1.5.1.1",
+          "Xamarin.AndroidX.Media3.DataSource": "1.5.1.1",
+          "Xamarin.AndroidX.Media3.Database": "1.5.1.1",
+          "Xamarin.AndroidX.Media3.Decoder": "1.5.1.1",
+          "Xamarin.AndroidX.Media3.Extractor": "1.5.1.1"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.ExoPlayer.dll": {
@@ -1791,11 +1768,11 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media3.ExoPlayer.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media3.ExoPlayer.Dash/1.5.0": {
+      "Xamarin.AndroidX.Media3.ExoPlayer.Dash/1.5.1.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Annotation": "1.9.1.1",
-          "Xamarin.AndroidX.Media3.ExoPlayer": "1.5.0"
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Media3.ExoPlayer": "1.5.1.1"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.ExoPlayer.Dash.dll": {
@@ -1811,11 +1788,11 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media3.ExoPlayer.Dash.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media3.ExoPlayer.Hls/1.5.0": {
+      "Xamarin.AndroidX.Media3.ExoPlayer.Hls/1.5.1.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Annotation": "1.9.1.1",
-          "Xamarin.AndroidX.Media3.ExoPlayer": "1.5.0"
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Media3.ExoPlayer": "1.5.1.1"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.ExoPlayer.Hls.dll": {
@@ -1831,11 +1808,11 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media3.ExoPlayer.Hls.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media3.ExoPlayer.Rtsp/1.5.0": {
+      "Xamarin.AndroidX.Media3.ExoPlayer.Rtsp/1.5.1.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Annotation": "1.9.1.1",
-          "Xamarin.AndroidX.Media3.ExoPlayer": "1.5.0"
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Media3.ExoPlayer": "1.5.1.1"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.ExoPlayer.Rtsp.dll": {
@@ -1851,13 +1828,13 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media3.ExoPlayer.Rtsp.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media3.Extractor/1.5.0": {
+      "Xamarin.AndroidX.Media3.Extractor/1.5.1.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Annotation": "1.9.1.1",
-          "Xamarin.AndroidX.Media3.Common": "1.5.0",
-          "Xamarin.AndroidX.Media3.Container": "1.5.0",
-          "Xamarin.AndroidX.Media3.Decoder": "1.5.0"
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Media3.Common": "1.5.1.1",
+          "Xamarin.AndroidX.Media3.Container": "1.5.1.1",
+          "Xamarin.AndroidX.Media3.Decoder": "1.5.1.1"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.Extractor.dll": {
@@ -1873,14 +1850,14 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media3.Extractor.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media3.Session/1.5.0": {
+      "Xamarin.AndroidX.Media3.Session/1.5.1.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Collection": "1.4.5.1",
-          "Xamarin.AndroidX.Core": "1.15.0.1",
-          "Xamarin.AndroidX.Media": "1.7.0.8",
-          "Xamarin.AndroidX.Media3.Common": "1.5.0",
-          "Xamarin.AndroidX.Media3.DataSource": "1.5.0"
+          "Xamarin.AndroidX.Collection": "1.4.5.2",
+          "Xamarin.AndroidX.Core": "1.15.0.2",
+          "Xamarin.AndroidX.Media": "1.7.0.9",
+          "Xamarin.AndroidX.Media3.Common": "1.5.1.1",
+          "Xamarin.AndroidX.Media3.DataSource": "1.5.1.1"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.Session.dll": {
@@ -1896,13 +1873,13 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media3.Session.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media3.Ui/1.5.0": {
+      "Xamarin.AndroidX.Media3.Ui/1.5.1.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Annotation": "1.9.1.1",
-          "Xamarin.AndroidX.Media": "1.7.0.8",
-          "Xamarin.AndroidX.Media3.Common": "1.5.0",
-          "Xamarin.AndroidX.RecyclerView": "1.3.2.9"
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Media": "1.7.0.9",
+          "Xamarin.AndroidX.Media3.Common": "1.5.1.1",
+          "Xamarin.AndroidX.RecyclerView": "1.3.2.10"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.Ui.dll": {
@@ -2409,7 +2386,7 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Window.Extensions.Core.Core.targets": {}
         }
       },
-      "Xamarin.CheckerFramework.CheckerQual/3.48.2.1": {
+      "Xamarin.CheckerFramework.CheckerQual/3.48.4.1": {
         "type": "package",
         "compile": {
           "lib/net8.0-android34.0/_._": {}
@@ -2518,15 +2495,15 @@
           }
         }
       },
-      "Xamarin.Google.Guava/33.3.1.1": {
+      "Xamarin.Google.Guava/33.4.0.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.CheckerFramework.CheckerQual": "3.48.2.1",
-          "Xamarin.Google.Code.FindBugs.JSR305": "3.0.2.17",
-          "Xamarin.Google.ErrorProne.Annotations": "2.35.1.1",
-          "Xamarin.Google.Guava.FailureAccess": "1.0.2.9",
+          "Xamarin.CheckerFramework.CheckerQual": "3.48.4.1",
+          "Xamarin.Google.Code.FindBugs.JSR305": "3.0.2.18",
+          "Xamarin.Google.ErrorProne.Annotations": "2.36.0.1",
+          "Xamarin.Google.Guava.FailureAccess": "1.0.2.10",
           "Xamarin.Google.Guava.ListenableFuture": "9999.0.0",
-          "Xamarin.Google.J2Objc.Annotations": "3.0.0.7"
+          "Xamarin.Google.J2Objc.Annotations": "3.0.0.8"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.Google.Guava.dll": {
@@ -2539,7 +2516,7 @@
           }
         }
       },
-      "Xamarin.Google.Guava.FailureAccess/1.0.2.9": {
+      "Xamarin.Google.Guava.FailureAccess/1.0.2.10": {
         "type": "package",
         "compile": {
           "lib/net8.0-android34.0/Xamarin.Google.Guava.FailureAccess.dll": {
@@ -2565,7 +2542,7 @@
           }
         }
       },
-      "Xamarin.Google.J2Objc.Annotations/3.0.0.7": {
+      "Xamarin.Google.J2Objc.Annotations/3.0.0.8": {
         "type": "package",
         "compile": {
           "lib/net8.0-android34.0/_._": {}
@@ -2769,29 +2746,6 @@
           }
         }
       },
-      "CommunityToolkit.Maui.MediaElement/6.1.2": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Maui.Controls": "[9.0.90, 10.0.0)",
-          "Xamarin.AndroidX.Media3.Common": "1.5.0",
-          "Xamarin.AndroidX.Media3.ExoPlayer": "1.5.0",
-          "Xamarin.AndroidX.Media3.ExoPlayer.Dash": "1.5.0",
-          "Xamarin.AndroidX.Media3.ExoPlayer.Hls": "1.5.0",
-          "Xamarin.AndroidX.Media3.ExoPlayer.Rtsp": "1.5.0",
-          "Xamarin.AndroidX.Media3.Session": "1.5.0",
-          "Xamarin.AndroidX.Media3.UI": "1.5.0"
-        },
-        "compile": {
-          "lib/net9.0-android35.0/CommunityToolkit.Maui.MediaElement.dll": {
-            "related": ".aar;.xml"
-          }
-        },
-        "runtime": {
-          "lib/net9.0-android35.0/CommunityToolkit.Maui.MediaElement.dll": {
-            "related": ".aar;.xml"
-          }
-        }
-      },
       "GoogleGson/2.13.0.1": {
         "type": "package",
         "dependencies": {
@@ -4372,12 +4326,12 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Loader.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media/1.7.0.8": {
+      "Xamarin.AndroidX.Media/1.7.0.9": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Annotation": "1.9.1.1",
-          "Xamarin.AndroidX.Collection": "1.4.5.1",
-          "Xamarin.AndroidX.Core": "1.15.0.1"
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Collection": "1.4.5.2",
+          "Xamarin.AndroidX.Core": "1.15.0.2"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media.dll": {
@@ -4393,12 +4347,12 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media3.Common/1.5.0": {
+      "Xamarin.AndroidX.Media3.Common/1.5.1.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Annotation": "1.9.1.1",
-          "Xamarin.AndroidX.Annotation.Experimental": "1.4.1.7",
-          "Xamarin.Google.Guava": "33.3.1.1"
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Annotation.Experimental": "1.4.1.8",
+          "Xamarin.Google.Guava": "33.4.0.1"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.Common.dll": {
@@ -4414,11 +4368,11 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media3.Common.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media3.Container/1.5.0": {
+      "Xamarin.AndroidX.Media3.Container/1.5.1.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Annotation": "1.9.1.1",
-          "Xamarin.AndroidX.Media3.Common": "1.5.0"
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Media3.Common": "1.5.1.1"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.Container.dll": {
@@ -4434,11 +4388,11 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media3.Container.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media3.Database/1.5.0": {
+      "Xamarin.AndroidX.Media3.Database/1.5.1.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Annotation": "1.9.1.1",
-          "Xamarin.AndroidX.Media3.Common": "1.5.0"
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Media3.Common": "1.5.1.1"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.Database.dll": {
@@ -4454,13 +4408,13 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media3.Database.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media3.DataSource/1.5.0": {
+      "Xamarin.AndroidX.Media3.DataSource/1.5.1.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Annotation": "1.9.1.1",
-          "Xamarin.AndroidX.ExifInterface": "1.3.7.8",
-          "Xamarin.AndroidX.Media3.Common": "1.5.0",
-          "Xamarin.AndroidX.Media3.Database": "1.5.0"
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.ExifInterface": "1.3.7.9",
+          "Xamarin.AndroidX.Media3.Common": "1.5.1.1",
+          "Xamarin.AndroidX.Media3.Database": "1.5.1.1"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.DataSource.dll": {
@@ -4476,11 +4430,11 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media3.DataSource.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media3.Decoder/1.5.0": {
+      "Xamarin.AndroidX.Media3.Decoder/1.5.1.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Annotation": "1.9.1.1",
-          "Xamarin.AndroidX.Media3.Common": "1.5.0"
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Media3.Common": "1.5.1.1"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.Decoder.dll": {
@@ -4496,19 +4450,19 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media3.Decoder.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media3.ExoPlayer/1.5.0": {
+      "Xamarin.AndroidX.Media3.ExoPlayer/1.5.1.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Annotation": "1.9.1.1",
-          "Xamarin.AndroidX.Collection": "1.4.5.1",
-          "Xamarin.AndroidX.Core": "1.15.0.1",
-          "Xamarin.AndroidX.ExifInterface": "1.3.7.8",
-          "Xamarin.AndroidX.Media3.Common": "1.5.0",
-          "Xamarin.AndroidX.Media3.Container": "1.5.0",
-          "Xamarin.AndroidX.Media3.DataSource": "1.5.0",
-          "Xamarin.AndroidX.Media3.Database": "1.5.0",
-          "Xamarin.AndroidX.Media3.Decoder": "1.5.0",
-          "Xamarin.AndroidX.Media3.Extractor": "1.5.0"
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Collection": "1.4.5.2",
+          "Xamarin.AndroidX.Core": "1.15.0.2",
+          "Xamarin.AndroidX.ExifInterface": "1.3.7.9",
+          "Xamarin.AndroidX.Media3.Common": "1.5.1.1",
+          "Xamarin.AndroidX.Media3.Container": "1.5.1.1",
+          "Xamarin.AndroidX.Media3.DataSource": "1.5.1.1",
+          "Xamarin.AndroidX.Media3.Database": "1.5.1.1",
+          "Xamarin.AndroidX.Media3.Decoder": "1.5.1.1",
+          "Xamarin.AndroidX.Media3.Extractor": "1.5.1.1"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.ExoPlayer.dll": {
@@ -4524,11 +4478,11 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media3.ExoPlayer.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media3.ExoPlayer.Dash/1.5.0": {
+      "Xamarin.AndroidX.Media3.ExoPlayer.Dash/1.5.1.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Annotation": "1.9.1.1",
-          "Xamarin.AndroidX.Media3.ExoPlayer": "1.5.0"
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Media3.ExoPlayer": "1.5.1.1"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.ExoPlayer.Dash.dll": {
@@ -4544,11 +4498,11 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media3.ExoPlayer.Dash.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media3.ExoPlayer.Hls/1.5.0": {
+      "Xamarin.AndroidX.Media3.ExoPlayer.Hls/1.5.1.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Annotation": "1.9.1.1",
-          "Xamarin.AndroidX.Media3.ExoPlayer": "1.5.0"
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Media3.ExoPlayer": "1.5.1.1"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.ExoPlayer.Hls.dll": {
@@ -4564,11 +4518,11 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media3.ExoPlayer.Hls.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media3.ExoPlayer.Rtsp/1.5.0": {
+      "Xamarin.AndroidX.Media3.ExoPlayer.Rtsp/1.5.1.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Annotation": "1.9.1.1",
-          "Xamarin.AndroidX.Media3.ExoPlayer": "1.5.0"
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Media3.ExoPlayer": "1.5.1.1"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.ExoPlayer.Rtsp.dll": {
@@ -4584,13 +4538,13 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media3.ExoPlayer.Rtsp.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media3.Extractor/1.5.0": {
+      "Xamarin.AndroidX.Media3.Extractor/1.5.1.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Annotation": "1.9.1.1",
-          "Xamarin.AndroidX.Media3.Common": "1.5.0",
-          "Xamarin.AndroidX.Media3.Container": "1.5.0",
-          "Xamarin.AndroidX.Media3.Decoder": "1.5.0"
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Media3.Common": "1.5.1.1",
+          "Xamarin.AndroidX.Media3.Container": "1.5.1.1",
+          "Xamarin.AndroidX.Media3.Decoder": "1.5.1.1"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.Extractor.dll": {
@@ -4606,14 +4560,14 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media3.Extractor.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media3.Session/1.5.0": {
+      "Xamarin.AndroidX.Media3.Session/1.5.1.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Collection": "1.4.5.1",
-          "Xamarin.AndroidX.Core": "1.15.0.1",
-          "Xamarin.AndroidX.Media": "1.7.0.8",
-          "Xamarin.AndroidX.Media3.Common": "1.5.0",
-          "Xamarin.AndroidX.Media3.DataSource": "1.5.0"
+          "Xamarin.AndroidX.Collection": "1.4.5.2",
+          "Xamarin.AndroidX.Core": "1.15.0.2",
+          "Xamarin.AndroidX.Media": "1.7.0.9",
+          "Xamarin.AndroidX.Media3.Common": "1.5.1.1",
+          "Xamarin.AndroidX.Media3.DataSource": "1.5.1.1"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.Session.dll": {
@@ -4629,13 +4583,13 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media3.Session.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media3.Ui/1.5.0": {
+      "Xamarin.AndroidX.Media3.Ui/1.5.1.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Annotation": "1.9.1.1",
-          "Xamarin.AndroidX.Media": "1.7.0.8",
-          "Xamarin.AndroidX.Media3.Common": "1.5.0",
-          "Xamarin.AndroidX.RecyclerView": "1.3.2.9"
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Media": "1.7.0.9",
+          "Xamarin.AndroidX.Media3.Common": "1.5.1.1",
+          "Xamarin.AndroidX.RecyclerView": "1.3.2.10"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.Ui.dll": {
@@ -5142,7 +5096,7 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Window.Extensions.Core.Core.targets": {}
         }
       },
-      "Xamarin.CheckerFramework.CheckerQual/3.48.2.1": {
+      "Xamarin.CheckerFramework.CheckerQual/3.48.4.1": {
         "type": "package",
         "compile": {
           "lib/net8.0-android34.0/_._": {}
@@ -5251,15 +5205,15 @@
           }
         }
       },
-      "Xamarin.Google.Guava/33.3.1.1": {
+      "Xamarin.Google.Guava/33.4.0.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.CheckerFramework.CheckerQual": "3.48.2.1",
-          "Xamarin.Google.Code.FindBugs.JSR305": "3.0.2.17",
-          "Xamarin.Google.ErrorProne.Annotations": "2.35.1.1",
-          "Xamarin.Google.Guava.FailureAccess": "1.0.2.9",
+          "Xamarin.CheckerFramework.CheckerQual": "3.48.4.1",
+          "Xamarin.Google.Code.FindBugs.JSR305": "3.0.2.18",
+          "Xamarin.Google.ErrorProne.Annotations": "2.36.0.1",
+          "Xamarin.Google.Guava.FailureAccess": "1.0.2.10",
           "Xamarin.Google.Guava.ListenableFuture": "9999.0.0",
-          "Xamarin.Google.J2Objc.Annotations": "3.0.0.7"
+          "Xamarin.Google.J2Objc.Annotations": "3.0.0.8"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.Google.Guava.dll": {
@@ -5272,7 +5226,7 @@
           }
         }
       },
-      "Xamarin.Google.Guava.FailureAccess/1.0.2.9": {
+      "Xamarin.Google.Guava.FailureAccess/1.0.2.10": {
         "type": "package",
         "compile": {
           "lib/net8.0-android34.0/Xamarin.Google.Guava.FailureAccess.dll": {
@@ -5298,7 +5252,7 @@
           }
         }
       },
-      "Xamarin.Google.J2Objc.Annotations/3.0.0.7": {
+      "Xamarin.Google.J2Objc.Annotations/3.0.0.8": {
         "type": "package",
         "compile": {
           "lib/net8.0-android34.0/_._": {}
@@ -5502,29 +5456,6 @@
           }
         }
       },
-      "CommunityToolkit.Maui.MediaElement/6.1.2": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Maui.Controls": "[9.0.90, 10.0.0)",
-          "Xamarin.AndroidX.Media3.Common": "1.5.0",
-          "Xamarin.AndroidX.Media3.ExoPlayer": "1.5.0",
-          "Xamarin.AndroidX.Media3.ExoPlayer.Dash": "1.5.0",
-          "Xamarin.AndroidX.Media3.ExoPlayer.Hls": "1.5.0",
-          "Xamarin.AndroidX.Media3.ExoPlayer.Rtsp": "1.5.0",
-          "Xamarin.AndroidX.Media3.Session": "1.5.0",
-          "Xamarin.AndroidX.Media3.UI": "1.5.0"
-        },
-        "compile": {
-          "lib/net9.0-android35.0/CommunityToolkit.Maui.MediaElement.dll": {
-            "related": ".aar;.xml"
-          }
-        },
-        "runtime": {
-          "lib/net9.0-android35.0/CommunityToolkit.Maui.MediaElement.dll": {
-            "related": ".aar;.xml"
-          }
-        }
-      },
       "GoogleGson/2.13.0.1": {
         "type": "package",
         "dependencies": {
@@ -7105,12 +7036,12 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Loader.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media/1.7.0.8": {
+      "Xamarin.AndroidX.Media/1.7.0.9": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Annotation": "1.9.1.1",
-          "Xamarin.AndroidX.Collection": "1.4.5.1",
-          "Xamarin.AndroidX.Core": "1.15.0.1"
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Collection": "1.4.5.2",
+          "Xamarin.AndroidX.Core": "1.15.0.2"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media.dll": {
@@ -7126,12 +7057,12 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media3.Common/1.5.0": {
+      "Xamarin.AndroidX.Media3.Common/1.5.1.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Annotation": "1.9.1.1",
-          "Xamarin.AndroidX.Annotation.Experimental": "1.4.1.7",
-          "Xamarin.Google.Guava": "33.3.1.1"
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Annotation.Experimental": "1.4.1.8",
+          "Xamarin.Google.Guava": "33.4.0.1"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.Common.dll": {
@@ -7147,11 +7078,11 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media3.Common.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media3.Container/1.5.0": {
+      "Xamarin.AndroidX.Media3.Container/1.5.1.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Annotation": "1.9.1.1",
-          "Xamarin.AndroidX.Media3.Common": "1.5.0"
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Media3.Common": "1.5.1.1"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.Container.dll": {
@@ -7167,11 +7098,11 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media3.Container.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media3.Database/1.5.0": {
+      "Xamarin.AndroidX.Media3.Database/1.5.1.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Annotation": "1.9.1.1",
-          "Xamarin.AndroidX.Media3.Common": "1.5.0"
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Media3.Common": "1.5.1.1"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.Database.dll": {
@@ -7187,13 +7118,13 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media3.Database.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media3.DataSource/1.5.0": {
+      "Xamarin.AndroidX.Media3.DataSource/1.5.1.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Annotation": "1.9.1.1",
-          "Xamarin.AndroidX.ExifInterface": "1.3.7.8",
-          "Xamarin.AndroidX.Media3.Common": "1.5.0",
-          "Xamarin.AndroidX.Media3.Database": "1.5.0"
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.ExifInterface": "1.3.7.9",
+          "Xamarin.AndroidX.Media3.Common": "1.5.1.1",
+          "Xamarin.AndroidX.Media3.Database": "1.5.1.1"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.DataSource.dll": {
@@ -7209,11 +7140,11 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media3.DataSource.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media3.Decoder/1.5.0": {
+      "Xamarin.AndroidX.Media3.Decoder/1.5.1.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Annotation": "1.9.1.1",
-          "Xamarin.AndroidX.Media3.Common": "1.5.0"
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Media3.Common": "1.5.1.1"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.Decoder.dll": {
@@ -7229,19 +7160,19 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media3.Decoder.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media3.ExoPlayer/1.5.0": {
+      "Xamarin.AndroidX.Media3.ExoPlayer/1.5.1.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Annotation": "1.9.1.1",
-          "Xamarin.AndroidX.Collection": "1.4.5.1",
-          "Xamarin.AndroidX.Core": "1.15.0.1",
-          "Xamarin.AndroidX.ExifInterface": "1.3.7.8",
-          "Xamarin.AndroidX.Media3.Common": "1.5.0",
-          "Xamarin.AndroidX.Media3.Container": "1.5.0",
-          "Xamarin.AndroidX.Media3.DataSource": "1.5.0",
-          "Xamarin.AndroidX.Media3.Database": "1.5.0",
-          "Xamarin.AndroidX.Media3.Decoder": "1.5.0",
-          "Xamarin.AndroidX.Media3.Extractor": "1.5.0"
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Collection": "1.4.5.2",
+          "Xamarin.AndroidX.Core": "1.15.0.2",
+          "Xamarin.AndroidX.ExifInterface": "1.3.7.9",
+          "Xamarin.AndroidX.Media3.Common": "1.5.1.1",
+          "Xamarin.AndroidX.Media3.Container": "1.5.1.1",
+          "Xamarin.AndroidX.Media3.DataSource": "1.5.1.1",
+          "Xamarin.AndroidX.Media3.Database": "1.5.1.1",
+          "Xamarin.AndroidX.Media3.Decoder": "1.5.1.1",
+          "Xamarin.AndroidX.Media3.Extractor": "1.5.1.1"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.ExoPlayer.dll": {
@@ -7257,11 +7188,11 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media3.ExoPlayer.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media3.ExoPlayer.Dash/1.5.0": {
+      "Xamarin.AndroidX.Media3.ExoPlayer.Dash/1.5.1.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Annotation": "1.9.1.1",
-          "Xamarin.AndroidX.Media3.ExoPlayer": "1.5.0"
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Media3.ExoPlayer": "1.5.1.1"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.ExoPlayer.Dash.dll": {
@@ -7277,11 +7208,11 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media3.ExoPlayer.Dash.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media3.ExoPlayer.Hls/1.5.0": {
+      "Xamarin.AndroidX.Media3.ExoPlayer.Hls/1.5.1.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Annotation": "1.9.1.1",
-          "Xamarin.AndroidX.Media3.ExoPlayer": "1.5.0"
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Media3.ExoPlayer": "1.5.1.1"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.ExoPlayer.Hls.dll": {
@@ -7297,11 +7228,11 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media3.ExoPlayer.Hls.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media3.ExoPlayer.Rtsp/1.5.0": {
+      "Xamarin.AndroidX.Media3.ExoPlayer.Rtsp/1.5.1.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Annotation": "1.9.1.1",
-          "Xamarin.AndroidX.Media3.ExoPlayer": "1.5.0"
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Media3.ExoPlayer": "1.5.1.1"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.ExoPlayer.Rtsp.dll": {
@@ -7317,13 +7248,13 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media3.ExoPlayer.Rtsp.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media3.Extractor/1.5.0": {
+      "Xamarin.AndroidX.Media3.Extractor/1.5.1.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Annotation": "1.9.1.1",
-          "Xamarin.AndroidX.Media3.Common": "1.5.0",
-          "Xamarin.AndroidX.Media3.Container": "1.5.0",
-          "Xamarin.AndroidX.Media3.Decoder": "1.5.0"
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Media3.Common": "1.5.1.1",
+          "Xamarin.AndroidX.Media3.Container": "1.5.1.1",
+          "Xamarin.AndroidX.Media3.Decoder": "1.5.1.1"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.Extractor.dll": {
@@ -7339,14 +7270,14 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media3.Extractor.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media3.Session/1.5.0": {
+      "Xamarin.AndroidX.Media3.Session/1.5.1.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Collection": "1.4.5.1",
-          "Xamarin.AndroidX.Core": "1.15.0.1",
-          "Xamarin.AndroidX.Media": "1.7.0.8",
-          "Xamarin.AndroidX.Media3.Common": "1.5.0",
-          "Xamarin.AndroidX.Media3.DataSource": "1.5.0"
+          "Xamarin.AndroidX.Collection": "1.4.5.2",
+          "Xamarin.AndroidX.Core": "1.15.0.2",
+          "Xamarin.AndroidX.Media": "1.7.0.9",
+          "Xamarin.AndroidX.Media3.Common": "1.5.1.1",
+          "Xamarin.AndroidX.Media3.DataSource": "1.5.1.1"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.Session.dll": {
@@ -7362,13 +7293,13 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media3.Session.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media3.Ui/1.5.0": {
+      "Xamarin.AndroidX.Media3.Ui/1.5.1.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Annotation": "1.9.1.1",
-          "Xamarin.AndroidX.Media": "1.7.0.8",
-          "Xamarin.AndroidX.Media3.Common": "1.5.0",
-          "Xamarin.AndroidX.RecyclerView": "1.3.2.9"
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Media": "1.7.0.9",
+          "Xamarin.AndroidX.Media3.Common": "1.5.1.1",
+          "Xamarin.AndroidX.RecyclerView": "1.3.2.10"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.Ui.dll": {
@@ -7875,7 +7806,7 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Window.Extensions.Core.Core.targets": {}
         }
       },
-      "Xamarin.CheckerFramework.CheckerQual/3.48.2.1": {
+      "Xamarin.CheckerFramework.CheckerQual/3.48.4.1": {
         "type": "package",
         "compile": {
           "lib/net8.0-android34.0/_._": {}
@@ -7984,15 +7915,15 @@
           }
         }
       },
-      "Xamarin.Google.Guava/33.3.1.1": {
+      "Xamarin.Google.Guava/33.4.0.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.CheckerFramework.CheckerQual": "3.48.2.1",
-          "Xamarin.Google.Code.FindBugs.JSR305": "3.0.2.17",
-          "Xamarin.Google.ErrorProne.Annotations": "2.35.1.1",
-          "Xamarin.Google.Guava.FailureAccess": "1.0.2.9",
+          "Xamarin.CheckerFramework.CheckerQual": "3.48.4.1",
+          "Xamarin.Google.Code.FindBugs.JSR305": "3.0.2.18",
+          "Xamarin.Google.ErrorProne.Annotations": "2.36.0.1",
+          "Xamarin.Google.Guava.FailureAccess": "1.0.2.10",
           "Xamarin.Google.Guava.ListenableFuture": "9999.0.0",
-          "Xamarin.Google.J2Objc.Annotations": "3.0.0.7"
+          "Xamarin.Google.J2Objc.Annotations": "3.0.0.8"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.Google.Guava.dll": {
@@ -8005,7 +7936,7 @@
           }
         }
       },
-      "Xamarin.Google.Guava.FailureAccess/1.0.2.9": {
+      "Xamarin.Google.Guava.FailureAccess/1.0.2.10": {
         "type": "package",
         "compile": {
           "lib/net8.0-android34.0/Xamarin.Google.Guava.FailureAccess.dll": {
@@ -8031,7 +7962,7 @@
           }
         }
       },
-      "Xamarin.Google.J2Objc.Annotations/3.0.0.7": {
+      "Xamarin.Google.J2Objc.Annotations/3.0.0.8": {
         "type": "package",
         "compile": {
           "lib/net8.0-android34.0/_._": {}
@@ -8235,29 +8166,6 @@
           }
         }
       },
-      "CommunityToolkit.Maui.MediaElement/6.1.2": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Maui.Controls": "[9.0.90, 10.0.0)",
-          "Xamarin.AndroidX.Media3.Common": "1.5.0",
-          "Xamarin.AndroidX.Media3.ExoPlayer": "1.5.0",
-          "Xamarin.AndroidX.Media3.ExoPlayer.Dash": "1.5.0",
-          "Xamarin.AndroidX.Media3.ExoPlayer.Hls": "1.5.0",
-          "Xamarin.AndroidX.Media3.ExoPlayer.Rtsp": "1.5.0",
-          "Xamarin.AndroidX.Media3.Session": "1.5.0",
-          "Xamarin.AndroidX.Media3.UI": "1.5.0"
-        },
-        "compile": {
-          "lib/net9.0-android35.0/CommunityToolkit.Maui.MediaElement.dll": {
-            "related": ".aar;.xml"
-          }
-        },
-        "runtime": {
-          "lib/net9.0-android35.0/CommunityToolkit.Maui.MediaElement.dll": {
-            "related": ".aar;.xml"
-          }
-        }
-      },
       "GoogleGson/2.13.0.1": {
         "type": "package",
         "dependencies": {
@@ -9838,12 +9746,12 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Loader.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media/1.7.0.8": {
+      "Xamarin.AndroidX.Media/1.7.0.9": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Annotation": "1.9.1.1",
-          "Xamarin.AndroidX.Collection": "1.4.5.1",
-          "Xamarin.AndroidX.Core": "1.15.0.1"
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Collection": "1.4.5.2",
+          "Xamarin.AndroidX.Core": "1.15.0.2"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media.dll": {
@@ -9859,12 +9767,12 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media3.Common/1.5.0": {
+      "Xamarin.AndroidX.Media3.Common/1.5.1.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Annotation": "1.9.1.1",
-          "Xamarin.AndroidX.Annotation.Experimental": "1.4.1.7",
-          "Xamarin.Google.Guava": "33.3.1.1"
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Annotation.Experimental": "1.4.1.8",
+          "Xamarin.Google.Guava": "33.4.0.1"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.Common.dll": {
@@ -9880,11 +9788,11 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media3.Common.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media3.Container/1.5.0": {
+      "Xamarin.AndroidX.Media3.Container/1.5.1.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Annotation": "1.9.1.1",
-          "Xamarin.AndroidX.Media3.Common": "1.5.0"
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Media3.Common": "1.5.1.1"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.Container.dll": {
@@ -9900,11 +9808,11 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media3.Container.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media3.Database/1.5.0": {
+      "Xamarin.AndroidX.Media3.Database/1.5.1.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Annotation": "1.9.1.1",
-          "Xamarin.AndroidX.Media3.Common": "1.5.0"
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Media3.Common": "1.5.1.1"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.Database.dll": {
@@ -9920,13 +9828,13 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media3.Database.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media3.DataSource/1.5.0": {
+      "Xamarin.AndroidX.Media3.DataSource/1.5.1.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Annotation": "1.9.1.1",
-          "Xamarin.AndroidX.ExifInterface": "1.3.7.8",
-          "Xamarin.AndroidX.Media3.Common": "1.5.0",
-          "Xamarin.AndroidX.Media3.Database": "1.5.0"
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.ExifInterface": "1.3.7.9",
+          "Xamarin.AndroidX.Media3.Common": "1.5.1.1",
+          "Xamarin.AndroidX.Media3.Database": "1.5.1.1"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.DataSource.dll": {
@@ -9942,11 +9850,11 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media3.DataSource.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media3.Decoder/1.5.0": {
+      "Xamarin.AndroidX.Media3.Decoder/1.5.1.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Annotation": "1.9.1.1",
-          "Xamarin.AndroidX.Media3.Common": "1.5.0"
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Media3.Common": "1.5.1.1"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.Decoder.dll": {
@@ -9962,19 +9870,19 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media3.Decoder.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media3.ExoPlayer/1.5.0": {
+      "Xamarin.AndroidX.Media3.ExoPlayer/1.5.1.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Annotation": "1.9.1.1",
-          "Xamarin.AndroidX.Collection": "1.4.5.1",
-          "Xamarin.AndroidX.Core": "1.15.0.1",
-          "Xamarin.AndroidX.ExifInterface": "1.3.7.8",
-          "Xamarin.AndroidX.Media3.Common": "1.5.0",
-          "Xamarin.AndroidX.Media3.Container": "1.5.0",
-          "Xamarin.AndroidX.Media3.DataSource": "1.5.0",
-          "Xamarin.AndroidX.Media3.Database": "1.5.0",
-          "Xamarin.AndroidX.Media3.Decoder": "1.5.0",
-          "Xamarin.AndroidX.Media3.Extractor": "1.5.0"
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Collection": "1.4.5.2",
+          "Xamarin.AndroidX.Core": "1.15.0.2",
+          "Xamarin.AndroidX.ExifInterface": "1.3.7.9",
+          "Xamarin.AndroidX.Media3.Common": "1.5.1.1",
+          "Xamarin.AndroidX.Media3.Container": "1.5.1.1",
+          "Xamarin.AndroidX.Media3.DataSource": "1.5.1.1",
+          "Xamarin.AndroidX.Media3.Database": "1.5.1.1",
+          "Xamarin.AndroidX.Media3.Decoder": "1.5.1.1",
+          "Xamarin.AndroidX.Media3.Extractor": "1.5.1.1"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.ExoPlayer.dll": {
@@ -9990,11 +9898,11 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media3.ExoPlayer.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media3.ExoPlayer.Dash/1.5.0": {
+      "Xamarin.AndroidX.Media3.ExoPlayer.Dash/1.5.1.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Annotation": "1.9.1.1",
-          "Xamarin.AndroidX.Media3.ExoPlayer": "1.5.0"
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Media3.ExoPlayer": "1.5.1.1"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.ExoPlayer.Dash.dll": {
@@ -10010,11 +9918,11 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media3.ExoPlayer.Dash.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media3.ExoPlayer.Hls/1.5.0": {
+      "Xamarin.AndroidX.Media3.ExoPlayer.Hls/1.5.1.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Annotation": "1.9.1.1",
-          "Xamarin.AndroidX.Media3.ExoPlayer": "1.5.0"
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Media3.ExoPlayer": "1.5.1.1"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.ExoPlayer.Hls.dll": {
@@ -10030,11 +9938,11 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media3.ExoPlayer.Hls.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media3.ExoPlayer.Rtsp/1.5.0": {
+      "Xamarin.AndroidX.Media3.ExoPlayer.Rtsp/1.5.1.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Annotation": "1.9.1.1",
-          "Xamarin.AndroidX.Media3.ExoPlayer": "1.5.0"
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Media3.ExoPlayer": "1.5.1.1"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.ExoPlayer.Rtsp.dll": {
@@ -10050,13 +9958,13 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media3.ExoPlayer.Rtsp.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media3.Extractor/1.5.0": {
+      "Xamarin.AndroidX.Media3.Extractor/1.5.1.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Annotation": "1.9.1.1",
-          "Xamarin.AndroidX.Media3.Common": "1.5.0",
-          "Xamarin.AndroidX.Media3.Container": "1.5.0",
-          "Xamarin.AndroidX.Media3.Decoder": "1.5.0"
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Media3.Common": "1.5.1.1",
+          "Xamarin.AndroidX.Media3.Container": "1.5.1.1",
+          "Xamarin.AndroidX.Media3.Decoder": "1.5.1.1"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.Extractor.dll": {
@@ -10072,14 +9980,14 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media3.Extractor.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media3.Session/1.5.0": {
+      "Xamarin.AndroidX.Media3.Session/1.5.1.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Collection": "1.4.5.1",
-          "Xamarin.AndroidX.Core": "1.15.0.1",
-          "Xamarin.AndroidX.Media": "1.7.0.8",
-          "Xamarin.AndroidX.Media3.Common": "1.5.0",
-          "Xamarin.AndroidX.Media3.DataSource": "1.5.0"
+          "Xamarin.AndroidX.Collection": "1.4.5.2",
+          "Xamarin.AndroidX.Core": "1.15.0.2",
+          "Xamarin.AndroidX.Media": "1.7.0.9",
+          "Xamarin.AndroidX.Media3.Common": "1.5.1.1",
+          "Xamarin.AndroidX.Media3.DataSource": "1.5.1.1"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.Session.dll": {
@@ -10095,13 +10003,13 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media3.Session.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media3.Ui/1.5.0": {
+      "Xamarin.AndroidX.Media3.Ui/1.5.1.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Annotation": "1.9.1.1",
-          "Xamarin.AndroidX.Media": "1.7.0.8",
-          "Xamarin.AndroidX.Media3.Common": "1.5.0",
-          "Xamarin.AndroidX.RecyclerView": "1.3.2.9"
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Media": "1.7.0.9",
+          "Xamarin.AndroidX.Media3.Common": "1.5.1.1",
+          "Xamarin.AndroidX.RecyclerView": "1.3.2.10"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.Ui.dll": {
@@ -10608,7 +10516,7 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Window.Extensions.Core.Core.targets": {}
         }
       },
-      "Xamarin.CheckerFramework.CheckerQual/3.48.2.1": {
+      "Xamarin.CheckerFramework.CheckerQual/3.48.4.1": {
         "type": "package",
         "compile": {
           "lib/net8.0-android34.0/_._": {}
@@ -10717,15 +10625,15 @@
           }
         }
       },
-      "Xamarin.Google.Guava/33.3.1.1": {
+      "Xamarin.Google.Guava/33.4.0.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.CheckerFramework.CheckerQual": "3.48.2.1",
-          "Xamarin.Google.Code.FindBugs.JSR305": "3.0.2.17",
-          "Xamarin.Google.ErrorProne.Annotations": "2.35.1.1",
-          "Xamarin.Google.Guava.FailureAccess": "1.0.2.9",
+          "Xamarin.CheckerFramework.CheckerQual": "3.48.4.1",
+          "Xamarin.Google.Code.FindBugs.JSR305": "3.0.2.18",
+          "Xamarin.Google.ErrorProne.Annotations": "2.36.0.1",
+          "Xamarin.Google.Guava.FailureAccess": "1.0.2.10",
           "Xamarin.Google.Guava.ListenableFuture": "9999.0.0",
-          "Xamarin.Google.J2Objc.Annotations": "3.0.0.7"
+          "Xamarin.Google.J2Objc.Annotations": "3.0.0.8"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.Google.Guava.dll": {
@@ -10738,7 +10646,7 @@
           }
         }
       },
-      "Xamarin.Google.Guava.FailureAccess/1.0.2.9": {
+      "Xamarin.Google.Guava.FailureAccess/1.0.2.10": {
         "type": "package",
         "compile": {
           "lib/net8.0-android34.0/Xamarin.Google.Guava.FailureAccess.dll": {
@@ -10764,7 +10672,7 @@
           }
         }
       },
-      "Xamarin.Google.J2Objc.Annotations/3.0.0.7": {
+      "Xamarin.Google.J2Objc.Annotations/3.0.0.8": {
         "type": "package",
         "compile": {
           "lib/net8.0-android34.0/_._": {}
@@ -10968,29 +10876,6 @@
           }
         }
       },
-      "CommunityToolkit.Maui.MediaElement/6.1.2": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Maui.Controls": "[9.0.90, 10.0.0)",
-          "Xamarin.AndroidX.Media3.Common": "1.5.0",
-          "Xamarin.AndroidX.Media3.ExoPlayer": "1.5.0",
-          "Xamarin.AndroidX.Media3.ExoPlayer.Dash": "1.5.0",
-          "Xamarin.AndroidX.Media3.ExoPlayer.Hls": "1.5.0",
-          "Xamarin.AndroidX.Media3.ExoPlayer.Rtsp": "1.5.0",
-          "Xamarin.AndroidX.Media3.Session": "1.5.0",
-          "Xamarin.AndroidX.Media3.UI": "1.5.0"
-        },
-        "compile": {
-          "lib/net9.0-android35.0/CommunityToolkit.Maui.MediaElement.dll": {
-            "related": ".aar;.xml"
-          }
-        },
-        "runtime": {
-          "lib/net9.0-android35.0/CommunityToolkit.Maui.MediaElement.dll": {
-            "related": ".aar;.xml"
-          }
-        }
-      },
       "GoogleGson/2.13.0.1": {
         "type": "package",
         "dependencies": {
@@ -12571,12 +12456,12 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Loader.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media/1.7.0.8": {
+      "Xamarin.AndroidX.Media/1.7.0.9": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Annotation": "1.9.1.1",
-          "Xamarin.AndroidX.Collection": "1.4.5.1",
-          "Xamarin.AndroidX.Core": "1.15.0.1"
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Collection": "1.4.5.2",
+          "Xamarin.AndroidX.Core": "1.15.0.2"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media.dll": {
@@ -12592,12 +12477,12 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media3.Common/1.5.0": {
+      "Xamarin.AndroidX.Media3.Common/1.5.1.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Annotation": "1.9.1.1",
-          "Xamarin.AndroidX.Annotation.Experimental": "1.4.1.7",
-          "Xamarin.Google.Guava": "33.3.1.1"
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Annotation.Experimental": "1.4.1.8",
+          "Xamarin.Google.Guava": "33.4.0.1"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.Common.dll": {
@@ -12613,11 +12498,11 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media3.Common.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media3.Container/1.5.0": {
+      "Xamarin.AndroidX.Media3.Container/1.5.1.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Annotation": "1.9.1.1",
-          "Xamarin.AndroidX.Media3.Common": "1.5.0"
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Media3.Common": "1.5.1.1"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.Container.dll": {
@@ -12633,11 +12518,11 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media3.Container.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media3.Database/1.5.0": {
+      "Xamarin.AndroidX.Media3.Database/1.5.1.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Annotation": "1.9.1.1",
-          "Xamarin.AndroidX.Media3.Common": "1.5.0"
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Media3.Common": "1.5.1.1"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.Database.dll": {
@@ -12653,13 +12538,13 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media3.Database.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media3.DataSource/1.5.0": {
+      "Xamarin.AndroidX.Media3.DataSource/1.5.1.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Annotation": "1.9.1.1",
-          "Xamarin.AndroidX.ExifInterface": "1.3.7.8",
-          "Xamarin.AndroidX.Media3.Common": "1.5.0",
-          "Xamarin.AndroidX.Media3.Database": "1.5.0"
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.ExifInterface": "1.3.7.9",
+          "Xamarin.AndroidX.Media3.Common": "1.5.1.1",
+          "Xamarin.AndroidX.Media3.Database": "1.5.1.1"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.DataSource.dll": {
@@ -12675,11 +12560,11 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media3.DataSource.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media3.Decoder/1.5.0": {
+      "Xamarin.AndroidX.Media3.Decoder/1.5.1.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Annotation": "1.9.1.1",
-          "Xamarin.AndroidX.Media3.Common": "1.5.0"
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Media3.Common": "1.5.1.1"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.Decoder.dll": {
@@ -12695,19 +12580,19 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media3.Decoder.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media3.ExoPlayer/1.5.0": {
+      "Xamarin.AndroidX.Media3.ExoPlayer/1.5.1.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Annotation": "1.9.1.1",
-          "Xamarin.AndroidX.Collection": "1.4.5.1",
-          "Xamarin.AndroidX.Core": "1.15.0.1",
-          "Xamarin.AndroidX.ExifInterface": "1.3.7.8",
-          "Xamarin.AndroidX.Media3.Common": "1.5.0",
-          "Xamarin.AndroidX.Media3.Container": "1.5.0",
-          "Xamarin.AndroidX.Media3.DataSource": "1.5.0",
-          "Xamarin.AndroidX.Media3.Database": "1.5.0",
-          "Xamarin.AndroidX.Media3.Decoder": "1.5.0",
-          "Xamarin.AndroidX.Media3.Extractor": "1.5.0"
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Collection": "1.4.5.2",
+          "Xamarin.AndroidX.Core": "1.15.0.2",
+          "Xamarin.AndroidX.ExifInterface": "1.3.7.9",
+          "Xamarin.AndroidX.Media3.Common": "1.5.1.1",
+          "Xamarin.AndroidX.Media3.Container": "1.5.1.1",
+          "Xamarin.AndroidX.Media3.DataSource": "1.5.1.1",
+          "Xamarin.AndroidX.Media3.Database": "1.5.1.1",
+          "Xamarin.AndroidX.Media3.Decoder": "1.5.1.1",
+          "Xamarin.AndroidX.Media3.Extractor": "1.5.1.1"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.ExoPlayer.dll": {
@@ -12723,11 +12608,11 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media3.ExoPlayer.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media3.ExoPlayer.Dash/1.5.0": {
+      "Xamarin.AndroidX.Media3.ExoPlayer.Dash/1.5.1.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Annotation": "1.9.1.1",
-          "Xamarin.AndroidX.Media3.ExoPlayer": "1.5.0"
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Media3.ExoPlayer": "1.5.1.1"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.ExoPlayer.Dash.dll": {
@@ -12743,11 +12628,11 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media3.ExoPlayer.Dash.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media3.ExoPlayer.Hls/1.5.0": {
+      "Xamarin.AndroidX.Media3.ExoPlayer.Hls/1.5.1.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Annotation": "1.9.1.1",
-          "Xamarin.AndroidX.Media3.ExoPlayer": "1.5.0"
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Media3.ExoPlayer": "1.5.1.1"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.ExoPlayer.Hls.dll": {
@@ -12763,11 +12648,11 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media3.ExoPlayer.Hls.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media3.ExoPlayer.Rtsp/1.5.0": {
+      "Xamarin.AndroidX.Media3.ExoPlayer.Rtsp/1.5.1.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Annotation": "1.9.1.1",
-          "Xamarin.AndroidX.Media3.ExoPlayer": "1.5.0"
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Media3.ExoPlayer": "1.5.1.1"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.ExoPlayer.Rtsp.dll": {
@@ -12783,13 +12668,13 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media3.ExoPlayer.Rtsp.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media3.Extractor/1.5.0": {
+      "Xamarin.AndroidX.Media3.Extractor/1.5.1.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Annotation": "1.9.1.1",
-          "Xamarin.AndroidX.Media3.Common": "1.5.0",
-          "Xamarin.AndroidX.Media3.Container": "1.5.0",
-          "Xamarin.AndroidX.Media3.Decoder": "1.5.0"
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Media3.Common": "1.5.1.1",
+          "Xamarin.AndroidX.Media3.Container": "1.5.1.1",
+          "Xamarin.AndroidX.Media3.Decoder": "1.5.1.1"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.Extractor.dll": {
@@ -12805,14 +12690,14 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media3.Extractor.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media3.Session/1.5.0": {
+      "Xamarin.AndroidX.Media3.Session/1.5.1.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Collection": "1.4.5.1",
-          "Xamarin.AndroidX.Core": "1.15.0.1",
-          "Xamarin.AndroidX.Media": "1.7.0.8",
-          "Xamarin.AndroidX.Media3.Common": "1.5.0",
-          "Xamarin.AndroidX.Media3.DataSource": "1.5.0"
+          "Xamarin.AndroidX.Collection": "1.4.5.2",
+          "Xamarin.AndroidX.Core": "1.15.0.2",
+          "Xamarin.AndroidX.Media": "1.7.0.9",
+          "Xamarin.AndroidX.Media3.Common": "1.5.1.1",
+          "Xamarin.AndroidX.Media3.DataSource": "1.5.1.1"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.Session.dll": {
@@ -12828,13 +12713,13 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media3.Session.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media3.Ui/1.5.0": {
+      "Xamarin.AndroidX.Media3.Ui/1.5.1.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Annotation": "1.9.1.1",
-          "Xamarin.AndroidX.Media": "1.7.0.8",
-          "Xamarin.AndroidX.Media3.Common": "1.5.0",
-          "Xamarin.AndroidX.RecyclerView": "1.3.2.9"
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Media": "1.7.0.9",
+          "Xamarin.AndroidX.Media3.Common": "1.5.1.1",
+          "Xamarin.AndroidX.RecyclerView": "1.3.2.10"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.Ui.dll": {
@@ -13341,7 +13226,7 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Window.Extensions.Core.Core.targets": {}
         }
       },
-      "Xamarin.CheckerFramework.CheckerQual/3.48.2.1": {
+      "Xamarin.CheckerFramework.CheckerQual/3.48.4.1": {
         "type": "package",
         "compile": {
           "lib/net8.0-android34.0/_._": {}
@@ -13450,15 +13335,15 @@
           }
         }
       },
-      "Xamarin.Google.Guava/33.3.1.1": {
+      "Xamarin.Google.Guava/33.4.0.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.CheckerFramework.CheckerQual": "3.48.2.1",
-          "Xamarin.Google.Code.FindBugs.JSR305": "3.0.2.17",
-          "Xamarin.Google.ErrorProne.Annotations": "2.35.1.1",
-          "Xamarin.Google.Guava.FailureAccess": "1.0.2.9",
+          "Xamarin.CheckerFramework.CheckerQual": "3.48.4.1",
+          "Xamarin.Google.Code.FindBugs.JSR305": "3.0.2.18",
+          "Xamarin.Google.ErrorProne.Annotations": "2.36.0.1",
+          "Xamarin.Google.Guava.FailureAccess": "1.0.2.10",
           "Xamarin.Google.Guava.ListenableFuture": "9999.0.0",
-          "Xamarin.Google.J2Objc.Annotations": "3.0.0.7"
+          "Xamarin.Google.J2Objc.Annotations": "3.0.0.8"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.Google.Guava.dll": {
@@ -13471,7 +13356,7 @@
           }
         }
       },
-      "Xamarin.Google.Guava.FailureAccess/1.0.2.9": {
+      "Xamarin.Google.Guava.FailureAccess/1.0.2.10": {
         "type": "package",
         "compile": {
           "lib/net8.0-android34.0/Xamarin.Google.Guava.FailureAccess.dll": {
@@ -13497,7 +13382,7 @@
           }
         }
       },
-      "Xamarin.Google.J2Objc.Annotations/3.0.0.7": {
+      "Xamarin.Google.J2Objc.Annotations/3.0.0.8": {
         "type": "package",
         "compile": {
           "lib/net8.0-android34.0/_._": {}
@@ -13701,29 +13586,6 @@
           }
         }
       },
-      "CommunityToolkit.Maui.MediaElement/6.1.2": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Maui.Controls": "[9.0.90, 10.0.0)",
-          "Xamarin.AndroidX.Media3.Common": "1.5.0",
-          "Xamarin.AndroidX.Media3.ExoPlayer": "1.5.0",
-          "Xamarin.AndroidX.Media3.ExoPlayer.Dash": "1.5.0",
-          "Xamarin.AndroidX.Media3.ExoPlayer.Hls": "1.5.0",
-          "Xamarin.AndroidX.Media3.ExoPlayer.Rtsp": "1.5.0",
-          "Xamarin.AndroidX.Media3.Session": "1.5.0",
-          "Xamarin.AndroidX.Media3.UI": "1.5.0"
-        },
-        "compile": {
-          "lib/net9.0-android35.0/CommunityToolkit.Maui.MediaElement.dll": {
-            "related": ".aar;.xml"
-          }
-        },
-        "runtime": {
-          "lib/net9.0-android35.0/CommunityToolkit.Maui.MediaElement.dll": {
-            "related": ".aar;.xml"
-          }
-        }
-      },
       "GoogleGson/2.13.0.1": {
         "type": "package",
         "dependencies": {
@@ -15304,12 +15166,12 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Loader.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media/1.7.0.8": {
+      "Xamarin.AndroidX.Media/1.7.0.9": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Annotation": "1.9.1.1",
-          "Xamarin.AndroidX.Collection": "1.4.5.1",
-          "Xamarin.AndroidX.Core": "1.15.0.1"
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Collection": "1.4.5.2",
+          "Xamarin.AndroidX.Core": "1.15.0.2"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media.dll": {
@@ -15325,12 +15187,12 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media3.Common/1.5.0": {
+      "Xamarin.AndroidX.Media3.Common/1.5.1.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Annotation": "1.9.1.1",
-          "Xamarin.AndroidX.Annotation.Experimental": "1.4.1.7",
-          "Xamarin.Google.Guava": "33.3.1.1"
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Annotation.Experimental": "1.4.1.8",
+          "Xamarin.Google.Guava": "33.4.0.1"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.Common.dll": {
@@ -15346,11 +15208,11 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media3.Common.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media3.Container/1.5.0": {
+      "Xamarin.AndroidX.Media3.Container/1.5.1.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Annotation": "1.9.1.1",
-          "Xamarin.AndroidX.Media3.Common": "1.5.0"
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Media3.Common": "1.5.1.1"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.Container.dll": {
@@ -15366,11 +15228,11 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media3.Container.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media3.Database/1.5.0": {
+      "Xamarin.AndroidX.Media3.Database/1.5.1.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Annotation": "1.9.1.1",
-          "Xamarin.AndroidX.Media3.Common": "1.5.0"
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Media3.Common": "1.5.1.1"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.Database.dll": {
@@ -15386,13 +15248,13 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media3.Database.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media3.DataSource/1.5.0": {
+      "Xamarin.AndroidX.Media3.DataSource/1.5.1.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Annotation": "1.9.1.1",
-          "Xamarin.AndroidX.ExifInterface": "1.3.7.8",
-          "Xamarin.AndroidX.Media3.Common": "1.5.0",
-          "Xamarin.AndroidX.Media3.Database": "1.5.0"
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.ExifInterface": "1.3.7.9",
+          "Xamarin.AndroidX.Media3.Common": "1.5.1.1",
+          "Xamarin.AndroidX.Media3.Database": "1.5.1.1"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.DataSource.dll": {
@@ -15408,11 +15270,11 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media3.DataSource.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media3.Decoder/1.5.0": {
+      "Xamarin.AndroidX.Media3.Decoder/1.5.1.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Annotation": "1.9.1.1",
-          "Xamarin.AndroidX.Media3.Common": "1.5.0"
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Media3.Common": "1.5.1.1"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.Decoder.dll": {
@@ -15428,19 +15290,19 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media3.Decoder.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media3.ExoPlayer/1.5.0": {
+      "Xamarin.AndroidX.Media3.ExoPlayer/1.5.1.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Annotation": "1.9.1.1",
-          "Xamarin.AndroidX.Collection": "1.4.5.1",
-          "Xamarin.AndroidX.Core": "1.15.0.1",
-          "Xamarin.AndroidX.ExifInterface": "1.3.7.8",
-          "Xamarin.AndroidX.Media3.Common": "1.5.0",
-          "Xamarin.AndroidX.Media3.Container": "1.5.0",
-          "Xamarin.AndroidX.Media3.DataSource": "1.5.0",
-          "Xamarin.AndroidX.Media3.Database": "1.5.0",
-          "Xamarin.AndroidX.Media3.Decoder": "1.5.0",
-          "Xamarin.AndroidX.Media3.Extractor": "1.5.0"
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Collection": "1.4.5.2",
+          "Xamarin.AndroidX.Core": "1.15.0.2",
+          "Xamarin.AndroidX.ExifInterface": "1.3.7.9",
+          "Xamarin.AndroidX.Media3.Common": "1.5.1.1",
+          "Xamarin.AndroidX.Media3.Container": "1.5.1.1",
+          "Xamarin.AndroidX.Media3.DataSource": "1.5.1.1",
+          "Xamarin.AndroidX.Media3.Database": "1.5.1.1",
+          "Xamarin.AndroidX.Media3.Decoder": "1.5.1.1",
+          "Xamarin.AndroidX.Media3.Extractor": "1.5.1.1"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.ExoPlayer.dll": {
@@ -15456,11 +15318,11 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media3.ExoPlayer.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media3.ExoPlayer.Dash/1.5.0": {
+      "Xamarin.AndroidX.Media3.ExoPlayer.Dash/1.5.1.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Annotation": "1.9.1.1",
-          "Xamarin.AndroidX.Media3.ExoPlayer": "1.5.0"
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Media3.ExoPlayer": "1.5.1.1"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.ExoPlayer.Dash.dll": {
@@ -15476,11 +15338,11 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media3.ExoPlayer.Dash.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media3.ExoPlayer.Hls/1.5.0": {
+      "Xamarin.AndroidX.Media3.ExoPlayer.Hls/1.5.1.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Annotation": "1.9.1.1",
-          "Xamarin.AndroidX.Media3.ExoPlayer": "1.5.0"
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Media3.ExoPlayer": "1.5.1.1"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.ExoPlayer.Hls.dll": {
@@ -15496,11 +15358,11 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media3.ExoPlayer.Hls.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media3.ExoPlayer.Rtsp/1.5.0": {
+      "Xamarin.AndroidX.Media3.ExoPlayer.Rtsp/1.5.1.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Annotation": "1.9.1.1",
-          "Xamarin.AndroidX.Media3.ExoPlayer": "1.5.0"
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Media3.ExoPlayer": "1.5.1.1"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.ExoPlayer.Rtsp.dll": {
@@ -15516,13 +15378,13 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media3.ExoPlayer.Rtsp.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media3.Extractor/1.5.0": {
+      "Xamarin.AndroidX.Media3.Extractor/1.5.1.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Annotation": "1.9.1.1",
-          "Xamarin.AndroidX.Media3.Common": "1.5.0",
-          "Xamarin.AndroidX.Media3.Container": "1.5.0",
-          "Xamarin.AndroidX.Media3.Decoder": "1.5.0"
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Media3.Common": "1.5.1.1",
+          "Xamarin.AndroidX.Media3.Container": "1.5.1.1",
+          "Xamarin.AndroidX.Media3.Decoder": "1.5.1.1"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.Extractor.dll": {
@@ -15538,14 +15400,14 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media3.Extractor.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media3.Session/1.5.0": {
+      "Xamarin.AndroidX.Media3.Session/1.5.1.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Collection": "1.4.5.1",
-          "Xamarin.AndroidX.Core": "1.15.0.1",
-          "Xamarin.AndroidX.Media": "1.7.0.8",
-          "Xamarin.AndroidX.Media3.Common": "1.5.0",
-          "Xamarin.AndroidX.Media3.DataSource": "1.5.0"
+          "Xamarin.AndroidX.Collection": "1.4.5.2",
+          "Xamarin.AndroidX.Core": "1.15.0.2",
+          "Xamarin.AndroidX.Media": "1.7.0.9",
+          "Xamarin.AndroidX.Media3.Common": "1.5.1.1",
+          "Xamarin.AndroidX.Media3.DataSource": "1.5.1.1"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.Session.dll": {
@@ -15561,13 +15423,13 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media3.Session.targets": {}
         }
       },
-      "Xamarin.AndroidX.Media3.Ui/1.5.0": {
+      "Xamarin.AndroidX.Media3.Ui/1.5.1.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.AndroidX.Annotation": "1.9.1.1",
-          "Xamarin.AndroidX.Media": "1.7.0.8",
-          "Xamarin.AndroidX.Media3.Common": "1.5.0",
-          "Xamarin.AndroidX.RecyclerView": "1.3.2.9"
+          "Xamarin.AndroidX.Annotation": "1.9.1.2",
+          "Xamarin.AndroidX.Media": "1.7.0.9",
+          "Xamarin.AndroidX.Media3.Common": "1.5.1.1",
+          "Xamarin.AndroidX.RecyclerView": "1.3.2.10"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.Ui.dll": {
@@ -16074,7 +15936,7 @@
           "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Window.Extensions.Core.Core.targets": {}
         }
       },
-      "Xamarin.CheckerFramework.CheckerQual/3.48.2.1": {
+      "Xamarin.CheckerFramework.CheckerQual/3.48.4.1": {
         "type": "package",
         "compile": {
           "lib/net8.0-android34.0/_._": {}
@@ -16183,15 +16045,15 @@
           }
         }
       },
-      "Xamarin.Google.Guava/33.3.1.1": {
+      "Xamarin.Google.Guava/33.4.0.1": {
         "type": "package",
         "dependencies": {
-          "Xamarin.CheckerFramework.CheckerQual": "3.48.2.1",
-          "Xamarin.Google.Code.FindBugs.JSR305": "3.0.2.17",
-          "Xamarin.Google.ErrorProne.Annotations": "2.35.1.1",
-          "Xamarin.Google.Guava.FailureAccess": "1.0.2.9",
+          "Xamarin.CheckerFramework.CheckerQual": "3.48.4.1",
+          "Xamarin.Google.Code.FindBugs.JSR305": "3.0.2.18",
+          "Xamarin.Google.ErrorProne.Annotations": "2.36.0.1",
+          "Xamarin.Google.Guava.FailureAccess": "1.0.2.10",
           "Xamarin.Google.Guava.ListenableFuture": "9999.0.0",
-          "Xamarin.Google.J2Objc.Annotations": "3.0.0.7"
+          "Xamarin.Google.J2Objc.Annotations": "3.0.0.8"
         },
         "compile": {
           "lib/net8.0-android34.0/Xamarin.Google.Guava.dll": {
@@ -16204,7 +16066,7 @@
           }
         }
       },
-      "Xamarin.Google.Guava.FailureAccess/1.0.2.9": {
+      "Xamarin.Google.Guava.FailureAccess/1.0.2.10": {
         "type": "package",
         "compile": {
           "lib/net8.0-android34.0/Xamarin.Google.Guava.FailureAccess.dll": {
@@ -16230,7 +16092,7 @@
           }
         }
       },
-      "Xamarin.Google.J2Objc.Annotations/3.0.0.7": {
+      "Xamarin.Google.J2Objc.Annotations/3.0.0.8": {
         "type": "package",
         "compile": {
           "lib/net8.0-android34.0/_._": {}
@@ -16434,22 +16296,6 @@
           }
         }
       },
-      "CommunityToolkit.Maui.MediaElement/6.1.2": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Maui.Controls": "[9.0.90, 10.0.0)"
-        },
-        "compile": {
-          "lib/net9.0-ios18.0/CommunityToolkit.Maui.MediaElement.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net9.0-ios18.0/CommunityToolkit.Maui.MediaElement.dll": {
-            "related": ".xml"
-          }
-        }
-      },
       "HtmlAgilityPack/1.12.2": {
         "type": "package",
         "compile": {
@@ -16894,6 +16740,27 @@
             "related": ".xml"
           }
         }
+      },
+      "Xamarin.AndroidX.Media3.Common/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.ExoPlayer/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.ExoPlayer.Dash/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.ExoPlayer.Hls/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.ExoPlayer.Rtsp/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.Session/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.Ui/1.5.1.1": {
+        "type": "package"
       }
     },
     "net9.0-ios18.5/android-arm64": {
@@ -16931,22 +16798,6 @@
           }
         }
       },
-      "CommunityToolkit.Maui.MediaElement/6.1.2": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Maui.Controls": "[9.0.90, 10.0.0)"
-        },
-        "compile": {
-          "lib/net9.0-ios18.0/CommunityToolkit.Maui.MediaElement.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net9.0-ios18.0/CommunityToolkit.Maui.MediaElement.dll": {
-            "related": ".xml"
-          }
-        }
-      },
       "HtmlAgilityPack/1.12.2": {
         "type": "package",
         "compile": {
@@ -17391,6 +17242,27 @@
             "related": ".xml"
           }
         }
+      },
+      "Xamarin.AndroidX.Media3.Common/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.ExoPlayer/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.ExoPlayer.Dash/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.ExoPlayer.Hls/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.ExoPlayer.Rtsp/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.Session/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.Ui/1.5.1.1": {
+        "type": "package"
       }
     },
     "net9.0-ios18.5/android-x64": {
@@ -17428,22 +17300,6 @@
           }
         }
       },
-      "CommunityToolkit.Maui.MediaElement/6.1.2": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Maui.Controls": "[9.0.90, 10.0.0)"
-        },
-        "compile": {
-          "lib/net9.0-ios18.0/CommunityToolkit.Maui.MediaElement.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net9.0-ios18.0/CommunityToolkit.Maui.MediaElement.dll": {
-            "related": ".xml"
-          }
-        }
-      },
       "HtmlAgilityPack/1.12.2": {
         "type": "package",
         "compile": {
@@ -17888,6 +17744,27 @@
             "related": ".xml"
           }
         }
+      },
+      "Xamarin.AndroidX.Media3.Common/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.ExoPlayer/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.ExoPlayer.Dash/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.ExoPlayer.Hls/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.ExoPlayer.Rtsp/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.Session/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.Ui/1.5.1.1": {
+        "type": "package"
       }
     },
     "net9.0-ios18.5/iossimulator-x64": {
@@ -17925,22 +17802,6 @@
           }
         }
       },
-      "CommunityToolkit.Maui.MediaElement/6.1.2": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Maui.Controls": "[9.0.90, 10.0.0)"
-        },
-        "compile": {
-          "lib/net9.0-ios18.0/CommunityToolkit.Maui.MediaElement.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net9.0-ios18.0/CommunityToolkit.Maui.MediaElement.dll": {
-            "related": ".xml"
-          }
-        }
-      },
       "HtmlAgilityPack/1.12.2": {
         "type": "package",
         "compile": {
@@ -18385,6 +18246,27 @@
             "related": ".xml"
           }
         }
+      },
+      "Xamarin.AndroidX.Media3.Common/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.ExoPlayer/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.ExoPlayer.Dash/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.ExoPlayer.Hls/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.ExoPlayer.Rtsp/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.Session/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.Ui/1.5.1.1": {
+        "type": "package"
       }
     },
     "net9.0-ios18.5/maccatalyst-x64": {
@@ -18422,22 +18304,6 @@
           }
         }
       },
-      "CommunityToolkit.Maui.MediaElement/6.1.2": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Maui.Controls": "[9.0.90, 10.0.0)"
-        },
-        "compile": {
-          "lib/net9.0-ios18.0/CommunityToolkit.Maui.MediaElement.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net9.0-ios18.0/CommunityToolkit.Maui.MediaElement.dll": {
-            "related": ".xml"
-          }
-        }
-      },
       "HtmlAgilityPack/1.12.2": {
         "type": "package",
         "compile": {
@@ -18882,6 +18748,27 @@
             "related": ".xml"
           }
         }
+      },
+      "Xamarin.AndroidX.Media3.Common/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.ExoPlayer/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.ExoPlayer.Dash/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.ExoPlayer.Hls/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.ExoPlayer.Rtsp/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.Session/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.Ui/1.5.1.1": {
+        "type": "package"
       }
     },
     "net9.0-ios18.5/win10-x64": {
@@ -18919,22 +18806,6 @@
           }
         }
       },
-      "CommunityToolkit.Maui.MediaElement/6.1.2": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Maui.Controls": "[9.0.90, 10.0.0)"
-        },
-        "compile": {
-          "lib/net9.0-ios18.0/CommunityToolkit.Maui.MediaElement.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net9.0-ios18.0/CommunityToolkit.Maui.MediaElement.dll": {
-            "related": ".xml"
-          }
-        }
-      },
       "HtmlAgilityPack/1.12.2": {
         "type": "package",
         "compile": {
@@ -19379,6 +19250,27 @@
             "related": ".xml"
           }
         }
+      },
+      "Xamarin.AndroidX.Media3.Common/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.ExoPlayer/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.ExoPlayer.Dash/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.ExoPlayer.Hls/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.ExoPlayer.Rtsp/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.Session/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.Ui/1.5.1.1": {
+        "type": "package"
       }
     },
     "net9.0-maccatalyst18.5": {
@@ -19416,22 +19308,6 @@
           }
         }
       },
-      "CommunityToolkit.Maui.MediaElement/6.1.2": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Maui.Controls": "[9.0.90, 10.0.0)"
-        },
-        "compile": {
-          "lib/net9.0-maccatalyst18.0/CommunityToolkit.Maui.MediaElement.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net9.0-maccatalyst18.0/CommunityToolkit.Maui.MediaElement.dll": {
-            "related": ".xml"
-          }
-        }
-      },
       "HtmlAgilityPack/1.12.2": {
         "type": "package",
         "compile": {
@@ -19876,6 +19752,27 @@
             "related": ".xml"
           }
         }
+      },
+      "Xamarin.AndroidX.Media3.Common/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.ExoPlayer/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.ExoPlayer.Dash/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.ExoPlayer.Hls/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.ExoPlayer.Rtsp/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.Session/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.Ui/1.5.1.1": {
+        "type": "package"
       }
     },
     "net9.0-maccatalyst18.5/android-arm64": {
@@ -19913,22 +19810,6 @@
           }
         }
       },
-      "CommunityToolkit.Maui.MediaElement/6.1.2": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Maui.Controls": "[9.0.90, 10.0.0)"
-        },
-        "compile": {
-          "lib/net9.0-maccatalyst18.0/CommunityToolkit.Maui.MediaElement.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net9.0-maccatalyst18.0/CommunityToolkit.Maui.MediaElement.dll": {
-            "related": ".xml"
-          }
-        }
-      },
       "HtmlAgilityPack/1.12.2": {
         "type": "package",
         "compile": {
@@ -20373,6 +20254,27 @@
             "related": ".xml"
           }
         }
+      },
+      "Xamarin.AndroidX.Media3.Common/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.ExoPlayer/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.ExoPlayer.Dash/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.ExoPlayer.Hls/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.ExoPlayer.Rtsp/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.Session/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.Ui/1.5.1.1": {
+        "type": "package"
       }
     },
     "net9.0-maccatalyst18.5/android-x64": {
@@ -20410,22 +20312,6 @@
           }
         }
       },
-      "CommunityToolkit.Maui.MediaElement/6.1.2": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Maui.Controls": "[9.0.90, 10.0.0)"
-        },
-        "compile": {
-          "lib/net9.0-maccatalyst18.0/CommunityToolkit.Maui.MediaElement.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net9.0-maccatalyst18.0/CommunityToolkit.Maui.MediaElement.dll": {
-            "related": ".xml"
-          }
-        }
-      },
       "HtmlAgilityPack/1.12.2": {
         "type": "package",
         "compile": {
@@ -20870,6 +20756,27 @@
             "related": ".xml"
           }
         }
+      },
+      "Xamarin.AndroidX.Media3.Common/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.ExoPlayer/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.ExoPlayer.Dash/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.ExoPlayer.Hls/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.ExoPlayer.Rtsp/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.Session/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.Ui/1.5.1.1": {
+        "type": "package"
       }
     },
     "net9.0-maccatalyst18.5/iossimulator-x64": {
@@ -20907,22 +20814,6 @@
           }
         }
       },
-      "CommunityToolkit.Maui.MediaElement/6.1.2": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Maui.Controls": "[9.0.90, 10.0.0)"
-        },
-        "compile": {
-          "lib/net9.0-maccatalyst18.0/CommunityToolkit.Maui.MediaElement.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net9.0-maccatalyst18.0/CommunityToolkit.Maui.MediaElement.dll": {
-            "related": ".xml"
-          }
-        }
-      },
       "HtmlAgilityPack/1.12.2": {
         "type": "package",
         "compile": {
@@ -21367,6 +21258,27 @@
             "related": ".xml"
           }
         }
+      },
+      "Xamarin.AndroidX.Media3.Common/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.ExoPlayer/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.ExoPlayer.Dash/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.ExoPlayer.Hls/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.ExoPlayer.Rtsp/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.Session/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.Ui/1.5.1.1": {
+        "type": "package"
       }
     },
     "net9.0-maccatalyst18.5/maccatalyst-x64": {
@@ -21404,22 +21316,6 @@
           }
         }
       },
-      "CommunityToolkit.Maui.MediaElement/6.1.2": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Maui.Controls": "[9.0.90, 10.0.0)"
-        },
-        "compile": {
-          "lib/net9.0-maccatalyst18.0/CommunityToolkit.Maui.MediaElement.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net9.0-maccatalyst18.0/CommunityToolkit.Maui.MediaElement.dll": {
-            "related": ".xml"
-          }
-        }
-      },
       "HtmlAgilityPack/1.12.2": {
         "type": "package",
         "compile": {
@@ -21864,6 +21760,27 @@
             "related": ".xml"
           }
         }
+      },
+      "Xamarin.AndroidX.Media3.Common/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.ExoPlayer/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.ExoPlayer.Dash/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.ExoPlayer.Hls/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.ExoPlayer.Rtsp/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.Session/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.Ui/1.5.1.1": {
+        "type": "package"
       }
     },
     "net9.0-maccatalyst18.5/win10-x64": {
@@ -21901,22 +21818,6 @@
           }
         }
       },
-      "CommunityToolkit.Maui.MediaElement/6.1.2": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Maui.Controls": "[9.0.90, 10.0.0)"
-        },
-        "compile": {
-          "lib/net9.0-maccatalyst18.0/CommunityToolkit.Maui.MediaElement.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net9.0-maccatalyst18.0/CommunityToolkit.Maui.MediaElement.dll": {
-            "related": ".xml"
-          }
-        }
-      },
       "HtmlAgilityPack/1.12.2": {
         "type": "package",
         "compile": {
@@ -22361,6 +22262,27 @@
             "related": ".xml"
           }
         }
+      },
+      "Xamarin.AndroidX.Media3.Common/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.ExoPlayer/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.ExoPlayer.Dash/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.ExoPlayer.Hls/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.ExoPlayer.Rtsp/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.Session/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.Ui/1.5.1.1": {
+        "type": "package"
       }
     },
     "net9.0-windows10.0.19041": {
@@ -22395,22 +22317,6 @@
         },
         "runtime": {
           "lib/net9.0-windows10.0.19041/CommunityToolkit.Maui.Core.dll": {
-            "related": ".xml"
-          }
-        }
-      },
-      "CommunityToolkit.Maui.MediaElement/6.1.2": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Maui.Controls": "[9.0.90, 10.0.0)"
-        },
-        "compile": {
-          "lib/net9.0-windows10.0.19041/CommunityToolkit.Maui.MediaElement.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net9.0-windows10.0.19041/CommunityToolkit.Maui.MediaElement.dll": {
             "related": ".xml"
           }
         }
@@ -23131,6 +23037,27 @@
             "rid": "win"
           }
         }
+      },
+      "Xamarin.AndroidX.Media3.Common/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.ExoPlayer/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.ExoPlayer.Dash/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.ExoPlayer.Hls/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.ExoPlayer.Rtsp/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.Session/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.Ui/1.5.1.1": {
+        "type": "package"
       }
     },
     "net9.0-windows10.0.19041/android-arm64": {
@@ -23169,22 +23096,6 @@
           }
         }
       },
-      "CommunityToolkit.Maui.MediaElement/6.1.2": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Maui.Controls": "[9.0.90, 10.0.0)"
-        },
-        "compile": {
-          "lib/net9.0-windows10.0.19041/CommunityToolkit.Maui.MediaElement.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net9.0-windows10.0.19041/CommunityToolkit.Maui.MediaElement.dll": {
-            "related": ".xml"
-          }
-        }
-      },
       "HtmlAgilityPack/1.12.2": {
         "type": "package",
         "compile": {
@@ -23833,6 +23744,27 @@
         "build": {
           "buildTransitive/net8.0/_._": {}
         }
+      },
+      "Xamarin.AndroidX.Media3.Common/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.ExoPlayer/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.ExoPlayer.Dash/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.ExoPlayer.Hls/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.ExoPlayer.Rtsp/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.Session/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.Ui/1.5.1.1": {
+        "type": "package"
       }
     },
     "net9.0-windows10.0.19041/android-x64": {
@@ -23871,22 +23803,6 @@
           }
         }
       },
-      "CommunityToolkit.Maui.MediaElement/6.1.2": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Maui.Controls": "[9.0.90, 10.0.0)"
-        },
-        "compile": {
-          "lib/net9.0-windows10.0.19041/CommunityToolkit.Maui.MediaElement.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net9.0-windows10.0.19041/CommunityToolkit.Maui.MediaElement.dll": {
-            "related": ".xml"
-          }
-        }
-      },
       "HtmlAgilityPack/1.12.2": {
         "type": "package",
         "compile": {
@@ -24535,6 +24451,27 @@
         "build": {
           "buildTransitive/net8.0/_._": {}
         }
+      },
+      "Xamarin.AndroidX.Media3.Common/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.ExoPlayer/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.ExoPlayer.Dash/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.ExoPlayer.Hls/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.ExoPlayer.Rtsp/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.Session/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.Ui/1.5.1.1": {
+        "type": "package"
       }
     },
     "net9.0-windows10.0.19041/iossimulator-x64": {
@@ -24573,22 +24510,6 @@
           }
         }
       },
-      "CommunityToolkit.Maui.MediaElement/6.1.2": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Maui.Controls": "[9.0.90, 10.0.0)"
-        },
-        "compile": {
-          "lib/net9.0-windows10.0.19041/CommunityToolkit.Maui.MediaElement.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net9.0-windows10.0.19041/CommunityToolkit.Maui.MediaElement.dll": {
-            "related": ".xml"
-          }
-        }
-      },
       "HtmlAgilityPack/1.12.2": {
         "type": "package",
         "compile": {
@@ -25237,6 +25158,27 @@
         "build": {
           "buildTransitive/net8.0/_._": {}
         }
+      },
+      "Xamarin.AndroidX.Media3.Common/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.ExoPlayer/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.ExoPlayer.Dash/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.ExoPlayer.Hls/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.ExoPlayer.Rtsp/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.Session/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.Ui/1.5.1.1": {
+        "type": "package"
       }
     },
     "net9.0-windows10.0.19041/maccatalyst-x64": {
@@ -25275,22 +25217,6 @@
           }
         }
       },
-      "CommunityToolkit.Maui.MediaElement/6.1.2": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Maui.Controls": "[9.0.90, 10.0.0)"
-        },
-        "compile": {
-          "lib/net9.0-windows10.0.19041/CommunityToolkit.Maui.MediaElement.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net9.0-windows10.0.19041/CommunityToolkit.Maui.MediaElement.dll": {
-            "related": ".xml"
-          }
-        }
-      },
       "HtmlAgilityPack/1.12.2": {
         "type": "package",
         "compile": {
@@ -25939,6 +25865,27 @@
         "build": {
           "buildTransitive/net8.0/_._": {}
         }
+      },
+      "Xamarin.AndroidX.Media3.Common/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.ExoPlayer/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.ExoPlayer.Dash/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.ExoPlayer.Hls/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.ExoPlayer.Rtsp/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.Session/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.Ui/1.5.1.1": {
+        "type": "package"
       }
     },
     "net9.0-windows10.0.19041/win10-x64": {
@@ -25973,22 +25920,6 @@
         },
         "runtime": {
           "lib/net9.0-windows10.0.19041/CommunityToolkit.Maui.Core.dll": {
-            "related": ".xml"
-          }
-        }
-      },
-      "CommunityToolkit.Maui.MediaElement/6.1.2": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Maui.Controls": "[9.0.90, 10.0.0)"
-        },
-        "compile": {
-          "lib/net9.0-windows10.0.19041/CommunityToolkit.Maui.MediaElement.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net9.0-windows10.0.19041/CommunityToolkit.Maui.MediaElement.dll": {
             "related": ".xml"
           }
         }
@@ -26651,6 +26582,27 @@
         "build": {
           "buildTransitive/net8.0/_._": {}
         }
+      },
+      "Xamarin.AndroidX.Media3.Common/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.ExoPlayer/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.ExoPlayer.Dash/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.ExoPlayer.Hls/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.ExoPlayer.Rtsp/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.Session/1.5.1.1": {
+        "type": "package"
+      },
+      "Xamarin.AndroidX.Media3.Ui/1.5.1.1": {
+        "type": "package"
       }
     }
   },
@@ -26706,34 +26658,6 @@
         "lib/net9.0-windows10.0.19041/CommunityToolkit.Maui.Core.xml",
         "lib/net9.0/CommunityToolkit.Maui.Core.dll",
         "lib/net9.0/CommunityToolkit.Maui.Core.xml"
-      ]
-    },
-    "CommunityToolkit.Maui.MediaElement/6.1.2": {
-      "sha512": "uGnnItX0BL9HMzNI+EZFdgIJFk/kMLuOkozTjbY/5M23YgCkLEgUTDNpju/KLlMbTpYBxlVXMQfML7ABUSh6bg==",
-      "type": "package",
-      "path": "communitytoolkit.maui.mediaelement/6.1.2",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "ReadMe.txt",
-        "analyzers/dotnet/cs/CommunityToolkit.Maui.MediaElement.Analyzers.CodeFixes.dll",
-        "analyzers/dotnet/cs/CommunityToolkit.Maui.MediaElement.Analyzers.dll",
-        "communitytoolkit.maui.mediaelement.6.1.2.nupkg.sha512",
-        "communitytoolkit.maui.mediaelement.nuspec",
-        "icon.png",
-        "lib/net9.0-android35.0/CommunityToolkit.Maui.MediaElement.aar",
-        "lib/net9.0-android35.0/CommunityToolkit.Maui.MediaElement.dll",
-        "lib/net9.0-android35.0/CommunityToolkit.Maui.MediaElement.xml",
-        "lib/net9.0-ios18.0/CommunityToolkit.Maui.MediaElement.dll",
-        "lib/net9.0-ios18.0/CommunityToolkit.Maui.MediaElement.xml",
-        "lib/net9.0-maccatalyst18.0/CommunityToolkit.Maui.MediaElement.dll",
-        "lib/net9.0-maccatalyst18.0/CommunityToolkit.Maui.MediaElement.xml",
-        "lib/net9.0-tizen10.0/CommunityToolkit.Maui.MediaElement.dll",
-        "lib/net9.0-tizen10.0/CommunityToolkit.Maui.MediaElement.xml",
-        "lib/net9.0-windows10.0.19041/CommunityToolkit.Maui.MediaElement.dll",
-        "lib/net9.0-windows10.0.19041/CommunityToolkit.Maui.MediaElement.xml",
-        "lib/net9.0/CommunityToolkit.Maui.MediaElement.dll",
-        "lib/net9.0/CommunityToolkit.Maui.MediaElement.xml"
       ]
     },
     "GoogleGson/2.13.0.1": {
@@ -30013,15 +29937,17 @@
         "xamarin.androidx.loader.nuspec"
       ]
     },
-    "Xamarin.AndroidX.Media/1.7.0.8": {
-      "sha512": "zmGgExk9h7EjRaUCpK2qUWXKrNt+JwaBSZHek6yW8iQVRHNQoBJ0H6vgJSi2lZ+OOkdrhkiFXKjqSsfD2GHScw==",
+    "Xamarin.AndroidX.Media/1.7.0.9": {
+      "sha512": "1128tUF7uuCKC81LsdZwXRFRXhn702ModdRjSBarjphaORz7o546HM8W1uQw4Y7sjueouAV4dP78fUrz2V584w==",
       "type": "package",
-      "path": "xamarin.androidx.media/1.7.0.8",
+      "path": "xamarin.androidx.media/1.7.0.9",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "LICENSE.md",
         "THIRD-PARTY-NOTICES.txt",
+        "_manifest/spdx_2.2/manifest.spdx.json",
+        "_manifest/spdx_2.2/manifest.spdx.json.sha256",
         "aar/androidx.media.media.aar",
         "build/net8.0-android34.0/Xamarin.AndroidX.Media.targets",
         "buildTransitive/net8.0-android34.0/Xamarin.AndroidX.Media.targets",
@@ -30031,14 +29957,14 @@
         "lib/net8.0-android34.0/Xamarin.AndroidX.Media.xml",
         "proguard/proguard.txt",
         "readme.md",
-        "xamarin.androidx.media.1.7.0.8.nupkg.sha512",
+        "xamarin.androidx.media.1.7.0.9.nupkg.sha512",
         "xamarin.androidx.media.nuspec"
       ]
     },
-    "Xamarin.AndroidX.Media3.Common/1.5.0": {
-      "sha512": "yXoT6XF2Kd8n2PqvxXlpFiaOZIXoFM3LqWk5oTvSiM0ZNwLCiJscHzvx1LqAQTRUpGhDUEitDag3h70Pcz6EPQ==",
+    "Xamarin.AndroidX.Media3.Common/1.5.1.1": {
+      "sha512": "t0zEWPgYyjnTj1aFsCKK3rXa8MK02zuAntkFdIZMy98/ofxfzpUeSFFuAzisacIKfX+EzENgoiwcvwFXYGcw+A==",
       "type": "package",
-      "path": "xamarin.androidx.media3.common/1.5.0",
+      "path": "xamarin.androidx.media3.common/1.5.1.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -30055,14 +29981,14 @@
         "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.Common.xml",
         "proguard/proguard.txt",
         "readme.md",
-        "xamarin.androidx.media3.common.1.5.0.nupkg.sha512",
+        "xamarin.androidx.media3.common.1.5.1.1.nupkg.sha512",
         "xamarin.androidx.media3.common.nuspec"
       ]
     },
-    "Xamarin.AndroidX.Media3.Container/1.5.0": {
-      "sha512": "NjbrKdQziuUgjpsd6lTjm40mW+kjHetPbn2vTWHng6AbGuVtBkoEvXWFNCesMb3lj7Sdd0NkqnjCUQKyXS73GA==",
+    "Xamarin.AndroidX.Media3.Container/1.5.1.1": {
+      "sha512": "dKxgSbaaMKlMFQ5es+jwLMT0W83LN6JLt9k8wfyP4/lqmWRLSleGcSr8+ka1w5gMJ3iX7zmNz0iM+8qqB+7gHQ==",
       "type": "package",
-      "path": "xamarin.androidx.media3.container/1.5.0",
+      "path": "xamarin.androidx.media3.container/1.5.1.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -30078,14 +30004,14 @@
         "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.Container.pdb",
         "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.Container.xml",
         "readme.md",
-        "xamarin.androidx.media3.container.1.5.0.nupkg.sha512",
+        "xamarin.androidx.media3.container.1.5.1.1.nupkg.sha512",
         "xamarin.androidx.media3.container.nuspec"
       ]
     },
-    "Xamarin.AndroidX.Media3.Database/1.5.0": {
-      "sha512": "SINNobAPpwdc9y+IsnfX7NTQarVZRYL17Vctw/oFl2y1/1d57TJVBEOQy7lzdCNpV/Xo1NyMFIwYFuLlm8n60g==",
+    "Xamarin.AndroidX.Media3.Database/1.5.1.1": {
+      "sha512": "qL3yWH9YWRWhJtZj3uYVhLfiWtv5C6+qQipxoqCHIdnG6O5pqfWfjk/md89hxZ5ao25IGTVgVY1QCSphLmQkig==",
       "type": "package",
-      "path": "xamarin.androidx.media3.database/1.5.0",
+      "path": "xamarin.androidx.media3.database/1.5.1.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -30101,14 +30027,14 @@
         "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.Database.pdb",
         "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.Database.xml",
         "readme.md",
-        "xamarin.androidx.media3.database.1.5.0.nupkg.sha512",
+        "xamarin.androidx.media3.database.1.5.1.1.nupkg.sha512",
         "xamarin.androidx.media3.database.nuspec"
       ]
     },
-    "Xamarin.AndroidX.Media3.DataSource/1.5.0": {
-      "sha512": "E0tQ9xCd/Faf2YOxVHbLsBgHSxLEeTiKGS0QDUbkZUHytoa9YawCWN5U97u5bWKGuMOlSXq4K3YKsLuDTrfzWQ==",
+    "Xamarin.AndroidX.Media3.DataSource/1.5.1.1": {
+      "sha512": "Rv8EwG24Om8D7DlZfyO6UJJ//Gdpfye2cEv7/ZUV4sUuJUOx/UHD3dCZ+BCK/M+8JO2cJdZoip4raUHWFzJzsw==",
       "type": "package",
-      "path": "xamarin.androidx.media3.datasource/1.5.0",
+      "path": "xamarin.androidx.media3.datasource/1.5.1.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -30125,14 +30051,14 @@
         "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.DataSource.xml",
         "proguard/proguard.txt",
         "readme.md",
-        "xamarin.androidx.media3.datasource.1.5.0.nupkg.sha512",
+        "xamarin.androidx.media3.datasource.1.5.1.1.nupkg.sha512",
         "xamarin.androidx.media3.datasource.nuspec"
       ]
     },
-    "Xamarin.AndroidX.Media3.Decoder/1.5.0": {
-      "sha512": "35kzzuoas9A8qO3vA8IdJ+f1SEjsca/kINfThifxdu+bNaxv1EafBhvqcGFLlLRb7twJJdc5GoMzA94hCJnOeg==",
+    "Xamarin.AndroidX.Media3.Decoder/1.5.1.1": {
+      "sha512": "9GXTf9aQzvXB90cm7tRlIS2oWO8kmLIX3jJk56NYj1Ew4urOREBOChUiHGeuZBWbutXJogEy1KSCfglFc4XNFA==",
       "type": "package",
-      "path": "xamarin.androidx.media3.decoder/1.5.0",
+      "path": "xamarin.androidx.media3.decoder/1.5.1.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -30148,14 +30074,14 @@
         "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.Decoder.pdb",
         "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.Decoder.xml",
         "readme.md",
-        "xamarin.androidx.media3.decoder.1.5.0.nupkg.sha512",
+        "xamarin.androidx.media3.decoder.1.5.1.1.nupkg.sha512",
         "xamarin.androidx.media3.decoder.nuspec"
       ]
     },
-    "Xamarin.AndroidX.Media3.ExoPlayer/1.5.0": {
-      "sha512": "TuOVMuP9inj4IAfMAU6SDw3sJtSJgbsrbEEY2rJvKfaKOJ3OhZztT0iL4MFbuyHDl1Kf4bBSONkkdOyiZM887g==",
+    "Xamarin.AndroidX.Media3.ExoPlayer/1.5.1.1": {
+      "sha512": "IFmAHAqpHSJfoTBvgTdA2SCOUiBbvtmKqIKFNdqLta87WGK9leF04Ne5i+f5rr8ao9jmMcEGxAt48xohI0rsdg==",
       "type": "package",
-      "path": "xamarin.androidx.media3.exoplayer/1.5.0",
+      "path": "xamarin.androidx.media3.exoplayer/1.5.1.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -30172,14 +30098,14 @@
         "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.ExoPlayer.xml",
         "proguard/proguard.txt",
         "readme.md",
-        "xamarin.androidx.media3.exoplayer.1.5.0.nupkg.sha512",
+        "xamarin.androidx.media3.exoplayer.1.5.1.1.nupkg.sha512",
         "xamarin.androidx.media3.exoplayer.nuspec"
       ]
     },
-    "Xamarin.AndroidX.Media3.ExoPlayer.Dash/1.5.0": {
-      "sha512": "3U4WFqvuxkQiXASaITWbsH7hsizYWYREWwD2jC3xvFGhTv+pVKrp2DyTZ4GpKE9lpoSdaE+URWINs+ugNEEI+w==",
+    "Xamarin.AndroidX.Media3.ExoPlayer.Dash/1.5.1.1": {
+      "sha512": "yWwfGVD0Yjs0kEiCLvuvlIJteEPF+EU0EJLEsnE1IHLJPkdehAGy4TWtG34wqH7S9Df1sBovPUSVKEaXKsv4KA==",
       "type": "package",
-      "path": "xamarin.androidx.media3.exoplayer.dash/1.5.0",
+      "path": "xamarin.androidx.media3.exoplayer.dash/1.5.1.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -30195,14 +30121,14 @@
         "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.ExoPlayer.Dash.pdb",
         "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.ExoPlayer.Dash.xml",
         "readme.md",
-        "xamarin.androidx.media3.exoplayer.dash.1.5.0.nupkg.sha512",
+        "xamarin.androidx.media3.exoplayer.dash.1.5.1.1.nupkg.sha512",
         "xamarin.androidx.media3.exoplayer.dash.nuspec"
       ]
     },
-    "Xamarin.AndroidX.Media3.ExoPlayer.Hls/1.5.0": {
-      "sha512": "+2/lBjOLEPMrd4iq2yb5epSrhYHWq0m75nZBBA6OJltdoALHF9YZL4kRHCBTjc5P94P5/h9ayRBNrxy7ReXWaw==",
+    "Xamarin.AndroidX.Media3.ExoPlayer.Hls/1.5.1.1": {
+      "sha512": "+GuwvGrlpVYYQRgVAuW1fBYVgWfCKiYGJhXZ5FHW+CUAfBchqOsHjcJ9RAVG5/Sa0U51+ttHpmdYsAw9hU3/Sg==",
       "type": "package",
-      "path": "xamarin.androidx.media3.exoplayer.hls/1.5.0",
+      "path": "xamarin.androidx.media3.exoplayer.hls/1.5.1.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -30218,14 +30144,14 @@
         "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.ExoPlayer.Hls.pdb",
         "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.ExoPlayer.Hls.xml",
         "readme.md",
-        "xamarin.androidx.media3.exoplayer.hls.1.5.0.nupkg.sha512",
+        "xamarin.androidx.media3.exoplayer.hls.1.5.1.1.nupkg.sha512",
         "xamarin.androidx.media3.exoplayer.hls.nuspec"
       ]
     },
-    "Xamarin.AndroidX.Media3.ExoPlayer.Rtsp/1.5.0": {
-      "sha512": "QpcnXNXj+Mp2lKllZwJ9f9289UPgaRaYm0OCpD8XsaESqtR303RK2Y9cF0e7R67l3Nz/mgKTdnlOPmi2/B+Q6w==",
+    "Xamarin.AndroidX.Media3.ExoPlayer.Rtsp/1.5.1.1": {
+      "sha512": "u1L6e37jwZh03SC3oPR/4PSO0SdIdmbLf5mnGi+9cOmHvN5b3weag6SKWnnXAqTNorEvvh5kmt9RSdn1F+L7lw==",
       "type": "package",
-      "path": "xamarin.androidx.media3.exoplayer.rtsp/1.5.0",
+      "path": "xamarin.androidx.media3.exoplayer.rtsp/1.5.1.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -30241,14 +30167,14 @@
         "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.ExoPlayer.Rtsp.pdb",
         "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.ExoPlayer.Rtsp.xml",
         "readme.md",
-        "xamarin.androidx.media3.exoplayer.rtsp.1.5.0.nupkg.sha512",
+        "xamarin.androidx.media3.exoplayer.rtsp.1.5.1.1.nupkg.sha512",
         "xamarin.androidx.media3.exoplayer.rtsp.nuspec"
       ]
     },
-    "Xamarin.AndroidX.Media3.Extractor/1.5.0": {
-      "sha512": "XNEBksh+IHCj9qQy8V9YjLXq8zMH5D0T/h1x3sOFicmuTv8AIFa0ob6roo6awC2pFfLDWMcmSF4xlBa0OpwXtQ==",
+    "Xamarin.AndroidX.Media3.Extractor/1.5.1.1": {
+      "sha512": "G1hK0KbaftW9aP5WH7wE/4RDDuayJJkiJrvAn38SmE2MdCSEVfaOVxOAo953KdPFR+sc4UsTFw/3CXlgV57O3Q==",
       "type": "package",
-      "path": "xamarin.androidx.media3.extractor/1.5.0",
+      "path": "xamarin.androidx.media3.extractor/1.5.1.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -30265,14 +30191,14 @@
         "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.Extractor.xml",
         "proguard/proguard.txt",
         "readme.md",
-        "xamarin.androidx.media3.extractor.1.5.0.nupkg.sha512",
+        "xamarin.androidx.media3.extractor.1.5.1.1.nupkg.sha512",
         "xamarin.androidx.media3.extractor.nuspec"
       ]
     },
-    "Xamarin.AndroidX.Media3.Session/1.5.0": {
-      "sha512": "RTc4JoQua5uC7JVBArYHTJMAw8nLczCjLYIsMDUd4kRCZwnGYeyVKX4JrLcHHorgaVHuRitAeaCJd41JxRS7Vw==",
+    "Xamarin.AndroidX.Media3.Session/1.5.1.1": {
+      "sha512": "I5jaOqu4UAQzqF9WMuX0bmf/AT5a28nOLDtCftNRDHCA8oMm8lminZFoRMpeh1NGighXqB6Ve6BEQpuZ1qvqQQ==",
       "type": "package",
-      "path": "xamarin.androidx.media3.session/1.5.0",
+      "path": "xamarin.androidx.media3.session/1.5.1.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -30288,14 +30214,14 @@
         "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.Session.pdb",
         "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.Session.xml",
         "readme.md",
-        "xamarin.androidx.media3.session.1.5.0.nupkg.sha512",
+        "xamarin.androidx.media3.session.1.5.1.1.nupkg.sha512",
         "xamarin.androidx.media3.session.nuspec"
       ]
     },
-    "Xamarin.AndroidX.Media3.Ui/1.5.0": {
-      "sha512": "UKn+G1W211a0D8aG9rxQ4P8eCriEA5qIZ+6Hf3vYlLc3+BFkc9eq7pwQT6+FIBbCGJSKodlbaF60RFR9kANR8g==",
+    "Xamarin.AndroidX.Media3.Ui/1.5.1.1": {
+      "sha512": "BArMVIWvLFkkYwZnOKcilba70/OoLdADROd+G+92AyskXutQp7TpjezbZ7bss7Ta9QVPljSz3UvtxOI5sPjK6A==",
       "type": "package",
-      "path": "xamarin.androidx.media3.ui/1.5.0",
+      "path": "xamarin.androidx.media3.ui/1.5.1.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -30312,7 +30238,7 @@
         "lib/net8.0-android34.0/Xamarin.AndroidX.Media3.Ui.xml",
         "proguard/proguard.txt",
         "readme.md",
-        "xamarin.androidx.media3.ui.1.5.0.nupkg.sha512",
+        "xamarin.androidx.media3.ui.1.5.1.1.nupkg.sha512",
         "xamarin.androidx.media3.ui.nuspec"
       ]
     },
@@ -30789,22 +30715,24 @@
         "xamarin.androidx.window.extensions.core.core.nuspec"
       ]
     },
-    "Xamarin.CheckerFramework.CheckerQual/3.48.2.1": {
-      "sha512": "HpsMA3+u7SM9XJodPVwyC2qa5c8chyteG6uGG95uwTea7JFI0ZsXRgsz9G2pL6vaL+LXV1dlqdx9/n5L5SyGIg==",
+    "Xamarin.CheckerFramework.CheckerQual/3.48.4.1": {
+      "sha512": "H4/5sHTcQf4BPy2UC2j/T6/kLnCFGfTEbcenD0XVxhjxQFk+g0RrytEFibmgZeeRcu+UbwEbCu2UadSuZ4jQhw==",
       "type": "package",
-      "path": "xamarin.checkerframework.checkerqual/3.48.2.1",
+      "path": "xamarin.checkerframework.checkerqual/3.48.4.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "LICENSE.md",
         "THIRD-PARTY-NOTICES.txt",
+        "_manifest/spdx_2.2/manifest.spdx.json",
+        "_manifest/spdx_2.2/manifest.spdx.json.sha256",
         "build/net8.0-android34.0/Xamarin.CheckerFramework.CheckerQual.targets",
         "buildTransitive/net8.0-android34.0/Xamarin.CheckerFramework.CheckerQual.targets",
         "icon.png",
         "jar/checker-qual.jar",
         "lib/net8.0-android34.0/_._",
         "readme.md",
-        "xamarin.checkerframework.checkerqual.3.48.2.1.nupkg.sha512",
+        "xamarin.checkerframework.checkerqual.3.48.4.1.nupkg.sha512",
         "xamarin.checkerframework.checkerqual.nuspec"
       ]
     },
@@ -30906,41 +30834,45 @@
         "xamarin.google.errorprone.typeannotations.nuspec"
       ]
     },
-    "Xamarin.Google.Guava/33.3.1.1": {
-      "sha512": "I4LsO35R72/4kr8v+6K0qoz744EBqUP7ecAXxXtpoozy13NesGlyorV0vhFFTTpyiQkzT2pFDCKIVW6nLcxLWQ==",
+    "Xamarin.Google.Guava/33.4.0.1": {
+      "sha512": "sQP/331s9zkAZtr1mrI5PBVvn4wYSC6CvKZvyoanTnSqujODBnbxLwp6R1YTkxZ7aaxjKE0nt9qju6dSngbA1w==",
       "type": "package",
-      "path": "xamarin.google.guava/33.3.1.1",
+      "path": "xamarin.google.guava/33.4.0.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "LICENSE.md",
         "THIRD-PARTY-NOTICES.txt",
+        "_manifest/spdx_2.2/manifest.spdx.json",
+        "_manifest/spdx_2.2/manifest.spdx.json.sha256",
         "icon.png",
         "lib/net8.0-android34.0/Xamarin.Google.Guava.aar",
         "lib/net8.0-android34.0/Xamarin.Google.Guava.dll",
         "lib/net8.0-android34.0/Xamarin.Google.Guava.pdb",
         "lib/net8.0-android34.0/Xamarin.Google.Guava.xml",
         "readme.md",
-        "xamarin.google.guava.33.3.1.1.nupkg.sha512",
+        "xamarin.google.guava.33.4.0.1.nupkg.sha512",
         "xamarin.google.guava.nuspec"
       ]
     },
-    "Xamarin.Google.Guava.FailureAccess/1.0.2.9": {
-      "sha512": "ZoRDyO8f8W+vEvmokNSDJ7osKw22niyeQQThCXtkJyBmrWlC4ugQ0NhLrGJGJcjYagGd/jUqqaAsbciQ4sH7ag==",
+    "Xamarin.Google.Guava.FailureAccess/1.0.2.10": {
+      "sha512": "1l0hChyVsO34T4XFlMpVPboXSpSRH0tn7ocCsvj6uERFIrbYiEGCdfa2rh94no6pU2JMTnfal8sigTEMg7kiSA==",
       "type": "package",
-      "path": "xamarin.google.guava.failureaccess/1.0.2.9",
+      "path": "xamarin.google.guava.failureaccess/1.0.2.10",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "LICENSE.md",
         "THIRD-PARTY-NOTICES.txt",
+        "_manifest/spdx_2.2/manifest.spdx.json",
+        "_manifest/spdx_2.2/manifest.spdx.json.sha256",
         "icon.png",
         "lib/net8.0-android34.0/Xamarin.Google.Guava.FailureAccess.aar",
         "lib/net8.0-android34.0/Xamarin.Google.Guava.FailureAccess.dll",
         "lib/net8.0-android34.0/Xamarin.Google.Guava.FailureAccess.pdb",
         "lib/net8.0-android34.0/Xamarin.Google.Guava.FailureAccess.xml",
         "readme.md",
-        "xamarin.google.guava.failureaccess.1.0.2.9.nupkg.sha512",
+        "xamarin.google.guava.failureaccess.1.0.2.10.nupkg.sha512",
         "xamarin.google.guava.failureaccess.nuspec"
       ]
     },
@@ -30960,22 +30892,24 @@
         "xamarin.google.guava.listenablefuture.nuspec"
       ]
     },
-    "Xamarin.Google.J2Objc.Annotations/3.0.0.7": {
-      "sha512": "oyL4HxzoSBoLvW+8g4tBwYcX7Oy8W4JOGeEcdMjdvvEzzQu6iJiXGea0h4RUEIo6C67tfXJbyb1Zsria0pkTsQ==",
+    "Xamarin.Google.J2Objc.Annotations/3.0.0.8": {
+      "sha512": "jRhuoM1DmCjXJ4ssEJkxzcFe5lQAXYu78qxjPa+6yhk7EEa6/wKstWrlb5lel8dQIFkwN1KTGkZR7e2/KtXRfw==",
       "type": "package",
-      "path": "xamarin.google.j2objc.annotations/3.0.0.7",
+      "path": "xamarin.google.j2objc.annotations/3.0.0.8",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "LICENSE.md",
         "THIRD-PARTY-NOTICES.txt",
+        "_manifest/spdx_2.2/manifest.spdx.json",
+        "_manifest/spdx_2.2/manifest.spdx.json.sha256",
         "build/net8.0-android34.0/Xamarin.Google.J2Objc.Annotations.targets",
         "buildTransitive/net8.0-android34.0/Xamarin.Google.J2Objc.Annotations.targets",
         "icon.png",
         "jar/j2objc-annotations.jar",
         "lib/net8.0-android34.0/_._",
         "readme.md",
-        "xamarin.google.j2objc.annotations.3.0.0.7.nupkg.sha512",
+        "xamarin.google.j2objc.annotations.3.0.0.8.nupkg.sha512",
         "xamarin.google.j2objc.annotations.nuspec"
       ]
     },
@@ -31173,63 +31107,87 @@
   "projectFileDependencyGroups": {
     "net9.0-android35.0": [
       "CommunityToolkit.Maui >= 12.2.0",
-      "CommunityToolkit.Maui.MediaElement >= 6.1.2",
       "HtmlAgilityPack >= 1.12.2",
       "Microsoft.Extensions.Logging.Debug >= 9.0.8",
       "Microsoft.Maui.Controls >= 9.0.100",
       "Microsoft.Maui.Controls.Compatibility >= 9.0.100",
       "Microsoft.NET.ILLink.Tasks >= 9.0.8",
-      "Newtonsoft.Json >= 13.0.3"
+      "Newtonsoft.Json >= 13.0.3",
+      "Xamarin.AndroidX.Media3.Common >= 1.5.1.1",
+      "Xamarin.AndroidX.Media3.ExoPlayer >= 1.5.1.1",
+      "Xamarin.AndroidX.Media3.ExoPlayer.Dash >= 1.5.1.1",
+      "Xamarin.AndroidX.Media3.ExoPlayer.Hls >= 1.5.1.1",
+      "Xamarin.AndroidX.Media3.ExoPlayer.Rtsp >= 1.5.1.1",
+      "Xamarin.AndroidX.Media3.Session >= 1.5.1.1",
+      "Xamarin.AndroidX.Media3.UI >= 1.5.1.1"
     ],
     "net9.0-ios18.5": [
       "CommunityToolkit.Maui >= 12.2.0",
-      "CommunityToolkit.Maui.MediaElement >= 6.1.2",
       "HtmlAgilityPack >= 1.12.2",
       "Microsoft.Extensions.Logging.Debug >= 9.0.8",
       "Microsoft.Maui.Controls >= 9.0.100",
       "Microsoft.Maui.Controls.Compatibility >= 9.0.100",
       "Microsoft.NET.ILLink.Tasks >= 9.0.8",
-      "Newtonsoft.Json >= 13.0.3"
+      "Newtonsoft.Json >= 13.0.3",
+      "Xamarin.AndroidX.Media3.Common >= 1.5.1.1",
+      "Xamarin.AndroidX.Media3.ExoPlayer >= 1.5.1.1",
+      "Xamarin.AndroidX.Media3.ExoPlayer.Dash >= 1.5.1.1",
+      "Xamarin.AndroidX.Media3.ExoPlayer.Hls >= 1.5.1.1",
+      "Xamarin.AndroidX.Media3.ExoPlayer.Rtsp >= 1.5.1.1",
+      "Xamarin.AndroidX.Media3.Session >= 1.5.1.1",
+      "Xamarin.AndroidX.Media3.UI >= 1.5.1.1"
     ],
     "net9.0-maccatalyst18.5": [
       "CommunityToolkit.Maui >= 12.2.0",
-      "CommunityToolkit.Maui.MediaElement >= 6.1.2",
       "HtmlAgilityPack >= 1.12.2",
       "Microsoft.Extensions.Logging.Debug >= 9.0.8",
       "Microsoft.Maui.Controls >= 9.0.100",
       "Microsoft.Maui.Controls.Compatibility >= 9.0.100",
       "Microsoft.NET.ILLink.Tasks >= 9.0.8",
-      "Newtonsoft.Json >= 13.0.3"
+      "Newtonsoft.Json >= 13.0.3",
+      "Xamarin.AndroidX.Media3.Common >= 1.5.1.1",
+      "Xamarin.AndroidX.Media3.ExoPlayer >= 1.5.1.1",
+      "Xamarin.AndroidX.Media3.ExoPlayer.Dash >= 1.5.1.1",
+      "Xamarin.AndroidX.Media3.ExoPlayer.Hls >= 1.5.1.1",
+      "Xamarin.AndroidX.Media3.ExoPlayer.Rtsp >= 1.5.1.1",
+      "Xamarin.AndroidX.Media3.Session >= 1.5.1.1",
+      "Xamarin.AndroidX.Media3.UI >= 1.5.1.1"
     ],
     "net9.0-windows10.0.19041": [
       "CommunityToolkit.Maui >= 12.2.0",
-      "CommunityToolkit.Maui.MediaElement >= 6.1.2",
       "HtmlAgilityPack >= 1.12.2",
       "Microsoft.Extensions.Logging.Debug >= 9.0.8",
       "Microsoft.Maui.Controls >= 9.0.100",
       "Microsoft.Maui.Controls.Compatibility >= 9.0.100",
-      "Newtonsoft.Json >= 13.0.3"
+      "Newtonsoft.Json >= 13.0.3",
+      "Xamarin.AndroidX.Media3.Common >= 1.5.1.1",
+      "Xamarin.AndroidX.Media3.ExoPlayer >= 1.5.1.1",
+      "Xamarin.AndroidX.Media3.ExoPlayer.Dash >= 1.5.1.1",
+      "Xamarin.AndroidX.Media3.ExoPlayer.Hls >= 1.5.1.1",
+      "Xamarin.AndroidX.Media3.ExoPlayer.Rtsp >= 1.5.1.1",
+      "Xamarin.AndroidX.Media3.Session >= 1.5.1.1",
+      "Xamarin.AndroidX.Media3.UI >= 1.5.1.1"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\frank\\.nuget\\packages\\": {},
+    "C:\\Users\\kye.franken\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\SportsProgram\\Sports-Training-Program\\SportsTrainig\\SportsTrainig\\SportsTraining.csproj",
+      "projectUniqueName": "C:\\SportsTraining\\SportsTraining\\Sports-Training-Program\\SportsTrainig\\SportsTrainig\\SportsTraining.csproj",
       "projectName": "SportsTraining",
-      "projectPath": "C:\\SportsProgram\\Sports-Training-Program\\SportsTrainig\\SportsTrainig\\SportsTraining.csproj",
-      "packagesPath": "C:\\Users\\frank\\.nuget\\packages\\",
-      "outputPath": "C:\\SportsProgram\\Sports-Training-Program\\SportsTrainig\\SportsTrainig\\obj\\",
+      "projectPath": "C:\\SportsTraining\\SportsTraining\\Sports-Training-Program\\SportsTrainig\\SportsTrainig\\SportsTraining.csproj",
+      "packagesPath": "C:\\Users\\kye.franken\\.nuget\\packages\\",
+      "outputPath": "C:\\SportsTraining\\SportsTraining\\Sports-Training-Program\\SportsTrainig\\SportsTrainig\\obj\\",
       "projectStyle": "PackageReference",
       "crossTargeting": true,
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\frank\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\kye.franken\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -31282,10 +31240,6 @@
             "target": "Package",
             "version": "[12.2.0, )"
           },
-          "CommunityToolkit.Maui.MediaElement": {
-            "target": "Package",
-            "version": "[6.1.2, )"
-          },
           "HtmlAgilityPack": {
             "target": "Package",
             "version": "[1.12.2, )"
@@ -31311,6 +31265,34 @@
           "Newtonsoft.Json": {
             "target": "Package",
             "version": "[13.0.3, )"
+          },
+          "Xamarin.AndroidX.Media3.Common": {
+            "target": "Package",
+            "version": "[1.5.1.1, )"
+          },
+          "Xamarin.AndroidX.Media3.ExoPlayer": {
+            "target": "Package",
+            "version": "[1.5.1.1, )"
+          },
+          "Xamarin.AndroidX.Media3.ExoPlayer.Dash": {
+            "target": "Package",
+            "version": "[1.5.1.1, )"
+          },
+          "Xamarin.AndroidX.Media3.ExoPlayer.Hls": {
+            "target": "Package",
+            "version": "[1.5.1.1, )"
+          },
+          "Xamarin.AndroidX.Media3.ExoPlayer.Rtsp": {
+            "target": "Package",
+            "version": "[1.5.1.1, )"
+          },
+          "Xamarin.AndroidX.Media3.Session": {
+            "target": "Package",
+            "version": "[1.5.1.1, )"
+          },
+          "Xamarin.AndroidX.Media3.UI": {
+            "target": "Package",
+            "version": "[1.5.1.1, )"
           }
         },
         "imports": [
@@ -31341,10 +31323,6 @@
             "target": "Package",
             "version": "[12.2.0, )"
           },
-          "CommunityToolkit.Maui.MediaElement": {
-            "target": "Package",
-            "version": "[6.1.2, )"
-          },
           "HtmlAgilityPack": {
             "target": "Package",
             "version": "[1.12.2, )"
@@ -31370,6 +31348,34 @@
           "Newtonsoft.Json": {
             "target": "Package",
             "version": "[13.0.3, )"
+          },
+          "Xamarin.AndroidX.Media3.Common": {
+            "target": "Package",
+            "version": "[1.5.1.1, )"
+          },
+          "Xamarin.AndroidX.Media3.ExoPlayer": {
+            "target": "Package",
+            "version": "[1.5.1.1, )"
+          },
+          "Xamarin.AndroidX.Media3.ExoPlayer.Dash": {
+            "target": "Package",
+            "version": "[1.5.1.1, )"
+          },
+          "Xamarin.AndroidX.Media3.ExoPlayer.Hls": {
+            "target": "Package",
+            "version": "[1.5.1.1, )"
+          },
+          "Xamarin.AndroidX.Media3.ExoPlayer.Rtsp": {
+            "target": "Package",
+            "version": "[1.5.1.1, )"
+          },
+          "Xamarin.AndroidX.Media3.Session": {
+            "target": "Package",
+            "version": "[1.5.1.1, )"
+          },
+          "Xamarin.AndroidX.Media3.UI": {
+            "target": "Package",
+            "version": "[1.5.1.1, )"
           }
         },
         "imports": [
@@ -31400,10 +31406,6 @@
             "target": "Package",
             "version": "[12.2.0, )"
           },
-          "CommunityToolkit.Maui.MediaElement": {
-            "target": "Package",
-            "version": "[6.1.2, )"
-          },
           "HtmlAgilityPack": {
             "target": "Package",
             "version": "[1.12.2, )"
@@ -31429,6 +31431,34 @@
           "Newtonsoft.Json": {
             "target": "Package",
             "version": "[13.0.3, )"
+          },
+          "Xamarin.AndroidX.Media3.Common": {
+            "target": "Package",
+            "version": "[1.5.1.1, )"
+          },
+          "Xamarin.AndroidX.Media3.ExoPlayer": {
+            "target": "Package",
+            "version": "[1.5.1.1, )"
+          },
+          "Xamarin.AndroidX.Media3.ExoPlayer.Dash": {
+            "target": "Package",
+            "version": "[1.5.1.1, )"
+          },
+          "Xamarin.AndroidX.Media3.ExoPlayer.Hls": {
+            "target": "Package",
+            "version": "[1.5.1.1, )"
+          },
+          "Xamarin.AndroidX.Media3.ExoPlayer.Rtsp": {
+            "target": "Package",
+            "version": "[1.5.1.1, )"
+          },
+          "Xamarin.AndroidX.Media3.Session": {
+            "target": "Package",
+            "version": "[1.5.1.1, )"
+          },
+          "Xamarin.AndroidX.Media3.UI": {
+            "target": "Package",
+            "version": "[1.5.1.1, )"
           }
         },
         "imports": [
@@ -31460,10 +31490,6 @@
             "target": "Package",
             "version": "[12.2.0, )"
           },
-          "CommunityToolkit.Maui.MediaElement": {
-            "target": "Package",
-            "version": "[6.1.2, )"
-          },
           "HtmlAgilityPack": {
             "target": "Package",
             "version": "[1.12.2, )"
@@ -31483,6 +31509,34 @@
           "Newtonsoft.Json": {
             "target": "Package",
             "version": "[13.0.3, )"
+          },
+          "Xamarin.AndroidX.Media3.Common": {
+            "target": "Package",
+            "version": "[1.5.1.1, )"
+          },
+          "Xamarin.AndroidX.Media3.ExoPlayer": {
+            "target": "Package",
+            "version": "[1.5.1.1, )"
+          },
+          "Xamarin.AndroidX.Media3.ExoPlayer.Dash": {
+            "target": "Package",
+            "version": "[1.5.1.1, )"
+          },
+          "Xamarin.AndroidX.Media3.ExoPlayer.Hls": {
+            "target": "Package",
+            "version": "[1.5.1.1, )"
+          },
+          "Xamarin.AndroidX.Media3.ExoPlayer.Rtsp": {
+            "target": "Package",
+            "version": "[1.5.1.1, )"
+          },
+          "Xamarin.AndroidX.Media3.Session": {
+            "target": "Package",
+            "version": "[1.5.1.1, )"
+          },
+          "Xamarin.AndroidX.Media3.UI": {
+            "target": "Package",
+            "version": "[1.5.1.1, )"
           }
         },
         "imports": [
@@ -31530,5 +31584,1141 @@
         "#import": []
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.Session 1.5.1.1 is not compatible with net9.0-ios18.5 (.NETCoreApp,Version=v9.0). Package Xamarin.AndroidX.Media3.Session 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.Session",
+      "targetGraphs": [
+        "net9.0-ios18.5"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.ExoPlayer.Hls 1.5.1.1 is not compatible with net9.0-ios18.5 (.NETCoreApp,Version=v9.0). Package Xamarin.AndroidX.Media3.ExoPlayer.Hls 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.ExoPlayer.Hls",
+      "targetGraphs": [
+        "net9.0-ios18.5"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.Ui 1.5.1.1 is not compatible with net9.0-ios18.5 (.NETCoreApp,Version=v9.0). Package Xamarin.AndroidX.Media3.Ui 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.Ui",
+      "targetGraphs": [
+        "net9.0-ios18.5"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.Common 1.5.1.1 is not compatible with net9.0-ios18.5 (.NETCoreApp,Version=v9.0). Package Xamarin.AndroidX.Media3.Common 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.Common",
+      "targetGraphs": [
+        "net9.0-ios18.5"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.ExoPlayer.Rtsp 1.5.1.1 is not compatible with net9.0-ios18.5 (.NETCoreApp,Version=v9.0). Package Xamarin.AndroidX.Media3.ExoPlayer.Rtsp 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.ExoPlayer.Rtsp",
+      "targetGraphs": [
+        "net9.0-ios18.5"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.ExoPlayer.Dash 1.5.1.1 is not compatible with net9.0-ios18.5 (.NETCoreApp,Version=v9.0). Package Xamarin.AndroidX.Media3.ExoPlayer.Dash 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.ExoPlayer.Dash",
+      "targetGraphs": [
+        "net9.0-ios18.5"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.ExoPlayer 1.5.1.1 is not compatible with net9.0-ios18.5 (.NETCoreApp,Version=v9.0). Package Xamarin.AndroidX.Media3.ExoPlayer 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.ExoPlayer",
+      "targetGraphs": [
+        "net9.0-ios18.5"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.Session 1.5.1.1 is not compatible with net9.0-maccatalyst18.5 (.NETCoreApp,Version=v9.0). Package Xamarin.AndroidX.Media3.Session 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.Session",
+      "targetGraphs": [
+        "net9.0-maccatalyst18.5"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.ExoPlayer.Hls 1.5.1.1 is not compatible with net9.0-maccatalyst18.5 (.NETCoreApp,Version=v9.0). Package Xamarin.AndroidX.Media3.ExoPlayer.Hls 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.ExoPlayer.Hls",
+      "targetGraphs": [
+        "net9.0-maccatalyst18.5"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.Ui 1.5.1.1 is not compatible with net9.0-maccatalyst18.5 (.NETCoreApp,Version=v9.0). Package Xamarin.AndroidX.Media3.Ui 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.Ui",
+      "targetGraphs": [
+        "net9.0-maccatalyst18.5"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.Common 1.5.1.1 is not compatible with net9.0-maccatalyst18.5 (.NETCoreApp,Version=v9.0). Package Xamarin.AndroidX.Media3.Common 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.Common",
+      "targetGraphs": [
+        "net9.0-maccatalyst18.5"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.ExoPlayer.Rtsp 1.5.1.1 is not compatible with net9.0-maccatalyst18.5 (.NETCoreApp,Version=v9.0). Package Xamarin.AndroidX.Media3.ExoPlayer.Rtsp 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.ExoPlayer.Rtsp",
+      "targetGraphs": [
+        "net9.0-maccatalyst18.5"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.ExoPlayer.Dash 1.5.1.1 is not compatible with net9.0-maccatalyst18.5 (.NETCoreApp,Version=v9.0). Package Xamarin.AndroidX.Media3.ExoPlayer.Dash 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.ExoPlayer.Dash",
+      "targetGraphs": [
+        "net9.0-maccatalyst18.5"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.ExoPlayer 1.5.1.1 is not compatible with net9.0-maccatalyst18.5 (.NETCoreApp,Version=v9.0). Package Xamarin.AndroidX.Media3.ExoPlayer 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.ExoPlayer",
+      "targetGraphs": [
+        "net9.0-maccatalyst18.5"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.Session 1.5.1.1 is not compatible with net9.0-windows10.0.19041 (.NETCoreApp,Version=v9.0). Package Xamarin.AndroidX.Media3.Session 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.Session",
+      "targetGraphs": [
+        "net9.0-windows10.0.19041"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.ExoPlayer.Hls 1.5.1.1 is not compatible with net9.0-windows10.0.19041 (.NETCoreApp,Version=v9.0). Package Xamarin.AndroidX.Media3.ExoPlayer.Hls 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.ExoPlayer.Hls",
+      "targetGraphs": [
+        "net9.0-windows10.0.19041"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.Ui 1.5.1.1 is not compatible with net9.0-windows10.0.19041 (.NETCoreApp,Version=v9.0). Package Xamarin.AndroidX.Media3.Ui 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.Ui",
+      "targetGraphs": [
+        "net9.0-windows10.0.19041"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.Common 1.5.1.1 is not compatible with net9.0-windows10.0.19041 (.NETCoreApp,Version=v9.0). Package Xamarin.AndroidX.Media3.Common 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.Common",
+      "targetGraphs": [
+        "net9.0-windows10.0.19041"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.ExoPlayer.Rtsp 1.5.1.1 is not compatible with net9.0-windows10.0.19041 (.NETCoreApp,Version=v9.0). Package Xamarin.AndroidX.Media3.ExoPlayer.Rtsp 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.ExoPlayer.Rtsp",
+      "targetGraphs": [
+        "net9.0-windows10.0.19041"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.ExoPlayer.Dash 1.5.1.1 is not compatible with net9.0-windows10.0.19041 (.NETCoreApp,Version=v9.0). Package Xamarin.AndroidX.Media3.ExoPlayer.Dash 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.ExoPlayer.Dash",
+      "targetGraphs": [
+        "net9.0-windows10.0.19041"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.ExoPlayer 1.5.1.1 is not compatible with net9.0-windows10.0.19041 (.NETCoreApp,Version=v9.0). Package Xamarin.AndroidX.Media3.ExoPlayer 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.ExoPlayer",
+      "targetGraphs": [
+        "net9.0-windows10.0.19041"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.Session 1.5.1.1 is not compatible with net9.0-ios18.5 (.NETCoreApp,Version=v9.0) / android-arm64. Package Xamarin.AndroidX.Media3.Session 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.Session",
+      "targetGraphs": [
+        "net9.0-ios18.5/android-arm64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.ExoPlayer.Hls 1.5.1.1 is not compatible with net9.0-ios18.5 (.NETCoreApp,Version=v9.0) / android-arm64. Package Xamarin.AndroidX.Media3.ExoPlayer.Hls 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.ExoPlayer.Hls",
+      "targetGraphs": [
+        "net9.0-ios18.5/android-arm64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.Ui 1.5.1.1 is not compatible with net9.0-ios18.5 (.NETCoreApp,Version=v9.0) / android-arm64. Package Xamarin.AndroidX.Media3.Ui 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.Ui",
+      "targetGraphs": [
+        "net9.0-ios18.5/android-arm64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.Common 1.5.1.1 is not compatible with net9.0-ios18.5 (.NETCoreApp,Version=v9.0) / android-arm64. Package Xamarin.AndroidX.Media3.Common 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.Common",
+      "targetGraphs": [
+        "net9.0-ios18.5/android-arm64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.ExoPlayer.Rtsp 1.5.1.1 is not compatible with net9.0-ios18.5 (.NETCoreApp,Version=v9.0) / android-arm64. Package Xamarin.AndroidX.Media3.ExoPlayer.Rtsp 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.ExoPlayer.Rtsp",
+      "targetGraphs": [
+        "net9.0-ios18.5/android-arm64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.ExoPlayer.Dash 1.5.1.1 is not compatible with net9.0-ios18.5 (.NETCoreApp,Version=v9.0) / android-arm64. Package Xamarin.AndroidX.Media3.ExoPlayer.Dash 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.ExoPlayer.Dash",
+      "targetGraphs": [
+        "net9.0-ios18.5/android-arm64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.ExoPlayer 1.5.1.1 is not compatible with net9.0-ios18.5 (.NETCoreApp,Version=v9.0) / android-arm64. Package Xamarin.AndroidX.Media3.ExoPlayer 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.ExoPlayer",
+      "targetGraphs": [
+        "net9.0-ios18.5/android-arm64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.Session 1.5.1.1 is not compatible with net9.0-ios18.5 (.NETCoreApp,Version=v9.0) / android-x64. Package Xamarin.AndroidX.Media3.Session 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.Session",
+      "targetGraphs": [
+        "net9.0-ios18.5/android-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.ExoPlayer.Hls 1.5.1.1 is not compatible with net9.0-ios18.5 (.NETCoreApp,Version=v9.0) / android-x64. Package Xamarin.AndroidX.Media3.ExoPlayer.Hls 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.ExoPlayer.Hls",
+      "targetGraphs": [
+        "net9.0-ios18.5/android-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.Ui 1.5.1.1 is not compatible with net9.0-ios18.5 (.NETCoreApp,Version=v9.0) / android-x64. Package Xamarin.AndroidX.Media3.Ui 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.Ui",
+      "targetGraphs": [
+        "net9.0-ios18.5/android-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.Common 1.5.1.1 is not compatible with net9.0-ios18.5 (.NETCoreApp,Version=v9.0) / android-x64. Package Xamarin.AndroidX.Media3.Common 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.Common",
+      "targetGraphs": [
+        "net9.0-ios18.5/android-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.ExoPlayer.Rtsp 1.5.1.1 is not compatible with net9.0-ios18.5 (.NETCoreApp,Version=v9.0) / android-x64. Package Xamarin.AndroidX.Media3.ExoPlayer.Rtsp 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.ExoPlayer.Rtsp",
+      "targetGraphs": [
+        "net9.0-ios18.5/android-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.ExoPlayer.Dash 1.5.1.1 is not compatible with net9.0-ios18.5 (.NETCoreApp,Version=v9.0) / android-x64. Package Xamarin.AndroidX.Media3.ExoPlayer.Dash 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.ExoPlayer.Dash",
+      "targetGraphs": [
+        "net9.0-ios18.5/android-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.ExoPlayer 1.5.1.1 is not compatible with net9.0-ios18.5 (.NETCoreApp,Version=v9.0) / android-x64. Package Xamarin.AndroidX.Media3.ExoPlayer 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.ExoPlayer",
+      "targetGraphs": [
+        "net9.0-ios18.5/android-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.Session 1.5.1.1 is not compatible with net9.0-ios18.5 (.NETCoreApp,Version=v9.0) / iossimulator-x64. Package Xamarin.AndroidX.Media3.Session 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.Session",
+      "targetGraphs": [
+        "net9.0-ios18.5/iossimulator-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.ExoPlayer.Hls 1.5.1.1 is not compatible with net9.0-ios18.5 (.NETCoreApp,Version=v9.0) / iossimulator-x64. Package Xamarin.AndroidX.Media3.ExoPlayer.Hls 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.ExoPlayer.Hls",
+      "targetGraphs": [
+        "net9.0-ios18.5/iossimulator-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.Ui 1.5.1.1 is not compatible with net9.0-ios18.5 (.NETCoreApp,Version=v9.0) / iossimulator-x64. Package Xamarin.AndroidX.Media3.Ui 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.Ui",
+      "targetGraphs": [
+        "net9.0-ios18.5/iossimulator-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.Common 1.5.1.1 is not compatible with net9.0-ios18.5 (.NETCoreApp,Version=v9.0) / iossimulator-x64. Package Xamarin.AndroidX.Media3.Common 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.Common",
+      "targetGraphs": [
+        "net9.0-ios18.5/iossimulator-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.ExoPlayer.Rtsp 1.5.1.1 is not compatible with net9.0-ios18.5 (.NETCoreApp,Version=v9.0) / iossimulator-x64. Package Xamarin.AndroidX.Media3.ExoPlayer.Rtsp 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.ExoPlayer.Rtsp",
+      "targetGraphs": [
+        "net9.0-ios18.5/iossimulator-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.ExoPlayer.Dash 1.5.1.1 is not compatible with net9.0-ios18.5 (.NETCoreApp,Version=v9.0) / iossimulator-x64. Package Xamarin.AndroidX.Media3.ExoPlayer.Dash 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.ExoPlayer.Dash",
+      "targetGraphs": [
+        "net9.0-ios18.5/iossimulator-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.ExoPlayer 1.5.1.1 is not compatible with net9.0-ios18.5 (.NETCoreApp,Version=v9.0) / iossimulator-x64. Package Xamarin.AndroidX.Media3.ExoPlayer 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.ExoPlayer",
+      "targetGraphs": [
+        "net9.0-ios18.5/iossimulator-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.Session 1.5.1.1 is not compatible with net9.0-ios18.5 (.NETCoreApp,Version=v9.0) / maccatalyst-x64. Package Xamarin.AndroidX.Media3.Session 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.Session",
+      "targetGraphs": [
+        "net9.0-ios18.5/maccatalyst-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.ExoPlayer.Hls 1.5.1.1 is not compatible with net9.0-ios18.5 (.NETCoreApp,Version=v9.0) / maccatalyst-x64. Package Xamarin.AndroidX.Media3.ExoPlayer.Hls 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.ExoPlayer.Hls",
+      "targetGraphs": [
+        "net9.0-ios18.5/maccatalyst-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.Ui 1.5.1.1 is not compatible with net9.0-ios18.5 (.NETCoreApp,Version=v9.0) / maccatalyst-x64. Package Xamarin.AndroidX.Media3.Ui 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.Ui",
+      "targetGraphs": [
+        "net9.0-ios18.5/maccatalyst-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.Common 1.5.1.1 is not compatible with net9.0-ios18.5 (.NETCoreApp,Version=v9.0) / maccatalyst-x64. Package Xamarin.AndroidX.Media3.Common 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.Common",
+      "targetGraphs": [
+        "net9.0-ios18.5/maccatalyst-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.ExoPlayer.Rtsp 1.5.1.1 is not compatible with net9.0-ios18.5 (.NETCoreApp,Version=v9.0) / maccatalyst-x64. Package Xamarin.AndroidX.Media3.ExoPlayer.Rtsp 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.ExoPlayer.Rtsp",
+      "targetGraphs": [
+        "net9.0-ios18.5/maccatalyst-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.ExoPlayer.Dash 1.5.1.1 is not compatible with net9.0-ios18.5 (.NETCoreApp,Version=v9.0) / maccatalyst-x64. Package Xamarin.AndroidX.Media3.ExoPlayer.Dash 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.ExoPlayer.Dash",
+      "targetGraphs": [
+        "net9.0-ios18.5/maccatalyst-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.ExoPlayer 1.5.1.1 is not compatible with net9.0-ios18.5 (.NETCoreApp,Version=v9.0) / maccatalyst-x64. Package Xamarin.AndroidX.Media3.ExoPlayer 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.ExoPlayer",
+      "targetGraphs": [
+        "net9.0-ios18.5/maccatalyst-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.Session 1.5.1.1 is not compatible with net9.0-ios18.5 (.NETCoreApp,Version=v9.0) / win10-x64. Package Xamarin.AndroidX.Media3.Session 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.Session",
+      "targetGraphs": [
+        "net9.0-ios18.5/win10-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.ExoPlayer.Hls 1.5.1.1 is not compatible with net9.0-ios18.5 (.NETCoreApp,Version=v9.0) / win10-x64. Package Xamarin.AndroidX.Media3.ExoPlayer.Hls 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.ExoPlayer.Hls",
+      "targetGraphs": [
+        "net9.0-ios18.5/win10-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.Ui 1.5.1.1 is not compatible with net9.0-ios18.5 (.NETCoreApp,Version=v9.0) / win10-x64. Package Xamarin.AndroidX.Media3.Ui 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.Ui",
+      "targetGraphs": [
+        "net9.0-ios18.5/win10-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.Common 1.5.1.1 is not compatible with net9.0-ios18.5 (.NETCoreApp,Version=v9.0) / win10-x64. Package Xamarin.AndroidX.Media3.Common 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.Common",
+      "targetGraphs": [
+        "net9.0-ios18.5/win10-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.ExoPlayer.Rtsp 1.5.1.1 is not compatible with net9.0-ios18.5 (.NETCoreApp,Version=v9.0) / win10-x64. Package Xamarin.AndroidX.Media3.ExoPlayer.Rtsp 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.ExoPlayer.Rtsp",
+      "targetGraphs": [
+        "net9.0-ios18.5/win10-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.ExoPlayer.Dash 1.5.1.1 is not compatible with net9.0-ios18.5 (.NETCoreApp,Version=v9.0) / win10-x64. Package Xamarin.AndroidX.Media3.ExoPlayer.Dash 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.ExoPlayer.Dash",
+      "targetGraphs": [
+        "net9.0-ios18.5/win10-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.ExoPlayer 1.5.1.1 is not compatible with net9.0-ios18.5 (.NETCoreApp,Version=v9.0) / win10-x64. Package Xamarin.AndroidX.Media3.ExoPlayer 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.ExoPlayer",
+      "targetGraphs": [
+        "net9.0-ios18.5/win10-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.Session 1.5.1.1 is not compatible with net9.0-maccatalyst18.5 (.NETCoreApp,Version=v9.0) / android-arm64. Package Xamarin.AndroidX.Media3.Session 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.Session",
+      "targetGraphs": [
+        "net9.0-maccatalyst18.5/android-arm64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.ExoPlayer.Hls 1.5.1.1 is not compatible with net9.0-maccatalyst18.5 (.NETCoreApp,Version=v9.0) / android-arm64. Package Xamarin.AndroidX.Media3.ExoPlayer.Hls 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.ExoPlayer.Hls",
+      "targetGraphs": [
+        "net9.0-maccatalyst18.5/android-arm64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.Ui 1.5.1.1 is not compatible with net9.0-maccatalyst18.5 (.NETCoreApp,Version=v9.0) / android-arm64. Package Xamarin.AndroidX.Media3.Ui 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.Ui",
+      "targetGraphs": [
+        "net9.0-maccatalyst18.5/android-arm64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.Common 1.5.1.1 is not compatible with net9.0-maccatalyst18.5 (.NETCoreApp,Version=v9.0) / android-arm64. Package Xamarin.AndroidX.Media3.Common 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.Common",
+      "targetGraphs": [
+        "net9.0-maccatalyst18.5/android-arm64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.ExoPlayer.Rtsp 1.5.1.1 is not compatible with net9.0-maccatalyst18.5 (.NETCoreApp,Version=v9.0) / android-arm64. Package Xamarin.AndroidX.Media3.ExoPlayer.Rtsp 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.ExoPlayer.Rtsp",
+      "targetGraphs": [
+        "net9.0-maccatalyst18.5/android-arm64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.ExoPlayer.Dash 1.5.1.1 is not compatible with net9.0-maccatalyst18.5 (.NETCoreApp,Version=v9.0) / android-arm64. Package Xamarin.AndroidX.Media3.ExoPlayer.Dash 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.ExoPlayer.Dash",
+      "targetGraphs": [
+        "net9.0-maccatalyst18.5/android-arm64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.ExoPlayer 1.5.1.1 is not compatible with net9.0-maccatalyst18.5 (.NETCoreApp,Version=v9.0) / android-arm64. Package Xamarin.AndroidX.Media3.ExoPlayer 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.ExoPlayer",
+      "targetGraphs": [
+        "net9.0-maccatalyst18.5/android-arm64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.Session 1.5.1.1 is not compatible with net9.0-maccatalyst18.5 (.NETCoreApp,Version=v9.0) / android-x64. Package Xamarin.AndroidX.Media3.Session 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.Session",
+      "targetGraphs": [
+        "net9.0-maccatalyst18.5/android-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.ExoPlayer.Hls 1.5.1.1 is not compatible with net9.0-maccatalyst18.5 (.NETCoreApp,Version=v9.0) / android-x64. Package Xamarin.AndroidX.Media3.ExoPlayer.Hls 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.ExoPlayer.Hls",
+      "targetGraphs": [
+        "net9.0-maccatalyst18.5/android-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.Ui 1.5.1.1 is not compatible with net9.0-maccatalyst18.5 (.NETCoreApp,Version=v9.0) / android-x64. Package Xamarin.AndroidX.Media3.Ui 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.Ui",
+      "targetGraphs": [
+        "net9.0-maccatalyst18.5/android-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.Common 1.5.1.1 is not compatible with net9.0-maccatalyst18.5 (.NETCoreApp,Version=v9.0) / android-x64. Package Xamarin.AndroidX.Media3.Common 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.Common",
+      "targetGraphs": [
+        "net9.0-maccatalyst18.5/android-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.ExoPlayer.Rtsp 1.5.1.1 is not compatible with net9.0-maccatalyst18.5 (.NETCoreApp,Version=v9.0) / android-x64. Package Xamarin.AndroidX.Media3.ExoPlayer.Rtsp 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.ExoPlayer.Rtsp",
+      "targetGraphs": [
+        "net9.0-maccatalyst18.5/android-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.ExoPlayer.Dash 1.5.1.1 is not compatible with net9.0-maccatalyst18.5 (.NETCoreApp,Version=v9.0) / android-x64. Package Xamarin.AndroidX.Media3.ExoPlayer.Dash 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.ExoPlayer.Dash",
+      "targetGraphs": [
+        "net9.0-maccatalyst18.5/android-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.ExoPlayer 1.5.1.1 is not compatible with net9.0-maccatalyst18.5 (.NETCoreApp,Version=v9.0) / android-x64. Package Xamarin.AndroidX.Media3.ExoPlayer 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.ExoPlayer",
+      "targetGraphs": [
+        "net9.0-maccatalyst18.5/android-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.Session 1.5.1.1 is not compatible with net9.0-maccatalyst18.5 (.NETCoreApp,Version=v9.0) / iossimulator-x64. Package Xamarin.AndroidX.Media3.Session 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.Session",
+      "targetGraphs": [
+        "net9.0-maccatalyst18.5/iossimulator-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.ExoPlayer.Hls 1.5.1.1 is not compatible with net9.0-maccatalyst18.5 (.NETCoreApp,Version=v9.0) / iossimulator-x64. Package Xamarin.AndroidX.Media3.ExoPlayer.Hls 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.ExoPlayer.Hls",
+      "targetGraphs": [
+        "net9.0-maccatalyst18.5/iossimulator-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.Ui 1.5.1.1 is not compatible with net9.0-maccatalyst18.5 (.NETCoreApp,Version=v9.0) / iossimulator-x64. Package Xamarin.AndroidX.Media3.Ui 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.Ui",
+      "targetGraphs": [
+        "net9.0-maccatalyst18.5/iossimulator-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.Common 1.5.1.1 is not compatible with net9.0-maccatalyst18.5 (.NETCoreApp,Version=v9.0) / iossimulator-x64. Package Xamarin.AndroidX.Media3.Common 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.Common",
+      "targetGraphs": [
+        "net9.0-maccatalyst18.5/iossimulator-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.ExoPlayer.Rtsp 1.5.1.1 is not compatible with net9.0-maccatalyst18.5 (.NETCoreApp,Version=v9.0) / iossimulator-x64. Package Xamarin.AndroidX.Media3.ExoPlayer.Rtsp 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.ExoPlayer.Rtsp",
+      "targetGraphs": [
+        "net9.0-maccatalyst18.5/iossimulator-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.ExoPlayer.Dash 1.5.1.1 is not compatible with net9.0-maccatalyst18.5 (.NETCoreApp,Version=v9.0) / iossimulator-x64. Package Xamarin.AndroidX.Media3.ExoPlayer.Dash 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.ExoPlayer.Dash",
+      "targetGraphs": [
+        "net9.0-maccatalyst18.5/iossimulator-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.ExoPlayer 1.5.1.1 is not compatible with net9.0-maccatalyst18.5 (.NETCoreApp,Version=v9.0) / iossimulator-x64. Package Xamarin.AndroidX.Media3.ExoPlayer 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.ExoPlayer",
+      "targetGraphs": [
+        "net9.0-maccatalyst18.5/iossimulator-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.Session 1.5.1.1 is not compatible with net9.0-maccatalyst18.5 (.NETCoreApp,Version=v9.0) / maccatalyst-x64. Package Xamarin.AndroidX.Media3.Session 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.Session",
+      "targetGraphs": [
+        "net9.0-maccatalyst18.5/maccatalyst-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.ExoPlayer.Hls 1.5.1.1 is not compatible with net9.0-maccatalyst18.5 (.NETCoreApp,Version=v9.0) / maccatalyst-x64. Package Xamarin.AndroidX.Media3.ExoPlayer.Hls 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.ExoPlayer.Hls",
+      "targetGraphs": [
+        "net9.0-maccatalyst18.5/maccatalyst-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.Ui 1.5.1.1 is not compatible with net9.0-maccatalyst18.5 (.NETCoreApp,Version=v9.0) / maccatalyst-x64. Package Xamarin.AndroidX.Media3.Ui 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.Ui",
+      "targetGraphs": [
+        "net9.0-maccatalyst18.5/maccatalyst-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.Common 1.5.1.1 is not compatible with net9.0-maccatalyst18.5 (.NETCoreApp,Version=v9.0) / maccatalyst-x64. Package Xamarin.AndroidX.Media3.Common 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.Common",
+      "targetGraphs": [
+        "net9.0-maccatalyst18.5/maccatalyst-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.ExoPlayer.Rtsp 1.5.1.1 is not compatible with net9.0-maccatalyst18.5 (.NETCoreApp,Version=v9.0) / maccatalyst-x64. Package Xamarin.AndroidX.Media3.ExoPlayer.Rtsp 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.ExoPlayer.Rtsp",
+      "targetGraphs": [
+        "net9.0-maccatalyst18.5/maccatalyst-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.ExoPlayer.Dash 1.5.1.1 is not compatible with net9.0-maccatalyst18.5 (.NETCoreApp,Version=v9.0) / maccatalyst-x64. Package Xamarin.AndroidX.Media3.ExoPlayer.Dash 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.ExoPlayer.Dash",
+      "targetGraphs": [
+        "net9.0-maccatalyst18.5/maccatalyst-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.ExoPlayer 1.5.1.1 is not compatible with net9.0-maccatalyst18.5 (.NETCoreApp,Version=v9.0) / maccatalyst-x64. Package Xamarin.AndroidX.Media3.ExoPlayer 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.ExoPlayer",
+      "targetGraphs": [
+        "net9.0-maccatalyst18.5/maccatalyst-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.Session 1.5.1.1 is not compatible with net9.0-maccatalyst18.5 (.NETCoreApp,Version=v9.0) / win10-x64. Package Xamarin.AndroidX.Media3.Session 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.Session",
+      "targetGraphs": [
+        "net9.0-maccatalyst18.5/win10-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.ExoPlayer.Hls 1.5.1.1 is not compatible with net9.0-maccatalyst18.5 (.NETCoreApp,Version=v9.0) / win10-x64. Package Xamarin.AndroidX.Media3.ExoPlayer.Hls 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.ExoPlayer.Hls",
+      "targetGraphs": [
+        "net9.0-maccatalyst18.5/win10-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.Ui 1.5.1.1 is not compatible with net9.0-maccatalyst18.5 (.NETCoreApp,Version=v9.0) / win10-x64. Package Xamarin.AndroidX.Media3.Ui 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.Ui",
+      "targetGraphs": [
+        "net9.0-maccatalyst18.5/win10-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.Common 1.5.1.1 is not compatible with net9.0-maccatalyst18.5 (.NETCoreApp,Version=v9.0) / win10-x64. Package Xamarin.AndroidX.Media3.Common 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.Common",
+      "targetGraphs": [
+        "net9.0-maccatalyst18.5/win10-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.ExoPlayer.Rtsp 1.5.1.1 is not compatible with net9.0-maccatalyst18.5 (.NETCoreApp,Version=v9.0) / win10-x64. Package Xamarin.AndroidX.Media3.ExoPlayer.Rtsp 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.ExoPlayer.Rtsp",
+      "targetGraphs": [
+        "net9.0-maccatalyst18.5/win10-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.ExoPlayer.Dash 1.5.1.1 is not compatible with net9.0-maccatalyst18.5 (.NETCoreApp,Version=v9.0) / win10-x64. Package Xamarin.AndroidX.Media3.ExoPlayer.Dash 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.ExoPlayer.Dash",
+      "targetGraphs": [
+        "net9.0-maccatalyst18.5/win10-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.ExoPlayer 1.5.1.1 is not compatible with net9.0-maccatalyst18.5 (.NETCoreApp,Version=v9.0) / win10-x64. Package Xamarin.AndroidX.Media3.ExoPlayer 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.ExoPlayer",
+      "targetGraphs": [
+        "net9.0-maccatalyst18.5/win10-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.Session 1.5.1.1 is not compatible with net9.0-windows10.0.19041 (.NETCoreApp,Version=v9.0) / android-arm64. Package Xamarin.AndroidX.Media3.Session 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.Session",
+      "targetGraphs": [
+        "net9.0-windows10.0.19041/android-arm64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.ExoPlayer.Hls 1.5.1.1 is not compatible with net9.0-windows10.0.19041 (.NETCoreApp,Version=v9.0) / android-arm64. Package Xamarin.AndroidX.Media3.ExoPlayer.Hls 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.ExoPlayer.Hls",
+      "targetGraphs": [
+        "net9.0-windows10.0.19041/android-arm64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.Ui 1.5.1.1 is not compatible with net9.0-windows10.0.19041 (.NETCoreApp,Version=v9.0) / android-arm64. Package Xamarin.AndroidX.Media3.Ui 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.Ui",
+      "targetGraphs": [
+        "net9.0-windows10.0.19041/android-arm64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.Common 1.5.1.1 is not compatible with net9.0-windows10.0.19041 (.NETCoreApp,Version=v9.0) / android-arm64. Package Xamarin.AndroidX.Media3.Common 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.Common",
+      "targetGraphs": [
+        "net9.0-windows10.0.19041/android-arm64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.ExoPlayer.Rtsp 1.5.1.1 is not compatible with net9.0-windows10.0.19041 (.NETCoreApp,Version=v9.0) / android-arm64. Package Xamarin.AndroidX.Media3.ExoPlayer.Rtsp 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.ExoPlayer.Rtsp",
+      "targetGraphs": [
+        "net9.0-windows10.0.19041/android-arm64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.ExoPlayer.Dash 1.5.1.1 is not compatible with net9.0-windows10.0.19041 (.NETCoreApp,Version=v9.0) / android-arm64. Package Xamarin.AndroidX.Media3.ExoPlayer.Dash 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.ExoPlayer.Dash",
+      "targetGraphs": [
+        "net9.0-windows10.0.19041/android-arm64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.ExoPlayer 1.5.1.1 is not compatible with net9.0-windows10.0.19041 (.NETCoreApp,Version=v9.0) / android-arm64. Package Xamarin.AndroidX.Media3.ExoPlayer 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.ExoPlayer",
+      "targetGraphs": [
+        "net9.0-windows10.0.19041/android-arm64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.Session 1.5.1.1 is not compatible with net9.0-windows10.0.19041 (.NETCoreApp,Version=v9.0) / android-x64. Package Xamarin.AndroidX.Media3.Session 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.Session",
+      "targetGraphs": [
+        "net9.0-windows10.0.19041/android-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.ExoPlayer.Hls 1.5.1.1 is not compatible with net9.0-windows10.0.19041 (.NETCoreApp,Version=v9.0) / android-x64. Package Xamarin.AndroidX.Media3.ExoPlayer.Hls 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.ExoPlayer.Hls",
+      "targetGraphs": [
+        "net9.0-windows10.0.19041/android-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.Ui 1.5.1.1 is not compatible with net9.0-windows10.0.19041 (.NETCoreApp,Version=v9.0) / android-x64. Package Xamarin.AndroidX.Media3.Ui 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.Ui",
+      "targetGraphs": [
+        "net9.0-windows10.0.19041/android-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.Common 1.5.1.1 is not compatible with net9.0-windows10.0.19041 (.NETCoreApp,Version=v9.0) / android-x64. Package Xamarin.AndroidX.Media3.Common 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.Common",
+      "targetGraphs": [
+        "net9.0-windows10.0.19041/android-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.ExoPlayer.Rtsp 1.5.1.1 is not compatible with net9.0-windows10.0.19041 (.NETCoreApp,Version=v9.0) / android-x64. Package Xamarin.AndroidX.Media3.ExoPlayer.Rtsp 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.ExoPlayer.Rtsp",
+      "targetGraphs": [
+        "net9.0-windows10.0.19041/android-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.ExoPlayer.Dash 1.5.1.1 is not compatible with net9.0-windows10.0.19041 (.NETCoreApp,Version=v9.0) / android-x64. Package Xamarin.AndroidX.Media3.ExoPlayer.Dash 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.ExoPlayer.Dash",
+      "targetGraphs": [
+        "net9.0-windows10.0.19041/android-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.ExoPlayer 1.5.1.1 is not compatible with net9.0-windows10.0.19041 (.NETCoreApp,Version=v9.0) / android-x64. Package Xamarin.AndroidX.Media3.ExoPlayer 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.ExoPlayer",
+      "targetGraphs": [
+        "net9.0-windows10.0.19041/android-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.Session 1.5.1.1 is not compatible with net9.0-windows10.0.19041 (.NETCoreApp,Version=v9.0) / iossimulator-x64. Package Xamarin.AndroidX.Media3.Session 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.Session",
+      "targetGraphs": [
+        "net9.0-windows10.0.19041/iossimulator-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.ExoPlayer.Hls 1.5.1.1 is not compatible with net9.0-windows10.0.19041 (.NETCoreApp,Version=v9.0) / iossimulator-x64. Package Xamarin.AndroidX.Media3.ExoPlayer.Hls 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.ExoPlayer.Hls",
+      "targetGraphs": [
+        "net9.0-windows10.0.19041/iossimulator-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.Ui 1.5.1.1 is not compatible with net9.0-windows10.0.19041 (.NETCoreApp,Version=v9.0) / iossimulator-x64. Package Xamarin.AndroidX.Media3.Ui 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.Ui",
+      "targetGraphs": [
+        "net9.0-windows10.0.19041/iossimulator-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.Common 1.5.1.1 is not compatible with net9.0-windows10.0.19041 (.NETCoreApp,Version=v9.0) / iossimulator-x64. Package Xamarin.AndroidX.Media3.Common 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.Common",
+      "targetGraphs": [
+        "net9.0-windows10.0.19041/iossimulator-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.ExoPlayer.Rtsp 1.5.1.1 is not compatible with net9.0-windows10.0.19041 (.NETCoreApp,Version=v9.0) / iossimulator-x64. Package Xamarin.AndroidX.Media3.ExoPlayer.Rtsp 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.ExoPlayer.Rtsp",
+      "targetGraphs": [
+        "net9.0-windows10.0.19041/iossimulator-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.ExoPlayer.Dash 1.5.1.1 is not compatible with net9.0-windows10.0.19041 (.NETCoreApp,Version=v9.0) / iossimulator-x64. Package Xamarin.AndroidX.Media3.ExoPlayer.Dash 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.ExoPlayer.Dash",
+      "targetGraphs": [
+        "net9.0-windows10.0.19041/iossimulator-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.ExoPlayer 1.5.1.1 is not compatible with net9.0-windows10.0.19041 (.NETCoreApp,Version=v9.0) / iossimulator-x64. Package Xamarin.AndroidX.Media3.ExoPlayer 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.ExoPlayer",
+      "targetGraphs": [
+        "net9.0-windows10.0.19041/iossimulator-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.Session 1.5.1.1 is not compatible with net9.0-windows10.0.19041 (.NETCoreApp,Version=v9.0) / maccatalyst-x64. Package Xamarin.AndroidX.Media3.Session 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.Session",
+      "targetGraphs": [
+        "net9.0-windows10.0.19041/maccatalyst-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.ExoPlayer.Hls 1.5.1.1 is not compatible with net9.0-windows10.0.19041 (.NETCoreApp,Version=v9.0) / maccatalyst-x64. Package Xamarin.AndroidX.Media3.ExoPlayer.Hls 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.ExoPlayer.Hls",
+      "targetGraphs": [
+        "net9.0-windows10.0.19041/maccatalyst-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.Ui 1.5.1.1 is not compatible with net9.0-windows10.0.19041 (.NETCoreApp,Version=v9.0) / maccatalyst-x64. Package Xamarin.AndroidX.Media3.Ui 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.Ui",
+      "targetGraphs": [
+        "net9.0-windows10.0.19041/maccatalyst-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.Common 1.5.1.1 is not compatible with net9.0-windows10.0.19041 (.NETCoreApp,Version=v9.0) / maccatalyst-x64. Package Xamarin.AndroidX.Media3.Common 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.Common",
+      "targetGraphs": [
+        "net9.0-windows10.0.19041/maccatalyst-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.ExoPlayer.Rtsp 1.5.1.1 is not compatible with net9.0-windows10.0.19041 (.NETCoreApp,Version=v9.0) / maccatalyst-x64. Package Xamarin.AndroidX.Media3.ExoPlayer.Rtsp 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.ExoPlayer.Rtsp",
+      "targetGraphs": [
+        "net9.0-windows10.0.19041/maccatalyst-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.ExoPlayer.Dash 1.5.1.1 is not compatible with net9.0-windows10.0.19041 (.NETCoreApp,Version=v9.0) / maccatalyst-x64. Package Xamarin.AndroidX.Media3.ExoPlayer.Dash 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.ExoPlayer.Dash",
+      "targetGraphs": [
+        "net9.0-windows10.0.19041/maccatalyst-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.ExoPlayer 1.5.1.1 is not compatible with net9.0-windows10.0.19041 (.NETCoreApp,Version=v9.0) / maccatalyst-x64. Package Xamarin.AndroidX.Media3.ExoPlayer 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.ExoPlayer",
+      "targetGraphs": [
+        "net9.0-windows10.0.19041/maccatalyst-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.Session 1.5.1.1 is not compatible with net9.0-windows10.0.19041 (.NETCoreApp,Version=v9.0) / win10-x64. Package Xamarin.AndroidX.Media3.Session 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.Session",
+      "targetGraphs": [
+        "net9.0-windows10.0.19041/win10-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.ExoPlayer.Hls 1.5.1.1 is not compatible with net9.0-windows10.0.19041 (.NETCoreApp,Version=v9.0) / win10-x64. Package Xamarin.AndroidX.Media3.ExoPlayer.Hls 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.ExoPlayer.Hls",
+      "targetGraphs": [
+        "net9.0-windows10.0.19041/win10-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.Ui 1.5.1.1 is not compatible with net9.0-windows10.0.19041 (.NETCoreApp,Version=v9.0) / win10-x64. Package Xamarin.AndroidX.Media3.Ui 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.Ui",
+      "targetGraphs": [
+        "net9.0-windows10.0.19041/win10-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.Common 1.5.1.1 is not compatible with net9.0-windows10.0.19041 (.NETCoreApp,Version=v9.0) / win10-x64. Package Xamarin.AndroidX.Media3.Common 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.Common",
+      "targetGraphs": [
+        "net9.0-windows10.0.19041/win10-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.ExoPlayer.Rtsp 1.5.1.1 is not compatible with net9.0-windows10.0.19041 (.NETCoreApp,Version=v9.0) / win10-x64. Package Xamarin.AndroidX.Media3.ExoPlayer.Rtsp 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.ExoPlayer.Rtsp",
+      "targetGraphs": [
+        "net9.0-windows10.0.19041/win10-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.ExoPlayer.Dash 1.5.1.1 is not compatible with net9.0-windows10.0.19041 (.NETCoreApp,Version=v9.0) / win10-x64. Package Xamarin.AndroidX.Media3.ExoPlayer.Dash 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.ExoPlayer.Dash",
+      "targetGraphs": [
+        "net9.0-windows10.0.19041/win10-x64"
+      ]
+    },
+    {
+      "code": "NU1202",
+      "level": "Error",
+      "message": "Package Xamarin.AndroidX.Media3.ExoPlayer 1.5.1.1 is not compatible with net9.0-windows10.0.19041 (.NETCoreApp,Version=v9.0) / win10-x64. Package Xamarin.AndroidX.Media3.ExoPlayer 1.5.1.1 supports: net8.0-android34.0 (.NETCoreApp,Version=v8.0)",
+      "libraryId": "Xamarin.AndroidX.Media3.ExoPlayer",
+      "targetGraphs": [
+        "net9.0-windows10.0.19041/win10-x64"
+      ]
+    }
+  ]
 }

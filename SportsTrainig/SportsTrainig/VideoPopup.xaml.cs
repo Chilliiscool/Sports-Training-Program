@@ -1,5 +1,6 @@
-using CommunityToolkit.Maui.Views;   // Popup
+using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Maui.Media;   // MediaElement, MediaSource
+using CommunityToolkit.Maui.Views;   // Popup
 using Microsoft.Maui.Controls;
 using System;
 
@@ -13,10 +14,10 @@ namespace SportsTraining.Popups
 
             TitleText.Text = string.IsNullOrWhiteSpace(title) ? "Video" : title;
 
-            // Optional logging
-            Player.MediaOpened += (_, __) => System.Diagnostics.Debug.WriteLine("[Video] Opened");
-            Player.StateChanged += (_, __) => System.Diagnostics.Debug.WriteLine("[Video] State=" + Player.CurrentState);
-            Player.MediaFailed += (_, e) => System.Diagnostics.Debug.WriteLine("[Video] Failed: " + e?.ErrorMessage);
+            // Named handlers = easy to unsubscribe
+            Player.MediaOpened += OnMediaOpened;
+            Player.StateChanged += OnStateChanged;
+            Player.MediaFailed += OnMediaFailed;
 
             if (!string.IsNullOrWhiteSpace(sourcePathOrUrl) && System.IO.File.Exists(sourcePathOrUrl))
                 Player.Source = MediaSource.FromFile(sourcePathOrUrl);
@@ -26,28 +27,37 @@ namespace SportsTraining.Popups
             this.Closed += (_, __) => CleanupPlayer();
         }
 
+        void OnMediaOpened(object? s, EventArgs e) =>
+            System.Diagnostics.Debug.WriteLine("[Video] Opened");
+
+        void OnStateChanged(object? s, EventArgs e) =>
+            System.Diagnostics.Debug.WriteLine("[Video] State=" + Player.CurrentState);
+
+        void OnMediaFailed(object? s, MediaFailedEventArgs e) =>
+            System.Diagnostics.Debug.WriteLine("[Video] Failed: " + e?.ErrorMessage);
+
         void CleanupPlayer()
         {
             try
             {
-                // Detach events first so late callbacks don't hit managed code
-                try { Player.MediaOpened -= (_, __) => { }; } catch { }
-                try { Player.StateChanged -= (_, __) => { }; } catch { }
-                try { Player.MediaFailed -= (_, __) => { }; } catch { }
+                // Detach named handlers
+                try { Player.MediaOpened -= OnMediaOpened; } catch { }
+                try { Player.StateChanged -= OnStateChanged; } catch { }
+                try { Player.MediaFailed -= OnMediaFailed; } catch { }
 
-                // Disconnect native handler BEFORE touching playback state
+                // Disconnect native handler BEFORE clearing source
                 try { Player?.Handler?.DisconnectHandler(); } catch { }
 
-                // Now clear the source; avoid Stop() to dodge Media3 discontinuity callback
+                // Clear source to release resources
                 try { Player.Source = null; } catch { }
             }
             catch { /* swallow during teardown */ }
         }
 
-        private async void OnCloseClicked(object sender, EventArgs e)
+        private void OnCloseClicked(object sender, EventArgs e)
         {
-            CleanupPlayer();
-            await CloseAsync();
+            // If your toolkit version uses Close() instead, just swap it.
+            CloseAsync();
         }
     }
 }

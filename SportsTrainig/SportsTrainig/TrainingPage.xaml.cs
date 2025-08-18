@@ -901,109 +901,28 @@ namespace SportsTraining.Pages
         // ======================================================
         //                 Image & Video (lightbox)
         // ======================================================
-        private void ShowImageOverlay(string imageUrl, string? title = null)
+        private void ShowVideoPopup(string videoUrl, string? title = null)
         {
-            try
+            var player = new SportsTraining.Controls.VideoPlayerView
             {
-                var img = new Image
-                {
-                    Source = ImageSource.FromUri(new Uri(imageUrl)),
-                    Aspect = Aspect.AspectFit,
-                    HorizontalOptions = LayoutOptions.Fill,
-                    VerticalOptions = LayoutOptions.Fill
-                };
+                Source = videoUrl,
+                AutoPlay = true,
+                ShowControls = true,
+                HorizontalOptions = LayoutOptions.Fill,
+                VerticalOptions = LayoutOptions.Fill
+            };
 
-                LightboxTitle.Text = string.IsNullOrWhiteSpace(title) ? "Image" : title;
-                LightboxContent.Content = img;
-                LightboxOverlay.IsVisible = true;
-            }
-            catch
-            {
-                DisplayAlert("Error", "Unable to load image.", "OK");
-            }
-        }
-
-        private async Task ShowVideoOverlayAsync(string videoUrl, string? title = null)
-        {
-            try
-            {
-                var playable = await GetPlayableVideoAsync(videoUrl); // download with cookie if needed
-                var media = new MediaElement
-                {
-                    Source = playable,
-                    ShouldAutoPlay = true,
-                    ShouldShowPlaybackControls = true,
-                    Aspect = Aspect.AspectFit,
-                    HorizontalOptions = LayoutOptions.Fill,
-                    VerticalOptions = LayoutOptions.Fill
-                };
-
-                LightboxTitle.Text = string.IsNullOrWhiteSpace(title) ? "Video" : title;
-                LightboxContent.Content = media;
-                LightboxOverlay.IsVisible = true;
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine("[Video] Open error: " + ex.Message);
-                await DisplayAlert("Video error", "Unable to open video.", "OK");
-            }
+            LightboxTitle.Text = string.IsNullOrWhiteSpace(title) ? "Video" : title;
+            LightboxContent.Content = player;     // your existing ContentView in the overlay
+            LightboxOverlay.IsVisible = true;     // your existing overlay grid
         }
 
         private void HideLightbox()
         {
-            // Drop the handler/content to avoid Media3 discontinuity callbacks.
-            try
-            {
-                if (LightboxContent.Content is MediaElement me)
-                {
-                    try { me.Source = null; } catch { }
-                    try { me.Handler?.DisconnectHandler(); } catch { }
-                }
-                LightboxContent.Content = null;
-            }
-            catch { }
+            LightboxContent.Content = null;       // this disposes player via handler
             LightboxOverlay.IsVisible = false;
         }
 
-        private async Task<string> GetPlayableVideoAsync(string remoteUrl)
-        {
-            if (string.IsNullOrWhiteSpace(remoteUrl))
-                return remoteUrl;
-
-            try
-            {
-                using var handler = new HttpClientHandler
-                {
-                    AllowAutoRedirect = true,
-                    AutomaticDecompression = DecompressionMethods.All
-                };
-                using var http = new HttpClient(handler);
-
-                var cookie = SessionManager.GetCookie();
-                if (!string.IsNullOrWhiteSpace(cookie))
-                    http.DefaultRequestHeaders.TryAddWithoutValidation("Cookie", $".VCPCOOKIES={cookie}");
-
-                using var resp = await http.GetAsync(remoteUrl, HttpCompletionOption.ResponseHeadersRead);
-                if (resp.IsSuccessStatusCode)
-                {
-                    var fileName = Path.GetFileName(new Uri(remoteUrl).AbsolutePath);
-                    if (string.IsNullOrWhiteSpace(fileName)) fileName = $"video_{DateTimeOffset.UtcNow.ToUnixTimeSeconds()}.mp4";
-
-                    var localPath = Path.Combine(FileSystem.CacheDirectory, fileName);
-                    await using (var fs = File.Create(localPath))
-                        await resp.Content.CopyToAsync(fs);
-
-                    return localPath; // local file for playback without headers
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine("[Video] Download fallback failed: " + ex.Message);
-            }
-
-            // Fallback: try remote URL directly (for public files)
-            return remoteUrl;
-        }
 
         // ------------------------------------------------------
         // Linked program buttons (e.g., “Weights”)
