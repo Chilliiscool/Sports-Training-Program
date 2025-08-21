@@ -1,31 +1,32 @@
 // Module Name: TrainingPage
 // Author: Kye Franken
 // Date Created: 20 / 06 / 2025
-// Date Modified: 18 / 08 / 2025
+// Date Modified: 21 / 08 / 2025
 // Description: Native rendering for BOTH program styles with Monday-start weeks.
 //   • Table: original AM/PM planned matrix (blocks as columns, <p> rows).
 //   • Exercises: weights view parsed from <div class="exercise"> blocks.
 //   • View toggle logic keeps both working; Auto prefers Exercises when present.
 //   • Images/videos use an in-page lightbox overlay (no popup).
+//   • Fixed Media3 compatibility issues with custom player handling.
 
-using CommunityToolkit.Maui.Media;           // MediaElement
-using CommunityToolkit.Maui.Views;
-using Microsoft.Maui.ApplicationModel;       // Launcher (fallback)
 using Microsoft.Maui.Controls;
-using Microsoft.Maui.Graphics;
-using Microsoft.Maui.Storage;                // FileSystem, Preferences
+using Microsoft.Maui.Storage;
 using SportsTraining.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
-using System.IO;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Net.Http;
+using System.IO;
+
+// Lightbox uses Toolkit MediaElement for video with safer handling
+using CommunityToolkit.Maui.Views;
+using ToolkitMediaElement = CommunityToolkit.Maui.Views.MediaElement;
 
 namespace SportsTraining.Pages
 {
@@ -59,6 +60,9 @@ namespace SportsTraining.Pages
         private int? _programId;
         private int? _programWeeks;
         private readonly Dictionary<int, int> _weeksCache = new();
+
+        // Media handling for safer video playback
+        private ToolkitMediaElement? _currentMediaElement;
 
         private bool Ready => _anchorDate.HasValue && !string.IsNullOrWhiteSpace(_url);
 
@@ -139,6 +143,9 @@ namespace SportsTraining.Pages
         {
             base.OnDisappearing();
             MessagingCenter.Unsubscribe<AppShell, bool>(this, "ShowDatesPanelChanged");
+
+            // Clean up any active media
+            CleanupCurrentMedia();
         }
 
         // ----------------------- Loader -----------------------
@@ -166,7 +173,7 @@ namespace SportsTraining.Pages
                 if (string.IsNullOrWhiteSpace(html))
                 {
                     int altDay = (_dayVc >= 0 && _dayVc <= 6) ? (_dayVc + 1) : 1; // convert 0..6 -> 1..7
-                    var altUrl = WithWeekDayVc(_url, _week, _dayVc);
+                    var altUrl = WithWeekDayVc(_url, _week, _dayVc); // keep 0..6 internally
                     altUrl = ReplaceQuery(altUrl, "day", altDay.ToString(CultureInfo.InvariantCulture));
                     string htmlAlt = await VisualCoachingService.GetRawSessionHtml(cookie, altUrl);
                     if (!string.IsNullOrWhiteSpace(htmlAlt))
@@ -191,29 +198,25 @@ namespace SportsTraining.Pages
                     }
                 }
 
-                // Title (from HTML <h1>)
+                // Title (from <h1>)
                 var h1 = ExtractFirst(html, @"<h1[^>]*>(.*?)</h1>");
                 TitleLabel.Text = !string.IsNullOrWhiteSpace(h1)
                     ? WebUtility.HtmlDecode(StripTags(h1).Trim())
                     : "Training Session";
 
-                // Header line above tabs
-                HeaderWeekDateLabel.Text = $"Week {DisplayWeek} · {SelectedDate:ddd dd/MM/yyyy}";
-
                 // Clear old content
                 SessionStack.Children.Clear();
 
-                // Show session title inside the content
+                // Show session title + date header
                 SessionStack.Children.Add(new Label
                 {
                     Text = TitleLabel.Text,
                     FontAttributes = FontAttributes.Bold,
                     FontSize = 18,
-                    Margin = new Thickness(0, 8, 0, 8)
+                    Margin = new Thickness(0, 4, 0, 0)
                 });
 
-                // Add buttons for any <a class="linkedProgram"> (e.g., “Weights”)
-                AddLinkedProgramButtons(html);
+                HeaderWeekDateLabel.Text = $"Week {DisplayWeek} · {SelectedDate:ddd dd/MM/yyyy}";
 
                 var mode = Preferences.Get(ViewModeKey, "Auto"); // Auto | Exercises | Table
                 bool hasExercisesMarkup = Regex.IsMatch(html ?? "", @"class=['""]exercise['""]", RegexOptions.IgnoreCase);
@@ -268,9 +271,9 @@ namespace SportsTraining.Pages
                     CornerRadius = 14,
                     FontSize = 14,
                     BackgroundColor = active
-                        ? new Color(0.25f, 0.43f, 0.96f)
-                        : new Color(0f, 0f, 0f, 0.08f),
-                    TextColor = Colors.White
+                        ? new Microsoft.Maui.Graphics.Color(0.25f, 0.43f, 0.96f)
+                        : new Microsoft.Maui.Graphics.Color(0f, 0f, 0f, 0.08f),
+                    TextColor = Microsoft.Maui.Graphics.Colors.White
                 };
                 int captured = wk;
                 btn.Clicked += async (_, __) =>
@@ -281,7 +284,6 @@ namespace SportsTraining.Pages
 
                     _url = WithWeekDayVc(_url, _week, _dayVc);
                     _absoluteSessionUrl = BuildAbsoluteUrl(_url);
-
                     await LoadAndRenderAsync();
                     HeaderWeekDateLabel.Text = $"Week {DisplayWeek} · {SelectedDate:ddd dd/MM/yyyy}";
                 };
@@ -303,8 +305,8 @@ namespace SportsTraining.Pages
                 row.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
                 row.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
                 row.BackgroundColor = isSelected
-                    ? new Color(0f, 0f, 0f, 0.08f)
-                    : Colors.Transparent;
+                    ? new Microsoft.Maui.Graphics.Color(0f, 0f, 0f, 0.08f)
+                    : Microsoft.Maui.Graphics.Colors.Transparent;
 
                 row.Add(new Label { Text = label, FontAttributes = FontAttributes.Bold, Margin = new Thickness(0, 0, 10, 0) }, 0, 0);
                 row.Add(new Label { Text = date.ToString("dd/MM"), Opacity = 0.8 }, 1, 0);
@@ -404,8 +406,8 @@ namespace SportsTraining.Pages
                 Padding = new Thickness(10),
                 Margin = new Thickness(0, 4, 0, 10),
                 BackgroundColor = Application.Current?.RequestedTheme == AppTheme.Dark
-                                  ? new Color(0.12f, 0.12f, 0.12f)
-                                  : new Color(0.96f, 0.96f, 0.96f)
+                                  ? new Microsoft.Maui.Graphics.Color(0.12f, 0.12f, 0.12f)
+                                  : new Microsoft.Maui.Graphics.Color(0.96f, 0.96f, 0.96f)
             };
 
             for (int r = 0; r < rowCount; r++)
@@ -537,8 +539,8 @@ namespace SportsTraining.Pages
                 Padding = new Thickness(10),
                 Margin = new Thickness(0, 6),
                 BackgroundColor = Application.Current?.RequestedTheme == AppTheme.Dark
-                    ? new Color(0.12f, 0.12f, 0.12f)
-                    : new Color(0.97f, 0.97f, 0.97f)
+                    ? new Microsoft.Maui.Graphics.Color(0.12f, 0.12f, 0.12f)
+                    : new Microsoft.Maui.Graphics.Color(0.97f, 0.97f, 0.97f)
             };
             row.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
             row.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
@@ -626,7 +628,7 @@ namespace SportsTraining.Pages
                 RowSpacing = 2,
                 ColumnSpacing = 6,
                 Padding = new Thickness(8, 6),
-                BackgroundColor = new Color(1f, 0.95f, 0.8f),
+                BackgroundColor = new Microsoft.Maui.Graphics.Color(1f, 0.95f, 0.8f),
                 MinimumWidthRequest = 120
             };
 
@@ -754,7 +756,7 @@ namespace SportsTraining.Pages
                 else parts.Add($"{k}={v}");
             }
 
-            Upsert("week", week.ToString(CultureInfo.InvariantCulture));                   // 0-based
+            Upsert("week", week.ToString(CultureInfo.InvariantCulture));                    // 0-based
             Upsert("day", Math.Clamp(dayVc, 0, 6).ToString(CultureInfo.InvariantCulture)); // 0..6 Mon..Sun
             Upsert("session", "0");
             Upsert("i", "0");
@@ -899,101 +901,179 @@ namespace SportsTraining.Pages
         }
 
         // ======================================================
-        //                 Image & Video (lightbox)
+        //                 Image & Video (lightbox) - IMPROVED
         // ======================================================
-        private void ShowVideoPopup(string videoUrl, string? title = null)
+
+        // Helper: safely clean up current media element
+        private void CleanupCurrentMedia()
         {
-            var player = new SportsTraining.Controls.VideoPlayerView
+            if (_currentMediaElement != null)
             {
-                Source = videoUrl,
-                AutoPlay = true,
-                ShowControls = true,
+                try
+                {
+                    // Don't call Stop() or Pause() - just detach source
+                    _currentMediaElement.Source = "";
+                    _currentMediaElement = null;
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"[Media] Cleanup warning: {ex.Message}");
+                }
+            }
+        }
+
+        // Helper: download behind-auth video to a temp file using the saved cookie
+        private static async Task<string?> DownloadVideoToTempAsync(string url)
+        {
+            try
+            {
+                var cookie = SessionManager.GetCookie() ?? "";
+                using var handler = new HttpClientHandler { UseCookies = false, AllowAutoRedirect = false };
+                using var http = new HttpClient(handler);
+
+                if (!string.IsNullOrEmpty(cookie))
+                    http.DefaultRequestHeaders.Add("Cookie", $".VCPCOOKIES={cookie}");
+                http.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (compatible; SportsTrainingApp/1.0)");
+
+                var resp = await http.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
+                if (!resp.IsSuccessStatusCode)
+                {
+                    Debug.WriteLine($"[Video] HTTP {resp.StatusCode} for {url}");
+                    return null;
+                }
+
+                var ext = Path.GetExtension(url);
+                if (string.IsNullOrWhiteSpace(ext)) ext = ".mp4";
+                var tempPath = Path.Combine(FileSystem.CacheDirectory, $"vcvideo_{Guid.NewGuid():N}{ext}");
+
+                await using var src = await resp.Content.ReadAsStreamAsync();
+                await using var fs = File.OpenWrite(tempPath);
+                await src.CopyToAsync(fs);
+
+                return tempPath;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"[Video] Download error: {ex.Message}");
+                return null;
+            }
+        }
+
+        private async Task ShowVideoOverlayAsync(string videoUrl, string? title = null)
+        {
+            // Clean up any existing media first
+            CleanupCurrentMedia();
+
+            // Build absolute URL if needed
+            if (!Uri.TryCreate(videoUrl, UriKind.Absolute, out var _))
+                videoUrl = $"https://cloud.visualcoaching2.com{(videoUrl.StartsWith("/") ? "" : "/")}{videoUrl}";
+
+            // Create the player with safer initialization
+            var media = new ToolkitMediaElement
+            {
+                ShouldAutoPlay = true,
+                ShouldShowPlaybackControls = true,
+                Aspect = Aspect.AspectFit,
                 HorizontalOptions = LayoutOptions.Fill,
                 VerticalOptions = LayoutOptions.Fill
             };
 
+            // Store reference for cleanup
+            _currentMediaElement = media;
+
+            bool playing = false;
+
+            try
+            {
+                // 1) Try direct URL first (works if the file is publicly accessible)
+                media.Source = videoUrl;
+                playing = true;
+                Debug.WriteLine($"[Video] Using direct URL: {videoUrl}");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"[Video] Direct URL failed: {ex.Message}");
+                playing = false;
+            }
+
+            // 2) Fallback: download with authentication cookie
+            if (!playing)
+            {
+                try
+                {
+                    var localPath = await DownloadVideoToTempAsync(videoUrl);
+                    if (localPath != null && File.Exists(localPath))
+                    {
+                        media.Source = localPath;
+                        playing = true;
+                        Debug.WriteLine($"[Video] Using downloaded file: {localPath}");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"[Video] Download fallback failed: {ex.Message}");
+                }
+            }
+
+            if (!playing)
+            {
+                CleanupCurrentMedia();
+                await DisplayAlert("Video Error", "Unable to load the video.", "OK");
+                return;
+            }
+
+            // Show the lightbox
             LightboxTitle.Text = string.IsNullOrWhiteSpace(title) ? "Video" : title;
-            LightboxContent.Content = player;     // your existing ContentView in the overlay
-            LightboxOverlay.IsVisible = true;     // your existing overlay grid
+            LightboxContent.Content = media;
+            LightboxOverlay.IsVisible = true;
+        }
+
+        private void ShowImageOverlay(string imageUrl, string? title = null)
+        {
+            try
+            {
+                // Clean up any existing media
+                CleanupCurrentMedia();
+
+                var img = new Image
+                {
+                    Source = ImageSource.FromUri(new Uri(imageUrl)),
+                    Aspect = Aspect.AspectFit,
+                    HorizontalOptions = LayoutOptions.Fill,
+                    VerticalOptions = LayoutOptions.Fill
+                };
+
+                LightboxTitle.Text = string.IsNullOrWhiteSpace(title) ? "Image" : title;
+                LightboxContent.Content = img;
+                LightboxOverlay.IsVisible = true;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"[Image] Error: {ex.Message}");
+                DisplayAlert("Error", "Unable to load image.", "OK");
+            }
         }
 
         private void HideLightbox()
         {
-            LightboxContent.Content = null;       // this disposes player via handler
-            LightboxOverlay.IsVisible = false;
-        }
-
-
-        // ------------------------------------------------------
-        // Linked program buttons (e.g., “Weights”)
-        // ------------------------------------------------------
-        private void AddLinkedProgramButtons(string html)
-        {
-            if (string.IsNullOrWhiteSpace(html)) return;
-
-            var matches = Regex.Matches(
-                html,
-                @"<a[^>]*class=['""]linkedProgram[^'""]*['""][^>]*href=['""](?<href>[^'""]+)['""][^>]*>(?<text>.*?)</a>",
-                RegexOptions.IgnoreCase | RegexOptions.Singleline);
-
-            foreach (Match m in matches.Cast<Match>())
-            {
-                var href = WebUtility.HtmlDecode(m.Groups["href"].Value);
-                var text = WebUtility.HtmlDecode(StripTags(m.Groups["text"].Value)).Trim();
-                if (string.IsNullOrWhiteSpace(text)) text = "Open linked program";
-
-                var btn = new Button
-                {
-                    Text = text,
-                    Padding = new Thickness(10, 6),
-                    CornerRadius = 10,
-                    Margin = new Thickness(0, 6, 0, 0)
-                };
-
-                btn.Clicked += async (_, __) => await OpenLinkedProgramAsync(href, text);
-                SessionStack.Children.Add(btn);
-            }
-        }
-
-        private async Task OpenLinkedProgramAsync(string href, string linkText)
-        {
             try
             {
-                // Look for "...program/12345" inside href (it’s often in the fragment)
-                var idMatch = Regex.Match(href ?? "", @"program/(\d+)", RegexOptions.IgnoreCase);
-                if (idMatch.Success)
-                {
-                    string id = idMatch.Groups[1].Value;
-                    int week = _week;                       // keep current week
-                    int day = Math.Clamp(_dayVc, 0, 6);     // keep current day (Mon=0..Sun=6)
-                    string ad = _anchorDate?.ToString("yyyy-MM-dd") ?? "";
+                // Clean up media safely
+                CleanupCurrentMedia();
 
-                    // Treat that number like a Program/Session id
-                    string target = $"/Application/Program/Session/{id}?week={week}&day={day}&session=0&i=0&format=Tablet&version=2&ad={ad}";
-
-                    var encodedUrl = Uri.EscapeDataString(target);
-                    var encodedAnchor = Uri.EscapeDataString(ad);
-                    await Shell.Current.GoToAsync($"//{nameof(TrainingPage)}?url={encodedUrl}&anchorDate={encodedAnchor}");
-                    return;
-                }
-
-                // Couldn’t parse an id ? open the absolute href in the browser
-                var abs = BuildAbsoluteUrl(href);
-                if (!string.IsNullOrWhiteSpace(abs))
-                    await Launcher.OpenAsync(new Uri(abs));
-                else
-                    await DisplayAlert("Open link", "Couldn’t open the linked program.", "OK");
+                // Clear content and hide overlay
+                LightboxContent.Content = null;
+                LightboxOverlay.IsVisible = false;
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("[Training] linkedProgram open failed: " + ex.Message);
-                await DisplayAlert("Open link", "Couldn’t open the linked program.", "OK");
+                Debug.WriteLine($"[Lightbox] Hide error: {ex.Message}");
+                // Force hide anyway
+                LightboxOverlay.IsVisible = false;
             }
         }
 
-        // ======================================================
-        //                 Lightbox handlers (images/videos)
-        // ======================================================
+        // Event handlers for lightbox
         private void OnLightboxCloseClicked(object sender, EventArgs e) => HideLightbox();
         private void OnLightboxBackgroundTapped(object sender, TappedEventArgs e) => HideLightbox();
     }

@@ -71,6 +71,10 @@
               "target": "Package",
               "version": "[12.2.0, )"
             },
+            "CommunityToolkit.Maui.MediaElement": {
+              "target": "Package",
+              "version": "[6.1.2, )"
+            },
             "HtmlAgilityPack": {
               "target": "Package",
               "version": "[1.12.2, )"
@@ -96,34 +100,6 @@
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.3, )"
-            },
-            "Xamarin.AndroidX.Media3.Common": {
-              "target": "Package",
-              "version": "[1.5.1.1, )"
-            },
-            "Xamarin.AndroidX.Media3.ExoPlayer": {
-              "target": "Package",
-              "version": "[1.5.1.1, )"
-            },
-            "Xamarin.AndroidX.Media3.ExoPlayer.Dash": {
-              "target": "Package",
-              "version": "[1.5.1.1, )"
-            },
-            "Xamarin.AndroidX.Media3.ExoPlayer.Hls": {
-              "target": "Package",
-              "version": "[1.5.1.1, )"
-            },
-            "Xamarin.AndroidX.Media3.ExoPlayer.Rtsp": {
-              "target": "Package",
-              "version": "[1.5.1.1, )"
-            },
-            "Xamarin.AndroidX.Media3.Session": {
-              "target": "Package",
-              "version": "[1.5.1.1, )"
-            },
-            "Xamarin.AndroidX.Media3.UI": {
-              "target": "Package",
-              "version": "[1.5.1.1, )"
             }
           },
           "imports": [
@@ -154,6 +130,10 @@
               "target": "Package",
               "version": "[12.2.0, )"
             },
+            "CommunityToolkit.Maui.MediaElement": {
+              "target": "Package",
+              "version": "[6.1.2, )"
+            },
             "HtmlAgilityPack": {
               "target": "Package",
               "version": "[1.12.2, )"
@@ -179,34 +159,6 @@
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.3, )"
-            },
-            "Xamarin.AndroidX.Media3.Common": {
-              "target": "Package",
-              "version": "[1.5.1.1, )"
-            },
-            "Xamarin.AndroidX.Media3.ExoPlayer": {
-              "target": "Package",
-              "version": "[1.5.1.1, )"
-            },
-            "Xamarin.AndroidX.Media3.ExoPlayer.Dash": {
-              "target": "Package",
-              "version": "[1.5.1.1, )"
-            },
-            "Xamarin.AndroidX.Media3.ExoPlayer.Hls": {
-              "target": "Package",
-              "version": "[1.5.1.1, )"
-            },
-            "Xamarin.AndroidX.Media3.ExoPlayer.Rtsp": {
-              "target": "Package",
-              "version": "[1.5.1.1, )"
-            },
-            "Xamarin.AndroidX.Media3.Session": {
-              "target": "Package",
-              "version": "[1.5.1.1, )"
-            },
-            "Xamarin.AndroidX.Media3.UI": {
-              "target": "Package",
-              "version": "[1.5.1.1, )"
             }
           },
           "imports": [
@@ -237,6 +189,10 @@
               "target": "Package",
               "version": "[12.2.0, )"
             },
+            "CommunityToolkit.Maui.MediaElement": {
+              "target": "Package",
+              "version": "[6.1.2, )"
+            },
             "HtmlAgilityPack": {
               "target": "Package",
               "version": "[1.12.2, )"
@@ -262,34 +218,6 @@
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.3, )"
-            },
-            "Xamarin.AndroidX.Media3.Common": {
-              "target": "Package",
-              "version": "[1.5.1.1, )"
-            },
-            "Xamarin.AndroidX.Media3.ExoPlayer": {
-              "target": "Package",
-              "version": "[1.5.1.1, )"
-            },
-            "Xamarin.AndroidX.Media3.ExoPlayer.Dash": {
-              "target": "Package",
-              "version": "[1.5.1.1, )"
-            },
-            "Xamarin.AndroidX.Media3.ExoPlayer.Hls": {
-              "target": "Package",
-              "version": "[1.5.1.1, )"
-            },
-            "Xamarin.AndroidX.Media3.ExoPlayer.Rtsp": {
-              "target": "Package",
-              "version": "[1.5.1.1, )"
-            },
-            "Xamarin.AndroidX.Media3.Session": {
-              "target": "Package",
-              "version": "[1.5.1.1, )"
-            },
-            "Xamarin.AndroidX.Media3.UI": {
-              "target": "Package",
-              "version": "[1.5.1.1, )"
             }
           },
           "imports": [
@@ -321,6 +249,10 @@
               "target": "Package",
               "version": "[12.2.0, )"
             },
+            "CommunityToolkit.Maui.MediaElement": {
+              "target": "Package",
+              "version": "[6.1.2, )"
+            },
             "HtmlAgilityPack": {
               "target": "Package",
               "version": "[1.12.2, )"
@@ -340,34 +272,6 @@
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.3, )"
-            },
-            "Xamarin.AndroidX.Media3.Common": {
-              "target": "Package",
-              "version": "[1.5.1.1, )"
-            },
-            "Xamarin.AndroidX.Media3.ExoPlayer": {
-              "target": "Package",
-              "version": "[1.5.1.1, )"
-            },
-            "Xamarin.AndroidX.Media3.ExoPlayer.Dash": {
-              "target": "Package",
-              "version": "[1.5.1.1, )"
-            },
-            "Xamarin.AndroidX.Media3.ExoPlayer.Hls": {
-              "target": "Package",
-              "version": "[1.5.1.1, )"
-            },
-            "Xamarin.AndroidX.Media3.ExoPlayer.Rtsp": {
-              "target": "Package",
-              "version": "[1.5.1.1, )"
-            },
-            "Xamarin.AndroidX.Media3.Session": {
-              "target": "Package",
-              "version": "[1.5.1.1, )"
-            },
-            "Xamarin.AndroidX.Media3.UI": {
-              "target": "Package",
-              "version": "[1.5.1.1, )"
             }
           },
           "imports": [

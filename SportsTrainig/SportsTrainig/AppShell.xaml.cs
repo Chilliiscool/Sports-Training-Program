@@ -26,6 +26,8 @@ namespace SportsTraining
             Routing.RegisterRoute(nameof(Pages.LoginPage), typeof(Pages.LoginPage));
             Routing.RegisterRoute(nameof(Pages.MainPage), typeof(Pages.MainPage));
             Routing.RegisterRoute(nameof(Pages.TrainingPage), typeof(Pages.TrainingPage));
+            Routing.RegisterRoute(nameof(Pages.VideoPage), typeof(Pages.VideoPage));
+
 
             // Ensure default (hidden) unless user changed it
             bool show = Preferences.Get(ShowDatesPrefKey, false);
