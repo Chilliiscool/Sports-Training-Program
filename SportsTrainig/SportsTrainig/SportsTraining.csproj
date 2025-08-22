@@ -74,6 +74,11 @@
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 	</ItemGroup>
 
+	<!-- Android-specific packages -->
+	<ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">
+		<PackageReference Include="Xamarin.AndroidX.LocalBroadcastManager" Version="1.1.0.15" />
+	</ItemGroup>
+
 	<ItemGroup>
 		<MauiXaml Update="ImagePopup.xaml">
 			<Generator>MSBuild:Compile</Generator>

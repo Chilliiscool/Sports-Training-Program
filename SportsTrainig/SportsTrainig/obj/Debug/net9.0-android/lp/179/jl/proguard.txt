@@ -1,20 +1,23 @@
-# Proguard rules specific to the extractor module.
+# Copyright (C) 2017 The Android Open Source Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
-# Methods accessed via reflection in DefaultExtractorsFactory
--dontnote androidx.media3.decoder.flac.FlacExtractor
--keepclassmembers class androidx.media3.decoder.flac.FlacExtractor {
-  <init>(int);
-}
--dontnote androidx.media3.decoder.flac.FlacLibrary
--keepclassmembers class androidx.media3.decoder.flac.FlacLibrary {
-  public static boolean isAvailable();
-}
--dontnote androidx.media3.decoder.midi.MidiExtractor
--keepclassmembers class androidx.media3.decoder.midi.MidiExtractor {
-  <init>();
+# Prevent Parcelable objects from being removed or renamed.
+-keep class android.support.v4.media.** implements android.os.Parcelable {
+    public static final android.os.Parcelable$Creator *;
 }
 
-# Don't warn about checkerframework and Kotlin annotations
--dontwarn org.checkerframework.**
--dontwarn kotlin.annotations.jvm.**
--dontwarn javax.annotation.**
+# Prevent Parcelable objects from being removed or renamed.
+-keep class androidx.media.** implements android.os.Parcelable {
+    public static final android.os.Parcelable$Creator *;
+}

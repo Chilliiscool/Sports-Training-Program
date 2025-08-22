@@ -30,9 +30,9 @@ public final class R {
 	}
 	public static final class string {
 		public static final int copy_toast_msg = 0x7f11002e;
-		public static final int fallback_menu_item_copy_link = 0x7f11007b;
-		public static final int fallback_menu_item_open_in_browser = 0x7f11007c;
-		public static final int fallback_menu_item_share_link = 0x7f11007d;
+		public static final int fallback_menu_item_copy_link = 0x7f11006d;
+		public static final int fallback_menu_item_open_in_browser = 0x7f11006e;
+		public static final int fallback_menu_item_share_link = 0x7f11006f;
 	}
 	public static final class xml {
 		public static final int image_share_filepaths = 0x7f140000;

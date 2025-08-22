@@ -7,10 +7,6 @@
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools" package="com.companyname.sportstrainig" android:versionCode="1" android:versionName="1.0">
   <uses-sdk android:minSdkVersion="21" android:targetSdkVersion="35" />
-  <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
-  <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-  <uses-permission android:name="android.permission.MEDIA_CONTENT_CONTROL" />
-  <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
   <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
   <uses-permission android:name="android.permission.INTERNET" />
   <permission android:name="com.companyname.sportstrainig.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" android:protectionLevel="signature" />
@@ -22,11 +18,7 @@
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
-    <service android:name="communityToolkit.maui.media.services" android:enabled="true" android:exported="false" android:foregroundServiceType="mediaPlayback">
-      <intent-filter>
-        <action android:name="androidx.media3.session.MediaSessionService" />
-      </intent-filter>
-    </service>
+    <service android:name="communityToolkit.maui.media.services" android:enabled="true" android:exported="false" android:foregroundServiceType="mediaPlayback" />
     <activity android:name="crc6468b6408a11370c2f.WebAuthenticatorIntermediateActivity" android:configChanges="orientation|screenSize" android:exported="false" />
     <provider android:name="microsoft.maui.essentials.fileProvider" android:authorities="com.companyname.sportstrainig.fileProvider" android:exported="false" android:grantUriPermissions="true">
       <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/microsoft_maui_essentials_fileprovider_file_paths" />

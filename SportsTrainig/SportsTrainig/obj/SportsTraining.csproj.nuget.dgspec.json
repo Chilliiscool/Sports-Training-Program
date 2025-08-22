@@ -69,11 +69,11 @@
           "dependencies": {
             "CommunityToolkit.Maui": {
               "target": "Package",
-              "version": "[12.2.0, )"
+              "version": "[10.1.0, )"
             },
             "CommunityToolkit.Maui.MediaElement": {
               "target": "Package",
-              "version": "[6.1.2, )"
+              "version": "[4.1.0, )"
             },
             "HtmlAgilityPack": {
               "target": "Package",
@@ -100,6 +100,10 @@
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.3, )"
+            },
+            "Xamarin.AndroidX.LocalBroadcastManager": {
+              "target": "Package",
+              "version": "[1.1.0.15, )"
             }
           },
           "imports": [
@@ -128,11 +132,11 @@
           "dependencies": {
             "CommunityToolkit.Maui": {
               "target": "Package",
-              "version": "[12.2.0, )"
+              "version": "[10.1.0, )"
             },
             "CommunityToolkit.Maui.MediaElement": {
               "target": "Package",
-              "version": "[6.1.2, )"
+              "version": "[4.1.0, )"
             },
             "HtmlAgilityPack": {
               "target": "Package",
@@ -187,11 +191,11 @@
           "dependencies": {
             "CommunityToolkit.Maui": {
               "target": "Package",
-              "version": "[12.2.0, )"
+              "version": "[10.1.0, )"
             },
             "CommunityToolkit.Maui.MediaElement": {
               "target": "Package",
-              "version": "[6.1.2, )"
+              "version": "[4.1.0, )"
             },
             "HtmlAgilityPack": {
               "target": "Package",
@@ -247,11 +251,11 @@
           "dependencies": {
             "CommunityToolkit.Maui": {
               "target": "Package",
-              "version": "[12.2.0, )"
+              "version": "[10.1.0, )"
             },
             "CommunityToolkit.Maui.MediaElement": {
               "target": "Package",
-              "version": "[6.1.2, )"
+              "version": "[4.1.0, )"
             },
             "HtmlAgilityPack": {
               "target": "Package",
