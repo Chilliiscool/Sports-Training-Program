@@ -4,6 +4,66 @@
         <name>SportsTraining</name>
     </assembly>
     <members>
+        <member name="M:SportsTraining.Services.VisualCoachingService.GetUserInfo(System.String,System.String)">
+            <summary>
+            Gets user information including diary IDs for the specified email address
+            </summary>
+            <param name="cookie">Authentication cookie</param>
+            <param name="email">User's email address</param>
+            <returns>UserInfo object with diary IDs, or null if not found</returns>
+        </member>
+        <member name="M:SportsTraining.Services.VisualCoachingService.GetDiaryData(System.String,System.Int32,System.String,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Gets diary data for a specific user, date, and program
+            </summary>
+            <param name="cookie">Authentication cookie</param>
+            <param name="diaryId">Diary ID (PerformanceDiaryId or WellnessDiaryId)</param>
+            <param name="date">Date in yyyy-MM-dd format</param>
+            <param name="userId">User ID (not email)</param>
+            <param name="programId">Program ID</param>
+            <param name="week">Week number (0-based)</param>
+            <param name="day">Day number (1-7)</param>
+            <param name="session">Session number (usually 0)</param>
+            <param name="i">Session index (usually 0)</param>
+            <returns>Raw diary JSON data</returns>
+        </member>
+        <member name="M:SportsTraining.Services.VisualCoachingService.GetDiaryDataByEmail(System.String,System.String,System.String,System.Int32,System.Int32,System.Int32,System.String,System.Int32,System.Int32)">
+            <summary>
+            Convenience method to get diary data by email address
+            </summary>
+            <param name="cookie">Authentication cookie</param>
+            <param name="email">User's email address</param>
+            <param name="date">Date in yyyy-MM-dd format</param>
+            <param name="programId">Program ID</param>
+            <param name="week">Week number (0-based)</param>
+            <param name="day">Day number (1-7)</param>
+            <param name="diaryType">Type of diary: "performance" or "wellness"</param>
+            <param name="session">Session number (usually 0)</param>
+            <param name="i">Session index (usually 0)</param>
+            <returns>Raw diary JSON data</returns>
+        </member>
+        <member name="M:SportsTraining.Services.VisualCoachingService.ParseDiaryData(System.String)">
+            <summary>
+            Parse diary JSON into a more usable format
+            </summary>
+            <param name="diaryJson">Raw JSON from GetDiaryData</param>
+            <returns>Parsed diary entry or null</returns>
+        </member>
+        <member name="M:SportsTraining.Services.VisualCoachingService.GetDiaryTemplate(System.String,System.Int32)">
+            <summary>
+            Get diary form template/structure for a specific diary
+            </summary>
+            <param name="cookie">Authentication cookie</param>
+            <param name="diaryId">Diary ID</param>
+            <returns>Form template JSON</returns>
+        </member>
+        <member name="M:SportsTraining.Services.VisualCoachingService.ParseDiaryTemplate(System.String)">
+            <summary>
+            Parse diary template into a structured form
+            </summary>
+            <param name="templateJson">Template JSON from GetDiaryTemplate</param>
+            <returns>Structured diary form</returns>
+        </member>
         <member name="T:SportsTraining.Resource">
             <summary>
             Android Resource Designer class.

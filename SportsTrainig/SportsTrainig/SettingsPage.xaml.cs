@@ -165,5 +165,43 @@ namespace SportsTraining.Pages
 
         public static bool AreNotificationsEnabled() =>
             Preferences.Get(NotificationsKey, true);
+        private async void OnDiarySettingsClicked(object sender, EventArgs e)
+        {
+            string currentEmail = Preferences.Get("UserEmail", "");
+
+            string message = string.IsNullOrEmpty(currentEmail)
+                ? "No user email is currently stored for diary entries."
+                : $"Current diary email: {currentEmail}";
+
+            bool changeEmail = await DisplayAlert("Diary Settings", message,
+                "Change Email", "Cancel");
+
+            if (changeEmail)
+            {
+                string newEmail = await DisplayPromptAsync("Diary Email",
+                    "Enter email address for diary entries:",
+                    placeholder: currentEmail);
+
+                if (!string.IsNullOrEmpty(newEmail))
+                {
+                    Preferences.Set("UserEmail", newEmail);
+                    await DisplayAlert("Success", $"Diary email updated to: {newEmail}", "OK");
+                }
+            }
+        }
+
+        private async void OnViewDiaryHistoryClicked(object sender, EventArgs e)
+        {
+            string userEmail = Preferences.Get("UserEmail", "");
+
+            if (string.IsNullOrEmpty(userEmail))
+            {
+                await DisplayAlert("No User Set", "Please set your email address first.", "OK");
+                return;
+            }
+
+            // Could navigate to a diary history page or show recent entries
+            await DisplayAlert("Diary History", "Diary history feature coming soon!", "OK");
+        }
     }
 }

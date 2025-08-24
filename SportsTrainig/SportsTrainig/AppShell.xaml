@@ -2,7 +2,8 @@
     <!--//
 Module Name: App 
 Author: Kye Franken 
-Date Created: 19/06/2025
+Date 
+    : 19/06/2025
 Date Modified: 06/08/2025
 Description: UI page for the AppShell.-->
 
@@ -16,8 +17,8 @@ Description: UI page for the AppShell.-->
 
     <Shell.TitleView>
         <HorizontalStackLayout x:Name="ShellTitleView" x:FieldModifier="public" Spacing="10" Padding="10" VerticalOptions="Center">
-            <Label x:Name="TitleLabel" x:FieldModifier="public" Text="Settings" FontSize="22" VerticalOptions="Center" />
-            <Image Source="default_logo.png" HeightRequest="50" />
+            <Label x:Name="TitleLabel" x:FieldModifier="public" Text="Home" FontSize="22" VerticalOptions="Center" />
+            <Image Source="default_logo.png" HeightRequest="50" WidthRequest="480" Scale="3"/>
             <Image x:Name="LogoImage" x:FieldModifier="public" Source="etpa_logo.png" HeightRequest="50" IsVisible="False" />
         </HorizontalStackLayout>
     </Shell.TitleView>
