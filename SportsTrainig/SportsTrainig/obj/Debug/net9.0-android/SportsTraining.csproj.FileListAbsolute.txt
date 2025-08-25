@@ -2416,3 +2416,5 @@ C:\SportsProgram\Sports-Training-Program\SportsTrainig\SportsTrainig\obj\Debug\n
 C:\SportsProgram\Sports-Training-Program\SportsTrainig\SportsTrainig\obj\Debug\net9.0-android\android\src\mono\com\google\android\exoplayer2\video\VideoRendererEventListenerImplementor.java
 C:\SportsProgram\Sports-Training-Program\SportsTrainig\SportsTrainig\obj\Debug\net9.0-android\resizetizer\r\drawable\video.png
 C:\SportsProgram\Sports-Training-Program\SportsTrainig\SportsTrainig\obj\Debug\net9.0-android\resizetizer\r\drawable\info.png
+C:\SportsTraining\SportsTraining\Sports-Training-Program\SportsTrainig\SportsTrainig\obj\Debug\net9.0-android\resizetizer\r\drawable\info.png
+C:\SportsTraining\SportsTraining\Sports-Training-Program\SportsTrainig\SportsTrainig\obj\Debug\net9.0-android\resizetizer\r\drawable\video.png

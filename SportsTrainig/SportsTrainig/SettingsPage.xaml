@@ -1,76 +1,90 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
-    <!--//
+<!--//
 Module Name: SettingsPage 
 Author: Kye Franken 
 Date Created: 20/06/2025
 Date Modified: 06/08/2025
 Description: UI page for the SettingsPage.-->
-    <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"  
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"  
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"  
             xmlns:controls="clr-namespace:Microsoft.Maui.Controls;assembly=Microsoft.Maui.Controls"  
             x:Class="SportsTraining.Pages.SettingsPage"  
-            Title="Setting">  
+            Title="Setting">
 
-   <Shell.TitleView>  
-       <HorizontalStackLayout Spacing="10" Padding="10" VerticalOptions="Center">
+    <Shell.TitleView>
+        <HorizontalStackLayout Spacing="10" Padding="10" VerticalOptions="Center">
             <Label Text="Settings" FontSize="22" VerticalOptions="Center" />
             <Image Source="default_logo.png" HeightRequest="50" />
             <Image x:Name="LogoImage" Source="etpa_logo.png" HeightRequest="50" IsVisible="False" />
-        </HorizontalStackLayout>  
-   </Shell.TitleView>  
+        </HorizontalStackLayout>
+    </Shell.TitleView>
 
-   <ScrollView>  
-       <VerticalStackLayout Padding="20" Spacing="12">  
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="12">
 
-           
-             
-
-           <VerticalStackLayout Padding="10" Spacing="10">
+            <!-- Company Selection -->
+            <VerticalStackLayout Padding="10" Spacing="10">
                 <Label Text="Select Company:" />
-                <Picker x:Name="CompanyPicker" SelectedIndexChanged="OnCompanyPickerSelectedIndexChanged" />  
-           </VerticalStackLayout>  
+                <Picker x:Name="CompanyPicker" SelectedIndexChanged="OnCompanyPickerSelectedIndexChanged" />
+            </VerticalStackLayout>
 
-           <Button Text="Account Settings" Clicked="OnAccountSettingsClicked" />  
-           <Button Text="Edit Profile" Clicked="OnEditProfileClicked" />  
-           <Button Text="Change Password" Clicked="OnChangePasswordClicked" />  
-           <Button Text="Training Preferences" Clicked="OnTrainingPreferencesClicked" />  
-           <Button Text="Goals" Clicked="OnGoalsClicked" />  
+            <!-- Account Settings -->
+            <Button Text="Account Settings" Clicked="OnAccountSettingsClicked" />
+            <Button Text="Edit Profile" Clicked="OnEditProfileClicked" />
+            <Button Text="Change Password" Clicked="OnChangePasswordClicked" />
+            <Button Text="Training Preferences" Clicked="OnTrainingPreferencesClicked" />
+            <Button Text="Goals" Clicked="OnGoalsClicked" />
 
-           <VerticalStackLayout Padding="10" Spacing="10">  
-               <Label Text="Select Units:" />  
-               <Picker x:Name="UnitsPicker" SelectedIndexChanged="OnUnitsPickerSelectedIndexChanged" />  
-           </VerticalStackLayout>  
+            <!-- ✅ ADD DIARY SETTINGS HERE -->
+            <Button Text="Diary Settings" Clicked="OnDiarySettingsClicked" />
+            <Button Text="View Diary History" Clicked="OnViewDiaryHistoryClicked" />
 
-           <HorizontalStackLayout Padding="10" Spacing="10" VerticalOptions="Center">  
-               <Label Text="Notifications:" VerticalOptions="Center" />  
-               <Label Text="Off" VerticalOptions="Center" />  
-               <Switch x:Name="NotificationsSwitch" Toggled="OnNotificationsToggled" />  
-               <Label Text="On" VerticalOptions="Center" />  
-           </HorizontalStackLayout>  
+            <!-- Units Selection -->
+            <VerticalStackLayout Padding="10" Spacing="10">
+                <Label Text="Select Units:" />
+                <Picker x:Name="UnitsPicker" SelectedIndexChanged="OnUnitsPickerSelectedIndexChanged" />
+            </VerticalStackLayout>
 
-           <Button Text="App Settings" Clicked="OnAppSettingsClicked" />  
+            <!-- App Preferences -->
+            <HorizontalStackLayout Padding="10" Spacing="10" VerticalOptions="Center">
+                <Label Text="Notifications:" VerticalOptions="Center" />
+                <Label Text="Off" VerticalOptions="Center" />
+                <Switch x:Name="NotificationsSwitch" Toggled="OnNotificationsToggled" />
+                <Label Text="On" VerticalOptions="Center" />
+            </HorizontalStackLayout>
 
-           <HorizontalStackLayout Padding="10" Spacing="10" VerticalOptions="Center">  
-               <Label Text="Offline Mode:" VerticalOptions="Center" />  
-               <Label Text="Off" VerticalOptions="Center" />  
-               <Switch Toggled="OnOfflineModeToggled" />  
-               <Label Text="On" VerticalOptions="Center" />  
-           </HorizontalStackLayout>  
+            <Button Text="App Settings" Clicked="OnAppSettingsClicked" />
 
-           <HorizontalStackLayout Padding="10" Spacing="10" VerticalOptions="Center">  
-               <Label Text="App Theme:" VerticalOptions="Center" />  
-               <Label Text="☀️ Light" VerticalOptions="Center" />  
-               <Switch x:Name="ThemeToggleSwitch" Toggled="OnThemeToggleToggled" />  
-               <Label Text="🌙 Dark" VerticalOptions="Center" />  
-           </HorizontalStackLayout>  
+            <HorizontalStackLayout Padding="10" Spacing="10" VerticalOptions="Center">
+                <Label Text="Offline Mode:" VerticalOptions="Center" />
+                <Label Text="Off" VerticalOptions="Center" />
+                <Switch Toggled="OnOfflineModeToggled" />
+                <Label Text="On" VerticalOptions="Center" />
+            </HorizontalStackLayout>
 
-           <Button Text="Language" Clicked="OnLanguageClicked" />  
-           <Button Text="Privacy Permissions" Clicked="OnPrivacyClicked" />  
-           <Button Text="Support" Clicked="OnSupportClicked" />  
-           <Button Text="FAQ" Clicked="OnFaqClicked" />  
-           <Button Text="Report Issue" Clicked="OnReportIssueClicked" />
-           <Button Text="Logout" Clicked="OnLogoutClicked" />
+            <HorizontalStackLayout Padding="10" Spacing="10" VerticalOptions="Center">
+                <Label Text="App Theme:" VerticalOptions="Center" />
+                <Label Text="☀️ Light" VerticalOptions="Center" />
+                <Switch x:Name="ThemeToggleSwitch" Toggled="OnThemeToggleToggled" />
+                <Label Text="🌙 Dark" VerticalOptions="Center" />
+            </HorizontalStackLayout>
 
-        </VerticalStackLayout>  
-   </ScrollView>  
+            <!-- ✅ OPTIONAL: ADD DIARY AUTO-PROMPT TOGGLE -->
+            <HorizontalStackLayout Padding="10" Spacing="10" VerticalOptions="Center">
+                <Label Text="Auto-prompt for diary:" VerticalOptions="Center" />
+                <Label Text="Off" VerticalOptions="Center" />
+                <Switch x:Name="DiaryAutoPromptSwitch" Toggled="OnDiaryAutoPromptToggled" />
+                <Label Text="On" VerticalOptions="Center" />
+            </HorizontalStackLayout>
+
+            <!-- Support & Info -->
+            <Button Text="Language" Clicked="OnLanguageClicked" />
+            <Button Text="Privacy Permissions" Clicked="OnPrivacyClicked" />
+            <Button Text="Support" Clicked="OnSupportClicked" />
+            <Button Text="FAQ" Clicked="OnFaqClicked" />
+            <Button Text="Report Issue" Clicked="OnReportIssueClicked" />
+            <Button Text="Logout" Clicked="OnLogoutClicked" />
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

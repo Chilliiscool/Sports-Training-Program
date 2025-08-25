@@ -45,8 +45,6 @@ namespace SportsTraining.Pages
         private const double ParagraphColWidth = 220;
         private const int MinWeeks = 1;
         private const int MaxWeeks = 14;
-        private bool _sessionCompleted = false;
-        private string _currentUserEmail = "";
         private const string UserEmailKey = "UserEmail";
         // Monday-start model: 0..6 = Mon..Sun (internal representation)
         private static readonly (string Label, int DayIdx)[] DaysVc =
@@ -2403,128 +2401,6 @@ namespace SportsTraining.Pages
             await LoadDiaryDataAsync(userEmail, currentDate, programId, week, day);
         }
 
-        // Alternative: Add diary data to your existing session display
-        private async Task EnhanceSessionWithDiary(string userEmail)
-        {
-            try
-            {
-                if (!Ready || string.IsNullOrEmpty(userEmail)) return;
-
-                string cookie = SessionManager.GetCookie();
-                if (string.IsNullOrEmpty(cookie)) return;
-
-                // Get diary data for current session context
-                string currentDate = SelectedDate.ToString("yyyy-MM-dd");
-                int programId = _programId.HasValue ? _programId.Value : 0;
-                int week = _week;
-                int day = _dayVc + 1; // Convert to 1-based
-
-                // Load both diaries
-                var performanceTask = VisualCoachingService.GetDiaryDataByEmail(
-                    cookie, userEmail, currentDate, programId, week, day, "performance");
-                var wellnessTask = VisualCoachingService.GetDiaryDataByEmail(
-                    cookie, userEmail, currentDate, programId, week, day, "wellness");
-
-                await Task.WhenAll(performanceTask, wellnessTask);
-
-                var performanceDiaryJson = await performanceTask;
-                var wellnessDiaryJson = await wellnessTask;
-
-                // Add diary sections if data exists
-                if (!string.IsNullOrEmpty(performanceDiaryJson))
-                {
-                    var entry = VisualCoachingService.ParseDiaryData(performanceDiaryJson);
-                    if (entry != null)
-                    {
-                        DisplayDiaryData("Performance Diary", entry);
-                    }
-                }
-
-                if (!string.IsNullOrEmpty(wellnessDiaryJson))
-                {
-                    var entry = VisualCoachingService.ParseDiaryData(wellnessDiaryJson);
-                    if (entry != null)
-                    {
-                        DisplayDiaryData("Wellness Diary", entry);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"[Diary] Error enhancing session with diary: {ex.Message}");
-                // Don't show error to user as diary is supplementary information
-            }
-        }
-        // Add this to your TrainingPage after the session content
-        private void AddSessionCompletionButton()
-        {
-            if (_sessionCompleted) return;
-
-            var completionSection = new VerticalStackLayout
-            {
-                Spacing = 10,
-                Margin = new Thickness(0, 20, 0, 10),
-                BackgroundColor = Color.FromArgb("#E8F5E8"),
-                Padding = new Thickness(15, 10)
-            };
-
-            completionSection.Children.Add(new Label
-            {
-                Text = "Session Complete?",
-                FontAttributes = FontAttributes.Bold,
-                FontSize = 16,
-                HorizontalOptions = LayoutOptions.Center
-            });
-
-            var completeButton = new Button
-            {
-                Text = "Complete Session & Fill Diary",
-                BackgroundColor = Color.FromArgb("#4CAF50"),
-                TextColor = Colors.White,
-                CornerRadius = 8,
-                Padding = new Thickness(20, 10),
-                HorizontalOptions = LayoutOptions.Center
-            };
-
-            completeButton.Clicked += OnCompleteSessionClicked;
-            completionSection.Children.Add(completeButton);
-
-            SessionStack.Children.Add(completionSection);
-        }
-
-        // Event handler for session completion
-        private async void OnCompleteSessionClicked(object sender, EventArgs e)
-        {
-            try
-            {
-                // Mark session as completed
-                _sessionCompleted = true;
-
-                // Hide the completion button and show diary
-                var button = sender as Button;
-                if (button?.Parent is VerticalStackLayout parent)
-                {
-                    parent.IsVisible = false;
-                }
-
-                // Get user email - you'll need to implement this based on your user management
-                string userEmail = await GetCurrentUserEmailAsync();
-                if (string.IsNullOrEmpty(userEmail))
-                {
-                    await DisplayAlert("Error", "Unable to determine user email for diary entry.", "OK");
-                    return;
-                }
-
-                // Load and show diary forms
-                await ShowPostSessionDiaryAsync(userEmail);
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"[Diary] Error in OnCompleteSessionClicked: {ex.Message}");
-                await DisplayAlert("Error", "Failed to load diary form.", "OK");
-            }
-        }
-
         // Create number input with validation
         private View CreateNumberInput(DiaryField field)
         {
@@ -2811,19 +2687,6 @@ namespace SportsTraining.Pages
             }
         }
 
-        // Integration method - call this in your LoadAndRenderAsync method
-        private async Task LoadSessionWithDiary()
-        {
-            // Your existing session loading code here...
-            await LoadAndRenderAsync();
-
-            // Add completion button if session hasn't been completed
-            if (!_sessionCompleted)
-            {
-                AddSessionCompletionButton();
-            }
-        }
-
         // Helper method to check if user has already filled diary for this session
         private async Task<bool> HasExistingDiaryEntry(string userEmail, string diaryType)
         {
@@ -2916,35 +2779,6 @@ namespace SportsTraining.Pages
             catch (Exception ex)
             {
                 Debug.WriteLine($"[Diary] Error showing diary status: {ex.Message}");
-            }
-        }
-
-        // Enhanced session loading that includes diary functionality
-        public async Task LoadSessionWithDiarySupport(string userEmail = "")
-        {
-            try
-            {
-                // Load the main session content
-                await LoadAndRenderAsync();
-
-                // If user email is provided, show diary-related UI
-                if (!string.IsNullOrEmpty(userEmail))
-                {
-                    _currentUserEmail = userEmail;
-
-                    // Check if diary entries already exist
-                    await ShowDiaryStatusAsync(userEmail);
-
-                    // Add completion button if session not completed
-                    if (!_sessionCompleted)
-                    {
-                        AddSessionCompletionButton();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"[Diary] Error in LoadSessionWithDiarySupport: {ex.Message}");
             }
         }
 
@@ -3158,7 +2992,6 @@ namespace SportsTraining.Pages
         private async Task LoadAndRenderAsync()
         {
             if (!Ready) return;
-
             try
             {
                 var cookie = SessionManager.GetCookie();
@@ -3172,7 +3005,6 @@ namespace SportsTraining.Pages
                 await EnsureProgramWeeksAsync(cookie);
                 BuildWeekTabsUI();
                 BuildDaysListUI();
-
                 string html = await VisualCoachingService.GetRawSessionHtml(cookie, _url);
 
                 // Clear old content and render session
@@ -3210,9 +3042,11 @@ namespace SportsTraining.Pages
                 if (!rendered)
                     SessionStack.Children.Add(new Label { Text = "No program content.", FontSize = 14 });
 
-                // *** ACTIVATE DIARY FUNCTIONALITY ***
-                await InitializeDiarySupport();
-
+                // ✅ ADD THESE LINES HERE:
+                if (rendered) // if session content was successfully rendered
+                {
+                    AddDiaryButtonForSession(); // Add the diary button
+                }
             }
             catch (UnauthorizedAccessException)
             {
@@ -3228,36 +3062,6 @@ namespace SportsTraining.Pages
             }
         }
 
-        // Update InitializeDiarySupport to be more comprehensive
-        private async Task InitializeDiarySupport()
-        {
-            try
-            {
-                Debug.WriteLine("[Diary] Initializing diary support...");
-
-                // Try to get user email from preferences first
-                string userEmail = Preferences.Get(UserEmailKey, "");
-
-                if (!string.IsNullOrEmpty(userEmail))
-                {
-                    // Show diary status for known user
-                    await ShowDiaryStatusAsync(userEmail);
-                }
-
-                // Always add the completion button (for any user)
-                AddSessionCompletionButton();
-
-                // Auto-prompt if session is recent and no user is known
-                if (string.IsNullOrEmpty(userEmail))
-                {
-                    await AutoPromptDiaryIfNeeded();
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"[Diary] Error in InitializeDiarySupport: {ex.Message}");
-            }
-        }
         private async Task LoadDiaryForm(VerticalStackLayout parentContainer, string cookie,
     UserInfo userInfo, string diaryType)
         {
@@ -3383,6 +3187,311 @@ namespace SportsTraining.Pages
             {
                 Debug.WriteLine($"[Diary] Error in ShowPostSessionDiaryAsync: {ex.Message}");
                 await DisplayAlert("Error", "Failed to load diary forms.", "OK");
+            }
+        }
+        
+        private async Task ShowDiaryFormAsync(string userEmail)
+        {
+            try
+            {
+                string cookie = SessionManager.GetCookie();
+                if (string.IsNullOrEmpty(cookie))
+                {
+                    await DisplayAlert("Error", "Please log in again.", "OK");
+                    return;
+                }
+
+                var userInfo = await VisualCoachingService.GetUserInfo(cookie, userEmail);
+                if (userInfo == null)
+                {
+                    await DisplayAlert("Error", $"User not found: {userEmail}", "OK");
+                    return;
+                }
+
+                await LoadDiaryForUser(userInfo, cookie);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"[Diary] ShowDiaryFormAsync error: {ex.Message}");
+                await DisplayAlert("Error", "Failed to load diary.", "OK");
+            }
+        }
+        private async Task LoadDiaryForUser(UserInfo userInfo, string cookie)
+        {
+            string currentDate = SelectedDate.ToString("yyyy-MM-dd");
+            int programId = _programId ?? 0;
+            int week = _week;
+            int day = _dayVc + 1; // Convert 0-based to 1-based for API
+
+            var diaryContainer = new VerticalStackLayout
+            {
+                Spacing = 15,
+                Margin = new Thickness(0, 10),
+                BackgroundColor = Color.FromArgb("#F8F9FA"),
+                Padding = new Thickness(15)
+            };
+
+            // Header
+            diaryContainer.Children.Add(new Label
+            {
+                Text = $"📝 Diary Entry - {userInfo.DisplayName}",
+                FontAttributes = FontAttributes.Bold,
+                FontSize = 18,
+                HorizontalOptions = LayoutOptions.Center
+            });
+
+            diaryContainer.Children.Add(new Label
+            {
+                Text = $"Session: {currentDate} • Week {DisplayWeek}, Day {day}",
+                FontSize = 14,
+                HorizontalOptions = LayoutOptions.Center,
+                TextColor = Color.FromArgb("#666666"),
+                Margin = new Thickness(0, 0, 0, 10)
+            });
+
+            // Load diaries
+            if (userInfo.PerformanceDiaryId > 0)
+            {
+                await LoadDiaryForm(diaryContainer, cookie, userInfo, "performance");
+            }
+
+            if (userInfo.WellnessDiaryId > 0)
+            {
+                await LoadDiaryForm(diaryContainer, cookie, userInfo, "wellness");
+            }
+
+            if (userInfo.PerformanceDiaryId == 0 && userInfo.WellnessDiaryId == 0)
+            {
+                diaryContainer.Children.Add(new Label
+                {
+                    Text = "No diaries configured for this user.",
+                    TextColor = Color.FromArgb("#FF9800"),
+                    FontAttributes = FontAttributes.Italic,
+                    HorizontalOptions = LayoutOptions.Center
+                });
+            }
+
+            SessionStack.Children.Add(diaryContainer);
+
+            // Scroll to diary
+            if (SessionStack.Parent is ScrollView scrollView)
+            {
+                await scrollView.ScrollToAsync(diaryContainer, ScrollToPosition.Start, true);
+            }
+        }
+        private void AddDiaryButtonForSession()
+        {
+            // Check if diary button already exists
+            if (SessionStack.Children.Any(c => c is VerticalStackLayout vs &&
+                vs.Children.Any(child => child is Button btn && btn.Text.Contains("Diary"))))
+                return;
+
+            var diarySection = new VerticalStackLayout
+            {
+                Spacing = 10,
+                Margin = new Thickness(0, 20, 0, 10),
+                BackgroundColor = Color.FromArgb("#E8F5E8"),
+                Padding = new Thickness(15, 10)
+            };
+
+            diarySection.Children.Add(new Label
+            {
+                Text = "Complete Your Session Diary",
+                FontAttributes = FontAttributes.Bold,
+                FontSize = 16,
+                HorizontalOptions = LayoutOptions.Center
+            });
+
+            var diaryButton = new Button
+            {
+                Text = "📝 Fill Session Diary",
+                BackgroundColor = Color.FromArgb("#4CAF50"),
+                TextColor = Colors.White,
+                CornerRadius = 8,
+                Padding = new Thickness(20, 10),
+                HorizontalOptions = LayoutOptions.Center
+            };
+
+            diaryButton.Clicked += OnDiaryButtonClicked;
+            diarySection.Children.Add(diaryButton);
+            SessionStack.Children.Add(diarySection);
+        }
+
+        private async void OnDiaryButtonClicked(object sender, EventArgs e)
+        {
+            try
+            {
+                // Use the existing cookie from login
+                string cookie = SessionManager.GetCookie();
+                if (string.IsNullOrEmpty(cookie))
+                {
+                    await DisplayAlert("Error", "Please log in again.", "OK");
+                    return;
+                }
+
+                // Hide the diary button section after clicking
+                if (sender is Button button && button.Parent is VerticalStackLayout parent)
+                {
+                    parent.IsVisible = false;
+                }
+
+                // Get the user's email from stored preferences (set during login or settings)
+                string userEmail = Preferences.Get("UserEmail", "");
+
+                if (string.IsNullOrEmpty(userEmail))
+                {
+                    // Prompt once for email and store it
+                    userEmail = await DisplayPromptAsync("User Email",
+                        "Enter your email address for diary entries:",
+                        placeholder: "user@example.com");
+
+                    if (string.IsNullOrEmpty(userEmail))
+                    {
+                        await DisplayAlert("Email Required", "Email is required for diary entries.", "OK");
+                        return;
+                    }
+
+                    // Store for future use
+                    Preferences.Set("UserEmail", userEmail);
+                }
+
+                await LoadDiaryForCurrentSession(cookie, userEmail);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"[Diary] Error: {ex.Message}");
+                await DisplayAlert("Error", "Failed to load diary form.", "OK");
+            }
+        }
+
+        private async Task LoadDiaryForCurrentSession(string cookie, string userEmail)
+        {
+            try
+            {
+                // Get user info using the login cookie
+                var userInfo = await VisualCoachingService.GetUserInfo(cookie, userEmail);
+                if (userInfo == null)
+                {
+                    await DisplayAlert("Error", $"Could not find user information for {userEmail}", "OK");
+                    return;
+                }
+
+                // Use current session context
+                string currentDate = SelectedDate.ToString("yyyy-MM-dd");
+                int programId = _programId ?? 0;
+                int week = _week;
+                int day = _dayVc + 1; // Convert 0-based to 1-based for API
+
+                Debug.WriteLine($"[Diary] Loading diary for {userInfo.DisplayName}");
+                Debug.WriteLine($"[Diary] Session: {currentDate}, Program: {programId}, Week: {week}, Day: {day}");
+
+                var diaryContainer = new VerticalStackLayout
+                {
+                    Spacing = 15,
+                    Margin = new Thickness(0, 10),
+                    BackgroundColor = Color.FromArgb("#F8F9FA"),
+                    Padding = new Thickness(15)
+                };
+
+                // Header
+                diaryContainer.Children.Add(new Label
+                {
+                    Text = $"📝 Diary Entry - {userInfo.DisplayName}",
+                    FontAttributes = FontAttributes.Bold,
+                    FontSize = 18,
+                    HorizontalOptions = LayoutOptions.Center
+                });
+
+                diaryContainer.Children.Add(new Label
+                {
+                    Text = $"Session: {currentDate} • Week {DisplayWeek}, Day {day}",
+                    FontSize = 14,
+                    HorizontalOptions = LayoutOptions.Center,
+                    TextColor = Color.FromArgb("#666666"),
+                    Margin = new Thickness(0, 0, 0, 10)
+                });
+
+                // Load Performance Diary (if available)
+                if (userInfo.PerformanceDiaryId > 0)
+                {
+                    await LoadSpecificDiary(diaryContainer, cookie, userInfo, "Performance",
+                        userInfo.PerformanceDiaryId, currentDate, programId, week, day);
+                }
+
+                // Load Wellness Diary (if available)
+                if (userInfo.WellnessDiaryId > 0)
+                {
+                    await LoadSpecificDiary(diaryContainer, cookie, userInfo, "Wellness",
+                        userInfo.WellnessDiaryId, currentDate, programId, week, day);
+                }
+
+                // Show message if no diaries available
+                if (userInfo.PerformanceDiaryId == 0 && userInfo.WellnessDiaryId == 0)
+                {
+                    diaryContainer.Children.Add(new Label
+                    {
+                        Text = "No diaries configured for this user.",
+                        TextColor = Color.FromArgb("#FF9800"),
+                        FontAttributes = FontAttributes.Italic,
+                        HorizontalOptions = LayoutOptions.Center
+                    });
+                }
+
+                SessionStack.Children.Add(diaryContainer);
+
+                // Scroll to diary section
+                if (SessionStack.Parent is ScrollView scrollView)
+                {
+                    await scrollView.ScrollToAsync(diaryContainer, ScrollToPosition.Start, true);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"[Diary] Error loading diary: {ex.Message}");
+                await DisplayAlert("Error", "Failed to load diary forms.", "OK");
+            }
+        }
+
+        private async Task LoadSpecificDiary(VerticalStackLayout parentContainer, string cookie,
+            UserInfo userInfo, string diaryType, int diaryId, string date, int programId, int week, int day)
+        {
+            try
+            {
+                Debug.WriteLine($"[Diary] Loading {diaryType} diary (ID: {diaryId})");
+
+                // Check for existing diary data using the cookie
+                var existingData = await VisualCoachingService.GetDiaryData(
+                    cookie, diaryId, date, userInfo.UserId, programId, week, day);
+
+                // Create basic diary form
+                var diaryForm = CreateBasicDiaryForm(diaryType, diaryId);
+                diaryForm.Date = date;
+                diaryForm.UserId = userInfo.UserId;
+                diaryForm.ProgramKey = $"{programId}:{week:000}:{day:000}:000:000";
+
+                // Populate with existing data if available
+                if (!string.IsNullOrEmpty(existingData))
+                {
+                    PopulateFormWithExistingData(diaryForm, existingData);
+                }
+
+                // Create and add the form UI
+                var formUI = CreateDiaryFormUI(diaryForm, cookie);
+                parentContainer.Children.Add(formUI);
+
+                Debug.WriteLine($"[Diary] {diaryType} diary form created successfully");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"[Diary] Error loading {diaryType} diary: {ex.Message}");
+
+                parentContainer.Children.Add(new Label
+                {
+                    Text = $"Error loading {diaryType} diary: {ex.Message}",
+                    TextColor = Colors.Red,
+                    FontSize = 12,
+                    Margin = new Thickness(0, 5)
+                });
             }
         }
 

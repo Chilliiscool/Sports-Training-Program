@@ -203,5 +203,10 @@ namespace SportsTraining.Pages
             // Could navigate to a diary history page or show recent entries
             await DisplayAlert("Diary History", "Diary history feature coming soon!", "OK");
         }
+        private void OnDiaryAutoPromptToggled(object sender, ToggledEventArgs e)
+        {
+            bool autoPrompt = e.Value;
+            Preferences.Set("DiaryAutoPrompt", autoPrompt);
+        }
     }
 }
