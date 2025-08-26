@@ -456,15 +456,15 @@ namespace SportsTraining.Services
         /// <param name="i">Session index (usually 0)</param>
         /// <returns>Raw diary JSON data</returns>
         public static async Task<string?> GetDiaryData(string cookie, int diaryId, string date, int userId,
-            int programId, int week, int day, int session = 0, int i = 0)
+    int programId, int week, int day, int session = 0, int i = 0)
         {
             try
             {
                 SetCookieFromSession();
                 ApplyCookieHeader(cookie);
 
-                // Format the program key with 3-digit padding: PROGRAMID:week:day:session:i
-                string programKey = $"{programId}:{week:000}:{day:000}:{session:000}:{i:000}";
+                // ✅ FIXED: Use 6-part program key format (add extra :000 at the end)
+                string programKey = $"{programId}:{week:000}:{day:000}:{session:000}:{i:000}:000";
 
                 string url = $"https://cloud.visualcoaching2.com/api/2/Form/GetForm/{diaryId}" +
                             $"?date={date}" +
@@ -477,7 +477,7 @@ namespace SportsTraining.Services
                 Debug.WriteLine($"[VCS] Diary ID: {diaryId}");
                 Debug.WriteLine($"[VCS] Date: {date}");
                 Debug.WriteLine($"[VCS] User ID: {userId}");
-                Debug.WriteLine($"[VCS] Program Key: {programKey}");
+                Debug.WriteLine($"[VCS] Program Key: {programKey}"); // Now shows 6 parts
                 Debug.WriteLine($"[VCS] URL: {url}");
 
                 var response = await client.GetAsync(url);
@@ -600,20 +600,21 @@ namespace SportsTraining.Services
         // Replace your SubmitDiaryData method in VisualCoachingService.cs with this corrected version:
 
         public static async Task<bool> SubmitDiaryData(string cookie, int diaryId, int userId, string date,
-            int programId, int week, int day, Dictionary<string, object> diaryData, int session = 0, int i = 0)
+    int programId, int week, int day, Dictionary<string, object> diaryData, int session = 0, int i = 0)
         {
             try
             {
                 SetCookieFromSession();
                 ApplyCookieHeader(cookie);
 
-                string programKey = $"{programId}:{week:000}:{day:000}:{session:000}:{i:000}";
+                // ✅ FIXED: Use 6-part program key format
+                string programKey = $"{programId}:{week:000}:{day:000}:{session:000}:{i:000}:000";
 
                 var formData = new Dictionary<string, object>
                 {
                     ["date"] = date,
                     ["userId"] = userId,
-                    ["programKey"] = programKey,
+                    ["programKey"] = programKey, // Now 6 parts
                     ["diaryId"] = diaryId
                 };
 
@@ -629,6 +630,7 @@ namespace SportsTraining.Services
                 string submitUrl = $"https://cloud.visualcoaching2.com/api/2/Form/SubmitForm";
 
                 Debug.WriteLine($"[VCS] Submitting diary data to: {submitUrl}");
+                Debug.WriteLine($"[VCS] Program Key: {programKey}"); // Now 6 parts
                 Debug.WriteLine($"[VCS] Data: {jsonContent}");
 
                 var response = await client.PostAsync(submitUrl, content);
@@ -644,15 +646,7 @@ namespace SportsTraining.Services
                 Debug.WriteLine($"[VCS] Diary submit response: {responseContent}");
                 Debug.WriteLine($"[VCS] Status code: {response.StatusCode}");
 
-                if (response.IsSuccessStatusCode)
-                {
-                    return true;
-                }
-                else
-                {
-                    Debug.WriteLine($"[VCS] Diary submit failed: {response.StatusCode} - {responseContent}");
-                    return false;
-                }
+                return response.IsSuccessStatusCode;
             }
             catch (UnauthorizedAccessException)
             {
@@ -786,6 +780,38 @@ namespace SportsTraining.Services
             {
                 Debug.WriteLine($"[VCS] ParseDiaryTemplate error: {ex.Message}");
                 return null;
+            }
+        }
+        public static async Task<string> GetRawApiCall(string cookie, string url)
+        {
+            try
+            {
+                SetCookieFromSession();
+                ApplyCookieHeader(cookie);
+
+                var response = await client.GetAsync(url);
+
+                if (IsRedirectToLogin(response) || response.StatusCode == HttpStatusCode.Unauthorized)
+                {
+                    Debug.WriteLine("[VCS] Session expired detected in GetRawApiCall.");
+                    SessionManager.ClearCookie();
+                    throw new UnauthorizedAccessException("Session expired, please login again.");
+                }
+
+                response.EnsureSuccessStatusCode();
+                var content = await response.Content.ReadAsStringAsync();
+
+                Debug.WriteLine($"[VCS] GetRawApiCall response length: {content?.Length ?? 0}");
+                return content ?? "";
+            }
+            catch (UnauthorizedAccessException)
+            {
+                throw;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"[VCS] GetRawApiCall error: {ex.Message}");
+                return "";
             }
         }
     }
