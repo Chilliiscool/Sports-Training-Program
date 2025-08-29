@@ -1,19 +1,8 @@
 ﻿// Module Name: TrainingPage
 // Author: Kye Franken
 // Date Created: 20 / 06 / 2025
-// Date Modified: 21 / 08 / 2025
-// Description: Native rendering for BOTH program styles with Monday-start weeks.
-//   • Table: original AM/PM planned matrix (blocks as columns, <p> rows).
-//   • Exercises: weights view parsed from <div class="exercise"> blocks.
-//   • View toggle logic keeps both working; Auto prefers Exercises when present.
-//   • Images/videos use an in-page lightbox overlay (no popup).
-//   • Fixed Media3 compatibility issues with custom player handling.
-//   • Added info button for exercise details.
-//   • FIXED: Day indexing - Monday=1, Sunday=7 for API
-//   • UPDATED: Clean button text without question mark symbols
-//   • ADDED: YouTube link support with embedded player and browser fallback
-
-// Lightbox uses Toolkit MediaElement for video with safer handling
+// Date Modified: 29 / 08 / 2025
+// Description: Loads the programs and sessions from Visual Coaching
 using CommunityToolkit.Maui.Views;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Layouts;
@@ -41,13 +30,14 @@ namespace SportsTraining.Pages
     public partial class TrainingPage : ContentPage, INotifyPropertyChanged
     {
         private const string ShowDatesPrefKey = "ShowDatesPanel";
-        private const string ViewModeKey = "ProgramViewMode"; // Auto | Exercises | Table
+        private const string ViewModeKey = "ProgramViewMode";
         private const double ParagraphColWidth = 220;
         private const int MinWeeks = 1;
         private const int MaxWeeks = 14;
         private const string UserEmailKey = "UserEmail";
         private string _currentSessionHtml = "";
-        // Monday-start model: 0..6 = Mon..Sun (internal representation)
+
+        // Monday-start model days
         private static readonly (string Label, int DayIdx)[] DaysVc =
         {
             ("Mon",0),("Tue",1),("Wed",2),("Thu",3),("Fri",4),("Sat",5),("Sun",6)
@@ -55,36 +45,31 @@ namespace SportsTraining.Pages
 
         private string _url = "";
         private string _absoluteSessionUrl = "";
-
-        private int _week = 0;           // 0-based week from URL (server)
-        private int _dayVc = 0;          // 0..6 (Mon..Sun) - internal representation
-        private DateTime? _anchorDate;   // Program DateStart yyyy-MM-dd (ad)
-        private DateTime? _selectedDate; // exact date for current view (seeded from 'ad')
-
+        private int _week = 0;
+        private int _dayVc = 0;
+        private DateTime? _anchorDate;
+        private DateTime? _selectedDate;
         private int _entryWeekForProgram = 0;
-        private DateTime _programWeek0Monday; // baseline Monday for Week 0
-
+        private DateTime _programWeek0Monday;
         private int? _programId;
         private int? _programWeeks;
         private readonly Dictionary<int, int> _weeksCache = new();
-
-        // Media handling for safer video playback
         private ToolkitMediaElement? _currentMediaElement;
 
+        // Flag to check if enough data is ready
         private bool Ready => _anchorDate.HasValue && !string.IsNullOrWhiteSpace(_url);
 
+        // Constructor
         public TrainingPage()
         {
             InitializeComponent();
-
-            // Optional Shell toggle to show/hide dates panel
             MessagingCenter.Subscribe<AppShell, bool>(this, "ShowDatesPanelChanged", (_, show) =>
             {
                 DatesSection.IsVisible = show;
             });
         }
 
-        // ----------------------- Query props -----------------------
+        // URL property (sets program and triggers reload)
         public string Url
         {
             get => WebUtility.UrlDecode(_url);
@@ -104,18 +89,15 @@ namespace SportsTraining.Pages
                         _programWeeks = w;
                 }
 
-                // Parse week and day from URL BEFORE setting up dates
                 ParseWeekAndDayVcFromUrl(_url);
                 _entryWeekForProgram = _week;
 
                 if (_anchorDate == null)
                     TryLoadAnchorFromUrl(_url);
 
-                // Set selected date based on the day from the URL
                 if (_anchorDate != null)
                 {
                     ComputeProgramBaselineMonday();
-                    // Calculate the selected date based on week and day from URL
                     _selectedDate = _programWeek0Monday.AddDays(7 * _week + _dayVc);
                     Debug.WriteLine($"[Url setter] Set _selectedDate to: {_selectedDate:yyyy-MM-dd dddd} (week={_week}, dayVc={_dayVc})");
                 }
@@ -125,6 +107,7 @@ namespace SportsTraining.Pages
             }
         }
 
+        // Anchor date property
         public string AnchorDate
         {
             get => _anchorDate?.ToString("yyyy-MM-dd");
@@ -142,7 +125,7 @@ namespace SportsTraining.Pages
             }
         }
 
-        // ----------------------- Lifecycle -----------------------
+        // Lifecycle: when page is shown
         protected override void OnAppearing()
         {
             base.OnAppearing();
@@ -150,16 +133,15 @@ namespace SportsTraining.Pages
             DatesSection.IsVisible = Preferences.Get(ShowDatesPrefKey, true);
         }
 
+        // Lifecycle: when page is hidden
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
             MessagingCenter.Unsubscribe<AppShell, bool>(this, "ShowDatesPanelChanged");
-
-            // Clean up any active media
             CleanupCurrentMedia();
         }
 
-        // ----------------------- Weeks / Days UI -----------------------
+        // Build week tabs navigation
         private void BuildWeekTabsUI()
         {
             WeekTabsLayout.Children.Clear();
@@ -196,14 +178,14 @@ namespace SportsTraining.Pages
             }
         }
 
+        // Build day list navigation
         private void BuildDaysListUI()
         {
             DaysListLayout.Children.Clear();
-
             var weekMonday = WeekMonday(SelectedDate);
+
             foreach (var (label, dayOffset) in DaysVc)
             {
-                // dayOffset is 0-based (0=Mon, 1=Tue, ..., 6=Sun) for AddDays
                 var date = weekMonday.AddDays(dayOffset);
                 bool isSelected = SelectedDate.Date == date.Date;
 
@@ -217,24 +199,19 @@ namespace SportsTraining.Pages
                 row.Add(new Label { Text = label, FontAttributes = FontAttributes.Bold, Margin = new Thickness(0, 0, 10, 0) }, 0, 0);
                 row.Add(new Label { Text = date.ToString("dd/MM"), Opacity = 0.8 }, 1, 0);
 
-                // FIXED: Use dayOffset directly (0-6) internally
-                int capturedDayOffset = dayOffset; // Keep 0-based (0=Mon, 6=Sun)
+                int capturedDayOffset = dayOffset;
                 var tap = new TapGestureRecognizer();
                 tap.Tapped += async (_, __) =>
                 {
                     Debug.WriteLine($"[Day Tap] Label: {label}, dayOffset: {capturedDayOffset}");
 
-                    _dayVc = capturedDayOffset; // Store as 0-based (0=Mon, 6=Sun)
-                    _selectedDate = weekMonday.AddDays(capturedDayOffset); // Use 0-based offset for date calc
+                    _dayVc = capturedDayOffset;
+                    _selectedDate = weekMonday.AddDays(capturedDayOffset);
                     _week = SelectedWeekIndex;
-
                     Debug.WriteLine($"[Day Tap] _dayVc (0-based): {_dayVc}, _selectedDate: {_selectedDate:yyyy-MM-dd ddd}");
-
                     _url = WithWeekDayVc(_url, _week, _dayVc);
                     _absoluteSessionUrl = BuildAbsoluteUrl(_url);
-
                     Debug.WriteLine($"[Day Tap] URL: {_url}");
-
                     await LoadAndRenderAsync();
                     HeaderWeekDateLabel.Text = $"Week {DisplayWeek} · {SelectedDate:ddd dd/MM/yyyy}";
                 };
@@ -243,7 +220,7 @@ namespace SportsTraining.Pages
             }
         }
 
-        // ----------------------- Program length detection -----------------------
+        // Ensure total program weeks
         private async Task EnsureProgramWeeksAsync(string cookie)
         {
             if (_programWeeks != null) return;
@@ -269,11 +246,7 @@ namespace SportsTraining.Pages
             if (_programId is int pid2) _weeksCache[pid2] = _programWeeks.Value;
         }
 
-        // ======================================================
-        //                     VIEW RENDERERS
-        // ======================================================
-
-        // -------- Table (AM/PM planned matrix; transposed) --------
+        // Render day table
         private bool RenderProgramDayTable(string html)
         {
             var blockCols = ExtractProgramColumns(html);
@@ -282,11 +255,7 @@ namespace SportsTraining.Pages
             return true;
         }
 
-        // ======================================================
-        //                 LINKED PROGRAMS SUPPORT
-        // ======================================================
-
-        // Enhanced TextPart class for both linked programs and YouTube links
+        // Helper class for text/link parsing
         private class TextPart
         {
             public string Text { get; set; } = "";
@@ -296,35 +265,28 @@ namespace SportsTraining.Pages
             public string YouTubeUrl { get; set; } = "";
         }
 
-        // Updated SplitTextWithAllLinks method - fix YouTube link text cleaning
+        // Split HTML text into parts (plain, program links, YouTube)
         private List<TextPart> SplitTextWithAllLinks(string html)
         {
             var parts = new List<TextPart>();
-
-            // Combined regex to match both linked programs and YouTube links
             var allMatches = new List<(Match match, string type)>();
 
-            // Find linked programs
             var linkedProgramMatches = Regex.Matches(html,
                 @"<a[^>]*href=""[^""]*(?:#program/|/Program/Session/)(\d+)""[^>]*class=""[^""]*linkedProgram[^""]*""[^>]*>(.*?)</a>",
                 RegexOptions.IgnoreCase | RegexOptions.Singleline);
-
             foreach (Match match in linkedProgramMatches)
             {
                 allMatches.Add((match, "linkedProgram"));
             }
 
-            // Find YouTube links
             var youtubeMatches = Regex.Matches(html,
                 @"<a[^>]*href=""(https://(?:www\.)youtube\.com/watch\?v=([^""&]+))[^""]*""[^>]*>(.*?)</a>",
                 RegexOptions.IgnoreCase | RegexOptions.Singleline);
-
             foreach (Match match in youtubeMatches)
             {
                 allMatches.Add((match, "youtube"));
             }
 
-            // Sort matches by position
             allMatches.Sort((a, b) => a.match.Index.CompareTo(b.match.Index));
 
             if (allMatches.Count == 0)
@@ -334,10 +296,8 @@ namespace SportsTraining.Pages
             }
 
             int lastIndex = 0;
-
             foreach (var (match, type) in allMatches)
             {
-                // Add text before the link
                 if (match.Index > lastIndex)
                 {
                     string beforeText = html.Substring(lastIndex, match.Index - lastIndex);
@@ -349,7 +309,6 @@ namespace SportsTraining.Pages
 
                 if (type == "linkedProgram")
                 {
-                    // Handle linked program (existing logic)
                     string programId = match.Groups[1].Value;
                     string linkText = match.Groups[2].Value;
 
@@ -365,12 +324,10 @@ namespace SportsTraining.Pages
                 }
                 else if (type == "youtube")
                 {
-                    // Handle YouTube link - APPLY THE SAME CLEANING
                     string youtubeUrl = match.Groups[1].Value;
                     string videoId = match.Groups[2].Value;
                     string linkText = match.Groups[3].Value;
 
-                    // FIXED: Apply the same aggressive cleaning to YouTube link text
                     string cleanLinkText = CleanButtonText(WebUtility.HtmlDecode(StripTags(linkText)));
 
                     if (string.IsNullOrWhiteSpace(cleanLinkText))
@@ -390,7 +347,6 @@ namespace SportsTraining.Pages
                 lastIndex = match.Index + match.Length;
             }
 
-            // Add remaining text after the last link
             if (lastIndex < html.Length)
             {
                 string afterText = html.Substring(lastIndex);
@@ -403,60 +359,44 @@ namespace SportsTraining.Pages
             return parts;
         }
 
-        // Enhanced CleanButtonText method with even more aggressive cleaning
+        // Aggressively clean link/button text
         private static string CleanButtonText(string text)
         {
             if (string.IsNullOrWhiteSpace(text)) return "Program";
 
-            // AGGRESSIVELY remove ALL types of question marks (including Unicode variants)
-            text = text.Replace("?", "")           // Regular question mark
-                      .Replace("？", "")           // Full-width question mark (Unicode)
-                      .Replace("¿", "")            // Inverted question mark
-                      .Replace("؟", "")            // Arabic question mark
-                      .Replace("；", "")           // Any other question-like characters
-                      .Replace("¡", "");           // Inverted exclamation (sometimes mistaken)
+            text = text.Replace("?", "")
+                      .Replace("？", "")
+                      .Replace("¿", "")
+                      .Replace("؟", "")
+                      .Replace("；", "")
+                      .Replace("¡", "");
 
-            // Remove ALL parentheses and their content (multiple passes to handle nested)
             while (text.Contains("(") && text.Contains(")"))
             {
                 text = Regex.Replace(text, @"\([^)]*\)", "");
             }
 
-            // Remove any leftover standalone parentheses
             text = text.Replace("(", "").Replace(")", "");
-
-            // Remove "Linked Program" text
             text = text.Replace("Linked Program", "", StringComparison.OrdinalIgnoreCase);
-
-            // Remove "YouTube" if it's redundant (since we add the play button)
             text = text.Replace("YouTube", "", StringComparison.OrdinalIgnoreCase);
-
-            // Remove common video-related words that might be redundant
             text = text.Replace("Video", "", StringComparison.OrdinalIgnoreCase);
             text = text.Replace("Watch", "", StringComparison.OrdinalIgnoreCase);
 
-            // Remove leading/trailing colons, dashes, periods, and whitespace
             text = Regex.Replace(text, @"^[:\-\.\s]+|[:\-\.\s]+$", "");
-
-            // Clean up multiple spaces and normalize whitespace
             text = Regex.Replace(text, @"\s+", " ");
-
-            // Remove any remaining special characters that might cause issues
             text = Regex.Replace(text, @"[^\w\s\-]", "");
 
             text = text.Trim();
 
-            // If nothing meaningful left, use appropriate default
             if (string.IsNullOrWhiteSpace(text) || text.Length < 2)
                 return "Video";
 
             return text;
         }
 
-        // Updated CreateContentWithLinkedPrograms method with better YouTube button text
+        // Create content (labels, buttons) with linked programs and YouTube
         private View CreateContentWithLinkedPrograms(string text)
         {
-            // Check for both linked programs and YouTube links
             var linkedProgramMatches = Regex.Matches(text,
                 @"<a[^>]*href=""[^""]*(?:#program/|/Program/Session/)(\d+)""[^>]*class=""[^""]*linkedProgram[^""]*""[^>]*>(.*?)</a>",
                 RegexOptions.IgnoreCase | RegexOptions.Singleline);
@@ -467,7 +407,6 @@ namespace SportsTraining.Pages
 
             if (linkedProgramMatches.Count == 0 && youtubeMatches.Count == 0)
             {
-                // No special links, return simple label
                 return new Label
                 {
                     Text = WebUtility.HtmlDecode(StripTags(text)),
@@ -477,22 +416,18 @@ namespace SportsTraining.Pages
                 };
             }
 
-            // Has special links, create interactive content
             var mainStack = new VerticalStackLayout { Spacing = 5 };
-
-            // Process the text to handle both types of links
             var parts = SplitTextWithAllLinks(text);
 
             foreach (var part in parts)
             {
                 if (part.IsLinkedProgram)
                 {
-                    // Handle linked programs (existing functionality)
                     var linkContainer = new VerticalStackLayout { Spacing = 10 };
 
                     var linkButton = new Button
                     {
-                        Text = part.Text, // Already cleaned in SplitTextWithAllLinks
+                        Text = part.Text,
                         FontSize = 14,
                         BackgroundColor = Color.FromArgb("#0088FF"),
                         TextColor = Colors.White,
@@ -520,7 +455,7 @@ namespace SportsTraining.Pages
                     {
                         if (!isExpanded)
                         {
-                            linkButton.Text = $"Hide {part.Text}"; // Use cleaned text
+                            linkButton.Text = $"Hide {part.Text}";
                             linkButton.BackgroundColor = Color.FromArgb("#0066CC");
                             expandedContainer.Children.Clear();
                             expandedContainer.Children.Add(new Label
@@ -535,7 +470,7 @@ namespace SportsTraining.Pages
                         }
                         else
                         {
-                            linkButton.Text = part.Text; // Use cleaned text
+                            linkButton.Text = part.Text;
                             linkButton.BackgroundColor = Color.FromArgb("#0088FF");
                             expandedContainer.IsVisible = false;
                             expandedContainer.Children.Clear();
@@ -549,12 +484,11 @@ namespace SportsTraining.Pages
                 }
                 else if (part.IsYouTubeLink)
                 {
-                    // Handle YouTube links - CLEAN BUTTON TEXT
                     var youtubeButton = new Button
                     {
-                        Text = $"▶ {part.Text}", // part.Text is now cleaned by CleanButtonText
+                        Text = $"▶ {part.Text}",
                         FontSize = 14,
-                        BackgroundColor = Color.FromArgb("#FF0000"), // YouTube red
+                        BackgroundColor = Color.FromArgb("#FF0000"),
                         TextColor = Colors.White,
                         CornerRadius = 6,
                         Padding = new Thickness(12, 6),
@@ -592,21 +526,17 @@ namespace SportsTraining.Pages
             };
         }
 
-
-
-        // YouTube link handling methods
+        // Open a YouTube link, fallback to webview if needed
         private async Task OpenYouTubeLinkAsync(string youtubeUrl, string title)
         {
             try
             {
-                // Option 1: Open in system browser (most reliable)
                 await Browser.OpenAsync(youtubeUrl, BrowserLaunchMode.SystemPreferred);
             }
             catch (Exception ex)
             {
                 Debug.WriteLine($"[YouTube] Error opening link: {ex.Message}");
 
-                // Fallback: Try to extract video ID and show in a web view
                 var videoId = ExtractYouTubeVideoId(youtubeUrl);
                 if (!string.IsNullOrEmpty(videoId))
                 {
@@ -619,19 +549,18 @@ namespace SportsTraining.Pages
             }
         }
 
-        // Extract YouTube video ID from URL
+        // Extract YouTube video id from url
         private string ExtractYouTubeVideoId(string url)
         {
             var match = Regex.Match(url, @"(?:youtube\.com/watch\?v=|youtu\.be/)([^&\n?#]+)");
             return match.Success ? match.Groups[1].Value : "";
         }
 
-        // Alternative: Show YouTube video in a web view overlay
+        // Show YouTube in an embedded webview
         private async Task ShowYouTubeInWebViewAsync(string videoId, string title)
         {
             try
             {
-                // Create embedded YouTube player URL
                 string embedUrl = $"https://www.youtube.com/embed/{videoId}?autoplay=1&modestbranding=1&rel=0";
 
                 var webView = new WebView
@@ -641,7 +570,6 @@ namespace SportsTraining.Pages
                     VerticalOptions = LayoutOptions.FillAndExpand
                 };
 
-                // Show in lightbox overlay (reuse existing lightbox)
                 LightboxTitle.Text = title ?? "YouTube Video";
                 LightboxContent.Content = webView;
                 LightboxOverlay.IsVisible = true;
@@ -653,7 +581,8 @@ namespace SportsTraining.Pages
             }
         }
 
-        // Updated OnLinkedProgramClicked method - navigate directly without displaying extra info
+
+        // Handle linked program click navigation
         private async Task OnLinkedProgramClicked(string programId, string programName)
         {
             try
@@ -667,35 +596,29 @@ namespace SportsTraining.Pages
 
                 Debug.WriteLine($"[LinkedProgram] Opening linked program: {programName} (ID: {programId})");
 
-                // Find the first day with actual content, considering program type
                 (int targetWeek, int targetDay) = await FindFirstContentWeekDayAsync(cookie, programId);
 
-                // Calculate the target date based on CURRENT PROGRAM'S DATE CONTEXT
                 DateTime targetDate;
                 if (targetDay == 0)
                 {
-                    // For day 0 (strength programs), use the Monday of the target week
                     DateTime mondayWeek0 = _programWeek0Monday;
-                    targetDate = mondayWeek0.AddDays(targetWeek * 7); // Day 0 = Monday of that week
+                    targetDate = mondayWeek0.AddDays(targetWeek * 7);
                     Debug.WriteLine($"[LinkedProgram] Using day 0 logic - target date: {targetDate:yyyy-MM-dd}");
                 }
                 else
                 {
-                    // For regular days 1-7, use standard calculation
                     DateTime mondayWeek0 = _programWeek0Monday;
-                    int daysToAdd = (targetWeek * 7) + (targetDay - 1); // targetDay 1-7 becomes 0-6 offset
+                    int daysToAdd = (targetWeek * 7) + (targetDay - 1);
                     targetDate = mondayWeek0.AddDays(daysToAdd);
                     Debug.WriteLine($"[LinkedProgram] Using standard logic - target date: {targetDate:yyyy-MM-dd}");
                 }
 
-                // Build URL for the linked program
                 string linkedUrl = $"/Application/Program/Session/{programId}?week={targetWeek}&day={targetDay}&session=0&i=0&format=Tablet&version=2";
 
                 Debug.WriteLine($"[LinkedProgram] Navigating to: {linkedUrl}");
                 Debug.WriteLine($"[LinkedProgram] Program: {programName} (ID: {programId}), Week: {targetWeek}, Day: {targetDay}");
                 Debug.WriteLine($"[LinkedProgram] Target date: {targetDate:yyyy-MM-dd ddd}");
 
-                // Navigate to the linked program directly
                 var encodedUrl = Uri.EscapeDataString(linkedUrl);
                 var encodedAnchor = Uri.EscapeDataString(targetDate.ToString("yyyy-MM-dd"));
                 await Shell.Current.GoToAsync($"//{nameof(TrainingPage)}?url={encodedUrl}&anchorDate={encodedAnchor}");
@@ -707,6 +630,7 @@ namespace SportsTraining.Pages
             }
         }
 
+        // Extract columns from program HTML
         private static List<List<string>> ExtractProgramColumns(string html)
         {
             var results = new List<List<string>>();
@@ -720,7 +644,7 @@ namespace SportsTraining.Pages
 
                 var cols = Regex.Matches(inner, @"<p[^>]*>(.*?)</p>", RegexOptions.Singleline | RegexOptions.IgnoreCase)
                                 .Cast<Match>()
-                                .Select(m => m.Groups[1].Value) // Keep HTML for linked program detection
+                                .Select(m => m.Groups[1].Value)
                                 .Where(s => !string.IsNullOrWhiteSpace(StripTags(s)))
                                 .ToList();
 
@@ -731,6 +655,7 @@ namespace SportsTraining.Pages
             return results;
         }
 
+        // Build transposed table for a day
         private View BuildDayTableTransposed(IList<List<string>> blocksAsCols)
         {
             int colCount = blocksAsCols.Count;
@@ -759,7 +684,6 @@ namespace SportsTraining.Pages
                     var colList = blocksAsCols[c];
                     string text = (r < colList.Count) ? colList[r] : "";
 
-                    // Check for linked programs and create appropriate content
                     var content = CreateContentWithLinkedPrograms(text);
 
                     Grid.SetRow(content, r);
@@ -771,7 +695,7 @@ namespace SportsTraining.Pages
             return new ScrollView { Orientation = ScrollOrientation.Horizontal, Content = grid };
         }
 
-        // -------- Exercises (weights) --------
+        // Internal classes for exercises
         private sealed class ExSet { public string Reps = "", Sign = "", Value = "", Unit = "", Extra = ""; }
         private sealed class ExerciseItem
         {
@@ -784,6 +708,7 @@ namespace SportsTraining.Pages
             public string Notes { get; init; } = "";
         }
 
+        // Render exercises from html
         private bool RenderExercisesFromHtml(string html)
         {
             var items = ExtractExercises(html);
@@ -795,6 +720,7 @@ namespace SportsTraining.Pages
             return true;
         }
 
+        // Extract exercise data from html
         private static List<ExerciseItem> ExtractExercises(string html)
         {
             var list = new List<ExerciseItem>();
@@ -806,11 +732,9 @@ namespace SportsTraining.Pages
             {
                 string inner = ex.Groups["inner"].Value;
 
-                // Name
                 var nameRaw = ExtractFirst(inner, @"<h3[^>]*>(.*?)</h3>");
                 string name = WebUtility.HtmlDecode(StripTags(nameRaw ?? "")).Trim();
 
-                // Notes
                 string notes = "";
                 var notesRaw = ExtractFirst(inner, @"<div[^>]*class=['""]notes['""][^>]*>(.*?)</div>");
                 if (!string.IsNullOrWhiteSpace(notesRaw))
@@ -819,11 +743,9 @@ namespace SportsTraining.Pages
                     notes = Sanitize(WebUtility.HtmlDecode(StripTags(p ?? "")));
                 }
 
-                // Extract exercise detail URL for info button
                 var detailLinkMatch = Regex.Match(inner, @"href=""(/Application/Exercise/Details/(\d+)\?[^""]*)"">", RegexOptions.IgnoreCase);
                 string detailUrl = detailLinkMatch.Success ? detailLinkMatch.Groups[1].Value : "";
 
-                // Sets
                 var sets = new List<ExSet>();
                 foreach (Match s in Regex.Matches(inner,
                     @"<div[^>]*class=['""]prescribed-fields\s+result-col['""][^>]*>.*?<div[^>]*class=['""]fields\s+prescribed-details['""][^>]*>(?<hdr>.*?)</div>(?<extra>.*?)</div>",
@@ -848,7 +770,6 @@ namespace SportsTraining.Pages
                         sets.Add(new ExSet { Reps = reps, Sign = sign, Value = value, Unit = unit, Extra = extra });
                 }
 
-                // Derive media by Exercise ID (zero-padded 5 digits)
                 var exId = TryExtractExerciseId(inner);
                 string id5 = NormalizeExerciseId(exId);
 
@@ -872,6 +793,7 @@ namespace SportsTraining.Pages
             return list;
         }
 
+        // Build UI row for an exercise
         private View BuildExerciseRow(ExerciseItem ex)
         {
             var row = new Grid
@@ -888,7 +810,6 @@ namespace SportsTraining.Pages
             row.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
             row.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
 
-            // Thumbnail
             View thumb = new Grid { WidthRequest = 72, HeightRequest = 56, Margin = new Thickness(0, 2, 10, 2) };
             if (!string.IsNullOrWhiteSpace(ex.ImageUrl))
             {
@@ -904,7 +825,6 @@ namespace SportsTraining.Pages
             row.Add(thumb, 0, 0);
             Grid.SetRowSpan(thumb, 3);
 
-            // Title + sets
             var rightTop = new Grid();
             rightTop.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
             rightTop.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
@@ -917,7 +837,6 @@ namespace SportsTraining.Pages
 
             row.Add(rightTop, 1, 0);
 
-            // Actions - Clean button text without question marks
             var actions = new HorizontalStackLayout { Spacing = 10, Margin = new Thickness(0, 6, 0, 0) };
 
             if (!string.IsNullOrWhiteSpace(ex.VideoUrl))
@@ -938,7 +857,6 @@ namespace SportsTraining.Pages
                 actions.Add(imageBtn);
             }
 
-            // Info button
             if (!string.IsNullOrWhiteSpace(ex.DetailUrl))
             {
                 var infoBtn = new Button { Text = "Info", Padding = new Thickness(10, 6), CornerRadius = 10 };
@@ -970,6 +888,7 @@ namespace SportsTraining.Pages
             return row;
         }
 
+        // Build grid for exercise sets
         private static Grid BuildSetsGrid(IList<ExSet> sets)
         {
             var grid = new Grid
@@ -1015,11 +934,7 @@ namespace SportsTraining.Pages
             return grid;
         }
 
-        // ======================================================
-        //                  INFO BUTTON FUNCTIONALITY
-        // ======================================================
-
-        // Info button handler
+        // Info button tapped handler
         private async Task OnInfoTapped(string detailUrl, string exerciseName, string exerciseId)
         {
             try
@@ -1048,7 +963,7 @@ namespace SportsTraining.Pages
             }
         }
 
-        // Show exercise details modal
+        // Show exercise details modal popup
         private async Task ShowExerciseDetailsPopup(string detailHtml, string exerciseName, string exerciseId)
         {
             string description = ExtractExerciseDescription(detailHtml);
@@ -1107,6 +1022,7 @@ namespace SportsTraining.Pages
             await Navigation.PushModalAsync(popup);
         }
 
+        // Helper to create info section in popup
         private VerticalStackLayout CreateInfoSection(string title, string content)
         {
             var section = new VerticalStackLayout { Spacing = 5 };
@@ -1133,7 +1049,7 @@ namespace SportsTraining.Pages
             return section;
         }
 
-        // HTML parsing helpers for exercise details
+        // Extract description from exercise html
         private string ExtractExerciseDescription(string html)
         {
             if (string.IsNullOrEmpty(html)) return "No description available.";
@@ -1168,6 +1084,7 @@ namespace SportsTraining.Pages
             return "No description available.";
         }
 
+        // Extract instructions from exercise html
         private string ExtractExerciseInstructions(string html)
         {
             if (string.IsNullOrEmpty(html)) return "No instructions available.";
@@ -1193,6 +1110,7 @@ namespace SportsTraining.Pages
             return "No instructions available.";
         }
 
+        // Extract muscle groups from exercise html
         private string ExtractMuscleGroups(string html)
         {
             if (string.IsNullOrEmpty(html)) return "Muscle information not available.";
@@ -1217,6 +1135,7 @@ namespace SportsTraining.Pages
             return "Muscle information not available.";
         }
 
+        // Strip html and clean text
         private string CleanHtmlText(string html)
         {
             if (string.IsNullOrEmpty(html)) return "";
@@ -1228,13 +1147,14 @@ namespace SportsTraining.Pages
             return text;
         }
 
-        // ======================================================
-        //                  Helpers / parsing / dates
-        // ======================================================
+        // Remove all HTML tags from a string
         private static string StripTags(string s) => Regex.Replace(s ?? "", "<.*?>", string.Empty);
+
+        // Extract the first regex match result from HTML
         private static string? ExtractFirst(string html, string pattern)
             => Regex.Match(html ?? "", pattern, RegexOptions.Singleline | RegexOptions.IgnoreCase) is var m && m.Success ? m.Groups[1].Value : null;
 
+        // Clean and normalize whitespace from text
         private static string Sanitize(string s)
         {
             if (string.IsNullOrEmpty(s)) return s ?? "";
@@ -1244,7 +1164,7 @@ namespace SportsTraining.Pages
             return t.Trim();
         }
 
-        // --- Exercise media helpers (zero-padded ids) ---
+        // Normalize exercise ID to a 5-digit format
         private static string NormalizeExerciseId(string? raw)
         {
             if (string.IsNullOrWhiteSpace(raw)) return "";
@@ -1254,12 +1174,15 @@ namespace SportsTraining.Pages
             return digits.PadLeft(5, '0');
         }
 
+        // Build exercise image URL
         private static string GetExerciseImageUrl(string id5)
             => $"https://cloud.visualcoaching2.com/Application/Exercise/Image/{id5}";
 
+        // Build exercise video URL
         private static string GetExerciseVideoUrl(string id5)
             => $"https://cloud.visualcoaching2.com/VCP/Images/Exercises/{id5}.mp4";
 
+        // Try extracting an exercise ID from HTML
         private static string TryExtractExerciseId(string innerHtml)
         {
             var m = Regex.Match(innerHtml, @"/Application/Exercise/Details/(\d+)", RegexOptions.IgnoreCase);
@@ -1277,6 +1200,7 @@ namespace SportsTraining.Pages
             return "";
         }
 
+        // Build absolute URL from a relative path
         private static string BuildAbsoluteUrl(string? maybeRelative)
         {
             if (string.IsNullOrWhiteSpace(maybeRelative)) return "";
@@ -1284,7 +1208,7 @@ namespace SportsTraining.Pages
             return $"https://cloud.visualcoaching2.com{(maybeRelative!.StartsWith("/") ? "" : "/")}{maybeRelative}";
         }
 
-        // --- URL week/day handling (accept 0..6 OR 1..7; store as 0..6 Mon..Sun internally) ---
+        // Parse week/day values from a program URL
         private void ParseWeekAndDayVcFromUrl(string raw)
         {
             _week = GetQueryInt(raw, "week", 0);
@@ -1294,20 +1218,19 @@ namespace SportsTraining.Pages
             // Convert API day (1-7) to internal representation (0-6)
             if (dayRaw >= 1 && dayRaw <= 7)
             {
-                _dayVc = dayRaw - 1; // 1..7 -> 0..6 (Mon=0, Sun=6)
+                _dayVc = dayRaw - 1;
             }
             else if (dayRaw >= 0 && dayRaw <= 6)
             {
-                _dayVc = dayRaw; // Already 0..6
+                _dayVc = dayRaw;
             }
             else
             {
-                _dayVc = 0; // default Monday
+                _dayVc = 0;
             }
 
             Debug.WriteLine($"[ParseWeekAndDayVc] dayRaw from URL: {dayRaw}, _dayVc (internal): {_dayVc}");
 
-            // Update selected date based on the parsed day
             if (_anchorDate.HasValue)
             {
                 _selectedDate = _programWeek0Monday.AddDays(7 * _week + _dayVc);
@@ -1315,7 +1238,7 @@ namespace SportsTraining.Pages
             }
         }
 
-        // FIXED: Convert internal 0-6 to API 1-7
+        // Add/replace week and day query values in a URL
         private static string WithWeekDayVc(string raw, int week, int dayVc)
         {
             int qIdx = raw.IndexOf('?');
@@ -1331,11 +1254,11 @@ namespace SportsTraining.Pages
                 else parts.Add($"{k}={v}");
             }
 
-            Upsert("week", week.ToString(CultureInfo.InvariantCulture)); // 0-based week
+            Upsert("week", week.ToString(CultureInfo.InvariantCulture));
 
-            // FIXED: Convert internal 0-6 (Mon-Sun) to API 1-7 (Mon=1, Sun=7)
-            int apiDay = Math.Clamp(dayVc, 0, 6) + 1; // 0->1, 1->2, ..., 6->7
-            Upsert("day", apiDay.ToString(CultureInfo.InvariantCulture)); // 1..7 for API
+            // Convert 0–6 (Mon–Sun) internal to 1–7 API values
+            int apiDay = Math.Clamp(dayVc, 0, 6) + 1;
+            Upsert("day", apiDay.ToString(CultureInfo.InvariantCulture));
 
             Upsert("session", "0");
             Upsert("i", "0");
@@ -1345,6 +1268,7 @@ namespace SportsTraining.Pages
             return $"{path}?{string.Join("&", parts)}";
         }
 
+        // Get an integer query value from a URL, or fallback
         private static int GetQueryInt(string url, string key, int fallback)
         {
             int q = url.IndexOf('?');
@@ -1359,6 +1283,7 @@ namespace SportsTraining.Pages
             return fallback;
         }
 
+        // Normalize URL, forcing index and required params
         private static string ForceFirstIndexAndNormalize(string raw)
         {
             if (string.IsNullOrWhiteSpace(raw)) return raw;
@@ -1383,6 +1308,7 @@ namespace SportsTraining.Pages
             return $"{path}?{string.Join("&", parts)}";
         }
 
+        // Replace a query parameter in a URL
         private static string ReplaceQuery(string url, string key, string value)
         {
             int q = url.IndexOf('?');
@@ -1403,13 +1329,14 @@ namespace SportsTraining.Pages
             return $"{path}?{string.Join("&", kvs)}";
         }
 
-        // Monday-start calendar math
+        // Get the Monday date for the week containing a given date
         private static DateTime WeekMonday(DateTime d)
         {
             int diff = ((7 + (int)d.DayOfWeek - (int)DayOfWeek.Monday) % 7);
             return d.Date.AddDays(-diff);
         }
 
+        // Compute the program's baseline Monday
         private void ComputeProgramBaselineMonday()
         {
             var ad = _anchorDate!.Value;
@@ -1417,9 +1344,11 @@ namespace SportsTraining.Pages
             _programWeek0Monday = adMon.AddDays(-7 * _entryWeekForProgram);
         }
 
+        // Get the currently selected date
         private DateTime SelectedDate
             => _selectedDate ?? _programWeek0Monday.AddDays(7 * _week + Math.Clamp(_dayVc, 0, 6));
 
+        // Get the current selected week index
         private int SelectedWeekIndex
         {
             get
@@ -1430,16 +1359,18 @@ namespace SportsTraining.Pages
             }
         }
 
+        // Get display week number (1-based)
         private int DisplayWeek
         {
             get
             {
                 var span = WeekMonday(SelectedDate) - _programWeek0Monday;
-                int w = (int)(span.TotalDays / 7.0); // zero-based
-                return Math.Max(0, w) + 1;           // display 1-based
+                int w = (int)(span.TotalDays / 7.0);
+                return Math.Max(0, w) + 1;
             }
         }
 
+        // Try loading anchor date from a program URL
         private void TryLoadAnchorFromUrl(string rawUrl)
         {
             var ad = GetQueryValue(rawUrl, "ad");
@@ -1451,6 +1382,7 @@ namespace SportsTraining.Pages
             }
         }
 
+        // Try parsing a date string in yyyy-MM-dd format
         private static bool TryParseYMD(string? s, out DateTime dt)
         {
             dt = default;
@@ -1460,6 +1392,7 @@ namespace SportsTraining.Pages
             return DateTime.TryParse(s, CultureInfo.InvariantCulture, DateTimeStyles.AssumeLocal, out dt);
         }
 
+        // Get a query parameter value from a URL
         private static string GetQueryValue(string url, string key)
         {
             int q = url.IndexOf('?'); if (q < 0) return "";
@@ -1472,6 +1405,7 @@ namespace SportsTraining.Pages
             return "";
         }
 
+        // Parse a program ID from a program URL
         private static int? ParseProgramId(string url)
         {
             var m = Regex.Match(url ?? "", @"/Program/Session/(\d+)", RegexOptions.IgnoreCase);
@@ -1479,18 +1413,13 @@ namespace SportsTraining.Pages
             return null;
         }
 
-        // ======================================================
-        //                 Image & Video (lightbox) - IMPROVED
-        // ======================================================
-
-        // Helper: safely clean up current media element
+        // Safely clean up current media element
         private void CleanupCurrentMedia()
         {
             if (_currentMediaElement != null)
             {
                 try
                 {
-                    // Don't call Stop() or Pause() - just detach source
                     _currentMediaElement.Source = "";
                     _currentMediaElement = null;
                 }
@@ -1501,7 +1430,7 @@ namespace SportsTraining.Pages
             }
         }
 
-        // Helper: download behind-auth video to a temp file using the saved cookie
+        // Download a video behind-auth to a temp file
         private static async Task<string?> DownloadVideoToTempAsync(string url)
         {
             try
@@ -1538,16 +1467,14 @@ namespace SportsTraining.Pages
             }
         }
 
+        // Show a video in the lightbox overlay
         private async Task ShowVideoOverlayAsync(string videoUrl, string? title = null)
         {
-            // Clean up any existing media first
             CleanupCurrentMedia();
 
-            // Build absolute URL if needed
             if (!Uri.TryCreate(videoUrl, UriKind.Absolute, out var _))
                 videoUrl = $"https://cloud.visualcoaching2.com{(videoUrl.StartsWith("/") ? "" : "/")}{videoUrl}";
 
-            // Create the player with safer initialization
             var media = new ToolkitMediaElement
             {
                 ShouldAutoPlay = true,
@@ -1557,14 +1484,11 @@ namespace SportsTraining.Pages
                 VerticalOptions = LayoutOptions.Fill
             };
 
-            // Store reference for cleanup
             _currentMediaElement = media;
-
             bool playing = false;
 
             try
             {
-                // 1) Try direct URL first (works if the file is publicly accessible)
                 media.Source = videoUrl;
                 playing = true;
                 Debug.WriteLine($"[Video] Using direct URL: {videoUrl}");
@@ -1575,7 +1499,6 @@ namespace SportsTraining.Pages
                 playing = false;
             }
 
-            // 2) Fallback: download with authentication cookie
             if (!playing)
             {
                 try
@@ -1601,17 +1524,16 @@ namespace SportsTraining.Pages
                 return;
             }
 
-            // Show the lightbox
             LightboxTitle.Text = string.IsNullOrWhiteSpace(title) ? "Video" : title;
             LightboxContent.Content = media;
             LightboxOverlay.IsVisible = true;
         }
 
+        // Show an image in the lightbox overlay
         private void ShowImageOverlay(string imageUrl, string? title = null)
         {
             try
             {
-                // Clean up any existing media
                 CleanupCurrentMedia();
 
                 var img = new Image
@@ -1633,34 +1555,29 @@ namespace SportsTraining.Pages
             }
         }
 
+        // Hide the lightbox overlay
         private void HideLightbox()
         {
             try
             {
-                // Clean up media safely
                 CleanupCurrentMedia();
-
-                // Clear content and hide overlay
                 LightboxContent.Content = null;
                 LightboxOverlay.IsVisible = false;
             }
             catch (Exception ex)
             {
                 Debug.WriteLine($"[Lightbox] Hide error: {ex.Message}");
-                // Force hide anyway
                 LightboxOverlay.IsVisible = false;
             }
         }
 
-        // Event handlers for lightbox
+        // Event handler: close button in lightbox
         private void OnLightboxCloseClicked(object sender, EventArgs e) => HideLightbox();
+
+        // Event handler: tapping background hides lightbox
         private void OnLightboxBackgroundTapped(object sender, TappedEventArgs e) => HideLightbox();
 
-        // ======================================================
-        //                 LINKED PROGRAMS SUPPORT - CLEAN BUTTONS
-        // ======================================================
-
-        // Compact exercise row for inline display with clean button text
+        // Build compact exercise row with thumbnail, title, sets, and actions
         private View BuildCompactExerciseRow(ExerciseItem ex)
         {
             var row = new Grid
@@ -1677,7 +1594,7 @@ namespace SportsTraining.Pages
             row.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
             row.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
 
-            // Smaller thumbnail for compact view - make it tappable for image overlay
+            // Thumbnail for exercise
             View thumb = new Grid { WidthRequest = 48, HeightRequest = 36, Margin = new Thickness(0, 2, 8, 2) };
             if (!string.IsNullOrWhiteSpace(ex.ImageUrl))
             {
@@ -1690,7 +1607,6 @@ namespace SportsTraining.Pages
                     Margin = new Thickness(0, 2, 8, 2)
                 };
 
-                // Make thumbnail tappable to show full image
                 var imageTap = new TapGestureRecognizer();
                 imageTap.Tapped += (_, __) => ShowImageOverlay(ex.ImageUrl, ex.Name);
                 image.GestureRecognizers.Add(imageTap);
@@ -1700,7 +1616,7 @@ namespace SportsTraining.Pages
             row.Add(thumb, 0, 0);
             Grid.SetRowSpan(thumb, 3);
 
-            // Title + sets in more compact layout
+            // Title and sets
             var rightTop = new Grid();
             rightTop.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
             rightTop.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
@@ -1713,7 +1629,6 @@ namespace SportsTraining.Pages
             };
             rightTop.Add(title, 0, 0);
 
-            // Compact sets display in the top right
             if (ex.Sets.Count > 0)
             {
                 var compactSetsGrid = BuildCompactSetsGrid(ex.Sets);
@@ -1722,7 +1637,7 @@ namespace SportsTraining.Pages
 
             row.Add(rightTop, 1, 0);
 
-            // Compact actions row with clean button text
+            // Action buttons row
             var actions = new FlexLayout
             {
                 Direction = FlexDirection.Row,
@@ -1736,7 +1651,7 @@ namespace SportsTraining.Pages
             {
                 var videoBtn = new ImageButton
                 {
-                    Source = "video.png",   // put video.png in Resources/Images
+                    Source = "video.png",
                     HeightRequest = 28,
                     WidthRequest = 28,
                     BackgroundColor = Colors.Transparent,
@@ -1750,12 +1665,11 @@ namespace SportsTraining.Pages
                 actions.Add(videoBtn);
             }
 
-            // Info button for details
             if (!string.IsNullOrWhiteSpace(ex.DetailUrl))
             {
                 var infoBtn = new ImageButton
                 {
-                    Source = "info.png",   // put info.png in Resources/Images
+                    Source = "info.png",
                     HeightRequest = 28,
                     WidthRequest = 28,
                     BackgroundColor = Colors.Transparent,
@@ -1771,7 +1685,7 @@ namespace SportsTraining.Pages
             if (actions.Children.Count > 0)
                 row.Add(actions, 1, 1);
 
-            // Notes if available
+            // Notes text
             if (!string.IsNullOrWhiteSpace(ex.Notes))
             {
                 var notes = new Label
@@ -1788,7 +1702,8 @@ namespace SportsTraining.Pages
             return row;
         }
 
-        // Compact sets grid for inline display
+
+        // Build compact grid for sets shown inline in the UI
         private static Grid BuildCompactSetsGrid(IList<ExSet> sets)
         {
             var grid = new Grid
@@ -1846,7 +1761,7 @@ namespace SportsTraining.Pages
             return grid;
         }
 
-        // Compact table for inline display
+        // Build compact table for displaying day content
         private View BuildCompactDayTable(IList<List<string>> blocksAsCols)
         {
             var mainStack = new VerticalStackLayout { Spacing = 8 };
@@ -1856,7 +1771,6 @@ namespace SportsTraining.Pages
                 var column = blocksAsCols[colIdx];
                 if (column.Count == 0) continue;
 
-                // Create a compact representation of each column
                 var colStack = new VerticalStackLayout { Spacing = 4 };
 
                 foreach (var item in column)
@@ -1869,7 +1783,6 @@ namespace SportsTraining.Pages
 
                 if (colStack.Children.Count > 0)
                 {
-                    // Add a subtle separator between columns
                     if (mainStack.Children.Count > 0)
                     {
                         mainStack.Children.Add(new BoxView
@@ -1886,20 +1799,14 @@ namespace SportsTraining.Pages
             return mainStack;
         }
 
-        // ======================================================
-        //                 STRENGTH PROGRAM SUPPORT
-        // ======================================================
-
-        // Method to detect if a program is a "Strength" type
+        // Check if program is a "Strength" type by inspecting its HTML
         private async Task<bool> IsStrengthProgramAsync(string cookie, string programId)
         {
             try
             {
-                // Try to get program metadata - using heuristic approach by checking day 0 content
                 string testUrl = $"/Application/Program/Session/{programId}?week=0&day=0&session=0&i=0&format=Tablet&version=2";
                 string html = await VisualCoachingService.GetRawSessionHtml(cookie, testUrl);
 
-                // If day 0 has substantial content, it's likely a strength program
                 if (!string.IsNullOrWhiteSpace(html) &&
                     (html.Contains("class=\"exercise\"", StringComparison.OrdinalIgnoreCase) ||
                      html.Contains("weekly-no-background", StringComparison.OrdinalIgnoreCase) ||
@@ -1918,14 +1825,13 @@ namespace SportsTraining.Pages
             }
         }
 
-        // Updated method to find first content with Strength program support
+        // Find the first week/day that has content for a given program
         private async Task<(int week, int day)> FindFirstContentWeekDayAsync(string cookie, string programId)
         {
             bool foundContent = false;
             int targetWeek = 0;
             int targetDay = 1; // Default to day 1 for non-strength programs
 
-            // Check if this is a strength program that might start from day 0
             bool isStrengthProgram = await IsStrengthProgramAsync(cookie, programId);
 
             async Task<bool> HasContentAsync(int week, int day)
@@ -1940,15 +1846,12 @@ namespace SportsTraining.Pages
                         html.Contains("<h1", StringComparison.OrdinalIgnoreCase));
             }
 
-            // Search strategy depends on program type
             if (isStrengthProgram)
             {
                 Debug.WriteLine($"[LinkedProgram] Searching strength program {programId} starting from day 0");
 
-                // For strength programs, start from day 0
                 for (int week = 0; week < MaxWeeks && !foundContent; week++)
                 {
-                    // Check day 0 first for strength programs
                     if (await HasContentAsync(week, 0))
                     {
                         targetWeek = week;
@@ -1958,7 +1861,6 @@ namespace SportsTraining.Pages
                         break;
                     }
 
-                    // Then check days 1-7
                     for (int day = 1; day <= 7 && !foundContent; day++)
                     {
                         if (await HasContentAsync(week, day))
@@ -1976,7 +1878,6 @@ namespace SportsTraining.Pages
             {
                 Debug.WriteLine($"[LinkedProgram] Searching regular program {programId} starting from day 1");
 
-                // For regular programs, search days 1-7 only
                 for (int week = 0; week < MaxWeeks && !foundContent; week++)
                 {
                     for (int day = 1; day <= 7 && !foundContent; day++)
@@ -1997,51 +1898,45 @@ namespace SportsTraining.Pages
             {
                 Debug.WriteLine($"[LinkedProgram] No content found for program {programId}, using defaults");
                 targetWeek = 0;
-                targetDay = isStrengthProgram ? 0 : 1; // Use day 0 for strength, day 1 for others
+                targetDay = isStrengthProgram ? 0 : 1;
             }
 
             return (targetWeek, targetDay);
         }
 
-        // Enhanced FetchAllSessions method to handle Strength programs properly
+
+        // Fetch all sessions for a program (handles strength vs regular programs)
         public async Task<bool> FetchAllSessionsAsync(int programId, string cookie)
         {
             bool hasContent = false;
 
             try
             {
-                // Check if it's a strength program
                 bool isStrengthProgram = await IsStrengthProgramAsync(cookie, programId.ToString());
-
                 Debug.WriteLine($"[Session Fetch] Program {programId} is {(isStrengthProgram ? "Strength" : "Regular")} type");
 
                 if (isStrengthProgram)
                 {
-                    // For strength programs, check day 0 for each week first
                     for (int week = 0; week <= 13; week++)
                     {
                         if (await HasSessionContentAsync(programId, week, 0, cookie))
                         {
                             Debug.WriteLine($"[Session Fetch] Found Strength content: Week {week}, Day 0");
                             hasContent = true;
-                            // Process this session...
                         }
 
-                        // Then check regular days 1-7
                         for (int day = 1; day <= 7; day++)
                         {
                             if (await HasSessionContentAsync(programId, week, day, cookie))
                             {
                                 Debug.WriteLine($"[Session Fetch] Found Strength content: Week {week}, Day {day}");
                                 hasContent = true;
-                                // Process this session...
                             }
                         }
                     }
                 }
                 else
                 {
-                    // For regular programs, only check days 1-7
                     for (int week = 0; week <= 13; week++)
                     {
                         for (int day = 1; day <= 7; day++)
@@ -2050,7 +1945,6 @@ namespace SportsTraining.Pages
                             {
                                 Debug.WriteLine($"[Session Fetch] Found Regular content: Week {week}, Day {day}");
                                 hasContent = true;
-                                // Process this session...
                             }
                         }
                     }
@@ -2064,7 +1958,7 @@ namespace SportsTraining.Pages
             return hasContent;
         }
 
-        // Helper method to check if a session has content
+        // Check if a program session has any content
         private async Task<bool> HasSessionContentAsync(int programId, int week, int day, string cookie)
         {
             try
@@ -2092,7 +1986,7 @@ namespace SportsTraining.Pages
             }
         }
 
-        // Updated LoadLinkedProgramInlineAsync with clean header (no symbols or ID)
+        // Load a linked program and render it inline in the UI
         private async Task LoadLinkedProgramInlineAsync(string programId, VerticalStackLayout container)
         {
             try
@@ -2107,9 +2001,7 @@ namespace SportsTraining.Pages
                     return;
                 }
 
-                // Find first content considering program type (might be day 0 for Strength)
                 (int week, int day) = await FindFirstContentWeekDayAsync(cookie, programId);
-
                 Debug.WriteLine($"[LinkedProgram] Found content at week {week}, day {day} for program {programId}");
 
                 string url = $"/Application/Program/Session/{programId}?week={week}&day={day}&session=0&i=0&format=Tablet&version=2";
@@ -2133,7 +2025,6 @@ namespace SportsTraining.Pages
 
                 Debug.WriteLine($"[LinkedProgram] HTML length: {html.Length} characters");
 
-                // Try to render exercises first, then table format (no header with IDs)
                 var exercises = ExtractExercises(html);
                 Debug.WriteLine($"[LinkedProgram] Found {exercises.Count} exercises");
 
@@ -2148,7 +2039,6 @@ namespace SportsTraining.Pages
                 }
                 else
                 {
-                    // Try table format
                     var blockCols = ExtractProgramColumns(html);
                     Debug.WriteLine($"[LinkedProgram] Found {blockCols.Count} table columns");
 
@@ -2186,15 +2076,13 @@ namespace SportsTraining.Pages
             }
         }
 
-        // Legacy methods for compatibility
+        // Fetch all sessions (legacy method, simpler version)
         public void FetchAllSessions(int programId)
         {
-            // Check for Week 0, Day 0 first (for programs like incline cycling)
             if (HasWeekZero(programId))
             {
-                FetchSession(programId, 0, 0); // Week 0, Day 0
+                FetchSession(programId, 0, 0);
 
-                // Then check for other days in Week 0
                 for (int day = 1; day <= 7; day++)
                 {
                     if (HasSessionContent(programId, 0, day))
@@ -2204,7 +2092,6 @@ namespace SportsTraining.Pages
                 }
             }
 
-            // Continue with regular weeks 1-13, days 1-7
             for (int week = 1; week <= 13; week++)
             {
                 for (int day = 1; day <= 7; day++)
@@ -2217,21 +2104,19 @@ namespace SportsTraining.Pages
             }
         }
 
+        // Check if a program supports Week 0 sessions
         private bool HasWeekZero(int programId)
         {
-            // Check if this program type has a Week 0
-            // This would need to be determined by program metadata
             return programId == 1476483; // Incline cycling program
         }
 
+        // Placeholder method: check if session content exists (legacy)
         private bool HasSessionContent(int programId, int week, int day)
         {
-            // This method should check if session content exists
-            // You'll need to implement this based on your existing logic
-            // For now, return true to attempt fetching
             return true;
         }
 
+        // Fetch a single session (legacy method with logging)
         private void FetchSession(int programId, int week, int day)
         {
             string url = string.Format(
@@ -2239,24 +2124,18 @@ namespace SportsTraining.Pages
                 programId, week, day
             );
 
-            // Add error handling for server issues
             try
             {
-                // Your existing fetch logic here
                 Debug.WriteLine($"[VCS] Fetching session from: {url}");
-
-                // Call your existing GetRawSessionHtml or similar method
-                // GetRawSessionHtml(url);
+                // Fetch logic would go here
             }
             catch (Exception ex)
             {
                 Debug.WriteLine($"[VCS] Failed to fetch session: {url}. Error: {ex.Message}");
-                // Maybe retry or queue for later
             }
         }
-        // Example usage in TrainingPage.xaml.cs or a new DiaryPage
 
-        // Add this private class inside your TrainingPage class
+        // Info class for diary data
         private class SessionDiaryInfo
         {
             public int DiaryId { get; set; }
@@ -2269,6 +2148,7 @@ namespace SportsTraining.Pages
                 return DiaryId > 0 && UserId > 0 && !string.IsNullOrEmpty(Date) && !string.IsNullOrEmpty(ProgramKey);
             }
         }
+
 
         // Add this method to your TrainingPage class to load diary data
         private async Task LoadDiaryDataAsync(string userEmail, string date, int programId, int week, int day)
